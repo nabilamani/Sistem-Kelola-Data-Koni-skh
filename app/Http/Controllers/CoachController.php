@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Coach;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
+use Illuminate\Support\Facades\Auth;
+
 
 class CoachController extends Controller
 {
@@ -13,11 +15,46 @@ class CoachController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
+    {
+        $user = Auth::user();
+        $search = $request->input('search'); // Capture the search input from the request
+
+        // Filter coaches based on user level and search query if provided
+        $coaches = Coach::when($user->level !== 'admin', function ($query) use ($user) {
+            // Extract sport category from user level if not an admin
+            $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
+            $query->where('sport_category', $sportCategory);
+        })
+            ->when($search, function ($query) use ($search) {
+                // Apply search filter on name and sport category fields
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('sport_category', 'like', "%$search%");
+            })
+            ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
+            ->paginate(4); // Display 4 items per page
+
+        return view('Pelatih.daftar', ['coaches' => $coaches, 'search' => $search]);
+    }
+
+    public function cetakPelatih()
 {
-    $coaches = coach::orderBy('created_at', 'asc')->paginate(4);
-    return view('Pelatih.daftar', ['coaches' => $coaches]);
+    $user = Auth::user(); // Get the authenticated user
+
+    // Filter coaches based on user level
+    $coaches = Coach::when($user->level !== 'admin', function ($query) use ($user) {
+        // Extract sport category from user level if not an admin
+        $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
+        $query->where('sport_category', $sportCategory);
+    })
+    ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
+    ->get(); // Retrieve all results based on filtering
+
+    return view('Pelatih.cetak-pelatih', compact('coaches'));
 }
+
+
+
 
 
     /**
@@ -57,7 +94,7 @@ class CoachController extends Controller
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('img'), $filename);
             $data['photo'] = 'img/' . $filename;
-        }        
+        }
 
         Coach::create($data);
 
@@ -95,23 +132,23 @@ class CoachController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-{
-    $coach = Coach::findOrFail($id);
-    $coach->name = $request->name;
-    $coach->age = $request->age;
-    $coach->address = $request->address;
-    $coach->sport_category = $request->sport_category;
-    $coach->description = $request->description;
+    {
+        $coach = Coach::findOrFail($id);
+        $coach->name = $request->name;
+        $coach->age = $request->age;
+        $coach->address = $request->address;
+        $coach->sport_category = $request->sport_category;
+        $coach->description = $request->description;
 
-    if ($request->hasFile('photo')) {
-        $photoPath = $request->file('photo')->store('photos', 'public');
-        $coach->photo = $photoPath;
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public');
+            $coach->photo = $photoPath;
+        }
+
+        $coach->save();
+
+        return redirect()->back()->with('success', 'Data pelatih berhasil diperbarui');
     }
-
-    $coach->save();
-
-    return redirect()->back()->with('success', 'Data pelatih berhasil diperbarui');
-}
 
 
     /**
@@ -121,15 +158,14 @@ class CoachController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-{
-    // Cari pelatih berdasarkan ID
-    $coach = Coach::findOrFail($id);
+    {
+        // Cari pelatih berdasarkan ID
+        $coach = Coach::findOrFail($id);
 
-    // Hapus data pelatih
-    $coach->delete();
+        // Hapus data pelatih
+        $coach->delete();
 
-    // Redirect dengan pesan sukses
-    return redirect()->back()->with('success', 'Data pelatih berhasil dihapus');
-}
-
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Data pelatih berhasil dihapus');
+    }
 }

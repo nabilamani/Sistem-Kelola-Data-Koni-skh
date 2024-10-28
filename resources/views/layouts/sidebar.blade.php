@@ -9,13 +9,13 @@
                                 <ul aria-expanded="false">
                                     <li><a href="/coaches/create"><i class="mdi mdi-account-plus"></i>Tambah Pelatih</a></li>
                                     <li><a href="/coaches"><i class="mdi mdi-account-multiple"></i>Daftar Pelatih</a></li>
-                                    <li><a href="/laporan"><i class="mdi mdi-file-document"></i>Laporan</a></li>
+                                    <li><a href="{{ route('cetak-pelatih')}}"><i class="mdi mdi-file-document"></i>Laporan</a></li>
                                 </ul>
                             </li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-run-fast"></i><span class="nav-text">Atlet</span></a>
                                 <ul aria-expanded="false">
-                                    <li><a href="/tambah"><i class="mdi mdi-account-plus"></i>Tambah Atlet</a></li>
-                                    <li><a href="/daftar"><i class="mdi mdi-account-multiple"></i>Daftar Atlet</a></li>
+                                    <li><a href="/athletes/create"><i class="mdi mdi-account-plus"></i>Tambah Atlet</a></li>
+                                    <li><a href="/athletes"><i class="mdi mdi-account-multiple"></i>Daftar Atlet</a></li>
                                     <li><a href="/daftar"><i class="mdi mdi-file-document"></i>Laporan</a></li>
                                 </ul>
                             </li>
@@ -42,8 +42,8 @@
                             </li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-calendar"></i><span class="nav-text">Event</span></a>
                                 <ul aria-expanded="false">
-                                    <li><a href="/tambah"><i class="mdi mdi-calendar-plus"></i>Tambah Event</a></li>
-                                    <li><a href="/daftar"><i class="mdi mdi-calendar-multiple"></i>Daftar Event</a></li>
+                                    <li><a href="/events/create"><i class="mdi mdi-calendar-plus"></i>Tambah Event</a></li>
+                                    <li><a href="/events"><i class="mdi mdi-calendar-multiple"></i>Daftar Event</a></li>
                                     <li><a href="/daftar"><i class="mdi mdi-file-document"></i>Laporan</a></li>
                                 </ul>
                             </li>
@@ -60,7 +60,7 @@
                     <li class="nav-label">Menu Admin</li>
                     
                     
-                    @if (auth()->user()->hasRole('admin'))
+                    @if (auth()->user()->level === 'admin' )
                     <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-newspaper"></i><span class="nav-text">Berita</span></a>
                         <ul aria-expanded="false">
                             <li><a href="/tambahpeny"><i class="mdi mdi-plus-box"></i>Tambah Berita</a></li>

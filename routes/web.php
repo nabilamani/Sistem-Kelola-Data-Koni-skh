@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AsetController;
+use App\Http\Controllers\AthleteController;
 use App\Http\Controllers\CoachController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+use App\Models\Athlete;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +64,24 @@ Route::get('/tambah', function () {
 Route::resource('coaches', CoachController::class);
 Route::put('/edit-pelatih/{id}', [CoachController::class, 'update']);
 Route::delete('/delete-pelatih/{id}', [CoachController::class, 'destroy']);
+Route::get('/cetak-pelatih', [CoachController::class, 'cetakPelatih'])->name('cetak-pelatih');
 
+Route::resource('athletes', AthleteController::class);
+Route::put('/edit-athlete/{id}', [AthleteController::class, 'update']);
+Route::delete('/delete-athlete/{id}', [AthleteController::class, 'destroy']);
+
+Route::resource('events', EventController::class);
+Route::put('/edit-event/{id}', [EventController::class, 'update']);
+Route::delete('/delete-event/{id}', [EventController::class, 'destroy']);
+Route::get('/cetak-event', [EventController::class, 'cetakEvent'])->name('cetak-event');
+
+
+
+
+
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
 

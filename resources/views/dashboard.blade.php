@@ -49,17 +49,17 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-        <a href="/coba" class="brand-logo">
-            <img class="logo-abbr" src="{{ asset('gambar_aset/images/koni.png') }}" alt="" style="margin-left: 10px; border-radius: 50%; ">
-                <span class="fw-bolder " style="margin-left: 10px; font-size: 18px; font-weight: 300">Sistem Kelola KONI</span>
-            </a>
+    <a href="/coba" class="brand-logo">
+        <img class="logo-abbr" src="{{ asset('gambar_aset/images/koni.png') }}" alt="" style="margin-left: 10px; border-radius: 50%;">
+        <span class="fw-bolder brand-text" style="margin-left: 10px; font-size: 18px; font-weight: 300">Sistem Kelola KONI</span>
+    </a>
 
-            <div class="nav-control">
-                <div class="hamburger">
-                    <span class="line"></span><span class="line"></span><span class="line"></span>
-                </div>
-            </div>
+    <div class="nav-control">
+        <div class="hamburger">
+            <span class="line"></span><span class="line"></span><span class="line"></span>
         </div>
+    </div>
+</div>
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -85,11 +85,11 @@
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
-                <div class="row page-titles mx-0">
+                <div class="row page-titles mx-0 mb-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>Hi, welcome back!</h4>
-                            <p class="mb-1">Anda login sebagai <span class="text-success">{{ Auth::user()->name }}</span></p>
+                            <h4>Hi, Selamat Datang Kembali!</h4>
+                            <p class="mb-1"><span class="text-success">{{ Auth::user()->name }},</span> Anda login sebagai <span class="text-success">{{ Auth::user()->level }}</span></p>
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -102,7 +102,7 @@
                 <!-- row -->
                 <div class="row">
                 <!-- Basic Layout -->
-                <div class="container-fluid">
+                <div class="container">
             
                     <!-- Row 1: Summary Statistics -->
                     <div class="row">
@@ -129,7 +129,7 @@
                                 <div class="card-body">
                                     <div class="media align-items-center">
                                         <div class="media-body">
-                                            <h2 class="mb-0">50</h2>
+                                            <h2 class="mb-0">{{ $eventCount }}</h2>
                                             <p class="text-muted mb-0">Total Events</p>
                                         </div>
                                         <div class="icon-block">
@@ -163,7 +163,7 @@
                                 <div class="card-body">
                                     <div class="media align-items-center">
                                         <div class="media-body">
-                                            <h2 class="mb-0">75</h2>
+                                            <h2 class="mb-0">{{ $coachCount }}</h2>
                                             <p class="text-muted mb-0">Total Pelatih</p>
                                         </div>
                                         <div class="icon-block">
@@ -234,43 +234,25 @@
                     <div class="col-xl-6">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title">Event Mendatang</h5>
+                                <h5 class="card-title">Upcoming Events</h5>
                             </div>
                             <div class="card-body">
                                 <table class="table table-bordered">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>Event</th>
+                                            <th>Nama Event</th>
                                             <th>Tanggal</th>
                                             <th>Lokasi</th>
                                         </tr>
                                     </thead>
                                     <tbody style="color: rgb(114, 114, 114)">
-                                        <tr>
-                                            <td>Football Championship</td>
-                                            <td>2024-11-10</td>
-                                            <td>2024-11-10</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Badminton Tournament</td>
-                                            <td>2024-12-05</td>
-                                            <td>2024-12-05</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Swimming Gala</td>
-                                            <td>2025-01-15</td>
-                                            <td>2025-01-15</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Basketball Cup</td>
-                                            <td>2025-02-20</td>
-                                            <td>2025-02-20</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Volleyball League</td>
-                                            <td>2025-03-10</td>
-                                            <td>2025-03-10</td>
-                                        </tr>
+                                        @foreach($upcomingEvents as $event)
+                                            <tr>
+                                                <td>{{ $event->name }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($event->event_date)->format('d-m-Y') }}</td>
+                                                <td>{{ $event->location }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

@@ -21,6 +21,11 @@
 
 
 </head>
+<style>
+    .card {
+    border-bottom: 3px solid orange; /* You can adjust the width (3px) as needed */
+}
+</style>
 
 <body>
 
@@ -48,9 +53,11 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-        <a href="/coba" class="brand-logo">
-                <img class="logo-abbr" src="{{ asset('gambar_aset/images/koni.png') }}" alt="" style="margin-left: 10px; border-radius: 50%; ">
-                <span class="fw-bolder " style="margin-left: 10px; font-size: 18px; font-weight: 300">Sistem Kelola KONI</span>
+            <a href="/coba" class="brand-logo">
+                <img class="logo-abbr" src="{{ asset('gambar_aset/images/koni.png') }}" alt=""
+                    style="margin-left: 10px; border-radius: 50%; ">
+                <span class="fw-bolder " style="margin-left: 10px; font-size: 18px; font-weight: 300">Sistem Kelola
+                    KONI</span>
             </a>
 
             <div class="nav-control">
@@ -88,7 +95,8 @@
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
                             <h4>Hi, Selamat Datang!</h4>
-                            <p class="mb-1">{{ Auth::user()->name }}</p>
+                            <p class="mb-1"><span class="text-success">{{ Auth::user()->name }},</span> Anda login
+                                sebagai <span class="text-success">{{ Auth::user()->level }}</span></p>
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -100,215 +108,279 @@
                 </div>
                 <!-- row -->
                 <div class="row">
-                <!-- Basic Layout -->
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Daftar Pelatih</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="coachTable" class="table table-striped table-hover" style="min-width: 845px;">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th>No</th>
-                                            <th>ID</th>
-                                            <th>Nama</th>
-                                            <th>Umur</th>
-                                            <th>Alamat</th>
-                                            <th>Cabang Olahraga</th>
-                                            <th style="width: 20%">Deskripsi</th>
-                                            {{-- <th>Domisili</th> --}}
-                                            {{-- <th>Club</th> --}}
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-dark">
-                                        @php
-                                            $no = 1;
-                                        @endphp
-                                        @foreach($coaches as $coach)
+                    <!-- Basic Layout -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Daftar Pelatih</h4>
+                                <form action="{{ route('coaches.index') }}" method="GET" class="form-inline">
+                                    <input type="text" name="search" class="form-control mr-2"
+                                        placeholder="Cari pelatih..." value="{{ request('search') }}">
+                                    <button type="submit" class="btn btn-outline-primary">Cari</button>
+                                </form>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="coachTable" class="table table-striped table-hover"
+                                        style="min-width: 845px;">
+                                        <thead class="thead-dark">
                                             <tr>
-                                                <td>{{ $no++ }}</td>
-                                                <td>{{ $coach->id }}</td>
-                                                <td><img src="{{ $coach->photo }}" width="50" alt=""> {{ $coach->name }}</td>
-                                                <td>{{ $coach->age }}</td>
-                                                <td>{{ $coach->address }}</td>
-                                                <td>{{ $coach->sport_category }}</td>
-                                                <td>{{ $coach->description }}</td>
-                                                {{-- <td>{{ $coach['club'] }}</td> --}}
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                                                            Aksi
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="" data-toggle="modal" data-target="#coachDetailModal{{ $coach->id }}"><i class="bx bx-info-circle"></i> Lihat Detail</a>
-                                                            <a class="dropdown-item" href="" data-toggle="modal" data-target="#coachEditModal{{ $coach->id }}"><i class="bx bx-edit-alt"></i> Edit</a>
-                                                            <form action="/delete-pelatih/{{ $coach->id }}" method="POST" class="d-inline">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="dropdown-item" onclick="return confirm('Apakah Anda yakin ingin menghapus data pelatih ini?')">
-                                                                    <i class="bx bx-trash"></i> Hapus
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                                <th>No</th>
+                                                <th>ID</th>
+                                                <th>Nama</th>
+                                                <th>Umur</th>
+                                                <th>Alamat</th>
+                                                <th>Cabang Olahraga</th>
+                                                <th style="width: 20%">Deskripsi</th>
+                                                {{-- <th>Domisili</th> --}}
+                                                {{-- <th>Club</th> --}}
+                                                <th>Aksi</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                @foreach($coaches as $coach)
-<!-- Modal -->
-@if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+                                        </thead>
+                                        <tbody class="text-dark">
+                                            @php
+                                                $no = ($coaches->currentPage() - 1) * $coaches->perPage() + 1;
+                                            @endphp
+                                            @foreach ($coaches as $key => $coach)
+                                                @if (Auth::user()->level === 'admin' ||
+                                                        (Auth::user()->level === 'Pengurus Cabor Sepak Bola' && $coach->sport_category === 'Sepak Bola') ||
+                                                        (Auth::user()->level === 'Pengurus Cabor Badminton' && $coach->sport_category === 'Badminton') ||
+                                                        (Auth::user()->level === 'Pengurus Cabor Bola Voli' && $coach->sport_category === 'Bola Voli') ||
+                                                        (Auth::user()->level === 'Pengurus Cabor Bola Basket' && $coach->sport_category === 'Bola Basket') ||
+                                                        (Auth::user()->level === 'Pengurus Cabor Atletik' && $coach->sport_category === 'Atletik') ||
+                                                        (Auth::user()->level === 'Pengurus Cabor Renang' && $coach->sport_category === 'Renang') ||
+                                                        (Auth::user()->level === 'Pengurus Cabor Tinju' && $coach->sport_category === 'Tinju') ||
+                                                        (Auth::user()->level === 'Pengurus Cabor Pencak Silat' && $coach->sport_category === 'Pencak Silat'))
+                                                    <tr>
+                                                        <td>{{ $no++ }}</td>
+                                                        <!-- Increment $no to continue numbering -->
+                                                        <td>{{ $coach->id }}</td>
+                                                        <td><img src="{{ $coach->photo }}" width="50"
+                                                                alt=""> {{ $coach->name }}</td>
+                                                        <td>{{ $coach->age }}</td>
+                                                        <td>{{ $coach->address }}</td>
+                                                        <td>{{ $coach->sport_category }}</td>
+                                                        <td>{{ $coach->description }}</td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button
+                                                                    class="btn btn-outline-primary btn-sm dropdown-toggle"
+                                                                    type="button" data-toggle="dropdown"
+                                                                    aria-expanded="false">
+                                                                    Aksi
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" href=""
+                                                                        data-toggle="modal"
+                                                                        data-target="#coachDetailModal{{ $coach->id }}"><i
+                                                                            class="bx bx-info-circle"></i> Lihat
+                                                                        Detail</a>
+                                                                    <a class="dropdown-item" href=""
+                                                                        data-toggle="modal"
+                                                                        data-target="#coachEditModal{{ $coach->id }}"><i
+                                                                            class="bx bx-edit-alt"></i> Edit</a>
+                                                                    <form action="/delete-pelatih/{{ $coach->id }}"
+                                                                        method="POST" class="d-inline">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="dropdown-item"
+                                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data pelatih ini?')">
+                                                                            <i class="bx bx-trash"></i> Hapus
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        </tbody>
 
-<div class="modal fade" id="coachDetailModal{{ $coach->id }}" tabindex="-1" role="dialog" aria-labelledby="coachDetailModalLabel{{ $coach->id }}" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="coachDetailModalLabel{{ $coach->id }}">Detail Pelatih: {{ $coach->name }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Isi detail pelatih -->
-                <img src="{{ $coach->photo }}" width="100%" alt="Foto Pelatih">
-                <p><strong>Nama:</strong> {{ $coach->name }}</p>
-                <p><strong>Umur:</strong> {{ $coach->age }}</p>
-                <p><strong>Alamat:</strong> {{ $coach->address }}</p>
-                <p><strong>Cabang Olahraga:</strong> {{ $coach->sport_category }}</p>
-                <p><strong>Deskripsi:</strong> {{ $coach->description }}</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="coachEditModal{{ $coach->id }}" tabindex="-1" role="dialog" aria-labelledby="coachEditModalLabel{{ $coach->id }}" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="coachEditModalLabel{{ $coach->id }}">Edit Pelatih: {{ $coach->name }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Form Edit Pelatih -->
-                <form action="/edit-pelatih/{{ $coach->id }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group">
-                        <label for="name">Nama</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $coach->name }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="age">Umur</label>
-                        <input type="number" class="form-control" id="age" name="age" value="{{ $coach->age }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Alamat</label>
-                        <input type="text" class="form-control" id="address" name="address" value="{{ $coach->address }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="sport_category">Cabang Olahraga</label>
-                        <input type="text" class="form-control" id="sport_category" name="sport_category" value="{{ $coach->sport_category }}" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Deskripsi</label>
-                        <textarea class="form-control" id="description" name="description" rows="3" required>{{ $coach->description }}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="photo">Foto</label>
-                        <input type="file" class="form-control" id="photo" name="photo">
-                        <img src="{{ $coach->photo }}" width="100" alt="Foto Pelatih">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
+                                    </table>
+                                    @foreach ($coaches as $coach)
+                                        <!-- Modal -->
+                                        @if (session('success'))
+                                            <div class="alert alert-success">
+                                                {{ session('success') }}
+                                            </div>
+                                        @endif
 
-                                {{ $coaches->links()}}
+                                        <div class="modal fade" id="coachDetailModal{{ $coach->id }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="coachDetailModalLabel{{ $coach->id }}" aria-hidden="true">
+                                           <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                               <div class="modal-content">
+                                                   <div class="modal-header bg-primary text-white">
+                                                       <h5 class="modal-title" id="coachDetailModalLabel{{ $coach->id }}">Detail Pelatih: {{ $coach->name }}</h5>
+                                                       <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                           <span aria-hidden="true">&times;</span>
+                                                       </button>
+                                                   </div>
+                                                   <div class="modal-body">
+                                                       <div class="row">
+                                                           <!-- Left column: Coach photo -->
+                                                           <div class="col-md-4 text-center">
+                                                               <img src="{{ $coach->photo }}" class="img-fluid rounded" alt="Foto Pelatih" style="max-height: 300px; object-fit: cover;">
+                                                           </div>
+                                                           <!-- Right column: Coach details -->
+                                                           <div class="col-md-8">
+                                                               <p class="mb-2"><strong>Nama:</strong> {{ $coach->name }}</p>
+                                                               <p class="mb-2"><strong>Umur:</strong> {{ $coach->age }}</p>
+                                                               <p class="mb-2"><strong>Alamat:</strong> {{ $coach->address }}</p>
+                                                               <p class="mb-2"><strong>Cabang Olahraga:</strong> {{ $coach->sport_category }}</p>
+                                                               <p class="mb-2"><strong>Deskripsi:</strong> {{ $coach->description }}</p>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                                   <div class="modal-footer">
+                                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                       
+                                       <div class="modal fade" id="coachEditModal{{ $coach->id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="coachEditModalLabel{{ $coach->id }}" aria-hidden="true">
+                                       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                           <div class="modal-content">
+                                               <div class="modal-header bg-primary text-white">
+                                                   <h5 class="modal-title" id="coachEditModalLabel{{ $coach->id }}">Edit Pelatih: {{ $coach->name }}</h5>
+                                                   <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                       <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                               </div>
+                                               <div class="modal-body">
+                                                   <!-- Form Edit Pelatih -->
+                                                   <form action="/edit-pelatih/{{ $coach->id }}" method="POST" enctype="multipart/form-data">
+                                                       @csrf
+                                                       @method('PUT')
+                                                       
+                                                       <div class="row">
+                                                           <!-- Left column -->
+                                                           <div class="col-md-6">
+                                                               <div class="form-group">
+                                                                   <label for="name">Nama</label>
+                                                                   <input type="text" class="form-control" id="name" name="name" 
+                                                                          value="{{ $coach->name }}" required>
+                                                               </div>
+                                                               <div class="form-group">
+                                                                   <label for="age">Umur</label>
+                                                                   <input type="number" class="form-control" id="age" name="age" 
+                                                                          value="{{ $coach->age }}" required>
+                                                               </div>
+                                                               <div class="form-group">
+                                                                   <label for="sport_category">Cabang Olahraga</label>
+                                                                   <input type="text" class="form-control" id="sport_category" name="sport_category" 
+                                                                          value="{{ $coach->sport_category }}" required>
+                                                               </div>
+                                                           </div>
+                                   
+                                                           <!-- Right column -->
+                                                           <div class="col-md-6">
+                                                               <div class="form-group">
+                                                                   <label for="address">Alamat</label>
+                                                                   <input type="text" class="form-control" id="address" name="address" 
+                                                                          value="{{ $coach->address }}" required>
+                                                               </div>
+                                                               <div class="form-group">
+                                                                   <label for="description">Deskripsi</label>
+                                                                   <textarea class="form-control" id="description" name="description" 
+                                                                             rows="3" required>{{ $coach->description }}</textarea>
+                                                               </div>
+                                                               <div class="form-group">
+                                                                   <label for="photo">Foto</label>
+                                                                   <input type="file" class="form-control-file" id="photo" name="photo">
+                                                                   <div class="mt-2">
+                                                                       <img src="{{ $coach->photo }}" class="img-fluid rounded" width="100" 
+                                                                            alt="Foto Pelatih">
+                                                                   </div>
+                                                               </div>
+                                                           </div>
+                                                       </div>
+                                   
+                                                       <div class="modal-footer">
+                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                           <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                       </div>
+                                                   </form>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   
+                                   
+                                   
+                                   
+                                    @endforeach
+
+                                    {{ $coaches->appends(request()->except('page'))->links() }}
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="/coaches/create" class="btn btn-rounded btn-primary">Tambah Pelatih</a>
+                                <a href="{{ route('cetak-pelatih')}}" target="_blank" class="btn btn-rounded btn-primary mx-2">Cetak Laporan</a>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <a href="/coaches/create" class="btn btn-rounded btn-primary">Tambah Pelatih</a>
-                        </div>
                     </div>
+
+
                 </div>
-                
-                
-        </div>
-        <!--**********************************
+                <!--**********************************
             Content body end
         ***********************************-->
 
 
 
-        <!--**********************************
+                <!--**********************************
            Support ticket button start
         ***********************************-->
 
-        <!--**********************************
+                <!--**********************************
            Support ticket button end
         ***********************************-->
 
 
-    </div>
-    <!--**********************************
+            </div>
+            <!--**********************************
         Main wrapper end
     ***********************************-->
 
-    <!--**********************************
+            <!--**********************************
         Scripts
     ***********************************-->
-    <!-- Required vendors -->
-    <script src="{{ asset('gambar_aset/vendor/global/global.min.js') }}"></script>
-    <script src="{{ asset('gambar_aset/js/quixnav-init.js') }}"></script>
-    <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
+            <!-- Required vendors -->
+            <script src="{{ asset('gambar_aset/vendor/global/global.min.js') }}"></script>
+            <script src="{{ asset('gambar_aset/js/quixnav-init.js') }}"></script>
+            <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
 
 
-    <!-- Vectormap -->
-    <script src="{{ asset('gambar_aset/vendor/raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('gambar_aset/vendor/morris/morris.min.js') }}"></script>
+            <!-- Vectormap -->
+            <script src="{{ asset('gambar_aset/vendor/raphael/raphael.min.js') }}"></script>
+            <script src="{{ asset('gambar_aset/vendor/morris/morris.min.js') }}"></script>
 
 
-    <script src="{{ asset('gambar_aset/vendor/circle-progress/circle-progress.min.js') }}"></script>
-    <script src="{{ asset('gambar_aset/vendor/chart.js') }}/Chart.bundle.min.js') }}"></script>
+            <script src="{{ asset('gambar_aset/vendor/circle-progress/circle-progress.min.js') }}"></script>
+            <script src="{{ asset('gambar_aset/vendor/chart.js') }}/Chart.bundle.min.js') }}"></script>
 
-    <script src="{{ asset('gambar_aset/vendor/gaugeJS/dist/gauge.min.js') }}"></script>
+            <script src="{{ asset('gambar_aset/vendor/gaugeJS/dist/gauge.min.js') }}"></script>
 
-    <!--  flot-chart js -->
-    <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.js') }}"></script>
-    <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.resize.js') }}"></script>
+            <!--  flot-chart js -->
+            <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.js') }}"></script>
+            <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.resize.js') }}"></script>
 
-    <!-- Owl Carousel -->
-    <script src="{{ asset('gambar_aset/vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
+            <!-- Owl Carousel -->
+            <script src="{{ asset('gambar_aset/vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
 
-    <!-- Counter Up -->
-    <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
-    <script src="{{ asset('gambar_aset/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
+            <!-- Counter Up -->
+            <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
+            <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
+            <script src="{{ asset('gambar_aset/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
 
 
-    <script src="{{ asset('gambar_aset/js/dashboard/dashboard-1.js') }}"></script>
+            <script src="{{ asset('gambar_aset/js/dashboard/dashboard-1.js') }}"></script>
 
-    <!-- Datatable -->
-    <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+            <!-- Datatable -->
+            <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+            <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
 
 </body>
 

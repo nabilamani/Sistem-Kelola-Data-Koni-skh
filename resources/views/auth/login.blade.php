@@ -129,6 +129,19 @@
         .register-link a:hover {
             text-decoration: underline;
         }
+        .alert {
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            font-size: 12px
+        }
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
     </style>
 </head>
 <body>
@@ -141,10 +154,22 @@
         <div class="welcome-message">
             Selamat datang di Sistem Database KONI Sukoharjo
         </div>
+
         <!-- Session Status -->
         <div class="form-group">
             <x-auth-session-status class="mb-4" :status="session('status')" />
         </div>
+
+        <!-- Error Alert for Login Failure -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -185,4 +210,5 @@
         </form>
     </div>
 </body>
+
 </html>

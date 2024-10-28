@@ -13,17 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('level')->default('Pengurus Cabor Sepak Bola');
-            $table->rememberToken();
+        Schema::create('events', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->string('name'); // Nama event
+            $table->date('event_date'); // Tanggal event
+            $table->string('sport_category'); // Kategori olahraga
+            $table->string('location'); // Lokasi event
             $table->timestamps();
         });
+        
     }
+
+    
 
     /**
      * Reverse the migrations.
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('events');
     }
 };

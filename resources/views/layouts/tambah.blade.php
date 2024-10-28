@@ -83,8 +83,8 @@
                 <div class="row page-titles mx-0">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
-                            <h4>Hi, welcome back!</h4>
-                            <p class="mb-1">{{ Auth::user()->name }}</p>
+                            <h4>Hi, Selamat Datang kembali!</h4>
+                            <p class="mb-1"><span class="text-success">{{ Auth::user()->name }},</span> Anda login sebagai <span class="text-success">{{ Auth::user()->level }}</span></p>
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -124,10 +124,14 @@
                             <select id="defaultSelect" name="sport_category" class="form-control">
                               <option value="" hidden selected disabled>Pilih kategori..</option>
                               <option value="Badminton">Badminton</option>
-                              <option value="Football">Football</option>
-                              <option value="Basketball">Basketball</option>
-                              <option value="Volleyball">Volleyball</option>
-                              <option value="Bicycle">Bicycle</option>
+                              <option value="Sepak Bola">Sepak Bola</option>
+                              <option value="Bola Basket">Bola Basket</option>
+                              <option value="Bola Voli">Bola Voli</option>
+                              <option value="balap Sepeda">Balap Sepeda</option>
+                              <option value="Atletik">Atletik</option>
+                              <option value="Renang">Renang</option>
+                              <option value="Tinju">Tinju</option>
+                              <option value="Pencak Silat">Pencak Silat</option>
                             </select>
                           </div>
                         </div>

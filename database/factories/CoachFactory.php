@@ -19,7 +19,7 @@ class CoachFactory extends Factory
         return [
             'id' => fake()->unique()->regexify('P[0-9]{4}'),
             'name' => fake()->name(),
-            'sport_category' => fake()->randomElement(['Bycle', 'Volleyball', 'Basketball','Football', 'Badminton']),
+            'sport_category' => fake()->randomElement(['Balap Sepeda', 'Bola Voli', 'Bola Basket','Sepak Bola', 'Badminton','Atletik','Renang','Tinju','Pencak Silat']),
             'address' => fake()->address(),
             'age' => fake()->numberBetween(20, 85),
             'description' => fake()->text()

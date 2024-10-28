@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('gambar_aset/images/koni.png') }}">
     <title>Register Page</title>
+    <!-- Tambahkan di dalam <head> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+<!-- Tambahkan sebelum tag penutup </body> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -102,6 +109,35 @@
             margin-bottom: 30px;
             text-align: center;
         }
+        .form-group {
+    margin-bottom: 1.5rem; /* Space below each form group */
+}
+
+.form-label { 
+    color: #333; /* Dark color for better readability */
+}
+
+.form-select {
+    padding: 0.5rem; /* Inner padding */
+    border-radius: 0.375rem; /* Rounded corners */
+    border: 1px solid #ced4da; /* Border color */
+    background-color: #fff; /* White background */
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Smooth transitions */
+}
+
+.form-select:focus {
+    border-color: #80bdff; /* Border color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Box shadow on focus */
+}
+
+.invalid-feedback {
+    display: none; /* Hide feedback by default */
+}
+
+select:invalid:focus ~ .invalid-feedback {
+    display: block; /* Show feedback when the select is invalid */
+}
+
     </style>
 </head>
 <body>
@@ -142,6 +178,27 @@
                 <label for="password_confirmation">{{ __('Confirm Password') }}</label>
                 <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
             </div>
+            <!-- Level -->
+            <div class="form-group">
+                <label for="level" class="form-label">{{ __('Level') }}</label>
+                <select id="level" name="level" class="form-select" required>
+                    <option value="" disabled selected>Select Level</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Pengurus Cabor Sepak Bola">Pengurus Cabor Sepak Bola</option>
+                    <option value="Pengurus Cabor Badminton">Pengurus Cabor Badminton</option>
+                    <option value="Pengurus Cabor Bola Basket">Pengurus Cabor Bola Basket</option>
+                    <option value="Pengurus Cabor Bola Voli">Pengurus Cabor Bola Voli</option>
+                    <option value="Pengurus Cabor Atletik">Pengurus Cabor Atletik</option>
+                    <option value="Pengurus Cabor Renang">Pengurus Cabor Renang</option>
+                    <option value="Pengurus Cabor Tinju">Pengurus Cabor Tinju</option>
+                    <option value="Pengurus Cabor Pencak Silat">Pengurus Cabor Pencak Silat</option>
+                    <!-- Add more levels if needed -->
+                </select>
+                <div class="invalid-feedback">
+                    Please select a level.
+                </div>
+            </div>
+            
 
             <button type="submit" class="btn-register">{{ __('Register') }}</button>
 
@@ -151,5 +208,14 @@
             </div>
         </form>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#level').select2({
+                placeholder: 'Select Level',
+                allowClear: true
+            });
+        });
+    </script>
+    
 </body>
 </html>
