@@ -79,8 +79,8 @@
                 
                     <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-office-building"></i><span class="nav-text">Struktural Koni</span></a>
                         <ul aria-expanded="false">
-                            <li><a href="/tambahpem"><i class="mdi mdi-plus-box"></i>Tambah Data Struktural</a></li>
-                            <li><a href="/daftarpem"><i class="mdi mdi-account-group"></i>Daftar Struktural Koni</a></li>
+                            <li><a href="/koni-structures/create"><i class="mdi mdi-plus-box"></i>Tambah Data Struktural</a></li>
+                            <li><a href="/koni-structures"><i class="mdi mdi-account-group"></i>Daftar Struktural Koni</a></li>
                             <li><a href="/exportpem"><i class="mdi mdi-file-export"></i>Laporan</a></li>
                         </ul>
                     </li>

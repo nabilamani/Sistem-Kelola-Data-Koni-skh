@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <!-- row -->
-                <div class="row">
+                 <div class="row">
                     <!-- Basic Layout -->
                     <div class="col-12">
                         <div class="card">

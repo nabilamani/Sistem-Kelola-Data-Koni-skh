@@ -6,7 +6,9 @@ use App\Http\Controllers\CoachController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KoniStructureController;
 use App\Models\Athlete;
+use App\Models\KoniStructures;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +77,11 @@ Route::resource('events', EventController::class);
 Route::put('/edit-event/{id}', [EventController::class, 'update']);
 Route::delete('/delete-event/{id}', [EventController::class, 'destroy']);
 Route::get('/cetak-event', [EventController::class, 'cetakEvent'])->name('cetak-event');
+
+Route::resource('koni-structures', KoniStructureController::class);
+Route::put('/edit-koni-structure/{id}', [KoniStructureController::class, 'update']);
+Route::delete('/delete-koni-structure/{id}', [KoniStructureController::class, 'destroy']);
+Route::get('/cetak-koni-structure', [KoniStructureController::class, 'cetakStructure'])->name('cetak-koni-structure');
 
 
 

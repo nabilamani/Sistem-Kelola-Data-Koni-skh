@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
-class KoniStructure extends Model
+class KoniStructures extends Model
 {
     use HasFactory;
 
@@ -34,7 +34,7 @@ class KoniStructure extends Model
 
     public function generateId()
     {
-        $lastStructure = KoniStructure::max('id');
+        $lastStructure = KoniStructures::max('id');
         $lastNumber = $lastStructure ? intval(substr($lastStructure, 1)) : 0;
         $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
         return 'K' . $newNumber;
