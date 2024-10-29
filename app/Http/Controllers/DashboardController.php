@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Athlete;
 use Illuminate\Http\Request;
 use App\Models\Event; // Import the Event model
 use App\Models\Coach; // Import the Coach model
@@ -14,6 +15,7 @@ class DashboardController extends Controller
         // Retrieve the total counts of events and coaches
         $eventCount = Event::count();
         $coachCount = Coach::count();
+        $athleteCount = Athlete::count();
         
         $upcomingEvents = Event::where('event_date', '>=', now())
         ->orderBy('event_date', 'asc')
@@ -21,6 +23,6 @@ class DashboardController extends Controller
     
 
         // Pass these counts and the upcoming events to the view
-        return view('dashboard', compact('eventCount', 'coachCount', 'upcomingEvents'));
+        return view('dashboard', compact('eventCount', 'coachCount','athleteCount', 'upcomingEvents'));
     }
 }

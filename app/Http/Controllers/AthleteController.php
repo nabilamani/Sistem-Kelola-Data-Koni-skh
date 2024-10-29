@@ -45,6 +45,21 @@ class AthleteController extends Controller
         return view('Atlet.tambah');
     }
 
+    public function cetakAthlete()
+{
+    $user = Auth::user(); // Get the authenticated user
+
+    // Filter athletes based on user level
+    $athletes = athlete::when($user->level !== 'admin', function ($query) use ($user) {
+        // Extract sport category from user level if not an admin
+        $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
+        $query->where('sport_category', $sportCategory);
+    })
+    ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
+    ->get(); // Retrieve all results based on filtering
+
+    return view('atlet.cetak-atlet', compact('athletes'));
+}
     /**
      * Store a newly created athlete in storage.
      *
@@ -99,8 +114,7 @@ class AthleteController extends Controller
      */
     public function edit($id)
     {
-        $athlete = Athlete::findOrFail($id);
-        return view('Atlet.edit', compact('athlete'));
+        return 'abc';
     }
 
     /**

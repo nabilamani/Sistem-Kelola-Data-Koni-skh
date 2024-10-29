@@ -226,8 +226,8 @@
                                                                     <div class="form-group">
                                                                         <label for="gender">Jenis Kelamin</label>
                                                                         <select name="gender" class="form-control" required>
-                                                                            <option value="Laki-laki" {{ $athlete->gender == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
-                                                                            <option value="Perempuan" {{ $athlete->gender == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                                                            <option value="Male" {{ $athlete->gender == 'Male' ? 'selected' : '' }}>Laki-laki</option>
+                                                                            <option value="Female" {{ $athlete->gender == 'Female' ? 'selected' : '' }}>Perempuan</option>
                                                                         </select>
                                                                     </div>
                                                                     <div class="form-group">
@@ -260,15 +260,14 @@
                                                     </div>
                                                 </div>
                                             @endforeach
-                
-                                            {{ $athletes->appends(request()->except('page'))->links() }}
                                         </tbody>
                                     </table>
+                                    {{ $athletes->appends(request()->except('page'))->links() }}
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <a href="/athletes/create" class="btn btn-rounded btn-primary">Tambah Atlet</a>
-                                <a href="" target="_blank" class="btn btn-rounded btn-primary mx-2">Cetak Laporan</a>
+                                <a href="{{ route('cetak-athlete') }}" target="_blank" class="btn btn-rounded btn-primary mx-2">Cetak Laporan</a>
                             </div>
                         </div>
                     </div>

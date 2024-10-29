@@ -6,7 +6,7 @@ use App\Models\Coach;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 class CoachController extends Controller
 {
@@ -141,8 +141,16 @@ class CoachController extends Controller
         $coach->description = $request->description;
 
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos', 'public');
-            $coach->photo = $photoPath;
+            // Delete the old photo if it exists
+            if ($coach->photo && file_exists(public_path($coach->photo))) {
+                unlink(public_path($coach->photo));
+            }
+    
+            // Upload the new photo
+            $file = $request->file('photo');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('img'), $filename);
+            $data['photo'] = 'img/' . $filename;
         }
 
         $coach->save();
@@ -164,6 +172,11 @@ class CoachController extends Controller
 
         // Hapus data pelatih
         $coach->delete();
+
+        if ($coach->photo) {
+            Storage::delete('public/img/' . $coach->photo); 
+        }
+        
 
         // Redirect dengan pesan sukses
         return redirect()->back()->with('success', 'Data pelatih berhasil dihapus');

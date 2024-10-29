@@ -16,7 +16,7 @@
                                 <ul aria-expanded="false">
                                     <li><a href="/athletes/create"><i class="mdi mdi-account-plus"></i>Tambah Atlet</a></li>
                                     <li><a href="/athletes"><i class="mdi mdi-account-multiple"></i>Daftar Atlet</a></li>
-                                    <li><a href="/daftar"><i class="mdi mdi-file-document"></i>Laporan</a></li>
+                                    <li><a href="{{ route('cetak-athlete') }}"><i class="mdi mdi-file-document"></i>Laporan</a></li>
                                 </ul>
                             </li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-whistle"></i><span class="nav-text">Wasit</span></a>

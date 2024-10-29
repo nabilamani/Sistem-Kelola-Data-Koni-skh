@@ -112,7 +112,7 @@
                                 <div class="card-body">
                                     <div class="media align-items-center">
                                         <div class="media-body">
-                                            <h2 class="mb-0">300</h2>
+                                            <h2 class="mb-0">{{ $athleteCount }}</h2>
                                             <p class="text-muted mb-0">Total Atlet</p>
                                         </div>
                                         <div class="icon-block">

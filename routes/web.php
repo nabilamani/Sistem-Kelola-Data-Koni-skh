@@ -69,6 +69,7 @@ Route::get('/cetak-pelatih', [CoachController::class, 'cetakPelatih'])->name('ce
 Route::resource('athletes', AthleteController::class);
 Route::put('/edit-athlete/{id}', [AthleteController::class, 'update']);
 Route::delete('/delete-athlete/{id}', [AthleteController::class, 'destroy']);
+Route::get('/cetak-athlete', [AthleteController::class, 'cetakAthlete'])->name('cetak-athlete');
 
 Route::resource('events', EventController::class);
 Route::put('/edit-event/{id}', [EventController::class, 'update']);
