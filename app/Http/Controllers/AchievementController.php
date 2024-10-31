@@ -27,7 +27,7 @@ class AchievementController extends Controller
         ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
         ->paginate(4); // Display 4 items per page
 
-        return view('Achievement.index', ['achievements' => $achievements, 'search' => $search]);
+        return view('Prestasi.daftar', ['achievements' => $achievements, 'search' => $search]);
     }
 
     /**
