@@ -112,7 +112,7 @@
                                 <div class="card-body">
                                     <div class="media align-items-center">
                                         <div class="media-body">
-                                            <h2 class="mb-0">{{ $athleteCount }}</h2>
+                                            <h2 class="mb-0 count" data-count="{{ $athleteCount }}">0</h2>
                                             <p class="text-muted mb-0">Total Atlet</p>
                                         </div>
                                         <div class="icon-block">
@@ -129,7 +129,7 @@
                                 <div class="card-body">
                                     <div class="media align-items-center">
                                         <div class="media-body">
-                                            <h2 class="mb-0">{{ $eventCount }}</h2>
+                                            <h2 class="mb-0 count" data-count="{{ $eventCount }}">0</h2>
                                             <p class="text-muted mb-0">Total Events</p>
                                         </div>
                                         <div class="icon-block">
@@ -163,7 +163,7 @@
                                 <div class="card-body">
                                     <div class="media align-items-center">
                                         <div class="media-body">
-                                            <h2 class="mb-0">{{ $coachCount }}</h2>
+                                            <h2 class="mb-0 count" data-count="{{ $coachCount }}">0</h2>
                                             <p class="text-muted mb-0">Total Pelatih</p>
                                         </div>
                                         <div class="icon-block">
@@ -317,6 +317,37 @@
     <!-- Datatable -->
     <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+
+    <!-- Counting Animation Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const counters = document.querySelectorAll('.count');
+        const animationDuration = 2000; // Duration in milliseconds (2 seconds)
+
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-count');
+            const frameRate = 20; // Update the count every 20ms
+            const totalFrames = animationDuration / frameRate;
+            const increment = target / totalFrames;
+
+            let currentCount = 0;
+
+            const updateCount = () => {
+                currentCount += increment;
+                
+                if (currentCount < target) {
+                    counter.innerText = Math.ceil(currentCount);
+                    setTimeout(updateCount, frameRate);
+                } else {
+                    counter.innerText = target; // Set the final count
+                }
+            };
+
+            updateCount();
+        });
+    });
+</script>
+
 
 </body>
 

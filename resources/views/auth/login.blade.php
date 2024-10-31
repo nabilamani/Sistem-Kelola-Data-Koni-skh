@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -129,6 +130,7 @@
         .register-link a:hover {
             text-decoration: underline;
         }
+
         .alert {
             margin-bottom: 20px;
             border: 1px solid transparent;
@@ -136,18 +138,19 @@
             font-size: 12px
         }
 
-.alert-danger {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
-}
-
+        .alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
     </style>
 </head>
+
 <body>
     <div class="login-container">
         <!-- Logo -->
-        <img src="https://sisakti.konijateng.id/uploads/data_icon_koni_kab_kota/sukoharjo.png" alt="Logo KONI Sukoharjo" class="logo" style="height: 100px">
+        <img src="https://sisakti.konijateng.id/uploads/data_icon_koni_kab_kota/sukoharjo.png" alt="Logo KONI Sukoharjo"
+            class="logo" style="height: 100px">
 
         <!-- Welcome Message -->
         <h2>Login</h2>
@@ -170,14 +173,19 @@
                 </ul>
             </div>
         @endif
-
+        @if (session('message'))
+            <div class="alert alert-warning">
+                {{ session('message') }}
+            </div>
+        @endif
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email Address -->
             <div class="form-group">
                 <label for="email">{{ __('Email') }}</label>
-                <input id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
+                <input id="email" type="email" name="email" :value="old('email')" required autofocus
+                    autocomplete="username">
             </div>
 
             <!-- Password -->
@@ -185,6 +193,7 @@
                 <label for="password">{{ __('Password') }}</label>
                 <input id="password" type="password" name="password" required autocomplete="current-password">
             </div>
+
 
             <!-- Remember Me -->
             <div class="checkbox-group">

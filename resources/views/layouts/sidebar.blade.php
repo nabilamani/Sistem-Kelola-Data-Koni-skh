@@ -1,7 +1,7 @@
 <div class="quixnav">
             <div class="quixnav-scroll">
-                <li class="nav-label my-2">Menu Cabor</li>
                 <ul class="metismenu" id="menu">
+                    <li class="nav-label my-2">Menu Cabor</li>
                     <li><a class="shadow" href="/dashboard" aria-expanded="false"><i class="mdi mdi-home"></i><span class="nav-text">Dashboard</span></a></li>
                     <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-soccer"></i><span class="nav-text">Data Cabor</span></a>
                         <ul aria-expanded="false">
@@ -28,11 +28,12 @@
                             </li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-trophy"></i><span class="nav-text">Prestasi</span></a>
                                 <ul aria-expanded="false">
-                                    <li><a href="/tambah"><i class="mdi mdi-trophy-outline"></i>Tambah Prestasi</a></li>
-                                    <li><a href="/daftar"><i class="mdi mdi-trophy-variant"></i>Daftar Prestasi</a></li>
+                                    <li><a href="/achievements/create"><i class="mdi mdi-trophy-outline"></i>Tambah Prestasi</a></li>
+                                    <li><a href="/achievements"><i class="mdi mdi-trophy-variant"></i>Daftar Prestasi</a></li>
                                     <li><a href="/daftar"><i class="mdi mdi-file-document"></i>Laporan</a></li>
                                 </ul>
                             </li>
+                            
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="nav-text">Lokasi</span></a>
                                 <ul aria-expanded="false">
                                     <li><a href="/tambah"><i class="mdi mdi-map-marker-plus"></i>Tambah Lokasi</a></li>
@@ -44,7 +45,7 @@
                                 <ul aria-expanded="false">
                                     <li><a href="/events/create"><i class="mdi mdi-calendar-plus"></i>Tambah Event</a></li>
                                     <li><a href="/events"><i class="mdi mdi-calendar-multiple"></i>Daftar Event</a></li>
-                                    <li><a href="/daftar"><i class="mdi mdi-file-document"></i>Laporan</a></li>
+                                    <li><a href="{{ route('cetak-event') }}"><i class="mdi mdi-file-document"></i>Laporan</a></li>
                                 </ul>
                             </li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-account-group"></i><span class="nav-text">Struktural Cabor</span></a>
@@ -63,8 +64,8 @@
                     @if (auth()->user()->level === 'admin' )
                     <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-newspaper"></i><span class="nav-text">Berita</span></a>
                         <ul aria-expanded="false">
-                            <li><a href="/tambahpeny"><i class="mdi mdi-plus-box"></i>Tambah Berita</a></li>
-                            <li><a href="/daftarpeny"><i class="mdi mdi-newspaper"></i>Daftar Berita</a></li>
+                            <li><a href="/berita/create"><i class="mdi mdi-plus-box"></i>Tambah Berita</a></li>
+                            <li><a href="/berita"><i class="mdi mdi-newspaper"></i>Daftar Berita</a></li>
                             <li><a href="/exportpeny"><i class="mdi mdi-file-export"></i>Laporan</a></li>
                         </ul>
                     </li>
@@ -79,8 +80,8 @@
                 
                     <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-office-building"></i><span class="nav-text">Struktural Koni</span></a>
                         <ul aria-expanded="false">
-                            <li><a href="/koni-structures/create"><i class="mdi mdi-plus-box"></i>Tambah Data Struktural</a></li>
-                            <li><a href="/koni-structures"><i class="mdi mdi-account-group"></i>Daftar Struktural Koni</a></li>
+                            <li><a href="/konistructures/create"><i class="mdi mdi-plus-box"></i>Tambah Data Struktural</a></li>
+                            <li><a href="/konistructures"><i class="mdi mdi-account-group"></i>Daftar Struktural Koni</a></li>
                             <li><a href="/exportpem"><i class="mdi mdi-file-export"></i>Laporan</a></li>
                         </ul>
                     </li>

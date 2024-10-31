@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AchievementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AthleteController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
@@ -78,10 +80,21 @@ Route::put('/edit-event/{id}', [EventController::class, 'update']);
 Route::delete('/delete-event/{id}', [EventController::class, 'destroy']);
 Route::get('/cetak-event', [EventController::class, 'cetakEvent'])->name('cetak-event');
 
-Route::resource('koni-structures', KoniStructureController::class);
-Route::put('/edit-koni-structure/{id}', [KoniStructureController::class, 'update']);
-Route::delete('/delete-koni-structure/{id}', [KoniStructureController::class, 'destroy']);
-Route::get('/cetak-koni-structure', [KoniStructureController::class, 'cetakStructure'])->name('cetak-koni-structure');
+Route::resource('achievements', AchievementController::class);
+Route::put('/edit-achievement/{id}', [AchievementController::class, 'update']);
+Route::delete('/delete-achievement/{id}', [AchievementController::class, 'destroy']);
+Route::get('/cetak-achievement', [AchievementController::class, 'cetakAchievement'])->name('cetak-Achievement');
+
+Route::resource('berita', BeritaController::class);
+Route::put('/edit-berita/{id}', [BeritaController::class, 'update']);
+Route::delete('/delete-berita/{id}', [BeritaController::class, 'destroy']);
+Route::get('/cetak-berita', [BeritaController::class, 'cetakBerita'])->name('cetak-berita');
+
+
+Route::resource('konistructures', KoniStructureController::class);
+Route::put('/edit-konistructure/{id}', [KoniStructureController::class, 'update']);
+Route::delete('/delete-konistructure/{id}', [KoniStructureController::class, 'destroy']);
+Route::get('/cetak-konistructure', [KoniStructureController::class, 'cetakStructure'])->name('cetak-konistructure');
 
 
 

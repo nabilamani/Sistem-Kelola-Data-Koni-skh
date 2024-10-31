@@ -21,11 +21,6 @@
 
 
 </head>
-<style>
-    .card {
-    border-bottom: 3px solid orange; /* You can adjust the width (3px) as needed */
-}
-</style>
 
 <body>
 
@@ -101,8 +96,8 @@
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Struktural Koni</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Daftar Struktural</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Atlet</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Daftar Atlet</a></li>
                         </ol>
                     </div>
                 </div>
@@ -111,56 +106,52 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Daftar Struktur KONI</h4>
-                                <form action="{{ route('konistructures.index') }}" method="GET" class="form-inline">
-                                    <input type="text" name="search" class="form-control mr-2" placeholder="Cari anggota..." value="{{ request('search') }}">
+                                <h4 class="card-title">Daftar Berita</h4>
+                                <form action="{{ route('berita.index') }}" method="GET" class="form-inline">
+                                    <input type="text" name="search" class="form-control mr-2" placeholder="Cari berita..." value="{{ request('search') }}">
                                     <button type="submit" class="btn btn-outline-primary">Cari</button>
                                 </form>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="structureTable" class="table table-striped table-hover" style="min-width: 845px;">
+                                    <table id="beritaTable" class="table table-striped table-hover" style="min-width: 845px;">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Jabatan</th>
-                                                <th>Umur</th>
-                                                <th>Tanggal Lahir</th>
-                                                <th>Jenis Kelamin</th>
-                                                <th>Foto</th>
+                                                <th>Judul Berita</th>
+                                                <th>Lokasi Peristiwa</th>
+                                                <th>Tanggal dan Waktu</th>
+                                                <th>Kutipan Sumber</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-dark">
                                             @php
-                                                $no = ($konistructures->currentPage() - 1) * $konistructures->perPage() + 1;
+                                                $no = ($berita->currentPage() - 1) * $berita->perPage() + 1;
                                             @endphp
-                                            @foreach ($konistructures as $structure)
+                                            @foreach ($berita as $item)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $structure->name }}</td>
-                                                    <td>{{ $structure->position }}</td>
-                                                    <td>{{ $structure->age }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($structure->birth_date)->format('d-m-Y') }}</td>
-                                                    <td>{{ $structure->gender }}</td>
-                                                    <td><img src="{{ asset($structure->photo) }}" width="50" alt="Foto"></td>
+                                                    <td>{{ $item->judul_berita }}</td>
+                                                    <td>{{ $item->lokasi_peristiwa }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($item->tanggal_waktu)->format('d-m-Y H:i') }}</td>
+                                                    <td>{{ $item->kutipan_sumber }}</td>
                                                     <td>
                                                         <div class="dropdown">
                                                             <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                                                 Aksi
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#structureDetailModal{{ $structure->id }}">
+                                                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#beritaDetailModal{{ $item->id }}">
                                                                     <i class="bx bx-info-circle"></i> Lihat Detail
                                                                 </a>
-                                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#structureEditModal{{ $structure->id }}">
+                                                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#beritaEditModal{{ $item->id }}">
                                                                     <i class="bx bx-edit-alt"></i> Edit
                                                                 </a>
-                                                                <form action="{{ route('konistructures.destroy', $structure->id) }}" method="POST" class="d-inline">
+                                                                <form action="/delete-berita/{{ $item->id }}" method="POST" class="d-inline">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit" class="dropdown-item" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                                    <button type="submit" class="dropdown-item" onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">
                                                                         <i class="bx bx-trash"></i> Hapus
                                                                     </button>
                                                                 </form>
@@ -169,29 +160,23 @@
                                                     </td>
                                                 </tr>
                 
-                                                <!-- Detail Modal -->
-                                                <div class="modal fade" id="structureDetailModal{{ $structure->id }}" tabindex="-1" role="dialog" aria-labelledby="structureDetailModalLabel{{ $structure->id }}" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                <!-- Modal for Berita Details -->
+                                                <div class="modal fade" id="beritaDetailModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="beritaDetailModalLabel{{ $item->id }}" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
-                                                            <div class="modal-header bg-primary text-white">
-                                                                <h5 class="modal-title" id="structureDetailModalLabel{{ $structure->id }}">Detail Struktur KONI: {{ $structure->name }}</h5>
-                                                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="beritaDetailModalLabel{{ $item->id }}">Detail Berita: {{ $item->judul_berita }}</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="row">
-                                                                    <div class="col-md-4 text-center">
-                                                                        <img src="{{ asset($structure->photo) }}" class="img-fluid rounded" alt="Foto" style="max-height: 300px; object-fit: cover;">
-                                                                    </div>
-                                                                    <div class="col-md-8">
-                                                                        <p><strong>Nama:</strong> {{ $structure->name }}</p>
-                                                                        <p><strong>Jabatan:</strong> {{ $structure->position }}</p>
-                                                                        <p><strong>Umur:</strong> {{ $structure->age }}</p>
-                                                                        <p><strong>Tanggal Lahir:</strong> {{ $structure->birth_date }}</p>
-                                                                        <p><strong>Jenis Kelamin:</strong> {{ $structure->gender }}</p>
-                                                                    </div>
-                                                                </div>
+                                                                <p><strong>Judul Berita:</strong> {{ $item->judul_berita }}</p>
+                                                                <p><strong>Lokasi Peristiwa:</strong> {{ $item->lokasi_peristiwa }}</p>
+                                                                <p><strong>Tanggal dan Waktu:</strong> {{ \Carbon\Carbon::parse($item->tanggal_waktu)->format('d-m-Y H:i') }}</p>
+                                                                <p><strong>Kutipan Sumber:</strong> {{ $item->kutipan_sumber }}</p>
+                                                                <p><strong>Isi Berita:</strong> {{ $item->isi_berita }}</p>
+                                                                <img src="{{ $item->foto }}" width="100%" alt="Foto Berita">
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -200,55 +185,45 @@
                                                     </div>
                                                 </div>
                 
-                                                <!-- Edit Modal -->
-                                                <div class="modal fade" id="structureEditModal{{ $structure->id }}" tabindex="-1" role="dialog" aria-labelledby="structureEditModalLabel{{ $structure->id }}" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                <!-- Modal for Editing Berita -->
+                                                <div class="modal fade" id="beritaEditModal{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="beritaEditModalLabel{{ $item->id }}" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
-                                                            <div class="modal-header bg-primary text-white">
-                                                                <h5 class="modal-title" id="structureEditModalLabel{{ $structure->id }}">Edit Struktur KONI: {{ $structure->name }}</h5>
-                                                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="beritaEditModalLabel{{ $item->id }}">Edit Berita: {{ $item->judul_berita }}</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form action="{{ route('konistructures.update', $structure->id) }}" method="POST" enctype="multipart/form-data">
+                                                                <form action="/edit-berita/{{ $item->id }}" method="POST" enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('PUT')
-                                                                    <div class="row">
-                                                                        <div class="col-md-6">
-                                                                            <div class="form-group">
-                                                                                <label for="name">Nama</label>
-                                                                                <input type="text" class="form-control" id="name" name="name" value="{{ $structure->name }}" required>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="position">Jabatan</label>
-                                                                                <input type="text" class="form-control" id="position" name="position" value="{{ $structure->position }}" required>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="birth_date">Tanggal Lahir</label>
-                                                                                <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ $structure->birth_date }}" required>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-6">
-                                                                            <div class="form-group">
-                                                                                <label for="age">Umur</label>
-                                                                                <input type="number" class="form-control" id="age" name="age" value="{{ $structure->age }}" required>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="gender">Jenis Kelamin</label>
-                                                                                <select class="form-control" id="gender" name="gender" required>
-                                                                                    <option value="Laki-Laki" {{ $structure->gender == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
-                                                                                    <option value="Perempuan" {{ $structure->gender == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="photo">Foto</label>
-                                                                                <input type="file" class="form-control-file" id="photo" name="photo">
-                                                                                <div class="mt-2">
-                                                                                    <img src="{{ asset($structure->photo) }}" class="img-fluid rounded" width="100" alt="Foto">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                                                    <div class="form-group">
+                                                                        <label for="judul_berita">Judul Berita</label>
+                                                                        <input type="text" class="form-control" id="judul_berita" name="judul_berita" value="{{ $item->judul_berita }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="lokasi_peristiwa">Lokasi Peristiwa</label>
+                                                                        <input type="text" class="form-control" id="lokasi_peristiwa" name="lokasi_peristiwa" value="{{ $item->lokasi_peristiwa }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="tanggal_waktu">Tanggal dan Waktu</label>
+                                                                        <input type="datetime-local" class="form-control" id="tanggal_waktu" name="tanggal_waktu" value="{{ \Carbon\Carbon::parse($item->tanggal_waktu)->format('Y-m-d\TH:i') }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="kutipan_sumber">Kutipan Sumber</label>
+                                                                        <input type="text" class="form-control" id="kutipan_sumber" name="kutipan_sumber" value="{{ $item->kutipan_sumber }}">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="isi_berita">Isi Berita</label>
+                                                                        <textarea class="form-control" id="isi_berita" name="isi_berita" required>{{ $item->isi_berita }}</textarea>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="foto">Foto</label>
+                                                                        <input type="file" class="form-control" id="foto" name="foto">
+                                                                        <img src="{{ $item->foto }}" width="100" alt="Foto Berita">
+                                                                        <small>Biarkan kosong jika tidak ingin mengubah foto.</small>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -262,17 +237,16 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    {{ $konistructures->appends(request()->except('page'))->links() }}
+                                    {{ $berita->appends(request()->except('page'))->links() }}
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="{{ route('konistructures.create') }}" class="btn btn-rounded btn-primary">Tambah Anggota</a>
-                                <a href="{{ route('cetak-konistructure') }}" target="_blank" class="btn btn-rounded btn-primary mx-2">Cetak Laporan</a>
+                                <a href="/berita/create" class="btn btn-rounded btn-primary">Tambah Berita</a>
+                                <a href="" target="_blank" class="btn btn-rounded btn-primary mx-2">Cetak Laporan</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                
                 
                 <!--**********************************
             Content body end
