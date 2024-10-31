@@ -146,7 +146,7 @@
                                 <div class="card-body">
                                     <div class="media align-items-center">
                                         <div class="media-body">
-                                            <h2 class="mb-0">200</h2>
+                                            <h2 class="mb-0 count" data-count="{{ $achievementCount }}">0</h2>
                                             <p class="text-muted mb-0">Total Achievements</p>
                                         </div>
                                         <div class="icon-block">
@@ -188,47 +188,26 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>Cabang Olahraga</th>
-                                            <th>Emas</th>
-                                            <th>Perak</th>
-                                            <th>Perunggu</th>
+                                            <th>Jenis Event</th>
+                                            <th>Nama Atlet</th>
+                                            <th>Keterangan</th>
                                         </tr>
                                     </thead>
                                     <tbody style="color: rgb(114, 114, 114)">
-                                        <tr>
-                                            <td>Football</td>
-                                            <td>10</td>
-                                            <td>8</td>
-                                            <td>5</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Badminton</td>
-                                            <td>7</td>
-                                            <td>6</td>
-                                            <td>4</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Swimming</td>
-                                            <td>15</td>
-                                            <td>10</td>
-                                            <td>7</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Basketball</td>
-                                            <td>8</td>
-                                            <td>5</td>
-                                            <td>6</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Volleyball</td>
-                                            <td>6</td>
-                                            <td>9</td>
-                                            <td>3</td>
-                                        </tr>
+                                        @foreach ($achievements as $achievement)
+                                            <tr>
+                                                <td>{{ $achievement->sport_category }}</td>
+                                                <td>{{ $achievement->event_type }}</td>
+                                                <td>{{ $achievement->athlete_name }}</td>
+                                                <td>{{ $achievement->description }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
+                    
 
                     <!-- Tabel Event Mendatang -->
                     <div class="col-xl-6">
