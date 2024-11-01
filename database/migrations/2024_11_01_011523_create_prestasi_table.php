@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('achievements', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->string('sport_category'); // Kategori olahraga
             $table->string('event_type'); // Kelompok cabor (contoh: ganda-putri, ganda-putra)
             $table->string('athlete_name'); // Nama atlet

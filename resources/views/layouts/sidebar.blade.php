@@ -64,8 +64,8 @@
                     @if (auth()->user()->level === 'admin' )
                     <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-newspaper"></i><span class="nav-text">Berita</span></a>
                         <ul aria-expanded="false">
-                            <li><a href="/berita/create"><i class="mdi mdi-plus-box"></i>Tambah Berita</a></li>
-                            <li><a href="/berita"><i class="mdi mdi-newspaper"></i>Daftar Berita</a></li>
+                            <li><a href="/beritas/create"><i class="mdi mdi-plus-box"></i>Tambah Berita</a></li>
+                            <li><a href="/beritas"><i class="mdi mdi-newspaper"></i>Daftar Berita</a></li>
                             <li><a href="/exportpeny"><i class="mdi mdi-file-export"></i>Laporan</a></li>
                         </ul>
                     </li>

@@ -17,8 +17,11 @@ class Berita extends Model
         'lokasi_peristiwa',
         'isi_berita',
         'kutipan_sumber',
-        'foto',
+        'photo',
     ];
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     protected $dates = [
         'tanggal_waktu',
@@ -30,9 +33,10 @@ class Berita extends Model
     }
 
     public function generateId()
-    {
-        $lastBerita = Berita::max('id');
-        $newNumber = $lastBerita ? intval($lastBerita) + 1 : 1;
-        return str_pad($newNumber, 4, '0', STR_PAD_LEFT);
-    }
+{
+    $lastBerita = Berita::max('id');
+    $lastNumber = $lastBerita ? intval(substr($lastBerita, 1)) : 0;
+    $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+    return 'B' . $newNumber;
+}
 }

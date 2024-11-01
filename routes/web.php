@@ -85,7 +85,7 @@ Route::put('/edit-achievement/{id}', [AchievementController::class, 'update']);
 Route::delete('/delete-achievement/{id}', [AchievementController::class, 'destroy']);
 Route::get('/cetak-achievement', [AchievementController::class, 'cetakAchievement'])->name('cetak-Achievement');
 
-Route::resource('berita', BeritaController::class);
+Route::resource('beritas', BeritaController::class);
 Route::put('/edit-berita/{id}', [BeritaController::class, 'update']);
 Route::delete('/delete-berita/{id}', [BeritaController::class, 'destroy']);
 Route::get('/cetak-berita', [BeritaController::class, 'cetakBerita'])->name('cetak-berita');

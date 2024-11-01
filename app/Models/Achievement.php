@@ -26,10 +26,13 @@ class Achievement extends Model
      * @return string
      */
     public function generateId()
-    {
-        $lastAchievement = Achievement::max('id');
-        $lastNumber = $lastAchievement ? intval(substr($lastAchievement, 1)) : 0;
-        $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
-        return 'ACH' . $newNumber;
-    }
+{
+    do {
+        // Generate a unique ID, e.g., ACH followed by a unique number
+        $id = 'ACH' . str_pad(rand(1, 9999), 4, '0', STR_PAD_LEFT);
+    } while (Achievement::where('id', $id)->exists());
+
+    return $id;
+}
+
 }

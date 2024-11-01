@@ -102,7 +102,7 @@
                                 <h5 class="mb-0">Tambah Berita</h5>
                             </div>
                             <div class="card-body">
-                                <form action="/berita" method="post" enctype="multipart/form-data">
+                                <form action="/beritas" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="judul_berita">Judul Berita</label>
@@ -115,7 +115,7 @@
                                         <label class="col-sm-2 col-form-label" for="tanggal_waktu">Tanggal dan
                                             Waktu</label>
                                         <div class="col-sm-10">
-                                            <input type="datetime-local" name="tanggal_waktu" class="form-control"
+                                            <input type="date" name="tanggal_waktu" class="form-control"
                                                 required />
                                         </div>
                                     </div>
@@ -142,10 +142,9 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="foto">Foto</label>
+                                        <label class="col-sm-2 col-form-label" for="photo">Foto</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="file" name="foto"
-                                                accept="image/*" />
+                                            <input class="form-control" type="file" name="photo" id="gambar" style="height: 100%;" />
                                         </div>
                                     </div>
                                     <div class="row justify-content-end">

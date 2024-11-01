@@ -14,21 +14,29 @@ class AchievementController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        $user = Auth::user();
-        $search = $request->input('search'); // Capture the search input from the request
+{
+    $user = Auth::user();
+    $search = $request->input('search'); // Capture the search input from the request
 
-        // Filter achievements based on user level and search query if provided
-        $achievements = Achievement::when($search, function ($query) use ($search) {
-            // Apply search filter on sport category and athlete name
+    // Filter achievements based on user level and search query if provided
+    $achievements = Achievement::when($user->level !== 'admin', function ($query) use ($user) {
+        // Extract sport category from user level if the user is not an admin
+        $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
+        $query->where('sport_category', $sportCategory);
+    })
+    ->when($search, function ($query) use ($search) {
+        // Apply search filter on sport category and athlete name fields
+        $query->where(function ($query) use ($search) {
             $query->where('sport_category', 'like', "%$search%")
                   ->orWhere('athlete_name', 'like', "%$search%");
-        })
-        ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
-        ->paginate(4); // Display 4 items per page
+        });
+    })
+    ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
+    ->paginate(4); // Display 4 items per page
 
-        return view('Prestasi.daftar', ['achievements' => $achievements, 'search' => $search]);
-    }
+    return view('Prestasi.daftar', ['achievements' => $achievements, 'search' => $search]);
+}
+
 
     /**
      * Show the form for creating a new achievement.
