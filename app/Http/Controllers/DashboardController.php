@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Achievement;
 use App\Models\Athlete;
+use App\Models\Berita;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Coach; 
@@ -18,6 +19,10 @@ class DashboardController extends Controller
         $coachCount = Coach::count();
         $athleteCount = Athlete::count();
         $achievementCount = Achievement::count();
+
+        // Retrieve the latest news (adjust the number as needed)
+        $beritas = Berita::orderBy('tanggal_waktu', 'desc')->take(3)->get();
+        
         
         $upcomingEvents = Event::where('event_date', '>=', now())
         ->orderBy('event_date', 'asc')
@@ -28,6 +33,6 @@ class DashboardController extends Controller
     
 
         // Pass these counts and the upcoming events to the view
-        return view('dashboard', compact('eventCount', 'coachCount','athleteCount','achievementCount', 'upcomingEvents','achievements'));
+        return view('dashboard', compact('eventCount', 'coachCount','athleteCount','achievementCount', 'upcomingEvents','achievements','beritas'));
     }
 }

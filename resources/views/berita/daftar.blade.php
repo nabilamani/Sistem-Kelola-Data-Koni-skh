@@ -108,8 +108,8 @@
                             <div class="card-header">
                                 <h4 class="card-title">Daftar Berita</h4>
                                 <form action="{{ route('beritas.index') }}" method="GET" class="form-inline">
-                                    <input type="text" name="search" class="form-control mr-2" placeholder="Cari berita..."
-                                           value="{{ request('search') }}">
+                                    <input type="text" name="search" class="form-control mr-2"
+                                        placeholder="Cari berita..." value="{{ request('search') }}">
                                     <button type="submit" class="btn btn-outline-primary">Cari</button>
                                 </form>
                             </div>
@@ -121,31 +121,44 @@
                                                 <div class="row no-gutters align-items-stretch">
                                                     <!-- Image on the left side -->
                                                     <div class="col-md-4 d-flex">
-                                                        <img src="{{ asset($berita->photo) }}" class="card-img img-fluid my-3 mx-2" alt="Foto Berita" style="width: 100%; object-fit: cover; border-radius: 8px;">
+                                                        <img src="{{ asset($berita->photo) }}"
+                                                            class="card-img img-fluid my-3 mx-2" alt="Foto Berita"
+                                                            style="width: 100%; object-fit: cover; border-radius: 8px;">
                                                     </div>
                                                     <!-- Details on the right side -->
                                                     <div class="col-md-8">
                                                         <div class="card-body">
-                                                            <h5 class="card-title mb-0">{{ $berita->judul_berita }}</h5>
+                                                            <h5 class="card-title mb-0">{{ $berita->judul_berita }}
+                                                            </h5>
                                                             <p class="card-text mb-0">
-                                                                <small class="text-muted mb-0">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
+                                                                <small
+                                                                    class="text-muted mb-0">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
                                                             </p>
-                                                            <p class="card-text mb-0">{{ Str::limit($berita->isi_berita, 20) }}</p>
-                                                            <p class="card-text mb-0"><strong>Lokasi:</strong> {{ $berita->lokasi_peristiwa }}</p>
-                                                            <p class="card-text"><strong>Kutipan:</strong> {{ $berita->kutipan_sumber }}</p>
+                                                            <p class="card-text mb-0">
+                                                                {{ Str::limit($berita->isi_berita, 20) }}</p>
+                                                            <p class="card-text mb-0"><strong>Lokasi:</strong>
+                                                                {{ $berita->lokasi_peristiwa }}</p>
+                                                            <p class="card-text"><strong>Kutipan:</strong>
+                                                                {{ $berita->kutipan_sumber }}</p>
                                                             <!-- Action buttons -->
                                                             <div class="btn-group" role="group" aria-label="Aksi">
-                                                                <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#newsDetailModal{{ $berita->id }}">
+                                                                <a href="#" class="btn btn-info btn-sm"
+                                                                    data-toggle="modal"
+                                                                    data-target="#newsDetailModal{{ $berita->id }}">
                                                                     Lihat Detail
                                                                 </a>
-                                                                <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#newsEditModal{{ $berita->id }}">
+                                                                <a href="#" class="btn btn-warning btn-sm"
+                                                                    data-toggle="modal"
+                                                                    data-target="#newsEditModal{{ $berita->id }}">
                                                                     Edit
                                                                 </a>
-                                                                <form action="/delete-berita/{{ $berita->id }}" method="POST" class="d-inline">
+                                                                <form action="/delete-berita/{{ $berita->id }}"
+                                                                    method="POST" class="d-inline">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit" class="btn btn-danger btn-sm"
-                                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger btn-sm"
+                                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">
                                                                         Hapus
                                                                     </button>
                                                                 </form>
@@ -154,16 +167,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                            
+
+
                                         </div>
                                     @endforeach
                                 </div>
-                                
+
                                 <!-- Pagination -->
-                                
-                                    {{ $beritas->appends(request()->except('page'))->links() }}
-                                
+
+                                {{ $beritas->appends(request()->except('page'))->links() }}
+
                             </div>
                             <div class="card-footer">
                                 <a href="/beritas/create" class="btn btn-rounded btn-primary">Tambah Berita</a>
@@ -171,116 +184,129 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Modals for Viewing and Editing News -->
                 @foreach ($beritas as $berita)
-    <!-- Modal for News Details -->
-    <div class="modal fade" id="newsDetailModal{{ $berita->id }}" tabindex="-1" role="dialog"
-         aria-labelledby="newsDetailModalLabel{{ $berita->id }}" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newsDetailModalLabel{{ $berita->id }}">
-                        Detail Berita: {{ $berita->judul_berita }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <!-- Image Column -->
-                        <div class="col-md-5">
-                            @if($berita->photo)
-                                <img src="{{ asset($berita->photo) }}" alt="Foto Berita" class="img-fluid rounded mb-3" style="width: 100%; object-fit: cover;">
-                            @else
-                                <span>No image</span>
-                            @endif
-                        </div>
-                        <!-- Text Content Column -->
-                        <div class="col-md-7">
-                            <p><strong>Judul Berita:</strong> {{ $berita->judul_berita }}</p>
-                            <p><strong>Tanggal Waktu:</strong> {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</p>
-                            <p><strong>Lokasi Peristiwa:</strong> {{ $berita->lokasi_peristiwa }}</p>
-                            <p><strong>Isi Berita:</strong> {{ $berita->isi_berita }}</p>
-                            <p><strong>Kutipan Sumber:</strong> {{ $berita->kutipan_sumber }}</p>
+                    <!-- Modal for News Details -->
+                    <div class="modal fade" id="newsDetailModal{{ $berita->id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="newsDetailModalLabel{{ $berita->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="newsDetailModalLabel{{ $berita->id }}">
+                                        Detail Berita: {{ $berita->judul_berita }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <!-- Image Column -->
+                                        <div class="col-md-5">
+                                            @if ($berita->photo)
+                                                <img src="{{ asset($berita->photo) }}" alt="Foto Berita"
+                                                    class="img-fluid rounded mb-3"
+                                                    style="width: 100%; object-fit: cover;">
+                                            @else
+                                                <span>No image</span>
+                                            @endif
+                                        </div>
+                                        <!-- Text Content Column -->
+                                        <div class="col-md-7">
+                                            <p><strong>Judul Berita:</strong> {{ $berita->judul_berita }}</p>
+                                            <p><strong>Tanggal Waktu:</strong>
+                                                {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}
+                                            </p>
+                                            <p><strong>Lokasi Peristiwa:</strong> {{ $berita->lokasi_peristiwa }}</p>
+                                            <p><strong>Isi Berita:</strong> {{ $berita->isi_berita }}</p>
+                                            <p><strong>Kutipan Sumber:</strong> {{ $berita->kutipan_sumber }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Tutup</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Modal for Editing News -->
-    <div class="modal fade" id="newsEditModal{{ $berita->id }}" tabindex="-1" role="dialog"
-         aria-labelledby="newsEditModalLabel{{ $berita->id }}" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newsEditModalLabel{{ $berita->id }}">
-                        Edit Berita: {{ $berita->judul_berita }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="/edit-berita/{{ $berita->id }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="row">
-                            <!-- Image Preview Column -->
-                            <div class="col-md-5">
-                                <label for="photo">Foto</label>
-                                <input type="file" class="form-control-file" id="photo" name="photo" accept="image/*">
-                                @if($berita->photo)
-                                    <img src="{{ asset($berita->photo) }}" alt="Foto" class="img-fluid rounded mt-2" style="width: 100%; object-fit: cover;">
-                                @endif
-                            </div>
-                            <!-- Form Fields Column -->
-                            <div class="col-md-7">
-                                <div class="form-group">
-                                    <label for="judul_berita">Judul Berita</label>
-                                    <input type="text" class="form-control" id="judul_berita" name="judul_berita"
-                                           value="{{ $berita->judul_berita }}" required>
+                    <!-- Modal for Editing News -->
+                    <div class="modal fade" id="newsEditModal{{ $berita->id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="newsEditModalLabel{{ $berita->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="newsEditModalLabel{{ $berita->id }}">
+                                        Edit Berita: {{ $berita->judul_berita }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <div class="form-group">
-                                    <label for="tanggal_waktu">Tanggal Waktu</label>
-                                    <input type="datetime-local" class="form-control" id="tanggal_waktu" name="tanggal_waktu"
-                                           value="{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('Y-m-d\TH:i') }}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lokasi_peristiwa">Lokasi Peristiwa</label>
-                                    <input type="text" class="form-control" id="lokasi_peristiwa" name="lokasi_peristiwa"
-                                           value="{{ $berita->lokasi_peristiwa }}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="isi_berita">Isi Berita</label>
-                                    <textarea class="form-control" id="isi_berita" name="isi_berita" rows="4"
-                                              required>{{ $berita->isi_berita }}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="kutipan_sumber">Kutipan Sumber</label>
-                                    <input type="text" class="form-control" id="kutipan_sumber" name="kutipan_sumber"
-                                           value="{{ $berita->kutipan_sumber }}">
+                                <div class="modal-body">
+                                    <form action="/edit-berita/{{ $berita->id }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row">
+                                            <!-- Image Preview Column -->
+                                            <div class="col-md-5">
+                                                <label for="photo">Foto</label>
+                                                <input type="file" class="form-control-file" id="photo"
+                                                    name="photo" accept="image/*">
+                                                @if ($berita->photo)
+                                                    <img src="{{ asset($berita->photo) }}" alt="Foto"
+                                                        class="img-fluid rounded mt-2"
+                                                        style="width: 100%; object-fit: cover;">
+                                                @endif
+                                            </div>
+                                            <!-- Form Fields Column -->
+                                            <div class="col-md-7">
+                                                <div class="form-group">
+                                                    <label for="judul_berita">Judul Berita</label>
+                                                    <input type="text" class="form-control" id="judul_berita"
+                                                        name="judul_berita" value="{{ $berita->judul_berita }}"
+                                                        required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tanggal_waktu">Tanggal Waktu</label>
+                                                    <input type="datetime-local" class="form-control"
+                                                        id="tanggal_waktu" name="tanggal_waktu"
+                                                        value="{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('Y-m-d\TH:i') }}"
+                                                        required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lokasi_peristiwa">Lokasi Peristiwa</label>
+                                                    <input type="text" class="form-control" id="lokasi_peristiwa"
+                                                        name="lokasi_peristiwa"
+                                                        value="{{ $berita->lokasi_peristiwa }}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="isi_berita">Isi Berita</label>
+                                                    <textarea class="form-control" id="isi_berita" name="isi_berita" rows="4" required>{{ $berita->isi_berita }}</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="kutipan_sumber">Kutipan Sumber</label>
+                                                    <input type="text" class="form-control" id="kutipan_sumber"
+                                                        name="kutipan_sumber" value="{{ $berita->kutipan_sumber }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-@endforeach
+                    </div>
+                @endforeach
 
-                
-                
-                
+
+
+
                 <!--**********************************
             Content body end
         ***********************************-->

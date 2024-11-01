@@ -149,7 +149,7 @@
 <body>
     <div class="login-container">
         <!-- Logo -->
-        <img src="https://sisakti.konijateng.id/uploads/data_icon_koni_kab_kota/sukoharjo.png" alt="Logo KONI Sukoharjo"
+        <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo KONI Sukoharjo"
             class="logo" style="height: 100px">
 
         <!-- Welcome Message -->
