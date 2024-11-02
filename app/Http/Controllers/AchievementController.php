@@ -19,8 +19,8 @@ class AchievementController extends Controller
     $search = $request->input('search'); // Capture the search input from the request
 
     // Filter achievements based on user level and search query if provided
-    $achievements = Achievement::when($user->level !== 'admin', function ($query) use ($user) {
-        // Extract sport category from user level if the user is not an admin
+    $achievements = Achievement::when($user->level !== 'Admin', function ($query) use ($user) {
+        // Extract sport category from user level if the user is not an Admin
         $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
         $query->where('sport_category', $sportCategory);
     })

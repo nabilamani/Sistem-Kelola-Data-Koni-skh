@@ -9,6 +9,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KoniStructureController;
+use App\Http\Controllers\RefereeController;
 use App\Models\Athlete;
 use App\Models\KoniStructures;
 
@@ -38,22 +39,22 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('admin',function(){
+Route::get('Admin',function(){
     return view('dashboard');
-})->middleware(['auth', 'verified', 'role:admin']);
+})->middleware(['auth', 'verified', 'role:Admin']);
 
 Route::get('pengurus',function(){
     return '<h1>Hello Pengurus Cabor</h1>';
-})->middleware(['auth', 'verified', 'role:pengurus|admin']);
+})->middleware(['auth', 'verified', 'role:pengurus|Admin']);
 
 Route::get('badminton',function(){
     return view('badminton');
-})->middleware(['auth', 'verified', 'role_or_permission:lihat-data|admin']);
+})->middleware(['auth', 'verified', 'role_or_permission:lihat-data|Admin']);
 
 
 
 
-Route::get('/admin', function () {
+Route::get('/Admin', function () {
     return view('dashboard');
 });
 
@@ -74,6 +75,11 @@ Route::resource('athletes', AthleteController::class);
 Route::put('/edit-athlete/{id}', [AthleteController::class, 'update']);
 Route::delete('/delete-athlete/{id}', [AthleteController::class, 'destroy']);
 Route::get('/cetak-athlete', [AthleteController::class, 'cetakAthlete'])->name('cetak-athlete');
+
+Route::resource('referees', RefereeController::class);
+Route::put('/edit-referee/{id}', [RefereeController::class, 'update']);
+Route::delete('/delete-referee/{id}', [RefereeController::class, 'destroy']);
+Route::get('/cetak-referee', [RefereeController::class, 'cetakBerita'])->name('cetak-berita');
 
 Route::resource('events', EventController::class);
 Route::put('/edit-event/{id}', [EventController::class, 'update']);

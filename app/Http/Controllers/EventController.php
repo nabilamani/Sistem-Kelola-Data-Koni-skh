@@ -19,7 +19,7 @@ class EventController extends Controller
         $search = $request->input('search');
 
         // Filter events based on user level and search query
-        $events = Event::when($user->level !== 'admin', function ($query) use ($user) {
+        $events = Event::when($user->level !== 'Admin', function ($query) use ($user) {
             $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
             $query->where('sport_category', $sportCategory);
         })
@@ -44,7 +44,7 @@ class EventController extends Controller
     {
         $user = Auth::user();
 
-        $events = Event::when($user->level !== 'admin', function ($query) use ($user) {
+        $events = Event::when($user->level !== 'Admin', function ($query) use ($user) {
             $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
             $query->where('sport_category', $sportCategory);
         })

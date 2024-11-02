@@ -21,8 +21,8 @@ class CoachController extends Controller
         $search = $request->input('search'); // Capture the search input from the request
 
         // Filter coaches based on user level and search query if provided
-        $coaches = Coach::when($user->level !== 'admin', function ($query) use ($user) {
-            // Extract sport category from user level if not an admin
+        $coaches = Coach::when($user->level !== 'Admin', function ($query) use ($user) {
+            // Extract sport category from user level if not an Admin
             $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
             $query->where('sport_category', $sportCategory);
         })
@@ -42,8 +42,8 @@ class CoachController extends Controller
     $user = Auth::user(); // Get the authenticated user
 
     // Filter coaches based on user level
-    $coaches = Coach::when($user->level !== 'admin', function ($query) use ($user) {
-        // Extract sport category from user level if not an admin
+    $coaches = Coach::when($user->level !== 'Admin', function ($query) use ($user) {
+        // Extract sport category from user level if not an Admin
         $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
         $query->where('sport_category', $sportCategory);
     })

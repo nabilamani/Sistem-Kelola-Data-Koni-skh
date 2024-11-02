@@ -112,7 +112,7 @@
                         <div class="row">
                             <!-- Total Athletes -->
                             <div class="col-xl-3 col-lg-6 col-sm-6">
-                                <div class="card">
+                                <div class="card mb-2">
                                     <div class="card-body">
                                         <div class="media align-items-center">
                                             <div class="media-body">
@@ -129,7 +129,7 @@
 
                             <!-- Total Events -->
                             <div class="col-xl-3 col-lg-6 col-sm-6">
-                                <div class="card">
+                                <div class="card mb-2">
                                     <div class="card-body">
                                         <div class="media align-items-center">
                                             <div class="media-body">
@@ -146,7 +146,7 @@
 
                             <!-- Total Achievements -->
                             <div class="col-xl-3 col-lg-6 col-sm-6">
-                                <div class="card">
+                                <div class="card mb-2">
                                     <div class="card-body">
                                         <div class="media align-items-center">
                                             <div class="media-body">
@@ -163,7 +163,7 @@
 
                             <!-- Total Coaches -->
                             <div class="col-xl-3 col-lg-6 col-sm-6">
-                                <div class="card">
+                                <div class="card mb-2">
                                     <div class="card-body">
                                         <div class="media align-items-center">
                                             <div class="media-body">
@@ -177,7 +177,90 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Toggle More Info -->
+                            <div class="col-12 text-center mb-2">
+                                <a href="#" id="toggle-more-info" class="pt-0 mt-0"
+                                    style="width: 50px; height: 50px;">
+                                    <i class="bx bx-chevron-down font-size-30"></i>
+                                </a>
+                            </div>
+
+
+
+                            <!-- Additional Stats (Hidden by Default) -->
+                            <div id="more-info" class="row col-12 mx-0 px-0" style="display: none;">
+                                <!-- Total Referees -->
+                                <div class="col-xl-3 col-lg-6 col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <h2 class="mb-0 count" data-count="{{ $refereeteCount }}">0</h2>
+                                                    <p class="text-muted mb-0">Total Wasit</p>
+                                                </div>
+                                                <div class="icon-block">
+                                                    <i class="bx bx-id-card font-size-50"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Total Sports -->
+                                <div class="col-xl-3 col-lg-6 col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <h2 class="mb-0 count" data-count="">0</h2>
+                                                    <p class="text-muted mb-0">Total Cabor</p>
+                                                </div>
+                                                <div class="icon-block">
+                                                    <i class="bx bx-basketball font-size-50"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Total Venues -->
+                                <div class="col-xl-3 col-lg-6 col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <h2 class="mb-0 count" data-count="">0</h2>
+                                                    <p class="text-muted mb-0">Total Lokasi</p>
+                                                </div>
+                                                <div class="icon-block">
+                                                    <i class="bx bx-map font-size-50"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Total Accounts -->
+                                <div class="col-xl-3 col-lg-6 col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <h2 class="mb-0 count" data-count="">0</h2>
+                                                    <p class="text-muted mb-0">Total Akun</p>
+                                                </div>
+                                                <div class="icon-block">
+                                                    <i class="bx bx-user font-size-50"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+
                         <!-- Row 3: Latest berita -->
                         <div class="row">
                             <div class="col-xl-12">
@@ -202,11 +285,12 @@
                                                             </p>
                                                             <p class="card-text">
                                                                 {{ Str::limit($berita->isi_berita, 100) }}</p>
-                                                            <p class="card-text"><strong>Lokasi:</strong>
+                                                            <p class="card-text"><strong>Lokasi :</strong>
                                                                 {{ $berita->lokasi_peristiwa }}</p>
-                                                            <p class="card-text"><strong>Kutipan:</strong>
+                                                            <p class="card-text"><strong>Sumber :</strong>
                                                                 {{ $berita->kutipan_sumber }}</p>
-                                                                <a href="" class="btn btn-primary btn-sm my-auto">Selengkapnya</a>
+                                                            <a href=""
+                                                                class="btn btn-primary btn-sm my-auto">Selengkapnya</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -370,6 +454,20 @@
                             });
                         });
                     </script>
+                    <script>
+                        document.getElementById("toggle-more-info").addEventListener("click", function(event) {
+                            event.preventDefault();
+                            const moreInfoSection = document.getElementById("more-info");
+                            if (moreInfoSection.style.display === "none") {
+                                moreInfoSection.style.display = "flex";
+                                this.innerHTML = '<i class="bx bx-chevron-up font-size-30"></i> Sembunyikan';
+                            } else {
+                                moreInfoSection.style.display = "none";
+                                this.innerHTML = '<i class="bx bx-chevron-down font-size-30"></i> Selengkapnya';
+                            }
+                        });
+                    </script>
+
 
 
 </body>

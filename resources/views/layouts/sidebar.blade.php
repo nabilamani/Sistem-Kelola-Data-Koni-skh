@@ -21,8 +21,8 @@
                             </li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-whistle"></i><span class="nav-text">Wasit</span></a>
                                 <ul aria-expanded="false">
-                                    <li><a href="/tambah"><i class="mdi mdi-account-plus"></i>Tambah Wasit</a></li>
-                                    <li><a href="/daftar"><i class="mdi mdi-account-multiple"></i>Daftar Wasit</a></li>
+                                    <li><a href="/referees/create"><i class="mdi mdi-account-plus"></i>Tambah Wasit</a></li>
+                                    <li><a href="/referees"><i class="mdi mdi-account-multiple"></i>Daftar Wasit</a></li>
                                     <li><a href="/daftar"><i class="mdi mdi-file-document"></i>Laporan</a></li>
                                 </ul>
                             </li>
@@ -61,7 +61,7 @@
                     <li class="nav-label">Menu Admin</li>
                     
                     
-                    @if (auth()->user()->level === 'admin' )
+                    @if (auth()->user()->level === 'Admin' )
                     <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-newspaper"></i><span class="nav-text">Berita</span></a>
                         <ul aria-expanded="false">
                             <li><a href="/beritas/create"><i class="mdi mdi-plus-box"></i>Tambah Berita</a></li>

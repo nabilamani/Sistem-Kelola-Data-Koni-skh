@@ -86,7 +86,7 @@
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Struktural Koni</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Wasit</a></li>
                             <li class="breadcrumb-item active"><a href="javascript:void(0)">Tambah +</a></li>
                         </ol>
                     </div>
@@ -96,51 +96,31 @@
                     <div class="col-xxl">
                         <div class="card mb-4">
                             <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Tambah Data Struktural KONI</h5>
+                                <h5 class="mb-0">Tambah Data Wasit</h5>
                             </div>
                             <div class="card-body">
-                                <form action="/konistructures" method="post" enctype="multipart/form-data">
+                                <form action="/referees" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="name">Nama</label>
+                                        <label class="col-sm-2 col-form-label" for="name">Nama Wasit</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="name" class="form-control" placeholder="Masukkan nama..." required />
+                                            <input type="text" name="name" class="form-control" placeholder="Masukkan nama wasit..." required />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="position">Jabatan</label>
+                                        <label class="col-sm-2 col-form-label" for="sport_category">Kategori Olahraga</label>
                                         <div class="col-sm-10">
-                                            <select name="position" class="form-control" required>
-                                                <option value="">Pilih jabatan...</option>
-                                                <option value="Ketua Umum">Ketua Umum</option>
-                                                <option value="Wakil Ketua Umum I">Wakil Ketua Umum I</option>
-                                                <option value="Wakil Ketua Umum II">Wakil Ketua Umum II</option>
-                                                <option value="Sekretaris Umum">Sekretaris Umum</option>
-                                                <option value="Wakil Sekretaris Umum">Wakil Sekretaris Umum</option>
-                                                <option value="Bendahara Umum">Bendahara Umum</option>
-                                                <option value="Wakil Bendahara Umum">Wakil Bendahara Umum</option>
-                                                <option value="Audit Internal">Audit Internal</option>
-                                                <option value="Bidang Organisasi & Kerjasama Antar Lembaga">Bidang Organisasi & Kerjasama Antar Lembaga</option>
-                                                <option value="Bidang Pembinaan Prestasi">Bidang Pembinaan Prestasi</option>
-                                                <option value="Bidang Hukum Keolahragaan">Bidang Hukum Keolahragaan</option>
-                                                <option value="Bidang Pendidikan, Penataran dan Litbang">Bidang Pendidikan, Penataran dan Litbang</option>
-                                                <option value="Bidang Media dan Humas">Bidang Media dan Humas</option>
-                                                <option value="Bidang Sport Science dan IPTEK">Bidang Sport Science dan IPTEK</option>
-                                                <option value="Bidang Pengumpulan dan Pengolahan Data">Bidang Pengumpulan dan Pengolahan Data</option>
-                                                <option value="Bidang Perencanaan dan Anggaran">Bidang Perencanaan dan Anggaran</option>
+                                            <select name="sport_category" class="form-control" required>
+                                                <option value="" hidden selected>Pilih kategori olahraga...</option>
+                                                <option value="Badminton">Badminton</option>
+                                                <option value="Sepak Bola">Sepak Bola</option>
+                                                <option value="Bola Basket">Bola Basket</option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="age">Umur</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" name="age" class="form-control" placeholder="Masukkan umur..." required />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="birth_date">Tanggal Lahir</label>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-10">
                                             <input type="date" name="birth_date" class="form-control" required />
                                         </div>
                                     </div>
@@ -155,6 +135,18 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="license">Lisensi</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="license" class="form-control" placeholder="Masukkan lisensi wasit..." />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="experience">Pengalaman</label>
+                                        <div class="col-sm-10">
+                                            <textarea name="experience" class="form-control" placeholder="Masukkan pengalaman wasit..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="photo">Foto</label>
                                         <div class="col-sm-10">
                                             <input class="form-control" type="file" name="photo" id="gambar" style="height: 100%;" />
@@ -162,7 +154,7 @@
                                     </div>
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Tambah Struktural</button>
+                                            <button type="submit" class="btn btn-primary">Tambah Wasit</button>
                                         </div>
                                     </div>
                                 </form>

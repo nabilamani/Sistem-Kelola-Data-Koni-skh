@@ -17,6 +17,7 @@
 
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown header-profile">
+                                <p class="mb-0">{{ Auth::user()->level }}</p>
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
                                     <i class="mdi mdi-account"></i>
                                 </a>

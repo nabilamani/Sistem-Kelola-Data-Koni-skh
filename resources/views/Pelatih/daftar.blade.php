@@ -142,7 +142,7 @@
                                                 $no = ($coaches->currentPage() - 1) * $coaches->perPage() + 1;
                                             @endphp
                                             @foreach ($coaches as $key => $coach)
-                                                @if (Auth::user()->level === 'admin' ||
+                                                @if (Auth::user()->level === 'Admin' ||
                                                         (Auth::user()->level === 'Pengurus Cabor Sepak Bola' && $coach->sport_category === 'Sepak Bola') ||
                                                         (Auth::user()->level === 'Pengurus Cabor Badminton' && $coach->sport_category === 'Badminton') ||
                                                         (Auth::user()->level === 'Pengurus Cabor Bola Voli' && $coach->sport_category === 'Bola Voli') ||
