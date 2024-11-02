@@ -274,23 +274,57 @@
                                                 <div class="col-lg-4 col-md-6 mb-4">
                                                     <div class="card border shadow-sm h-100">
                                                         <img src="{{ asset($berita->photo) }}"
-                                                            class="card-img-top img-fluid"
-                                                            alt="{{ $berita->judul_berita }}"
-                                                            style="object-fit: cover; height: 200px; border-radius: 8px;">
+                                                             class="card-img-top img-fluid"
+                                                             alt="{{ $berita->judul_berita }}"
+                                                             style="object-fit: cover; height: 200px; border-radius: 8px;">
                                                         <div class="card-body d-flex flex-column">
                                                             <h5 class="card-title">{{ $berita->judul_berita }}</h5>
                                                             <p class="card-text">
-                                                                <small
-                                                                    class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
+                                                                <small class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
                                                             </p>
                                                             <p class="card-text">
-                                                                {{ Str::limit($berita->isi_berita, 100) }}</p>
-                                                            <p class="card-text"><strong>Lokasi :</strong>
-                                                                {{ $berita->lokasi_peristiwa }}</p>
-                                                            <p class="card-text"><strong>Sumber :</strong>
-                                                                {{ $berita->kutipan_sumber }}</p>
-                                                            <a href=""
-                                                                class="btn btn-primary btn-sm my-auto">Selengkapnya</a>
+                                                                {{ Str::limit($berita->isi_berita, 100) }}
+                                                            </p>
+                                                            <p class="card-text"><strong>Lokasi :</strong> {{ $berita->lokasi_peristiwa }}</p>
+                                                            <p class="card-text"><strong>Sumber :</strong> {{ $berita->kutipan_sumber }}</p>
+                                                            <button type="button" class="btn btn-primary btn-sm mt-auto" data-toggle="modal" data-target="#newsDetailModal{{ $berita->id }}">
+                                                                Selengkapnya
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                        
+                                                <!-- Modal for News Details -->
+                                                <div class="modal fade" id="newsDetailModal{{ $berita->id }}" tabindex="-1" role="dialog" aria-labelledby="newsDetailModalLabel{{ $berita->id }}" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="newsDetailModalLabel{{ $berita->id }}">Berita Selengkapnya : {{ $berita->judul_berita }}</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        @if ($berita->photo)
+                                                                            <img src="{{ asset($berita->photo) }}" alt="Foto Berita" class="img-fluid rounded mb-3" style="width: 100%; object-fit: cover;">
+                                                                        @else
+                                                                            <span>No image</span>
+                                                                        @endif
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <p><strong>Judul Berita:</strong> {{ $berita->judul_berita }}</p>
+                                                                        <p><strong>Tanggal Waktu:</strong> {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</p>
+                                                                        <p><strong>Lokasi Peristiwa:</strong> {{ $berita->lokasi_peristiwa }}</p>
+                                                                        <p><strong>Isi Berita:</strong> {{ $berita->isi_berita }}</p>
+                                                                        <p><strong>Kutipan Sumber:</strong> {{ $berita->kutipan_sumber }}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -300,6 +334,7 @@
                                 </div>
                             </div>
                         </div>
+                        
 
 
                         <!-- Row 2: Rekapan Prestasi Cabang Olahraga -->
