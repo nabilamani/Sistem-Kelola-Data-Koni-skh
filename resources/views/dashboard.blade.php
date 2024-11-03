@@ -206,6 +206,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <!-- Total Venues -->
+                                <div class="col-xl-3 col-lg-6 col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <h2 class="mb-0 count" data-count="{{ $venueCount }}">0</h2>
+                                                    <p class="text-muted mb-0">Total Lokasi</p>
+                                                </div>
+                                                <div class="icon-block">
+                                                    <i class="bx bx-map font-size-50"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- Total Sports -->
                                 <div class="col-xl-3 col-lg-6 col-sm-6">
@@ -218,23 +235,6 @@
                                                 </div>
                                                 <div class="icon-block">
                                                     <i class="bx bx-basketball font-size-50"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Total Venues -->
-                                <div class="col-xl-3 col-lg-6 col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <h2 class="mb-0 count" data-count="">0</h2>
-                                                    <p class="text-muted mb-0">Total Lokasi</p>
-                                                </div>
-                                                <div class="icon-block">
-                                                    <i class="bx bx-map font-size-50"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -314,11 +314,11 @@
                                                                         @endif
                                                                     </div>
                                                                     <div class="col-md-7">
-                                                                        <p><strong>Judul Berita:</strong> {{ $berita->judul_berita }}</p>
-                                                                        <p><strong>Tanggal Waktu:</strong> {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</p>
-                                                                        <p><strong>Lokasi Peristiwa:</strong> {{ $berita->lokasi_peristiwa }}</p>
-                                                                        <p><strong>Isi Berita:</strong> {{ $berita->isi_berita }}</p>
-                                                                        <p><strong>Kutipan Sumber:</strong> {{ $berita->kutipan_sumber }}</p>
+                                                                        <p><strong>Judul Berita :</strong> {{ $berita->judul_berita }}</p>
+                                                                        <p><strong>Tanggal Waktu :</strong> {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</p>
+                                                                        <p><strong>Lokasi Peristiwa :</strong> {{ $berita->lokasi_peristiwa }}</p>
+                                                                        <p><strong>Isi Berita :</strong> {{ $berita->isi_berita }}</p>
+                                                                        <p><strong>Kutipan Sumber :</strong> {{ $berita->kutipan_sumber }}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -351,7 +351,7 @@
                                                 <tr>
                                                     <th>Cabang Olahraga</th>
                                                     <th>Jenis Event</th>
-                                                    <th>Nama Atlet</th>
+                                                    <th>Nama Atlet/Team</th>
                                                     <th>Keterangan</th>
                                                 </tr>
                                             </thead>

@@ -139,4 +139,20 @@ class AchievementController extends Controller
 
         return redirect()->back()->with('success', 'Achievement data successfully deleted!');
     }
+
+    public function cetakPrestasi()
+    {
+        $user = Auth::user(); // Get the authenticated user
+
+        // Filter achievements based on user level
+        $achievements = Achievement::when($user->level !== 'Admin', function ($query) use ($user) {
+            // Extract sport category from user level if not an Admin
+            $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
+            $query->where('sport_category', $sportCategory);
+        })
+        ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
+        ->get(); // Retrieve all results based on filtering
+
+        return view('Prestasi.cetak-prestasi', compact('achievements'));
+    }
 }

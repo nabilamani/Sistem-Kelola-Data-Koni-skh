@@ -30,14 +30,14 @@
                                 <ul aria-expanded="false">
                                     <li><a href="/achievements/create"><i class="mdi mdi-trophy-outline"></i>Tambah Prestasi</a></li>
                                     <li><a href="/achievements"><i class="mdi mdi-trophy-variant"></i>Daftar Prestasi</a></li>
-                                    <li><a href="/daftar"><i class="mdi mdi-file-document"></i>Laporan</a></li>
+                                    <li><a href="{{ route('cetak-prestasi') }}"><i class="mdi mdi-file-document"></i>Laporan</a></li>
                                 </ul>
                             </li>
                             
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="nav-text">Lokasi</span></a>
                                 <ul aria-expanded="false">
-                                    <li><a href="/tambah"><i class="mdi mdi-map-marker-plus"></i>Tambah Lokasi</a></li>
-                                    <li><a href="/daftar"><i class="mdi mdi-map-marker-multiple"></i>Daftar Lokasi</a></li>
+                                    <li><a href="/venues/create"><i class="mdi mdi-map-marker-plus"></i>Tambah Lokasi</a></li>
+                                    <li><a href="/venues"><i class="mdi mdi-map-marker-multiple"></i>Daftar Lokasi</a></li>
                                     <li><a href="/daftar"><i class="mdi mdi-file-document"></i>Laporan</a></li>
                                 </ul>
                             </li>
@@ -48,6 +48,17 @@
                                     <li><a href="{{ route('cetak-event') }}"><i class="mdi mdi-file-document"></i>Laporan</a></li>
                                 </ul>
                             </li>
+                            <li>
+                                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                                    <i class="mdi mdi-calendar-clock"></i><span class="nav-text">Jadwal Pertandingan</span>
+                                </a>
+                                <ul aria-expanded="false">
+                                    <li><a href="/schedules/create"><i class="mdi mdi-calendar-edit"></i>Tambah Jadwal</a></li>
+                                    <li><a href="/schedules"><i class="mdi mdi-calendar-text"></i>Daftar Jadwal</a></li>
+                                    <li><a href="/laporan"><i class="mdi mdi-file-chart"></i>Laporan</a></li>
+                                </ul>
+                            </li>
+                            
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-account-group"></i><span class="nav-text">Struktural Cabor</span></a>
                                 <ul aria-expanded="false">
                                     <li><a href="/tambah"><i class="mdi mdi-account-edit"></i>Update Struktural</a></li>
@@ -87,8 +98,8 @@
                     </li>
                     <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-account-box"></i><span class="nav-text">Akun</span></a>
                         <ul aria-expanded="false">
-                            <li><a href="/tambahpem"><i class="mdi mdi-account-multiple-plus"></i>Tambah Akun</a></li>
-                            <li><a href="/daftarpem"><i class="mdi mdi-account-multiple"></i>Daftar Akun</a></li>
+                            <li><a href="/profile"><i class="mdi mdi-account-multiple-plus"></i>Tambah Akun</a></li>
+                            <li><a href="/users"><i class="mdi mdi-account-multiple"></i>Daftar Akun</a></li>
                         </ul>
                     </li>
                     @endif

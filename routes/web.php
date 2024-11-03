@@ -10,8 +10,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KoniStructureController;
 use App\Http\Controllers\RefereeController;
-use App\Models\Athlete;
-use App\Models\KoniStructures;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\VenueController;
+
+// use App\Models\Athlete;
+// use App\Models\KoniStructures;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +26,7 @@ use App\Models\KoniStructures;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -86,10 +90,20 @@ Route::put('/edit-event/{id}', [EventController::class, 'update']);
 Route::delete('/delete-event/{id}', [EventController::class, 'destroy']);
 Route::get('/cetak-event', [EventController::class, 'cetakEvent'])->name('cetak-event');
 
+Route::resource('venues', VenueController::class);
+Route::put('/edit-venue/{id}', [VenueController::class, 'update']);
+Route::delete('/delete-venue/{id}', [VenueController::class, 'destroy']);
+Route::get('/cetak-venue', [VenueController::class, 'cetakVenue'])->name('cetak-venue');
+
+Route::resource('schedules', ScheduleController::class);
+Route::put('/edit-schedule/{id}', [ScheduleController::class, 'update']);
+Route::delete('/delete-schedule/{id}', [ScheduleController::class, 'destroy']);
+Route::get('/cetak-schedule', [ScheduleController::class, 'cetakVenue'])->name('cetak-venue');
+
 Route::resource('achievements', AchievementController::class);
 Route::put('/edit-achievement/{id}', [AchievementController::class, 'update']);
 Route::delete('/delete-achievement/{id}', [AchievementController::class, 'destroy']);
-Route::get('/cetak-achievement', [AchievementController::class, 'cetakAchievement'])->name('cetak-Achievement');
+Route::get('/cetak-achievement', [AchievementController::class, 'cetakPrestasi'])->name('cetak-prestasi');
 
 Route::resource('beritas', BeritaController::class);
 Route::put('/edit-berita/{id}', [BeritaController::class, 'update']);

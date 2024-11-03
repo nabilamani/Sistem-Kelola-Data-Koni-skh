@@ -116,7 +116,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="athleteTable" class="table table-striped table-hover" style="min-width: 845px;">
+                                    <table id="athleteTable" class="table table-striped table-hover"
+                                        style="min-width: 845px;">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>No</th>
@@ -139,27 +140,37 @@
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ $athlete->name }}</td>
                                                     <td>{{ $athlete->sport_category }}</td>
-                                                    <td>{{ \Carbon\Carbon::parse($athlete->birth_date)->format('d-m-Y') }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($athlete->birth_date)->format('d-m-Y') }}
+                                                    </td>
                                                     <td>{{ $athlete->gender }}</td>
                                                     <td>{{ $athlete->weight }} kg</td>
                                                     <td>{{ $athlete->height }} cm</td>
                                                     <td>{{ $athlete->achievements }}</td>
                                                     <td>
                                                         <div class="dropdown">
-                                                            <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                            <button
+                                                                class="btn btn-outline-primary btn-sm dropdown-toggle"
+                                                                type="button" data-toggle="dropdown"
+                                                                aria-expanded="false">
                                                                 Aksi
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#athleteDetailModal{{ $athlete->id }}">
+                                                                <a class="dropdown-item" href=""
+                                                                    data-toggle="modal"
+                                                                    data-target="#athleteDetailModal{{ $athlete->id }}">
                                                                     <i class="bx bx-info-circle"></i> Lihat Detail
                                                                 </a>
-                                                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#athleteEditModal{{ $athlete->id }}">
+                                                                <a class="dropdown-item" href=""
+                                                                    data-toggle="modal"
+                                                                    data-target="#athleteEditModal{{ $athlete->id }}">
                                                                     <i class="bx bx-edit-alt"></i> Edit
                                                                 </a>
-                                                                <form action="/delete-athlete/{{ $athlete->id }}" method="POST" class="d-inline">
+                                                                <form action="/delete-athlete/{{ $athlete->id }}"
+                                                                    method="POST" class="d-inline">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit" class="dropdown-item" onclick="return confirm('Apakah Anda yakin ingin menghapus atlet ini?')">
+                                                                    <button type="submit" class="dropdown-item"
+                                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus atlet ini?')">
                                                                         <i class="bx bx-trash"></i> Hapus
                                                                     </button>
                                                                 </form>
@@ -167,92 +178,182 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                
+
                                                 <!-- Modal for Athlete Details -->
-                                                <div class="modal fade" id="athleteDetailModal{{ $athlete->id }}" tabindex="-1" role="dialog" aria-labelledby="athleteDetailModalLabel{{ $athlete->id }}" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
+                                                <!-- Modal for Athlete Details -->
+                                                <div class="modal fade" id="athleteDetailModal{{ $athlete->id }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="athleteDetailModalLabel{{ $athlete->id }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-lg"
+                                                        role="document">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="athleteDetailModalLabel{{ $athlete->id }}">Detail Atlet: {{ $athlete->name }}</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <div class="modal-header bg-primary text-white">
+                                                                <h5 class="modal-title"
+                                                                    id="athleteDetailModalLabel{{ $athlete->id }}">
+                                                                    Detail Atlet: {{ $athlete->name }}</h5>
+                                                                <button type="button" class="close text-white"
+                                                                    data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <img src="{{ $athlete->photo }}" width="100%"
-                                                            alt="Foto Atlet">
-                                                                <p><strong>Nama Atlet:</strong> {{ $athlete->name }}</p>
-                                                                <p><strong>Cabang Olahraga:</strong> {{ $athlete->sport_category }}</p>
-                                                                <p><strong>Tanggal Lahir:</strong> {{ \Carbon\Carbon::parse($athlete->birth_date)->format('d-m-Y') }}</p>
-                                                                <p><strong>Jenis Kelamin:</strong> {{ $athlete->gender }}</p>
-                                                                <p><strong>Berat Badan:</strong> {{ $athlete->weight }} kg</p>
-                                                                <p><strong>Tinggi Badan:</strong> {{ $athlete->height }} cm</p>
-                                                                <p><strong>Prestasi:</strong> {{ $athlete->achievements }}</p>
+                                                                <div class="row">
+                                                                    <!-- Left column: Athlete photo -->
+                                                                    <div class="col-md-4 text-center">
+                                                                        <img src="{{ $athlete->photo }}"
+                                                                            class="img-fluid rounded" alt="Foto Atlet"
+                                                                            style="max-height: 300px; object-fit: cover;">
+                                                                    </div>
+                                                                    <!-- Right column: Athlete details -->
+                                                                    <div class="col-md-8">
+                                                                        <p class="mb-2"><strong>Nama:</strong>
+                                                                            {{ $athlete->name }}</p>
+                                                                        <p class="mb-2"><strong>Cabang
+                                                                                Olahraga:</strong>
+                                                                            {{ $athlete->sport_category }}</p>
+                                                                        <p class="mb-2"><strong>Tanggal
+                                                                                Lahir:</strong>
+                                                                            {{ \Carbon\Carbon::parse($athlete->birth_date)->format('d-m-Y') }}
+                                                                        </p>
+                                                                        <p class="mb-2"><strong>Jenis
+                                                                                Kelamin:</strong>
+                                                                            {{ $athlete->gender }}</p>
+                                                                        <p class="mb-2"><strong>Berat Badan:</strong>
+                                                                            {{ $athlete->weight }} kg</p>
+                                                                        <p class="mb-2"><strong>Tinggi
+                                                                                Badan:</strong> {{ $athlete->height }}
+                                                                            cm</p>
+                                                                        <p class="mb-2"><strong>Prestasi:</strong>
+                                                                            {{ $athlete->achievements }}</p>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Tutup</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                
+
                                                 <!-- Modal for Editing Athlete -->
-                                                <div class="modal fade" id="athleteEditModal{{ $athlete->id }}" tabindex="-1" role="dialog" aria-labelledby="athleteEditModalLabel{{ $athlete->id }}" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
+                                                <div class="modal fade" id="athleteEditModal{{ $athlete->id }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="athleteEditModalLabel{{ $athlete->id }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-lg"
+                                                        role="document">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="athleteEditModalLabel{{ $athlete->id }}">Edit Atlet: {{ $athlete->name }}</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <div class="modal-header bg-primary text-white">
+                                                                <h5 class="modal-title"
+                                                                    id="athleteEditModalLabel{{ $athlete->id }}">Edit
+                                                                    Atlet: {{ $athlete->name }}</h5>
+                                                                <button type="button" class="close text-white"
+                                                                    data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <!-- Form Edit Atlet -->
-                                                                <form action="/edit-athlete/{{ $athlete->id }}" method="POST" enctype="multipart/form-data">
+                                                                <form action="/edit-athlete/{{ $athlete->id }}"
+                                                                    method="POST" enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('PUT')
-                                                                    <div class="form-group">
-                                                                        <label for="name">Nama Atlet</label>
-                                                                        <input type="text" class="form-control" id="name" name="name" value="{{ $athlete->name }}" required>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="sport_category">Cabang Olahraga</label>
-                                                                        <input type="text" class="form-control" id="sport_category" name="sport_category" value="{{ $athlete->sport_category }}" required>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="birth_date">Tanggal Lahir</label>
-                                                                        <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ \Carbon\Carbon::parse($athlete->birth_date)->format('Y-m-d') }}" required>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="gender">Jenis Kelamin</label>
-                                                                        <select name="gender" class="form-control" required>
-                                                                            <option value="Male" {{ $athlete->gender == 'Male' ? 'selected' : '' }}>Laki-laki</option>
-                                                                            <option value="Female" {{ $athlete->gender == 'Female' ? 'selected' : '' }}>Perempuan</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="weight">Berat Badan (kg)</label>
-                                                                        <input type="number" class="form-control" id="weight" name="weight" value="{{ $athlete->weight }}" required>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="height">Tinggi Badan (cm)</label>
-                                                                        <input type="number" class="form-control" id="height" name="height" value="{{ $athlete->height }}" required>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="achievements">Prestasi</label>
-                                                                        <textarea class="form-control" id="achievements" name="achievements" required>{{ $athlete->achievements }}</textarea>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label for="photo">Foto</label>
-                                                                        <input type="file" class="form-control"
-                                                                            id="photo" name="photo">
-                                                                        <img src="{{ $athlete->photo }}" width="100"
-                                                                            alt="Foto Atlet">
-                                                                            <small>Biarkan kosong jika tidak ingin mengubah foto.</small>
+                                                                    <div class="row">
+                                                                        <!-- Left column -->
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="name">Nama
+                                                                                    Atlet</label>
+                                                                                <input type="text"
+                                                                                    class="form-control"
+                                                                                    id="name" name="name"
+                                                                                    value="{{ $athlete->name }}"
+                                                                                    required>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="sport_category">Cabang
+                                                                                    Olahraga</label>
+                                                                                <input type="text"
+                                                                                    class="form-control"
+                                                                                    id="sport_category"
+                                                                                    name="sport_category"
+                                                                                    value="{{ $athlete->sport_category }}"
+                                                                                    required>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="birth_date">Tanggal
+                                                                                    Lahir</label>
+                                                                                <input type="date"
+                                                                                    class="form-control"
+                                                                                    id="birth_date" name="birth_date"
+                                                                                    value="{{ \Carbon\Carbon::parse($athlete->birth_date)->format('Y-m-d') }}"
+                                                                                    required>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <!-- Right column -->
+                                                                        <div class="col-md-6">
+                                                                            <div class="form-group">
+                                                                                <label for="gender">Jenis
+                                                                                    Kelamin</label>
+                                                                                <select name="gender"
+                                                                                    class="form-control" required>
+                                                                                    <option value="Male"
+                                                                                        {{ $athlete->gender == 'Male' ? 'selected' : '' }}>
+                                                                                        Laki-laki</option>
+                                                                                    <option value="Female"
+                                                                                        {{ $athlete->gender == 'Female' ? 'selected' : '' }}>
+                                                                                        Perempuan</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="weight">Berat Badan
+                                                                                    (kg)</label>
+                                                                                <input type="number"
+                                                                                    class="form-control"
+                                                                                    id="weight" name="weight"
+                                                                                    value="{{ $athlete->weight }}"
+                                                                                    required>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="height">Tinggi Badan
+                                                                                    (cm)</label>
+                                                                                <input type="number"
+                                                                                    class="form-control"
+                                                                                    id="height" name="height"
+                                                                                    value="{{ $athlete->height }}"
+                                                                                    required>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label
+                                                                                    for="achievements">Prestasi</label>
+                                                                                <textarea class="form-control" id="achievements" name="achievements" required>{{ $athlete->achievements }}</textarea>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="photo">Foto</label>
+                                                                                <input type="file"
+                                                                                    class="form-control-file"
+                                                                                    id="photo" name="photo">
+                                                                                <div class="mt-2">
+                                                                                    <img src="{{ $athlete->photo }}"
+                                                                                        class="img-fluid rounded"
+                                                                                        width="100"
+                                                                                        alt="Foto Atlet">
+                                                                                </div>
+                                                                                <small>Biarkan kosong jika tidak ingin
+                                                                                    mengubah foto.</small>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                                        <button type="button"
+                                                                            class="btn btn-secondary"
+                                                                            data-dismiss="modal">Batal</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Simpan
+                                                                            Perubahan</button>
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -267,12 +368,13 @@
                             </div>
                             <div class="card-footer">
                                 <a href="/athletes/create" class="btn btn-rounded btn-primary">Tambah Atlet</a>
-                                <a href="{{ route('cetak-athlete') }}" target="_blank" class="btn btn-rounded btn-primary mx-2">Cetak Laporan</a>
+                                <a href="{{ route('cetak-athlete') }}" target="_blank"
+                                    class="btn btn-rounded btn-primary mx-2">Cetak Laporan</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!--**********************************
             Content body end
         ***********************************-->

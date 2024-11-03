@@ -9,11 +9,12 @@
                                 </span>
                                 <div class="dropdown-menu p-0 m-0">
                                     <form>
-                                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                        <input id="searchInput" class="form-control" type="search" placeholder="Search" aria-label="Search" onkeyup="filterMenu()">
                                     </form>
                                 </div>
                             </div>
                         </div>
+                        
 
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown header-profile">
@@ -46,3 +47,56 @@
                 </nav>
             </div>
         </div>
+        <script>
+            function filterMenu() {
+    // Get the search query and convert it to lowercase
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    
+    // Get all top-level menu items in the sidebar
+    let menuItems = document.querySelectorAll('#menu > li');
+
+    // Loop through each top-level menu item
+    menuItems.forEach(function(topMenuItem) {
+        let topMenuText = topMenuItem.querySelector('.nav-text') ? topMenuItem.querySelector('.nav-text').textContent.toLowerCase() : '';
+        let matchFound = topMenuText.includes(input); // Flag to indicate if there’s a match
+
+        // Check all submenu items within this top-level menu item
+        let subMenuItems = topMenuItem.querySelectorAll('ul li');
+        subMenuItems.forEach(function(subMenuItem) {
+            let subMenuText = subMenuItem.textContent.toLowerCase();
+
+            // Show or hide submenu items based on the search query
+            if (subMenuText.includes(input)) {
+                subMenuItem.style.display = '';
+                matchFound = true; // Keep the top-level item visible if a match is found
+                expandParentMenus(subMenuItem); // Expand parent menus of matching submenus
+            } else {
+                subMenuItem.style.display = 'none';
+            }
+        });
+
+        // Show or hide the top-level menu item
+        if (matchFound) {
+            topMenuItem.style.display = '';
+            topMenuItem.setAttribute('aria-expanded', 'true'); // Automatically expand if it has matches
+        } else {
+            topMenuItem.style.display = 'none';
+            topMenuItem.setAttribute('aria-expanded', 'false');
+        }
+    });
+}
+
+// Function to expand all parent menus of a matched submenu item
+function expandParentMenus(element) {
+    let parentMenu = element.closest('li.has-arrow');
+    while (parentMenu) {
+        parentMenu.style.display = ''; // Show the parent menu
+        parentMenu.setAttribute('aria-expanded', 'true'); // Set it to expanded
+        parentMenu.classList.add('active'); // Add active class to open it
+        parentMenu = parentMenu.parentElement.closest('li.has-arrow'); // Move up to the next parent
+    }
+}
+
+
+
+        </script>
