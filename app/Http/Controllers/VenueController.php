@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Venue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VenueController extends Controller
 {
@@ -14,19 +15,28 @@ class VenueController extends Controller
      */
     public function index(Request $request)
     {
+        $user = Auth::user();  // Mendapatkan data pengguna yang sedang login
         $search = $request->input('search');
 
-        // Filter venues based on the search query if provided
-        $venues = Venue::when($search, function ($query) use ($search) {
-                $query->where('name', 'like', "%$search%")
-                    ->orWhere('sport_category', 'like', "%$search%")
-                    ->orWhere('address', 'like', "%$search%");
+        // Filter venues berdasarkan level pengguna dan query pencarian
+        $venues = Venue::when($user->level !== 'Admin', function ($query) use ($user) {
+            // Menghapus prefix "Pengurus Cabor " untuk mendapatkan kategori olahraga
+            $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
+            $query->where('sport_category', $sportCategory);
+        })
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('name', 'like', "%$search%")
+                        ->orWhere('sport_category', 'like', "%$search%")
+                        ->orWhere('address', 'like', "%$search%");
+                });
             })
             ->orderBy('created_at', 'asc')
             ->paginate(4);
 
         return view('Venue.daftar', ['venues' => $venues, 'search' => $search]);
     }
+
 
     /**
      * Show the form for creating a new venue.

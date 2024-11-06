@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
@@ -13,20 +14,29 @@ class ScheduleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        $search = $request->input('search');
+{
+    $user = Auth::user();  // Mendapatkan data pengguna yang sedang login
+    $search = $request->input('search');
 
-        // Filter schedules based on the search query if provided
-        $schedules = Schedule::when($search, function ($query) use ($search) {
+    // Filter schedules berdasarkan level pengguna dan query pencarian
+    $schedules = Schedule::when($user->level !== 'Admin', function ($query) use ($user) {
+            // Menghapus prefix "Pengurus Cabor " untuk mendapatkan kategori olahraga
+            $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
+            $query->where('sport_category', $sportCategory);
+        })
+        ->when($search, function ($query) use ($search) {
+            $query->where(function ($query) use ($search) {
                 $query->where('name', 'like', "%$search%")
-                    ->orWhere('sport_category', 'like', "%$search%")
-                    ->orWhere('venue_name', 'like', "%$search%");
-            })
-            ->orderBy('date', 'asc')
-            ->paginate(4);
+                      ->orWhere('sport_category', 'like', "%$search%")
+                      ->orWhere('venue_name', 'like', "%$search%");
+            });
+        })
+        ->orderBy('date', 'asc')
+        ->paginate(4);
 
-        return view('Jadwal.daftar', ['schedules' => $schedules, 'search' => $search]);
-    }
+    return view('Jadwal.daftar', ['schedules' => $schedules, 'search' => $search]);
+}
+
 
     /**
      * Show the form for creating a new schedule.

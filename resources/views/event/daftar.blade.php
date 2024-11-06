@@ -107,10 +107,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Daftar Pelatih</h4>
+                                <h4 class="card-title">Daftar Event</h4>
                                 <form action="{{ route('events.index') }}" method="GET" class="form-inline">
                                     <input type="text" name="search" class="form-control mr-2"
-                                        placeholder="Cari pelatih..." value="{{ request('search') }}">
+                                        placeholder="Cari event..." value="{{ request('search') }}">
                                     <button type="submit" class="btn btn-outline-primary">Cari</button>
                                 </form>
                             </div>

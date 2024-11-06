@@ -183,7 +183,7 @@ select:invalid:focus ~ .invalid-feedback {
                 <label for="level" class="form-label">{{ __('Level') }}</label>
                 <select id="level" name="level" class="form-select" required>
                     <option value="" disabled selected>Select Level</option>
-                    <option value="Admin">Admin</option>
+                    {{-- <option value="Admin">Admin</option> --}}
                     <option value="Pengurus Cabor Sepak Bola">Pengurus Cabor Sepak Bola</option>
                     <option value="Pengurus Cabor Badminton">Pengurus Cabor Badminton</option>
                     <option value="Pengurus Cabor Bola Basket">Pengurus Cabor Bola Basket</option>

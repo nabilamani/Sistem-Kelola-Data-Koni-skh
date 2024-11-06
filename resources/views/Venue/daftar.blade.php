@@ -361,9 +361,9 @@
             <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
             <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
             {{-- Debugging line --}}
-            <script>
+            {{-- <script>
                 console.log("Map URL: {{ $venue->map }}");
-            </script>
+            </script> --}}
 
 
 </body>
