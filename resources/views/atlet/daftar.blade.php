@@ -300,11 +300,11 @@
                                                                                     Kelamin</label>
                                                                                 <select name="gender"
                                                                                     class="form-control" required>
-                                                                                    <option value="Male"
-                                                                                        {{ $athlete->gender == 'Male' ? 'selected' : '' }}>
+                                                                                    <option value="Laki-laki"
+                                                                                        {{ $athlete->gender == 'Laki-laki' ? 'selected' : '' }}>
                                                                                         Laki-laki</option>
-                                                                                    <option value="Female"
-                                                                                        {{ $athlete->gender == 'Female' ? 'selected' : '' }}>
+                                                                                    <option value="Perempuan"
+                                                                                        {{ $athlete->gender == 'Perempuan' ? 'selected' : '' }}>
                                                                                         Perempuan</option>
                                                                                 </select>
                                                                             </div>

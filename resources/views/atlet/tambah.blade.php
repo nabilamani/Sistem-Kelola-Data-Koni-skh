@@ -129,8 +129,8 @@
                                         <div class="col-sm-10">
                                             <select name="gender" class="form-control" required>
                                                 <option value="" hidden selected>Pilih jenis kelamin...</option>
-                                                <option value="Male">Laki-laki</option>
-                                                <option value="Female">Perempuan</option>
+                                                <option value="Laki-laki">Laki-laki</option>
+                                                <option value="Perempuan">Perempuan</option>
                                             </select>
                                         </div>
                                     </div>

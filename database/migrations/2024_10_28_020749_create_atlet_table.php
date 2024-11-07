@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name'); // Nama atlet
             $table->string('sport_category'); // Kategori olahraga
             $table->date('birth_date'); // Tempat tanggal lahir
-            $table->enum('gender', ['Male', 'Female']); // Jenis kelamin
+            $table->enum('gender', ['Laki-laki', 'Perempuan']); // Jenis kelamin
             $table->decimal('weight', 5, 2); // Berat badan (dalam kg, misal 70.5)
             $table->decimal('height', 5, 2); // Tinggi badan (dalam cm, misal 180.0)
             $table->text('achievements')->nullable(); // Prestasi
