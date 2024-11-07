@@ -230,7 +230,7 @@
                                         <div class="card-body">
                                             <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <h2 class="mb-0 count" data-count="">0</h2>
+                                                    <h2 class="mb-0 count" data-count="" id="sportCategoryCount">0</h2>
                                                     <p class="text-muted mb-0">Total Cabor</p>
                                                 </div>
                                                 <div class="icon-block">
@@ -247,7 +247,7 @@
                                         <div class="card-body">
                                             <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <h2 class="mb-0 count" data-count="">0</h2>
+                                                    <h2 class="mb-0 count" data-count="{{ $userCount }}">0</h2>
                                                     <p class="text-muted mb-0">Total Akun</p>
                                                 </div>
                                                 <div class="icon-block">
@@ -502,6 +502,7 @@
                             }
                         });
                     </script>
+                    <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
 
 
 

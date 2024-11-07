@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Coach;
 use App\Models\Referee;
+use App\Models\User;
 use App\Models\Venue;
 use Carbon\Carbon;
 
@@ -23,6 +24,7 @@ class DashboardController extends Controller
         $refereeteCount = Referee::count();
         $venueCount = Venue::count();
         $achievementCount = Achievement::count();
+        $userCount = User::count();
 
         // Retrieve the latest news (adjust the number as needed)
         $beritas = Berita::orderBy('tanggal_waktu', 'desc')->take(3)->get();
@@ -36,6 +38,6 @@ class DashboardController extends Controller
 
 
         // Pass these counts and the upcoming events to the view
-        return view('dashboard', compact('eventCount', 'coachCount', 'athleteCount', 'refereeteCount', 'venueCount', 'achievementCount', 'upcomingEvents', 'achievements', 'beritas'));
+        return view('dashboard', compact('eventCount', 'coachCount', 'athleteCount', 'refereeteCount', 'venueCount', 'achievementCount', 'upcomingEvents', 'achievements', 'beritas','userCount'));
     }
 }

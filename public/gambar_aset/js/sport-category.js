@@ -26,3 +26,12 @@ const sportCategories = [
     });
   });
   
+  const sportCategoryCount = sportCategories.length;
+
+// Tampilkan jumlah kategori di elemen dashboard jika ada
+document.addEventListener("DOMContentLoaded", () => {
+    const categoryCountElement = document.getElementById('sportCategoryCount');
+    if (categoryCountElement) {
+        categoryCountElement.textContent = sportCategoryCount;
+    }
+});
