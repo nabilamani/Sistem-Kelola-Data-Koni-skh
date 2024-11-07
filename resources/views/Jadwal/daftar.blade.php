@@ -264,8 +264,10 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="/schedules/create" class="btn btn-rounded btn-primary">Tambah Schedule</a>
-                                <a href="" target="_blank" class="btn btn-rounded btn-primary mx-2">Cetak Laporan</a>
+                                <a href="/schedules/create" class="btn btn-rounded btn-primary">
+                                    <i class="mdi mdi-calendar-edit"></i> Tambah Schedule</a>
+                                <a href="" target="_blank" class="btn btn-rounded btn-primary mx-2">
+                                    <i class="mdi mdi-printer"></i> Cetak Laporan</a>
                             </div>
                         </div>
                     </div>

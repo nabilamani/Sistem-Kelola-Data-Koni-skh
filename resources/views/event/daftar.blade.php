@@ -283,9 +283,11 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="/events/create" class="btn btn-rounded btn-primary">Tambah Event</a>
+                                <a href="/events/create" class="btn btn-rounded btn-primary">
+                                    <i class="mdi mdi-calendar-plus"></i> Tambah Event</a>
                                 <a href="{{ route('cetak-event') }}" target="_blank"
-                                    class="btn btn-rounded btn-primary mx-2">Cetak Laporan</a>
+                                    class="btn btn-rounded btn-primary mx-2">
+                                    <i class="mdi mdi-printer"></i> Cetak Laporan</a>
                             </div>
                         </div>
                     </div>

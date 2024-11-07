@@ -8,6 +8,7 @@ use App\Http\Controllers\CoachController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\KoniStructureController;
 use App\Http\Controllers\RefereeController;
 use App\Http\Controllers\ScheduleController;
@@ -109,6 +110,11 @@ Route::resource('beritas', BeritaController::class);
 Route::put('/edit-berita/{id}', [BeritaController::class, 'update']);
 Route::delete('/delete-berita/{id}', [BeritaController::class, 'destroy']);
 Route::get('/cetak-berita', [BeritaController::class, 'cetakBerita'])->name('cetak-berita');
+
+Route::resource('galeris', GaleriController::class);
+Route::put('/edit-galeri/{id}', [GaleriController::class, 'update']);
+Route::delete('/delete-galeri/{id}', [GaleriController::class, 'destroy']);
+Route::get('/cetak-galeri', [GaleriController::class, 'cetakGaleri'])->name('cetak-geleri');
 
 
 Route::resource('konistructures', KoniStructureController::class);

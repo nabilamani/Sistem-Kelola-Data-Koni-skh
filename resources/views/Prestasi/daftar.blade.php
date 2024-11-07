@@ -263,8 +263,10 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="/achievements/create" class="btn btn-rounded btn-primary">Tambah Prestasi</a>
-                                <a href="{{ route('cetak-prestasi') }}" target="_blank" class="btn btn-rounded btn-primary mx-2">Cetak Laporan</a>
+                                <a href="/achievements/create" class="btn btn-rounded btn-primary">
+                                    <i class="mdi mdi-account-plus"></i> Tambah Prestasi</a>
+                                <a href="{{ route('cetak-prestasi') }}" target="_blank" class="btn btn-rounded btn-primary mx-2">
+                                    <i class="mdi mdi-printer"></i> Cetak Laporan</a>
                             </div>
                         </div>
                     </div>

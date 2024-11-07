@@ -367,9 +367,11 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="/athletes/create" class="btn btn-rounded btn-primary">Tambah Atlet</a>
+                                <a href="/athletes/create" class="btn btn-rounded btn-primary">
+                                    <i class="mdi mdi-account-plus"></i> Tambah Atlet</a>
                                 <a href="{{ route('cetak-athlete') }}" target="_blank"
-                                    class="btn btn-rounded btn-primary mx-2">Cetak Laporan</a>
+                                    class="btn btn-rounded btn-primary mx-2">
+                                    <i class="mdi mdi-printer"></i> Cetak Laporan </a>
                             </div>
                         </div>
                     </div>

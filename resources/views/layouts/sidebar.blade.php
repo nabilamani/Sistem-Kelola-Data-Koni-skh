@@ -83,8 +83,8 @@
                 
                     <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-image"></i><span class="nav-text">Galeri</span></a>
                         <ul aria-expanded="false">
-                            <li><a href="/tambahpem"><i class="mdi mdi-image-plus"></i>Tambah Data Galeri</a></li>
-                            <li><a href="/daftarpem"><i class="mdi mdi-image-multiple"></i>Daftar Galeri</a></li>
+                            <li><a href="/galeris/create"><i class="mdi mdi-image-plus"></i>Tambah Data Galeri</a></li>
+                            <li><a href="/galeris"><i class="mdi mdi-image-multiple"></i>Daftar Galeri</a></li>
                             <li><a href="/exportpem"><i class="mdi mdi-file-export"></i>Laporan</a></li>
                         </ul>
                     </li>

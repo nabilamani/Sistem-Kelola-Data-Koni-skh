@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('berita', function (Blueprint $table) {
+        Schema::create('beritas', function (Blueprint $table) {
             $table->string('id')->primary(); // Auto-incrementing ID
             $table->string('judul_berita'); // Judul Berita
             $table->date('tanggal_waktu'); // Tanggal dan Waktu
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('berita');
+        Schema::dropIfExists('beritas');
     }
 };

@@ -294,9 +294,10 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="/venues/create" class="btn btn-rounded btn-primary">Tambah Venue</a>
-                                <a href="" target="_blank" class="btn btn-rounded btn-primary mx-2">Cetak
-                                    Laporan</a>
+                                <a href="/venues/create" class="btn btn-rounded btn-primary">
+                                    <i class="mdi mdi-map-marker-plus"></i> Tambah Venue</a>
+                                <a href="" target="_blank" class="btn btn-rounded btn-primary mx-2">
+                                    <i class="mdi mdi-printer"></i> Cetak Laporan</a>
                             </div>
                         </div>
                     </div>
