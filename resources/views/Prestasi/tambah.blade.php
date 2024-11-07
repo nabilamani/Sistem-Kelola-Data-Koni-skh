@@ -102,16 +102,13 @@
                                 <form action="/achievements" method="post">
                                     @csrf
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="sport_category">Kategori Olahraga</label>
-                                        <div class="col-sm-10">
-                                            <select name="sport_category" class="form-control" required>
-                                                <option value="" hidden selected>Pilih kategori olahraga...</option>
-                                                <option value="Badminton">Badminton</option>
-                                                <option value="Sepak Bola">Sepak Bola</option>
-                                                <option value="Bola Basket">Bola Basket</option>
-                                            </select>
+                                        <label for="sportCategorySelect" class="col-sm-2 col-form-label">Pilih Cabor</label>
+                                        <div class="col-sm-4">
+                                          <select id="sportCategorySelect" name="sport_category" class="form-control sport-category-select">
+                                            <option value="" hidden selected disabled>Pilih kategori..</option>
+                                          </select>
                                         </div>
-                                    </div>
+                                      </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="event_type">Jenis Event</label>
                                         <div class="col-sm-10">
@@ -161,6 +158,7 @@
         <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
         <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
 
     </div>
 </body>

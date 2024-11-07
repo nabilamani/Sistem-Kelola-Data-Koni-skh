@@ -42,8 +42,10 @@
         ***********************************-->
         <div class="nav-header">
             <a href="/coba" class="brand-logo">
-                <img class="logo-abbr" src="{{ asset('gambar_aset/images/koni.png') }}" alt="" style="margin-left: 10px; border-radius: 50%;">
-                <span class="fw-bolder" style="margin-left: 10px; font-size: 18px; font-weight: 300">Sistem Kelola KONI</span>
+                <img class="logo-abbr" src="{{ asset('gambar_aset/images/koni.png') }}" alt=""
+                    style="margin-left: 10px; border-radius: 50%;">
+                <span class="fw-bolder" style="margin-left: 10px; font-size: 18px; font-weight: 300">Sistem Kelola
+                    KONI</span>
             </a>
 
             <div class="nav-control">
@@ -81,7 +83,8 @@
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
                             <h4>Hi, Selamat Datang kembali!</h4>
-                            <p class="mb-1"><span class="text-success">{{ Auth::user()->name }},</span> Anda login sebagai <span class="text-success">{{ Auth::user()->level }}</span></p>
+                            <p class="mb-1"><span class="text-success">{{ Auth::user()->name }},</span> Anda login
+                                sebagai <span class="text-success">{{ Auth::user()->level }}</span></p>
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -104,17 +107,18 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Nama Wasit</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="name" class="form-control" placeholder="Masukkan nama wasit..." required />
+                                            <input type="text" name="name" class="form-control"
+                                                placeholder="Masukkan nama wasit..." required />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="sport_category">Kategori Olahraga</label>
-                                        <div class="col-sm-10">
-                                            <select name="sport_category" class="form-control" required>
-                                                <option value="" hidden selected>Pilih kategori olahraga...</option>
-                                                <option value="Badminton">Badminton</option>
-                                                <option value="Sepak Bola">Sepak Bola</option>
-                                                <option value="Bola Basket">Bola Basket</option>
+                                        <label for="sportCategorySelect" class="col-sm-2 col-form-label">Pilih
+                                            Cabor</label>
+                                        <div class="col-sm-4">
+                                            <select id="sportCategorySelect" name="sport_category"
+                                                class="form-control sport-category-select">
+                                                <option value="" hidden selected disabled>Pilih kategori..
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -137,7 +141,8 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="license">Lisensi</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="license" class="form-control" placeholder="Masukkan lisensi wasit..." />
+                                            <input type="text" name="license" class="form-control"
+                                                placeholder="Masukkan lisensi wasit..." />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -149,7 +154,8 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="photo">Foto</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="file" name="photo" id="gambar" style="height: 100%;" />
+                                            <input class="form-control" type="file" name="photo" id="gambar"
+                                                style="height: 100%;" />
                                         </div>
                                     </div>
                                     <div class="row justify-content-end">
@@ -162,9 +168,9 @@
                         </div>
                     </div>
                 </div>
-                
-                
-                
+
+
+
                 <!--**********************************
                     Content body end
                 ***********************************-->
@@ -183,6 +189,7 @@
         <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
         <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
 
     </div>
 </body>

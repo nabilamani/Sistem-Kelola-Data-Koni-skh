@@ -119,22 +119,16 @@
                           </div>
                         </div>
                         <div class="row mb-3">
-                          <label for="defaultSelect" class="col-sm-2 col-form-label">Pilih Cabor</label>
+                          <label for="sportCategorySelect" class="col-sm-2 col-form-label">Pilih
+                              Cabor</label>
                           <div class="col-sm-4">
-                            <select id="defaultSelect" name="sport_category" class="form-control">
-                              <option value="" hidden selected disabled>Pilih kategori..</option>
-                              <option value="Badminton">Badminton</option>
-                              <option value="Sepak Bola">Sepak Bola</option>
-                              <option value="Bola Basket">Bola Basket</option>
-                              <option value="Bola Voli">Bola Voli</option>
-                              <option value="balap Sepeda">Balap Sepeda</option>
-                              <option value="Atletik">Atletik</option>
-                              <option value="Renang">Renang</option>
-                              <option value="Tinju">Tinju</option>
-                              <option value="Pencak Silat">Pencak Silat</option>
-                            </select>
+                              <select id="sportCategorySelect" name="sport_category"
+                                  class="form-control sport-category-select">
+                                  <option value="" hidden selected disabled>Pilih kategori..
+                                  </option>
+                              </select>
                           </div>
-                        </div>
+                      </div>
                         <div class="row mb-3">
                           <label class="col-sm-2 col-form-label" for="basic-default-name">Alamat</label>
                           <div class="col-sm-10">
@@ -227,6 +221,7 @@
     <!-- Datatable -->
     <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+    <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
 
 </body>
 

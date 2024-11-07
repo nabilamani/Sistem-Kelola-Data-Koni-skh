@@ -29,8 +29,10 @@
     <div id="main-wrapper">
         <div class="nav-header">
             <a href="/home" class="brand-logo">
-                <img class="logo-abbr" src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo" style="margin-left: 10px; border-radius: 50%;">
-                <span class="fw-bolder" style="margin-left: 10px; font-size: 18px; font-weight: 300">Sistem Kelola KONI</span>
+                <img class="logo-abbr" src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo"
+                    style="margin-left: 10px; border-radius: 50%;">
+                <span class="fw-bolder" style="margin-left: 10px; font-size: 18px; font-weight: 300">Sistem Kelola
+                    KONI</span>
             </a>
             <div class="nav-control">
                 <div class="hamburger">
@@ -60,7 +62,7 @@
                         </ol>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-xxl">
                         <div class="card mb-4">
@@ -73,37 +75,39 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Nama Event</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="name" class="form-control" placeholder="Masukkan nama event..." required />
+                                            <input type="text" name="name" class="form-control"
+                                                placeholder="Masukkan nama event..." required />
                                         </div>
                                     </div>
-                            
+
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="event_date">Tanggal</label>
                                         <div class="col-sm-10">
-                                            <input type="date" name="event_date" class="form-control" placeholder="Masukkan durasi event..." required />
+                                            <input type="date" name="event_date" class="form-control"
+                                                placeholder="Masukkan durasi event..." required />
                                         </div>
                                     </div>
-                            
+
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="sport_category">Kategori Olahraga</label>
-                                        <div class="col-sm-10">
-                                            <select name="sport_category" class="form-control" required>
-                                                <option value="" hidden selected>Pilih kategori olahraga...</option>
-                                                <option value="Badminton">Badminton</option>
-                                                <option value="Sepak Bola">Sepak Bola</option>
-                                                <option value="Bola Basket">Bola Basket</option>
-                                                <!-- Add other sports as needed -->
+                                        <label for="sportCategorySelect" class="col-sm-2 col-form-label">Pilih
+                                            Cabor</label>
+                                        <div class="col-sm-4">
+                                            <select id="sportCategorySelect" name="sport_category"
+                                                class="form-control sport-category-select">
+                                                <option value="" hidden selected disabled>Pilih kategori..
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
-                            
+
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="location">Lokasi</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="location" class="form-control" placeholder="Masukkan lokasi event..." required />
+                                            <input type="text" name="location" class="form-control"
+                                                placeholder="Masukkan lokasi event..." required />
                                         </div>
                                     </div>
-                                    
+
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
                                             <button type="submit" class="btn btn-primary">Tambah Event</button>
@@ -111,7 +115,7 @@
                                     </div>
                                 </form>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -156,6 +160,7 @@
     <!-- Datatable -->
     <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+    <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
 </body>
 
 </html>
