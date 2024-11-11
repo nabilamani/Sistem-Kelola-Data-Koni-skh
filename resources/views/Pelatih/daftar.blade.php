@@ -23,8 +23,9 @@
 </head>
 <style>
     .card {
-    border-bottom: 3px solid orange; /* You can adjust the width (3px) as needed */
-}
+        border-bottom: 3px solid orange;
+        /* You can adjust the width (3px) as needed */
+    }
 </style>
 
 <body>
@@ -200,116 +201,141 @@
                                     @foreach ($coaches as $coach)
                                         <!-- Modal -->
                                         @if (session('success'))
-                                            <div class="alert alert-success">
+                                            <div class="alert alert-success" id="success-alert">
                                                 {{ session('success') }}
                                             </div>
                                         @endif
 
-                                        <div class="modal fade" id="coachDetailModal{{ $coach->id }}" tabindex="-1" role="dialog"
-                                            aria-labelledby="coachDetailModalLabel{{ $coach->id }}" aria-hidden="true">
-                                           <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                               <div class="modal-content">
-                                                   <div class="modal-header bg-primary text-white">
-                                                       <h5 class="modal-title" id="coachDetailModalLabel{{ $coach->id }}">Detail Pelatih: {{ $coach->name }}</h5>
-                                                       <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                                           <span aria-hidden="true">&times;</span>
-                                                       </button>
-                                                   </div>
-                                                   <div class="modal-body">
-                                                       <div class="row">
-                                                           <!-- Left column: Coach photo -->
-                                                           <div class="col-md-4 text-center">
-                                                               <img src="{{ $coach->photo }}" class="img-fluid rounded" alt="Foto Pelatih" style="max-height: 300px; object-fit: cover;">
-                                                           </div>
-                                                           <!-- Right column: Coach details -->
-                                                           <div class="col-md-8">
-                                                               <p class="mb-2"><strong>Nama:</strong> {{ $coach->name }}</p>
-                                                               <p class="mb-2"><strong>Umur:</strong> {{ $coach->age }}</p>
-                                                               <p class="mb-2"><strong>Alamat:</strong> {{ $coach->address }}</p>
-                                                               <p class="mb-2"><strong>Cabang Olahraga:</strong> {{ $coach->sport_category }}</p>
-                                                               <p class="mb-2"><strong>Deskripsi:</strong> {{ $coach->description }}</p>
-                                                           </div>
-                                                       </div>
-                                                   </div>
-                                                   <div class="modal-footer">
-                                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                       
-                                       <div class="modal fade" id="coachEditModal{{ $coach->id }}" tabindex="-1" role="dialog"
-                                        aria-labelledby="coachEditModalLabel{{ $coach->id }}" aria-hidden="true">
-                                       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                           <div class="modal-content">
-                                               <div class="modal-header bg-primary text-white">
-                                                   <h5 class="modal-title" id="coachEditModalLabel{{ $coach->id }}">Edit Pelatih: {{ $coach->name }}</h5>
-                                                   <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                                                       <span aria-hidden="true">&times;</span>
-                                                   </button>
-                                               </div>
-                                               <div class="modal-body">
-                                                   <!-- Form Edit Pelatih -->
-                                                   <form action="/edit-pelatih/{{ $coach->id }}" method="POST" enctype="multipart/form-data">
-                                                       @csrf
-                                                       @method('PUT')
-                                                       
-                                                       <div class="row">
-                                                           <!-- Left column -->
-                                                           <div class="col-md-6">
-                                                               <div class="form-group">
-                                                                   <label for="name">Nama</label>
-                                                                   <input type="text" class="form-control" id="name" name="name" 
-                                                                          value="{{ $coach->name }}" required>
-                                                               </div>
-                                                               <div class="form-group">
-                                                                   <label for="age">Umur</label>
-                                                                   <input type="number" class="form-control" id="age" name="age" 
-                                                                          value="{{ $coach->age }}" required>
-                                                               </div>
-                                                               <div class="form-group">
-                                                                   <label for="sport_category">Cabang Olahraga</label>
-                                                                   <input type="text" class="form-control" id="sport_category" name="sport_category" 
-                                                                          value="{{ $coach->sport_category }}" required>
-                                                               </div>
-                                                           </div>
-                                   
-                                                           <!-- Right column -->
-                                                           <div class="col-md-6">
-                                                               <div class="form-group">
-                                                                   <label for="address">Alamat</label>
-                                                                   <input type="text" class="form-control" id="address" name="address" 
-                                                                          value="{{ $coach->address }}" required>
-                                                               </div>
-                                                               <div class="form-group">
-                                                                   <label for="description">Deskripsi</label>
-                                                                   <textarea class="form-control" id="description" name="description" 
-                                                                             rows="3" required>{{ $coach->description }}</textarea>
-                                                               </div>
-                                                               <div class="form-group">
-                                                                   <label for="photo">Foto</label>
-                                                                   <input type="file" class="form-control-file" id="photo" name="photo">
-                                                                   <div class="mt-2">
-                                                                       <img src="{{ $coach->photo }}" class="img-fluid rounded" width="100" 
-                                                                            alt="Foto Pelatih">
-                                                                   </div>
-                                                               </div>
-                                                           </div>
-                                                       </div>
-                                   
-                                                       <div class="modal-footer">
-                                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                           <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                                       </div>
-                                                   </form>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   
-                                   
-                                   
-                                   
+                                        <div class="modal fade" id="coachDetailModal{{ $coach->id }}"
+                                            tabindex="-1" role="dialog"
+                                            aria-labelledby="coachDetailModalLabel{{ $coach->id }}"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-primary text-white">
+                                                        <h5 class="modal-title"
+                                                            id="coachDetailModalLabel{{ $coach->id }}">Detail
+                                                            Pelatih: {{ $coach->name }}</h5>
+                                                        <button type="button" class="close text-white"
+                                                            data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <!-- Left column: Coach photo -->
+                                                            <div class="col-md-4 text-center">
+                                                                <img src="{{ $coach->photo }}"
+                                                                    class="img-fluid rounded" alt="Foto Pelatih"
+                                                                    style="max-height: 300px; object-fit: cover;">
+                                                            </div>
+                                                            <!-- Right column: Coach details -->
+                                                            <div class="col-md-8">
+                                                                <p class="mb-2"><strong>Nama:</strong>
+                                                                    {{ $coach->name }}</p>
+                                                                <p class="mb-2"><strong>Umur:</strong>
+                                                                    {{ $coach->age }}</p>
+                                                                <p class="mb-2"><strong>Alamat:</strong>
+                                                                    {{ $coach->address }}</p>
+                                                                <p class="mb-2"><strong>Cabang Olahraga:</strong>
+                                                                    {{ $coach->sport_category }}</p>
+                                                                <p class="mb-2"><strong>Deskripsi:</strong>
+                                                                    {{ $coach->description }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Tutup</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade" id="coachEditModal{{ $coach->id }}"
+                                            tabindex="-1" role="dialog"
+                                            aria-labelledby="coachEditModalLabel{{ $coach->id }}"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-primary text-white">
+                                                        <h5 class="modal-title"
+                                                            id="coachEditModalLabel{{ $coach->id }}">Edit Pelatih:
+                                                            {{ $coach->name }}</h5>
+                                                        <button type="button" class="close text-white"
+                                                            data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- Form Edit Pelatih -->
+                                                        <form action="/edit-pelatih/{{ $coach->id }}"
+                                                            method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            @method('PUT')
+
+                                                            <div class="row">
+                                                                <!-- Left column -->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="name">Nama</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="name" name="name"
+                                                                            value="{{ $coach->name }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="age">Umur</label>
+                                                                        <input type="number" class="form-control"
+                                                                            id="age" name="age"
+                                                                            value="{{ $coach->age }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="sport_category">Cabang
+                                                                            Olahraga</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="sport_category" name="sport_category"
+                                                                            value="{{ $coach->sport_category }}"
+                                                                            required>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Right column -->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="address">Alamat</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="address" name="address"
+                                                                            value="{{ $coach->address }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="description">Deskripsi</label>
+                                                                        <textarea class="form-control" id="description" name="description" rows="3" required>{{ $coach->description }}</textarea>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="photo">Foto</label>
+                                                                        <input type="file"
+                                                                            class="form-control-file" id="photo"
+                                                                            name="photo">
+                                                                        <div class="mt-2">
+                                                                            <img src="{{ $coach->photo }}"
+                                                                                class="img-fluid rounded"
+                                                                                width="100" alt="Foto Pelatih">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan
+                                                                    Perubahan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
 
                                     {{ $coaches->appends(request()->except('page'))->links() }}
@@ -319,9 +345,10 @@
                                 <a href="/coaches/create" class="btn btn-rounded btn-primary">
                                     <i class="mdi mdi-account-plus"></i> Tambah Pelatih
                                 </a>
-                                <a href="{{ route('cetak-pelatih')}}" target="_blank" class="btn btn-rounded btn-primary mx-2">
+                                <a href="{{ route('cetak-pelatih') }}" target="_blank"
+                                    class="btn btn-rounded btn-primary mx-2">
                                     <i class="mdi mdi-printer"></i> Cetak Laporan
-                                </a>                                
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -38,20 +38,20 @@ class CoachController extends Controller
     }
 
     public function cetakPelatih()
-{
-    $user = Auth::user(); // Get the authenticated user
+    {
+        $user = Auth::user(); // Get the authenticated user
 
-    // Filter coaches based on user level
-    $coaches = Coach::when($user->level !== 'Admin', function ($query) use ($user) {
-        // Extract sport category from user level if not an Admin
-        $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
-        $query->where('sport_category', $sportCategory);
-    })
-    ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
-    ->get(); // Retrieve all results based on filtering
+        // Filter coaches based on user level
+        $coaches = Coach::when($user->level !== 'Admin', function ($query) use ($user) {
+            // Extract sport category from user level if not an Admin
+            $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
+            $query->where('sport_category', $sportCategory);
+        })
+            ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
+            ->get(); // Retrieve all results based on filtering
 
-    return view('Pelatih.cetak-pelatih', compact('coaches'));
-}
+        return view('Pelatih.cetak-pelatih', compact('coaches'));
+    }
 
 
 
@@ -145,7 +145,7 @@ class CoachController extends Controller
             if ($coach->photo && file_exists(public_path($coach->photo))) {
                 unlink(public_path($coach->photo));
             }
-    
+
             // Upload the new photo
             $file = $request->file('photo');
             $filename = time() . '_' . $file->getClientOriginalName();
@@ -155,7 +155,8 @@ class CoachController extends Controller
 
         $coach->save();
 
-        return redirect()->back()->with('success', 'Data pelatih berhasil diperbarui');
+        session()->flash('success', 'Data berhasil diperbarui.');
+        return redirect()->back();
     }
 
 
@@ -174,9 +175,9 @@ class CoachController extends Controller
         $coach->delete();
 
         if ($coach->photo) {
-            Storage::delete('public/img/' . $coach->photo); 
+            Storage::delete('public/img/' . $coach->photo);
         }
-        
+
 
         // Redirect dengan pesan sukses
         return redirect()->back()->with('success', 'Data pelatih berhasil dihapus');

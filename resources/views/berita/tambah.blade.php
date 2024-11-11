@@ -15,6 +15,43 @@
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
 </head>
+<style>
+    .container {
+        width: 100%;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .option-button,
+    .adv-option-button {
+        background: #007bff;
+        border: none;
+        padding: 8px;
+        color: white;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+    #text-input {
+        min-height: 200px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    input[type="color"] {
+        margin-left: 10px;
+    }
+</style>
 
 <body>
 
@@ -115,8 +152,7 @@
                                         <label class="col-sm-2 col-form-label" for="tanggal_waktu">Tanggal dan
                                             Waktu</label>
                                         <div class="col-sm-10">
-                                            <input type="date" name="tanggal_waktu" class="form-control"
-                                                required />
+                                            <input type="date" name="tanggal_waktu" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -130,7 +166,38 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="isi_berita">Isi Berita</label>
                                         <div class="col-sm-10">
-                                            <textarea name="isi_berita" class="form-control" placeholder="Masukkan isi berita..." rows="5" required></textarea>
+                                            <!-- Rich Text Editor -->
+                                            <div class="container">
+                                                <div class="options">
+                                                    <button id="bold" class="option-button format"><i
+                                                            class="mdi mdi-format-bold"></i></button>
+                                                    <button id="italic" class="option-button format"><i
+                                                            class="mdi mdi-format-italic"></i></button>
+                                                    <button id="underline" class="option-button format"><i
+                                                            class="mdi mdi-format-underline"></i></button>
+                                                    <button id="strikethrough" class="option-button format"><i
+                                                            class="mdi mdi-format-strikethrough-variant"></i></button>
+                                                    <button id="createLink" class="adv-option-button"><i
+                                                            class="mdi mdi-link-variant"></i></button>
+                                                    <button id="unlink" class="option-button"><i
+                                                            class="mdi mdi-link-off"></i></button>
+                                                    <button id="insertOrderedList" class="option-button"><i
+                                                            class="mdi mdi-format-list-numbered"></i></button>
+                                                    <button id="insertUnorderedList" class="option-button"><i
+                                                            class="mdi mdi-format-list-bulleted"></i></button>
+                                                    <button id="justifyLeft" class="option-button align"><i
+                                                            class="mdi mdi-format-align-left"></i></button>
+                                                    <button id="justifyCenter" class="option-button align"><i
+                                                            class="mdi mdi-format-align-center"></i></button>
+                                                    <button id="justifyRight" class="option-button align"><i
+                                                            class="mdi mdi-format-align-right"></i></button>
+                                                    <button id="justifyFull" class="option-button align"><i
+                                                            class="mdi mdi-format-align-justify"></i></button>
+
+                                                </div>
+                                                <div id="text-input" contenteditable="true" name="isi_berita"></div>
+                                                <textarea id="isi_berita" name="isi_berita" hidden></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -144,7 +211,8 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="photo">Foto</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="file" name="photo" id="gambar" style="height: 100%;" />
+                                            <input class="form-control" type="file" name="photo"
+                                                style="height: 100%;" />
                                         </div>
                                     </div>
                                     <div class="row justify-content-end">
@@ -153,6 +221,8 @@
                                         </div>
                                     </div>
                                 </form>
+
+
 
 
                             </div>
@@ -180,6 +250,8 @@
         <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
         <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/texteditor.js') }}"></script>
+
 
     </div>
 </body>

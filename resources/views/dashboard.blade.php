@@ -21,6 +21,61 @@
     .card {
         border-bottom: 3px solid orange;
         /* You can adjust the width (3px) as needed */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .icon-block {
+        width: 60px;
+        height: 60px;
+    }
+
+    .count {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .text-primary {
+        color: #007bff !important;
+    }
+
+    .text-secondary {
+        color: #6c757d !important;
+    }
+
+    .hover-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 8px;
+    }
+
+    .hover-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-title {
+        font-weight: bold;
+        color: #343a40;
+        transition: color 0.3s ease;
+    }
+
+    .hover-card:hover .card-title {
+        color: #007bff;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
     }
 </style>
 
@@ -88,7 +143,7 @@
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
-                <div class="row page-titles mx-0 mb-0">
+                <div class="row page-titles mx-0 mb-0 shadow-sm">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
                             <h4>Hi, Selamat Datang Kembali!</h4>
@@ -112,23 +167,43 @@
                         <div class="row">
                             <!-- Total Athletes -->
                             <div class="col-xl-3 col-lg-6 col-sm-6">
-                                <div class="card mb-2">
-                                    <div class="card-body">
-                                        <div class="media align-items-center">
-                                            <div class="media-body">
-                                                <h2 class="mb-0 count" data-count="{{ $athleteCount }}">0</h2>
-                                                <p class="text-muted mb-0">Total Atlet</p>
-                                            </div>
-                                            <div class="icon-block">
-                                                <i class="bx bxs-group font-size-50"></i>
-                                            </div>
+                                <div class="card mb-3 shadow-lg rounded card-hover">
+                                    <div class="card-body d-flex justify-content-between align-items-center">
+                                        <!-- Bagian Kiri: Teks dan Count -->
+                                        <div>
+                                            <h2 class="count mb-1 text-primary" data-count="{{ $athleteCount }}">0</h2>
+                                            <p class="text-secondary mb-0">Total Atlet</p>
+                                        </div>
+
+                                        <!-- Bagian Kanan: Icon -->
+                                        <div
+                                            class="icon-block bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="mdi mdi-account-multiple font-size-40"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+
                             <!-- Total Events -->
                             <div class="col-xl-3 col-lg-6 col-sm-6">
+                                <div class="card mb-3 shadow-lg rounded card-hover">
+                                    <div class="card-body d-flex justify-content-between align-items-center">
+                                        <!-- Bagian Kiri: Teks dan Count -->
+                                        <div>
+                                            <h2 class="count mb-1 text-primary" data-count="{{ $eventCount }}">0</h2>
+                                            <p class="text-secondary mb-0">Total Event</p>
+                                        </div>
+
+                                        <!-- Bagian Kanan: Icon -->
+                                        <div
+                                            class="icon-block bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bx bx-calendar font-size-50"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
                                 <div class="card mb-2">
                                     <div class="card-body">
                                         <div class="media align-items-center">
@@ -142,10 +217,28 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- Total Achievements -->
                             <div class="col-xl-3 col-lg-6 col-sm-6">
+                                <div class="card mb-3 shadow-lg rounded card-hover">
+                                    <div class="card-body d-flex justify-content-between align-items-center">
+                                        <!-- Bagian Kiri: Teks dan Count -->
+                                        <div>
+                                            <h2 class="count mb-1 text-primary" data-count="{{ $achievementCount }}">0
+                                            </h2>
+                                            <p class="text-secondary mb-0">Total Prestasi</p>
+                                        </div>
+
+                                        <!-- Bagian Kanan: Icon -->
+                                        <div
+                                            class="icon-block bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bx bx-trophy font-size-50"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
                                 <div class="card mb-2">
                                     <div class="card-body">
                                         <div class="media align-items-center">
@@ -159,10 +252,27 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- Total Coaches -->
                             <div class="col-xl-3 col-lg-6 col-sm-6">
+                                <div class="card mb-3 shadow-lg rounded card-hover">
+                                    <div class="card-body d-flex justify-content-between align-items-center">
+                                        <!-- Bagian Kiri: Teks dan Count -->
+                                        <div>
+                                            <h2 class="count mb-1 text-primary" data-count="{{ $coachCount }}">0</h2>
+                                            <p class="text-secondary mb-0">Total Pelatih</p>
+                                        </div>
+
+                                        <!-- Bagian Kanan: Icon -->
+                                        <div
+                                            class="icon-block bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bx bx-user-circle font-size-50"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
                                 <div class="card mb-2">
                                     <div class="card-body">
                                         <div class="media align-items-center">
@@ -176,7 +286,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- Toggle More Info -->
                             <div class="col-12 text-center mb-2">
@@ -192,6 +302,24 @@
                             <div id="more-info" class="row col-12 mx-0 px-0" style="display: none;">
                                 <!-- Total Referees -->
                                 <div class="col-xl-3 col-lg-6 col-sm-6">
+                                    <div class="card mb-3 shadow-lg rounded card-hover">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <!-- Bagian Kiri: Teks dan Count -->
+                                            <div>
+                                                <h2 class="count mb-1 text-primary"
+                                                    data-count="{{ $refereeteCount }}">0</h2>
+                                                <p class="text-secondary mb-0">Total Wasit</p>
+                                            </div>
+
+                                            <!-- Bagian Kanan: Icon -->
+                                            <div
+                                                class="icon-block bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="bx bx-id-card font-size-50"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="media align-items-center">
@@ -205,10 +333,28 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                
+                                </div> --}}
+
                                 <!-- Total Venues -->
                                 <div class="col-xl-3 col-lg-6 col-sm-6">
+                                    <div class="card mb-3 shadow-lg rounded card-hover">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <!-- Bagian Kiri: Teks dan Count -->
+                                            <div>
+                                                <h2 class="count mb-1 text-primary" data-count="{{ $venueCount }}">
+                                                    0</h2>
+                                                <p class="text-secondary mb-0">Total Venue</p>
+                                            </div>
+
+                                            <!-- Bagian Kanan: Icon -->
+                                            <div
+                                                class="icon-block bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="bx bx-map font-size-50"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="media align-items-center">
@@ -222,10 +368,28 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <!-- Total Sports -->
                                 <div class="col-xl-3 col-lg-6 col-sm-6">
+                                    <div class="card mb-3 shadow-lg rounded card-hover">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <!-- Bagian Kiri: Teks dan Count -->
+                                            <div>
+                                                <h2 class="mb-1 count text-primary" data-count=""
+                                                    id="sportCategoryCount">0</h2>
+                                                <p class="text-secondary mb-0">Total Cabor</p>
+                                            </div>
+
+                                            <!-- Bagian Kanan: Icon -->
+                                            <div
+                                                class="icon-block bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="bx bx-basketball font-size-50"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="media align-items-center">
@@ -239,10 +403,28 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <!-- Total Accounts -->
                                 <div class="col-xl-3 col-lg-6 col-sm-6">
+                                    <div class="card mb-3 shadow-lg rounded card-hover">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <!-- Bagian Kiri: Teks dan Count -->
+                                            <div>
+                                                <h2 class="count mb-1 text-primary" data-count="{{ $userCount }}">
+                                                    0</h2>
+                                                <p class="text-secondary mb-0">Total Akun</p>
+                                            </div>
+
+                                            <!-- Bagian Kanan: Icon -->
+                                            <div
+                                                class="icon-block bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                                <i class="bx bx-user font-size-50"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="media align-items-center">
@@ -257,6 +439,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div> --}}
                             </div>
                         </div>
 
@@ -272,35 +455,51 @@
                                         <div class="row">
                                             @foreach ($beritas as $berita)
                                                 <div class="col-lg-4 col-md-6 mb-4">
-                                                    <div class="card border shadow-sm h-100">
+                                                    <div
+                                                        class="card border shadow-sm h-100 position-relative hover-card">
                                                         <img src="{{ asset($berita->photo) }}"
-                                                             class="card-img-top img-fluid"
-                                                             alt="{{ $berita->judul_berita }}"
-                                                             style="object-fit: cover; height: 200px; border-radius: 8px;">
+                                                            class="card-img-top img-fluid"
+                                                            alt="{{ $berita->judul_berita }}"
+                                                            style="object-fit: cover; height: 200px; border-radius: 8px 8px 0 0;">
                                                         <div class="card-body d-flex flex-column">
-                                                            <h5 class="card-title">{{ $berita->judul_berita }}</h5>
+                                                            <h5 class="card-title">{{ $berita->judul_berita }}
+                                                            </h5>
                                                             <p class="card-text">
-                                                                <small class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
+                                                                <small
+                                                                    class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
                                                             </p>
                                                             <p class="card-text">
                                                                 {{ Str::limit($berita->isi_berita, 100) }}
                                                             </p>
-                                                            <p class="card-text"><strong>Lokasi :</strong> {{ $berita->lokasi_peristiwa }}</p>
-                                                            <p class="card-text"><strong>Sumber :</strong> {{ $berita->kutipan_sumber }}</p>
-                                                            <button type="button" class="btn btn-primary btn-sm mt-auto" data-toggle="modal" data-target="#newsDetailModal{{ $berita->id }}">
+                                                            <p class="card-text"><strong>Lokasi :</strong>
+                                                                {{ $berita->lokasi_peristiwa }}</p>
+                                                            <p class="card-text"><strong>Sumber :</strong>
+                                                                {{ $berita->kutipan_sumber }}</p>
+                                                            <button type="button"
+                                                                class="btn btn-primary btn-sm mt-auto"
+                                                                data-toggle="modal"
+                                                                data-target="#newsDetailModal{{ $berita->id }}">
                                                                 Selengkapnya
                                                             </button>
                                                         </div>
                                                     </div>
+
                                                 </div>
-                        
+
                                                 <!-- Modal for News Details -->
-                                                <div class="modal fade" id="newsDetailModal{{ $berita->id }}" tabindex="-1" role="dialog" aria-labelledby="newsDetailModalLabel{{ $berita->id }}" aria-hidden="true">
+                                                <div class="modal fade" id="newsDetailModal{{ $berita->id }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="newsDetailModalLabel{{ $berita->id }}"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="newsDetailModalLabel{{ $berita->id }}">Berita Selengkapnya : {{ $berita->judul_berita }}</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <h5 class="modal-title"
+                                                                    id="newsDetailModalLabel{{ $berita->id }}">
+                                                                    Berita Selengkapnya :
+                                                                    {{ $berita->judul_berita }}</h5>
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
@@ -308,22 +507,32 @@
                                                                 <div class="row">
                                                                     <div class="col-md-5">
                                                                         @if ($berita->photo)
-                                                                            <img src="{{ asset($berita->photo) }}" alt="Foto Berita" class="img-fluid rounded mb-3" style="width: 100%; object-fit: cover;">
+                                                                            <img src="{{ asset($berita->photo) }}"
+                                                                                alt="Foto Berita"
+                                                                                class="img-fluid rounded mb-3"
+                                                                                style="width: 100%; object-fit: cover;">
                                                                         @else
                                                                             <span>No image</span>
                                                                         @endif
                                                                     </div>
                                                                     <div class="col-md-7">
-                                                                        <p><strong>Judul Berita :</strong> {{ $berita->judul_berita }}</p>
-                                                                        <p><strong>Tanggal Waktu :</strong> {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</p>
-                                                                        <p><strong>Lokasi Peristiwa :</strong> {{ $berita->lokasi_peristiwa }}</p>
-                                                                        <p><strong>Isi Berita :</strong> {{ $berita->isi_berita }}</p>
-                                                                        <p><strong>Kutipan Sumber :</strong> {{ $berita->kutipan_sumber }}</p>
+                                                                        <p><strong>Judul Berita :</strong>
+                                                                            {{ $berita->judul_berita }}</p>
+                                                                        <p><strong>Tanggal Waktu :</strong>
+                                                                            {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}
+                                                                        </p>
+                                                                        <p><strong>Lokasi Peristiwa :</strong>
+                                                                            {{ $berita->lokasi_peristiwa }}</p>
+                                                                        <p><strong>Isi Berita :</strong>
+                                                                            {{ $berita->isi_berita }}</p>
+                                                                        <p><strong>Kutipan Sumber :</strong>
+                                                                            {{ $berita->kutipan_sumber }}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Tutup</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -334,7 +543,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
 
 
                         <!-- Row 2: Rekapan Prestasi Cabang Olahraga -->
