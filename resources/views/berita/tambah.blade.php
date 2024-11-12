@@ -163,11 +163,18 @@
                                                 placeholder="Masukkan lokasi peristiwa..." required />
                                         </div>
                                     </div>
-                                    <div class="row mb-3">
+                                    <div class="row mb-3"> 
+                                        <label class="col-sm-2 col-form-label" for="isi_berita">Isi
+                                            Berita</label>
+                                        <div class="col -sm-10">
+                                            <textarea name="isi_berita" class="form-control" placeholder="Masukkan isi berita..." rows="5" required></textarea>
+                                        </div>
+                                    </div>
+                                    {{-- <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="isi_berita">Isi Berita</label>
                                         <div class="col-sm-10">
                                             <!-- Rich Text Editor -->
-                                            <div class="container">
+                                            <div class="container mt-0">
                                                 <div class="options">
                                                     <button id="bold" class="option-button format"><i
                                                             class="mdi mdi-format-bold"></i></button>
@@ -182,7 +189,7 @@
                                                     <button id="unlink" class="option-button"><i
                                                             class="mdi mdi-link-off"></i></button>
                                                     <button id="insertOrderedList" class="option-button"><i
-                                                            class="mdi mdi-format-list-numbered"></i></button>
+                                                            class="mdi mdi-format-list-numbers"></i></button>
                                                     <button id="insertUnorderedList" class="option-button"><i
                                                             class="mdi mdi-format-list-bulleted"></i></button>
                                                     <button id="justifyLeft" class="option-button align"><i
@@ -199,7 +206,7 @@
                                                 <textarea id="isi_berita" name="isi_berita" hidden></textarea>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="kutipan_sumber">Kutipan
                                             Sumber</label>
@@ -251,6 +258,13 @@
         <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
         <script src="{{ asset('gambar_aset/js/texteditor.js') }}"></script>
+        <script>
+            document.querySelector('form').addEventListener('submit', function() {
+                // Transfer content from the rich text editor to the hidden textarea
+                const beritas = document.getElementById('text-input').innerHTML;
+                document.getElementById('isi_berita').value = beritas;
+            });
+        </script>
 
 
     </div>

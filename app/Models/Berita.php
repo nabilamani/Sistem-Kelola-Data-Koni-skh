@@ -27,6 +27,10 @@ class Berita extends Model
         'tanggal_waktu',
     ];
 
+    protected $casts = [
+        'isi_berita' => 'string',
+    ];
+    
     public function getFormattedDateAttribute()
     {
         return Carbon::parse($this->tanggal_waktu)->format('d-m-Y H:i');

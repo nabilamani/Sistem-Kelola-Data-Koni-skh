@@ -116,7 +116,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="athleteTable" class="table table-striped table-hover"
+                                    <table id="athleteTable" class="table table-striped table-hover shadow-sm"
                                         style="min-width: 845px;">
                                         <thead class="thead-dark">
                                             <tr>
