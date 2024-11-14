@@ -25,6 +25,8 @@ class DashboardController extends Controller
         $venueCount = Venue::count();
         $achievementCount = Achievement::count();
         $userCount = User::count();
+        $maleCount = Athlete::where('gender', 'Laki-laki')->count();
+        $femaleCount = Athlete::where('gender', 'Perempuan')->count();
 
         // Retrieve the latest news (adjust the number as needed)
         $beritas = Berita::orderBy('tanggal_waktu', 'desc')->take(3)->get();
@@ -38,6 +40,6 @@ class DashboardController extends Controller
 
 
         // Pass these counts and the upcoming events to the view
-        return view('dashboard', compact('eventCount', 'coachCount', 'athleteCount', 'refereeteCount', 'venueCount', 'achievementCount', 'upcomingEvents', 'achievements', 'beritas','userCount'));
+        return view('dashboard', compact('eventCount', 'maleCount','femaleCount','coachCount', 'athleteCount', 'refereeteCount', 'venueCount', 'achievementCount', 'upcomingEvents', 'achievements', 'beritas','userCount'));
     }
 }

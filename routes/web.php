@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AthleteController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\CoachController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\KoniStructureController;
 use App\Http\Controllers\RefereeController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\VenueController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // use App\Models\Athlete;
 // use App\Models\KoniStructures;
@@ -28,10 +30,11 @@ use App\Http\Controllers\VenueController;
 |
 */
 
+Route::get('/', [Controller::class, 'home'])->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -129,6 +132,8 @@ Route::get('/cetak-konistructure', [KoniStructureController::class, 'cetakStruct
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
 
 
 
