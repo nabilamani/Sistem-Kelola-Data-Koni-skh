@@ -18,24 +18,59 @@
             overflow-x: hidden;
         }
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1030;
-            transition: transform 0.4s ease, background-color 0.4s ease;
-        }
+        /* Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+    transition: transform 0.4s ease, background-color 0.4s ease;
+    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    backdrop-filter: blur(20px); /* Apply blur effect */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Add a subtle border */
+}
 
-        /* Tambahkan background pada saat scroll */
-        .navbar.scrolled {
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+/* When scrolling */
+/* When scrolling */
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker and more opaque background */
+    backdrop-filter: blur(10px); /* Keep the blur effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
 
-        /* Efek transisi untuk navbar saat muncul dan tersembunyi */
-        .navbar.hidden {
-            transform: translateY(-100%);
-        }
+
+/* Hide navbar */
+.navbar.hidden {
+    transform: translateY(-100%);
+}
+
+/* Additional styling for navbar items */
+.navbar .navbar-brand {
+    font-weight: bold;
+    color: white; /* White color for brand */
+}
+
+.navbar .nav-link {
+    color: white !important; /* Make nav links white */
+}
+
+.navbar .nav-link:hover {
+    color: #FF9800 !important; /* Change color on hover */
+}
+
+/* Adjust styling for dropdowns */
+.navbar .dropdown-menu {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker dropdown background */
+    backdrop-filter: blur(5px); /* Apply blur to dropdown menu */
+}
+
+/* Button Styling */
+.navbar .btn-warning {
+    border-radius: 20px;
+    background-color: #FF9800; /* Orange background */
+    border: none;
+}
+
 
         /* Hero Section with Parallax Effect */
         .hero-section {
@@ -51,11 +86,28 @@
         }
 
         .hero-overlay {
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 50px;
-            border-radius: 10px;
-        }
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    backdrop-filter: blur(5px); /* Blurring the background for the glass effect */
+    padding: 50px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Border to enhance glass effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds depth */
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+/* Optional: Zoom-in effect on hover */
+.hero-overlay:hover {
+    transform: scale(1.05); /* Slight zoom-in */
+}
+
+/* For responsiveness */
+@media (max-width: 768px) {
+    .hero-overlay {
+        padding: 30px; /* Adjust padding for smaller screens */
+    }
+}
+
 
         .hero-title {
             font-weight: bold;
@@ -149,7 +201,7 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="KONI Sukoharjo" style="height: 50px;"
@@ -512,7 +564,7 @@
             <!-- Footer Bottom -->
             <div class="text-center">
                 <small>Developed By <a href="#"
-                        class="text-white text-decoration-none">konisukoharjo.com</a></small>
+                        class="text-white text-decoration-none">kominfosukoharjo.com</a></small>
             </div>
         </div>
     </footer>
