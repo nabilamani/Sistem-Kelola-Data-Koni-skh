@@ -13,6 +13,7 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\KoniStructureController;
 use App\Http\Controllers\RefereeController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SportCategoryController;
 use App\Http\Controllers\VenueController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -124,6 +125,10 @@ Route::resource('konistructures', KoniStructureController::class);
 Route::put('/edit-konistructure/{id}', [KoniStructureController::class, 'update']);
 Route::delete('/delete-konistructure/{id}', [KoniStructureController::class, 'destroy']);
 Route::get('/cetak-konistructure', [KoniStructureController::class, 'cetakStructure'])->name('cetak-konistructure');
+
+Route::resource('sportcategories', SportCategoryController::class);
+Route::put('/edit-sportcategory/{id}', [SportCategoryController::class, 'update']);
+Route::delete('/delete-sportcategory/{id}', [SportCategoryController::class, 'destroy']);
 
 
 

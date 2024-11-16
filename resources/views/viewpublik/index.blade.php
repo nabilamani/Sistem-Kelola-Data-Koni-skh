@@ -19,57 +19,85 @@
         }
 
         /* Navbar Styling */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1030;
-    transition: transform 0.4s ease, background-color 0.4s ease;
-    background: rgba(255, 255, 255, 0.1); /* Transparent background */
-    backdrop-filter: blur(20px); /* Apply blur effect */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Add a subtle border */
-}
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1030;
+            transition: transform 0.4s ease, background-color 0.4s ease;
+            background: rgba(255, 255, 255, 0.1);
+            /* Transparent background */
+            backdrop-filter: blur(20px);
+            /* Apply blur effect */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            /* Optional: Add a subtle border */
+        }
 
-/* When scrolling */
-/* When scrolling */
-.navbar.scrolled {
-    background-color: rgba(0, 0, 0, 0.7); /* Darker and more opaque background */
-    backdrop-filter: blur(10px); /* Keep the blur effect */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
-}
+        /* When scrolling */
+        /* When scrolling */
+        .navbar.scrolled {
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Darker and more opaque background */
+            backdrop-filter: blur(10px);
+            /* Keep the blur effect */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Soft shadow */
+        }
 
 
-/* Hide navbar */
-.navbar.hidden {
-    transform: translateY(-100%);
-}
+        /* Hide navbar */
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
 
-/* Additional styling for navbar items */
-.navbar .navbar-brand {
-    font-weight: bold;
-    color: white; /* White color for brand */
-}
+        /* Additional styling for navbar items */
+        .navbar .navbar-brand {
+            font-weight: bold;
+            color: white;
+            /* White color for brand */
+        }
 
-.navbar .nav-link {
-    color: white !important; /* Make nav links white */
-}
+        .navbar .nav-link {
+            color: white !important;
+            /* Make nav links white */
+        }
 
-.navbar .nav-link:hover {
-    color: #FF9800 !important; /* Change color on hover */
-}
+        .navbar .nav-link:hover {
+            color: #FF9800 !important;
+            /* Change color on hover */
+        }
 
-/* Adjust styling for dropdowns */
-.navbar .dropdown-menu {
-    background-color: rgba(0, 0, 0, 0.7); /* Darker dropdown background */
-    backdrop-filter: blur(5px); /* Apply blur to dropdown menu */
-}
+        /* Style untuk dropdown menu */
+        .navbar .dropdown-menu {
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Latar belakang dropdown menjadi gelap */
+            border: none;
+            /* Hilangkan border pada dropdown */
+            backdrop-filter: blur(5px);
+        }
 
-/* Button Styling */
-.navbar .btn-warning {
-    border-radius: 20px;
-    background-color: #FF9800; /* Orange background */
-    border: none;
-}
+        /* Warna teks dropdown menjadi putih */
+        .navbar .dropdown-menu .dropdown-item {
+            color: white !important;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Warna teks saat di-hover */
+        .navbar .dropdown-menu .dropdown-item:hover {
+            color: #212529 !important;
+            /* Teks menjadi gelap saat di-hover */
+            background-color: #fff;
+            /* Background sedikit lebih terang */
+        }
+
+
+        /* Button Styling */
+        .navbar .btn-warning {
+            border-radius: 20px;
+            background-color: #FF9800;
+            /* Orange background */
+            border: none;
+        }
 
 
         /* Hero Section with Parallax Effect */
@@ -86,27 +114,34 @@
         }
 
         .hero-overlay {
-    text-align: center;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-    backdrop-filter: blur(5px); /* Blurring the background for the glass effect */
-    padding: 50px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: Border to enhance glass effect */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds depth */
-    transition: transform 0.3s ease; /* Smooth zoom effect */
-}
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            /* Semi-transparent background */
+            backdrop-filter: blur(5px);
+            /* Blurring the background for the glass effect */
+            padding: 50px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            /* Optional: Border to enhance glass effect */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Optional: Adds depth */
+            transition: transform 0.3s ease;
+            /* Smooth zoom effect */
+        }
 
-/* Optional: Zoom-in effect on hover */
-.hero-overlay:hover {
-    transform: scale(1.05); /* Slight zoom-in */
-}
+        /* Optional: Zoom-in effect on hover */
+        .hero-overlay:hover {
+            transform: scale(1.05);
+            /* Slight zoom-in */
+        }
 
-/* For responsiveness */
-@media (max-width: 768px) {
-    .hero-overlay {
-        padding: 30px; /* Adjust padding for smaller screens */
-    }
-}
+        /* For responsiveness */
+        @media (max-width: 768px) {
+            .hero-overlay {
+                padding: 30px;
+                /* Adjust padding for smaller screens */
+            }
+        }
 
 
         .hero-title {
@@ -122,6 +157,7 @@
         /* Cards Styling */
         .card {
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .card:hover {
@@ -285,7 +321,8 @@
             <div class="row gy-4">
                 <!-- Card 1: Cabor -->
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm text-center p-4 h-100">
+                    <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover cursor-pointer"
+                        onclick="window.location.href='cabor.html';">
                         <i class="mdi mdi-basketball display-4 mb-3"></i>
                         <h5 class="fw-bold">Cabor</h5>
                     </div>
@@ -293,7 +330,8 @@
 
                 <!-- Card 2: Atlet -->
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm text-center p-4 h-100">
+                    <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
+                        onclick="window.location.href='atlet.html';">
                         <i class="mdi mdi-account-outline display-4 mb-3"></i>
                         <h5 class="fw-bold">Atlet</h5>
                     </div>
@@ -301,7 +339,8 @@
 
                 <!-- Card 3: Pelatih -->
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm text-center p-4 h-100">
+                    <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
+                        onclick="window.location.href='pelatih.html';">
                         <i class="mdi mdi-account-multiple-outline display-4 mb-3"></i>
                         <h5 class="fw-bold">Pelatih</h5>
                     </div>
@@ -309,7 +348,8 @@
 
                 <!-- Card 4: Berita Terkini -->
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm text-center p-4 h-100">
+                    <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
+                        onclick="window.location.href='berita.html';">
                         <i class="mdi mdi-newspaper display-4 mb-3"></i>
                         <h5 class="fw-bold">Berita Terkini</h5>
                     </div>
@@ -317,7 +357,8 @@
 
                 <!-- Card 5: Prestasi Atlet -->
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm text-center p-4 h-100">
+                    <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
+                        onclick="window.location.href='prestasi.html';">
                         <i class="mdi mdi-trophy-outline display-4 mb-3"></i>
                         <h5 class="fw-bold">Prestasi Atlet</h5>
                     </div>
@@ -325,7 +366,8 @@
 
                 <!-- Card 6: Wasit -->
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm text-center p-4 h-100">
+                    <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
+                        onclick="window.location.href='wasit.html';">
                         <i class="mdi mdi-whistle display-4 mb-3"></i>
                         <h5 class="fw-bold">Wasit</h5>
                     </div>
@@ -333,6 +375,7 @@
             </div>
         </div>
     </section>
+
 
     <section class="py-5 bg-dark text-white">
         <div class="container text-center">

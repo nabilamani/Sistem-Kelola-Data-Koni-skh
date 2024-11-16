@@ -42,10 +42,8 @@
         ***********************************-->
         <div class="nav-header">
             <a href="/coba" class="brand-logo">
-                <img class="logo-abbr" src="{{ asset('gambar_aset/images/koni.png') }}" alt=""
-                    style="margin-left: 10px; border-radius: 50%;">
-                <span class="fw-bolder" style="margin-left: 10px; font-size: 18px; font-weight: 300">Sistem Kelola
-                    KONI</span>
+                <img class="logo-abbr" src="{{ asset('gambar_aset/images/koni.png') }}" alt="" style="margin-left: 10px; border-radius: 50%;">
+                <span class="fw-bolder" style="margin-left: 10px; font-size: 18px; font-weight: 300">Sistem Kelola KONI</span>
             </a>
 
             <div class="nav-control">
@@ -83,13 +81,12 @@
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
                             <h4>Hi, Selamat Datang kembali!</h4>
-                            <p class="mb-1"><span class="text-success">{{ Auth::user()->name }},</span> Anda login
-                                sebagai <span class="text-success">{{ Auth::user()->level }}</span></p>
+                            <p class="mb-1"><span class="text-success">{{ Auth::user()->name }},</span> Anda login sebagai <span class="text-success">{{ Auth::user()->level }}</span></p>
                         </div>
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Atlet</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Cabor</a></li>
                             <li class="breadcrumb-item active"><a href="javascript:void(0)">Tambah +</a></li>
                         </ol>
                     </div>
@@ -99,76 +96,52 @@
                     <div class="col-xxl">
                         <div class="card mb-4">
                             <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Tambah Data Atlet</h5>
+                                <h5 class="mb-0">Tambah Data Kategori Olahraga</h5>
                             </div>
                             <div class="card-body">
-                                <form action="/athletes" method="post" enctype="multipart/form-data">
+                                <form action="/sportcategories" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="name">Nama Atlet</label>
+                                        <label class="col-sm-2 col-form-label" for="nama_cabor">Nama Federasi</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="name" class="form-control"
-                                                placeholder="Masukkan nama atlet..." required />
+                                            <input type="text" name="nama_cabor" class="form-control" placeholder="Masukkan nama kategori olahraga..." required />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="sportCategorySelect" class="col-sm-2 col-form-label">Pilih
-                                            Cabor</label>
+                                        <label for="sportCategorySelect" class="col-sm-2 col-form-label">Pilih Cabor</label>
                                         <div class="col-sm-4">
-                                            <select id="sportCategorySelect" name="sport_category"
-                                                class="form-control sport-category-select">
-                                                <option value="" hidden selected disabled>Pilih kategori..
-                                                </option>
-                                            </select>
+                                          <select id="sportCategorySelect" name="sport_category" class="form-control sport-category-select">
+                                            <option value="" hidden selected disabled>Pilih kategori..</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                    <div class="row mb-3">
+                                        <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
+                                        <div class="col-sm-10">
+                                            <textarea name="deskripsi" class="form-control" placeholder="Masukkan deskripsi kategori olahraga..."></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="birth_date">Tanggal Lahir</label>
+                                        <label for="puslatcab" class="col-sm-2 col-form-label">Pusat Latihan Cabang</label>
                                         <div class="col-sm-10">
-                                            <input type="date" name="birth_date" class="form-control" required />
+                                            <input type="text" name="puslatcab" class="form-control" placeholder="Masukkan pusat latihan cabang..." />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="gender">Jenis Kelamin</label>
+                                        <label for="kontak" class="col-sm-2 col-form-label">Kontak</label>
                                         <div class="col-sm-10">
-                                            <select name="gender" class="form-control" required>
-                                                <option value="" hidden selected>Pilih jenis kelamin...</option>
-                                                <option value="Laki-laki">Laki-laki</option>
-                                                <option value="Perempuan">Perempuan</option>
-                                            </select>
+                                            <input type="text" name="kontak" class="form-control" placeholder="Masukkan kontak (nomor telepon/email)..." />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="weight">Berat Badan (kg)</label>
+                                        <label for="logo" class="col-sm-2 col-form-label">Logo</label>
                                         <div class="col-sm-10">
-                                            <input type="number" name="weight" class="form-control"
-                                                placeholder="Masukkan berat badan atlet..." required />
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="height">Tinggi Badan
-                                            (cm)</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" name="height" class="form-control"
-                                                placeholder="Masukkan tinggi badan atlet..." required />
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="achievements">Prestasi</label>
-                                        <div class="col-sm-10">
-                                            <textarea name="achievements" class="form-control" placeholder="Masukkan prestasi atlet..."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="photo">Foto</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="file" name="photo" id="gambar"
-                                                style="height: 100%;" />
+                                            <input class="form-control" type="file" name="logo" id="logo" style="height: 100%;" />
                                         </div>
                                     </div>
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Tambah Atlet</button>
+                                            <button type="submit" class="btn btn-primary">Tambah Kategori Olahraga</button>
                                         </div>
                                     </div>
                                 </form>
@@ -176,8 +149,9 @@
                         </div>
                     </div>
                 </div>
-
-
+                
+                
+                
                 <!--**********************************
                     Content body end
                 ***********************************-->
