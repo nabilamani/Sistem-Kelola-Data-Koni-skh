@@ -252,15 +252,21 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body p-3">
-                                                        <form action="/edit-sport-category/{{ $SportCategory->id }}"
+                                                        <form action="/edit-sportcategory/{{ $SportCategory->id }}"
                                                             method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('PUT')
                                                             <div class="form-group mb-3">
-                                                                <label for="nama_cabor">Nama Kategori</label>
+                                                                <label for="nama_cabor">Nama Federasi</label>
                                                                 <input type="text" class="form-control"
                                                                     id="nama_cabor" name="nama_cabor"
                                                                     value="{{ $SportCategory->nama_cabor }}" required>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label for="sport_category">Nama Kategori</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="sport_category" name="sport_category"
+                                                                    value="{{ $SportCategory->sport_category }}" required>
                                                             </div>
                                                             <div class="form-group mb-3">
                                                                 <label for="deskripsi">Deskripsi</label>

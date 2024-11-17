@@ -52,14 +52,14 @@ class SportCategoryController extends Controller
         // Simpan data
         SportCategory::create($data);
 
-        return redirect()->route('sportcategories')->with('success', 'Sport category berhasil ditambahkan!');
+        return redirect()->route('sportcategories.index')->with('success', 'Sport category berhasil ditambahkan!');
     }
 
     // Edit sport category
     public function edit($id)
     {
         $category = SportCategory::findOrFail($id);
-        return view('cabor.edit', compact('category'));
+        return view('cabor.edit', compact('SportCategory'));
     }
 
     // Update sport category

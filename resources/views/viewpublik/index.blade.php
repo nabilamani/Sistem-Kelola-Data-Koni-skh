@@ -17,89 +17,6 @@
         body {
             overflow-x: hidden;
         }
-
-        /* Navbar Styling */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1030;
-            transition: transform 0.4s ease, background-color 0.4s ease;
-            background: rgba(255, 255, 255, 0.1);
-            /* Transparent background */
-            backdrop-filter: blur(20px);
-            /* Apply blur effect */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            /* Optional: Add a subtle border */
-        }
-
-        /* When scrolling */
-        /* When scrolling */
-        .navbar.scrolled {
-            background-color: rgba(0, 0, 0, 0.7);
-            /* Darker and more opaque background */
-            backdrop-filter: blur(10px);
-            /* Keep the blur effect */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            /* Soft shadow */
-        }
-
-
-        /* Hide navbar */
-        .navbar.hidden {
-            transform: translateY(-100%);
-        }
-
-        /* Additional styling for navbar items */
-        .navbar .navbar-brand {
-            font-weight: bold;
-            color: white;
-            /* White color for brand */
-        }
-
-        .navbar .nav-link {
-            color: white !important;
-            /* Make nav links white */
-        }
-
-        .navbar .nav-link:hover {
-            color: #FF9800 !important;
-            /* Change color on hover */
-        }
-
-        /* Style untuk dropdown menu */
-        .navbar .dropdown-menu {
-            background-color: rgba(0, 0, 0, 0.8);
-            /* Latar belakang dropdown menjadi gelap */
-            border: none;
-            /* Hilangkan border pada dropdown */
-            backdrop-filter: blur(5px);
-        }
-
-        /* Warna teks dropdown menjadi putih */
-        .navbar .dropdown-menu .dropdown-item {
-            color: white !important;
-            transition: color 0.3s ease, background-color 0.3s ease;
-        }
-
-        /* Warna teks saat di-hover */
-        .navbar .dropdown-menu .dropdown-item:hover {
-            color: #212529 !important;
-            /* Teks menjadi gelap saat di-hover */
-            background-color: #fff;
-            /* Background sedikit lebih terang */
-        }
-
-
-        /* Button Styling */
-        .navbar .btn-warning {
-            border-radius: 20px;
-            background-color: #FF9800;
-            /* Orange background */
-            border: none;
-        }
-
-
         /* Hero Section with Parallax Effect */
         .hero-section {
             height: 100vh;
@@ -203,98 +120,12 @@
         .contact-info button:hover {
             background-color: #ff5722;
         }
-
-        footer {
-            background-color: #1f2d3d;
-        }
-
-        footer h5 {
-            color: #ff7f50;
-            margin-bottom: 20px;
-        }
-
-        footer ul li a {
-            transition: color 0.3s;
-        }
-
-        footer ul li a:hover {
-            color: #ff5722;
-        }
-
-        footer hr {
-            border-color: #3c4b5c;
-        }
-
-        footer .mdi {
-            transition: transform 0.3s;
-        }
-
-        footer .mdi:hover {
-            transform: scale(1.2);
-        }
     </style>
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg shadow-sm">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="KONI Sukoharjo" style="height: 50px;"
-                    class="me-3">
-                <span class="fw-bold">KONI KABUPATEN SUKOHARJO</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Berita</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="profilDropdown" role="button"
-                            data-bs-toggle="dropdown">
-                            Profil
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Tentang</a></li>
-                            <li><a class="dropdown-item" href="#">Visi dan Misi</a></li>
-                            <li><a class="dropdown-item" href="#">Struktur Organisasi</a></li>
-                            <li><a class="dropdown-item" href="#">Program</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="olahragaDropdown" role="button"
-                            data-bs-toggle="dropdown">
-                            Olahraga
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Cabor</a></li>
-                            <li><a class="dropdown-item" href="#">Atlet</a></li>
-                            <li><a class="dropdown-item" href="#">Pelatih</a></li>
-                            <li><a class="dropdown-item" href="#">Wasit</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="galeriDropdown" role="button"
-                            data-bs-toggle="dropdown">
-                            Galeri
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Foto</a></li>
-                            <li><a class="dropdown-item" href="#">Video</a></li>
-                            <li><a class="dropdown-item" href="#">Prestasi</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Kontak</a></li>
-                    <li class="nav-item">
-                        <a class="btn btn-warning text-white ms-3 px-3" href="{{ route('login') }}"
-                            style="border-radius: 20px;">Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    
+    @include('viewpublik/layouts/navbar')
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -322,7 +153,7 @@
                 <!-- Card 1: Cabor -->
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover cursor-pointer"
-                        onclick="window.location.href='cabor.html';">
+                        onclick="window.location.href='/olahraga/cabor'">
                         <i class="mdi mdi-basketball display-4 mb-3"></i>
                         <h5 class="fw-bold">Cabor</h5>
                     </div>
@@ -331,7 +162,7 @@
                 <!-- Card 2: Atlet -->
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
-                        onclick="window.location.href='atlet.html';">
+                        onclick="window.location.href='/olahraga/atlet';">
                         <i class="mdi mdi-account-outline display-4 mb-3"></i>
                         <h5 class="fw-bold">Atlet</h5>
                     </div>
@@ -544,104 +375,7 @@
         </div>
     </section>
 
-    <footer class="bg-dark text-white pt-5 pb-3">
-        <div class="container">
-            <div class="row">
-                <!-- Logo dan Nama -->
-                <div class="col-lg-3 mb-4">
-                    <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo KONI Sukoharjo" class="mb-3"
-                        style="max-width: 80px;">
-                    <h4 class="text-white">KONI SUKOHARJO</h4>
-                    <hr class="text-secondary">
-                </div>
-
-                <!-- Menu Navigasi -->
-                <div class="col-lg-2 mb-4">
-                    <h5 class="fw-bold">Menu</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-white">Home</a></li>
-                        <li><a href="#" class="text-decoration-none text-white">Profil</a></li>
-                        <li><a href="#" class="text-decoration-none text-white">Olahraga</a></li>
-                        <li><a href="#" class="text-decoration-none text-white">Galeri</a></li>
-                        <li><a href="#" class="text-decoration-none text-white">Contact</a></li>
-                    </ul>
-                </div>
-
-                <!-- Informasi -->
-                <div class="col-lg-2 mb-4">
-                    <h5 class="fw-bold">Informasi</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-white">Cabang Olahraga</a></li>
-                        <li><a href="#" class="text-decoration-none text-white">Atlet</a></li>
-                        <li><a href="#" class="text-decoration-none text-white">Pelatih</a></li>
-                    </ul>
-                </div>
-
-                <!-- Situs Terkait -->
-                <div class="col-lg-3 mb-4">
-                    <h5 class="fw-bold">Situs Terkait</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-white">KONI Pusat</a></li>
-                        <li><a href="#" class="text-decoration-none text-white">KEMENPORA</a></li>
-                        <li><a href="#" class="text-decoration-none text-white">Komite Olimpiade Indonesia</a>
-                        </li>
-                        <li><a href="#" class="text-decoration-none text-white">Portal Sukoharjo</a></li>
-                    </ul>
-                </div>
-
-                <!-- Syarat & Kebijakan -->
-                <div class="col-lg-2 mb-4">
-                    <h5 class="fw-bold">Syarat & Kebijakan</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-decoration-none text-white">Ketentuan Layanan</a></li>
-                        <li><a href="#" class="text-decoration-none text-white">Kebijakan Privasi</a></li>
-                    </ul>
-                    <!-- Social Media Icons -->
-                    <div class="mt-3">
-                        <a href="#" class="text-white me-3"><i class="mdi mdi-instagram mdi-24px"></i></a>
-                        <a href="#" class="text-white"><i class="mdi mdi-youtube mdi-24px"></i></a>
-                    </div>
-                </div>
-            </div>
-            <hr class="text-secondary">
-            <!-- Footer Bottom -->
-            <div class="text-center">
-                <small>Developed By <a href="#"
-                        class="text-white text-decoration-none">kominfosukoharjo.com</a></small>
-            </div>
-        </div>
-    </footer>
-
-
-
-
-
-    <!-- JavaScript Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Sticky Header dengan efek smooth scroll
-        let lastScrollTop = 0;
-        const navbar = document.querySelector('.navbar');
-
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            // Menambahkan background saat scroll
-            if (scrollTop > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-
-            // Sembunyikan navbar saat scroll down, tampilkan saat scroll up
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                navbar.classList.add('hidden');
-            } else {
-                navbar.classList.remove('hidden');
-            }
-            lastScrollTop = scrollTop;
-        });
-    </script>
+    @include('viewpublik/layouts/footer')
 
 </body>
 

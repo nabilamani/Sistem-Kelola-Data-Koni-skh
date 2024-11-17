@@ -4,6 +4,7 @@ use App\Http\Controllers\AchievementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AthleteController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\CaborController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EventController;
@@ -32,6 +33,10 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 */
 
 Route::get('/', [Controller::class, 'home'])->name('home');
+
+Route::get('/olahraga/cabor', [CaborController::class, 'home'])->name('home');
+Route::get('/olahraga/atlet', [AthleteController::class, 'showAthletes'])->name('showAthletes');
+Route::get('/olahraga/cabor/{id}', [CaborController::class, 'show'])->name('cabor.show');
 
 // Route::get('/', function () {
 //     return view('welcome');

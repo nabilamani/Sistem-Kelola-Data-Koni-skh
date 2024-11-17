@@ -175,4 +175,10 @@ class AthleteController extends Controller
 
         return redirect()->back()->with('success', 'Athlete data successfully deleted!');
     }
+
+    public function showAthletes() {
+        $athletes = Athlete::paginate(12);  // or paginate if necessary
+        return view('viewpublik.atlet', compact('athletes'));
+    }
+    
 }
