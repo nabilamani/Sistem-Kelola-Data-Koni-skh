@@ -245,16 +245,20 @@
                 Bold,
                 Italic,
                 Font,
-                Paragraph
+                Paragraph, 
+                Alignment
             } from 'ckeditor5';
         
             ClassicEditor
                 .create( document.querySelector( '#editor' ), {
-                    plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+                    plugins: [ Essentials, Bold, Italic, Font, Paragraph, Alignment ],
                     toolbar: [
                         'undo', 'redo', '|', 'bold', 'italic', '|',
-                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
-                    ]
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|', 'alignment'
+                    ],
+                    alignment: {
+                        options: ['left', 'center', 'right', 'justify']
+                    },
                 } )
                 .then( /* ... */ )
                 .catch( /* ... */ );
