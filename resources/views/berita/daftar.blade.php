@@ -135,7 +135,7 @@
                                                                     class="text-muted mb-0">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
                                                             </p>
                                                             <p class="card-text mb-0">
-                                                                {{ Str::limit($berita->isi_berita, 20) }}</p>
+                                                                {!! Str::limit($berita->isi_berita, 100) !!}</p>
                                                             <p class="card-text mb-0"><strong>Lokasi:</strong>
                                                                 {{ $berita->lokasi_peristiwa }}</p>
                                                             <p class="card-text"><strong>Kutipan:</strong>
@@ -149,7 +149,15 @@
                                                                 </a>
                                                                 <a href="#" class="btn btn-warning btn-sm"
                                                                     data-toggle="modal"
-                                                                    data-target="#newsEditModal{{ $berita->id }}">
+                                                                    data-target="#newsEditModal"
+                                                                    data-id="{{ $berita->id }}"
+                                                                    data-title="{{ $berita->judul_berita }}"
+                                                                    data-date="{{ $berita->tanggal_waktu }}"
+                                                                    data-location="{{ $berita->lokasi_peristiwa }}"
+                                                                    data-content="{{ $berita->isi_berita }}"
+                                                                    data-source="{{ $berita->kutipan_sumber }}"
+                                                                    data-photo="{{ $berita->photo }}"
+                                                                    >
                                                                     Edit
                                                                 </a>
                                                                 <form action="/delete-berita/{{ $berita->id }}"
@@ -230,7 +238,7 @@
                     </div>
 
                     <!-- Modal for Editing News -->
-                    <div class="modal fade" id="newsEditModal{{ $berita->id }}" tabindex="-1" role="dialog"
+                    {{-- <div class="modal fade" id="newsEditModal{{ $berita->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="newsEditModalLabel{{ $berita->id }}" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -299,8 +307,61 @@
                                 </div>
                             </div>
                         </div>
+                    </div> --}}
+                    @endforeach
+
+
+                    <div class="modal fade" id="newsEditModal" tabindex="-1" role="dialog" aria-labelledby="newsEditModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="newsEditModalLabel">Edit Berita</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="newsEditForm" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label for="photo">Foto</label>
+                                                <input type="file" class="form-control-file" id="photo" name="photo" accept="image/*">
+                                                <img id="photoPreview" src="" alt="Foto" class="img-fluid rounded mt-2" style="width: 100%; object-fit: cover;">
+                                            </div>
+                                            <div class="col-md-7">
+                                                <div class="form-group">
+                                                    <label for="judul_berita">Judul Berita</label>
+                                                    <input type="text" class="form-control" id="judul_berita" name="judul_berita" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="tanggal_waktu">Tanggal Waktu</label>
+                                                    <input type="datetime" class="form-control" id="tanggal_waktu" name="tanggal_waktu" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lokasi_peristiwa">Lokasi Peristiwa</label>
+                                                    <input type="text" class="form-control" id="lokasi_peristiwa" name="lokasi_peristiwa" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="isi_berita">Isi Berita</label>
+                                                    <textarea class="form-control" id="isi_berita" name="isi_berita" rows="4"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="kutipan_sumber">Kutipan Sumber</label>
+                                                    <input type="text" class="form-control" id="kutipan_sumber" name="kutipan_sumber">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                @endforeach
 
 
 
@@ -363,7 +424,7 @@
             <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
             <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
 
-
+            
             <script type="importmap">
                 {
                     "imports": {
@@ -372,7 +433,7 @@
                     }
                 }
             </script>
-            <script type="module">
+            {{-- <script type="module">
                 import {
                     ClassicEditor,
                     Essentials,
@@ -383,7 +444,7 @@
                 } from 'ckeditor5';
             
                 ClassicEditor
-                    .create( document.querySelector( '#edito' ), {
+                    .create( document.querySelector( '#isi_berita' ), {
                         plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
                         toolbar: [
                             'undo', 'redo', '|', 'bold', 'italic', '|',
@@ -392,7 +453,52 @@
                     } )
                     .then( /* ... */ )
                     .catch( /* ... */ );
+            </script> --}}
+            <script type="module">
+                document.addEventListener('DOMContentLoaded', function () {
+                    let editorInstance; 
+
+                    let form = document.getElementById('newsEditForm');
+                    let photoPreview = document.getElementById('photoPreview');
+                    let titleInput = document.getElementById('judul_berita');
+                    let dateInput = document.getElementById('tanggal_waktu');
+                    let locationInput = document.getElementById('lokasi_peristiwa');
+                    let sourceInput = document.getElementById('kutipan_sumber');
+            
+                    document.querySelectorAll('[data-toggle="modal"]').forEach(function (button) {
+                        button.addEventListener('click', async function () {
+                            let id = button.getAttribute('data-id');
+                            let title = button.getAttribute('data-title');
+                            let date = button.getAttribute('data-date');
+                            let location = button.getAttribute('data-location');
+                            let content = button.getAttribute('data-content');
+                            let source = button.getAttribute('data-source');
+                            let photo = button.getAttribute('data-photo');
+            
+                            form.setAttribute('action', '/edit-berita/' + id);
+                            titleInput.value = title;
+                            dateInput.value = date;
+                            locationInput.value = location;
+                            sourceInput.value = source;
+                            photoPreview.src = photo || '';
+            
+                            if (!editorInstance) {
+                                const { ClassicEditor, Essentials, Bold, Italic, Font, Paragraph } = await import('ckeditor5');
+                                editorInstance = await ClassicEditor.create(document.querySelector('#isi_berita'), {
+                                    plugins: [Essentials, Bold, Italic, Font, Paragraph],
+                                    toolbar: [
+                                        'undo', 'redo', '|', 'bold', 'italic', '|',
+                                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                                    ]
+                                });
+                            }
+            
+                            editorInstance.setData(content);
+                        });
+                    });
+                });
             </script>
+            
             
             
             
