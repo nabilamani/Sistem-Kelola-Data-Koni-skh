@@ -184,14 +184,14 @@
             <!-- Email Address -->
             <div class="form-group">
                 <label for="email">{{ __('Email') }}</label>
-                <input id="email" type="email" name="email" :value="old('email')" required autofocus
+                <input id="email" type="email" name="email" :value="old('email')" value="adminkoni@gmail.com" required autofocus
                     autocomplete="username">
             </div>
 
             <!-- Password -->
             <div class="form-group">
                 <label for="password">{{ __('Password') }}</label>
-                <input id="password" type="password" name="password" required autocomplete="current-password">
+                <input id="password" type="password" name="password" value="koni321" required autocomplete="current-password">
             </div>
 
 

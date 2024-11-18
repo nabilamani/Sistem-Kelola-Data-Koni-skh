@@ -16,7 +16,7 @@
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
-
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css" />
 
 
 
@@ -216,7 +216,7 @@
                                                 {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}
                                             </p>
                                             <p><strong>Lokasi Peristiwa:</strong> {{ $berita->lokasi_peristiwa }}</p>
-                                            <p><strong>Isi Berita:</strong> {{ $berita->isi_berita }}</p>
+                                            <p><strong>Isi Berita:</strong> {!! $berita->isi_berita !!}</p>
                                             <p><strong>Kutipan Sumber:</strong> {{ $berita->kutipan_sumber }}</p>
                                         </div>
                                     </div>
@@ -281,7 +281,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="isi_berita">Isi Berita</label>
-                                                    <textarea class="form-control" id="isi_berita" name="isi_berita" rows="4" required>{{ $berita->isi_berita }}</textarea>
+                                                    <textarea class="form-control" id="editor" name="isi_berita" rows="4" required>{!! $berita->isi_berita !!}</textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="kutipan_sumber">Kutipan Sumber</label>
@@ -363,6 +363,39 @@
             <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
             <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
 
+
+            <script type="importmap">
+                {
+                    "imports": {
+                        "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.js",
+                        "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.3.1/"
+                    }
+                }
+            </script>
+            <script type="module">
+                import {
+                    ClassicEditor,
+                    Essentials,
+                    Bold,
+                    Italic,
+                    Font,
+                    Paragraph
+                } from 'ckeditor5';
+            
+                ClassicEditor
+                    .create( document.querySelector( '#edito' ), {
+                        plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+                        toolbar: [
+                            'undo', 'redo', '|', 'bold', 'italic', '|',
+                            'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                        ]
+                    } )
+                    .then( /* ... */ )
+                    .catch( /* ... */ );
+            </script>
+            
+            
+            
 </body>
 
 </html>

@@ -14,6 +14,7 @@
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css" />
 </head>
 <style>
     .container {
@@ -167,7 +168,7 @@
                                         <label class="col-sm-2 col-form-label" for="isi_berita">Isi
                                             Berita</label>
                                         <div class="col -sm-10">
-                                            <textarea name="isi_berita" class="form-control" placeholder="Masukkan isi berita..." rows="5" required></textarea>
+                                            <textarea   id="editor" name="isi_berita" class="" placeholder="Masukkan isi berita..." rows="5" ></textarea>
                                         </div>
                                     </div>
                                 
@@ -229,6 +230,36 @@
                 document.getElementById('isi_berita').value = beritas;
             });
         </script>
+        <script type="importmap">
+            {
+                "imports": {
+                    "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.js",
+                    "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.3.1/"
+                }
+            }
+        </script>
+        <script type="module">
+            import {
+                ClassicEditor,
+                Essentials,
+                Bold,
+                Italic,
+                Font,
+                Paragraph
+            } from 'ckeditor5';
+        
+            ClassicEditor
+                .create( document.querySelector( '#editor' ), {
+                    plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+                    toolbar: [
+                        'undo', 'redo', '|', 'bold', 'italic', '|',
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                    ]
+                } )
+                .then( /* ... */ )
+                .catch( /* ... */ );
+        </script>
+        
 
 
     </div>

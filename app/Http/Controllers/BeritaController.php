@@ -42,11 +42,12 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $data = $request->validate([
             'judul_berita' => 'required|string',
             'tanggal_waktu' => 'required|date',
             'lokasi_peristiwa' => 'required|string',
-            'isi_berita' => 'required|string',
+            'isi_berita' => 'required',
             'kutipan_sumber' => 'nullable|string',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -99,7 +100,7 @@ class BeritaController extends Controller
             'judul_berita' => 'required|string',
             'tanggal_waktu' => 'required|date',
             'lokasi_peristiwa' => 'required|string',
-            'isi_berita' => 'required|string',
+            'isi_berita' => 'required',
             'kutipan_sumber' => 'nullable|string',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);

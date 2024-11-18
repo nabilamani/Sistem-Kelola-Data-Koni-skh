@@ -225,7 +225,7 @@
                                         class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
                                 </p>
                                 <p class="card-text">
-                                    {{ Str::limit($berita->isi_berita, 100) }}
+                                    {!! Str::limit($berita->isi_berita, 200) !!}
                                 </p>
                                 <p class="card-text"><strong>Lokasi :</strong> {{ $berita->lokasi_peristiwa }}</p>
                                 <p class="card-text"><strong>Sumber :</strong> {{ $berita->kutipan_sumber }}</p>
