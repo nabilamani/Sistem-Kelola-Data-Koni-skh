@@ -16,6 +16,25 @@
     <style>
         body {
             overflow-x: hidden;
+            background-attachment: fixed;
+            background: linear-gradient(-45deg, #ee7752, #fff, #740831, #fff);
+            background-size: 1000% 1000%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .hero-section {
@@ -90,16 +109,33 @@
     </section>
 
     <div class="container my-5">
-        <h2 class="text-center mb-4">Daftar Atlet KONI Sukoharjo</h2>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <h2 class="text-center mb-4 text-white">Daftar Atlet KONI Sukoharjo</h2>
 
+        <!-- Tombol untuk mengganti tampilan -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <!-- Tombol untuk mengganti tampilan -->
+            <div>
+                <button id="card-view-btn" class="btn btn-primary active">Card View</button>
+                <button id="table-view-btn" class="btn btn-secondary">Table View</button>
+            </div>
+
+            <!-- Form Pencarian -->
+            <form action="{{ route('showAthletes') }}" method="GET" class="d-flex">
+                <input type="text" name="search" class="form-control me-2"
+                    placeholder="Cari atlet atau cabang olahraga..." value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </form>
+        </div>
+
+        <!-- Tampilan Card -->
+        <div id="card-view" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
             @foreach ($athletes as $athlete)
                 <div class="col-md-3">
                     <div class="card athlete-card">
                         <!-- Foto Atlet (Gunakan placeholder jika tidak ada gambar) -->
                         <img src="{{ $athlete->photo ? asset($athlete->photo) : 'https://via.placeholder.com/300x200' }}"
                             alt="{{ $athlete->name }}" class="athlete-photo">
-                        <div class="athlete-details text-center">
+                        <div class="athlete-details text-center p-3">
                             <h5 class="text-dark">{{ $athlete->name }}</h5>
                             <p class="text-muted">Cabang: {{ $athlete->sport_category }}</p>
                             <a href="#" class="btn btn-primary btn-sm">Detail</a>
@@ -108,11 +144,89 @@
                 </div>
             @endforeach
         </div>
-        {{ $athletes->links() }}
+
+        <!-- Tampilan Tabel -->
+        <div id="table-view" class="table-responsive rounded" style="display: none;">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Atlet</th>
+                        <th>Cabang Olahraga</th>
+                        <th>Foto</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $no = ($athletes->currentPage() - 1) * $athletes->perPage() + 1;
+                    @endphp
+                    @foreach ($athletes as $index => $athlete)
+                        <tr>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $athlete->name }}</td>
+                            <td>{{ $athlete->sport_category }}</td>
+                            <td>
+                                <img src="{{ $athlete->photo ? asset($athlete->photo) : 'https://via.placeholder.com/100x100' }}"
+                                    alt="{{ $athlete->name }}" class="img-thumbnail" width="100">
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm">Detail</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-4">
+            {{ $athletes->links() }}
+        </div>
     </div>
-    
-    
     @include('viewpublik/layouts/footer')
+
+
+    <script>
+        // Fungsi untuk menyimpan preferensi tampilan ke localStorage
+        function setView(view) {
+            localStorage.setItem('athleteView', view);
+        }
+
+        // Fungsi untuk memuat preferensi tampilan dari localStorage
+        function loadView() {
+            const savedView = localStorage.getItem('athleteView');
+            if (savedView === 'table') {
+                document.getElementById('card-view').style.display = 'none';
+                document.getElementById('table-view').style.display = 'block';
+                document.getElementById('table-view-btn').classList.add('active');
+                document.getElementById('card-view-btn').classList.remove('active');
+            } else {
+                document.getElementById('card-view').style.display = 'flex';
+                document.getElementById('table-view').style.display = 'none';
+                document.getElementById('card-view-btn').classList.add('active');
+                document.getElementById('table-view-btn').classList.remove('active');
+            }
+        }
+
+        // Event listeners untuk tombol tampilan
+        document.getElementById('card-view-btn').addEventListener('click', function() {
+            document.getElementById('card-view').style.display = 'flex';
+            document.getElementById('table-view').style.display = 'none';
+            setView('card');
+        });
+
+        document.getElementById('table-view-btn').addEventListener('click', function() {
+            document.getElementById('card-view').style.display = 'none';
+            document.getElementById('table-view').style.display = 'block';
+            setView('table');
+        });
+
+        // Memuat tampilan saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', loadView);
+    </script>
+
+
 </body>
 
 </html>

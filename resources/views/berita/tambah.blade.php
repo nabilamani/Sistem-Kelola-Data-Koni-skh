@@ -170,43 +170,7 @@
                                             <textarea name="isi_berita" class="form-control" placeholder="Masukkan isi berita..." rows="5" required></textarea>
                                         </div>
                                     </div>
-                                    {{-- <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="isi_berita">Isi Berita</label>
-                                        <div class="col-sm-10">
-                                            <!-- Rich Text Editor -->
-                                            <div class="container mt-0">
-                                                <div class="options">
-                                                    <button id="bold" class="option-button format"><i
-                                                            class="mdi mdi-format-bold"></i></button>
-                                                    <button id="italic" class="option-button format"><i
-                                                            class="mdi mdi-format-italic"></i></button>
-                                                    <button id="underline" class="option-button format"><i
-                                                            class="mdi mdi-format-underline"></i></button>
-                                                    <button id="strikethrough" class="option-button format"><i
-                                                            class="mdi mdi-format-strikethrough-variant"></i></button>
-                                                    <button id="createLink" class="adv-option-button"><i
-                                                            class="mdi mdi-link-variant"></i></button>
-                                                    <button id="unlink" class="option-button"><i
-                                                            class="mdi mdi-link-off"></i></button>
-                                                    <button id="insertOrderedList" class="option-button"><i
-                                                            class="mdi mdi-format-list-numbers"></i></button>
-                                                    <button id="insertUnorderedList" class="option-button"><i
-                                                            class="mdi mdi-format-list-bulleted"></i></button>
-                                                    <button id="justifyLeft" class="option-button align"><i
-                                                            class="mdi mdi-format-align-left"></i></button>
-                                                    <button id="justifyCenter" class="option-button align"><i
-                                                            class="mdi mdi-format-align-center"></i></button>
-                                                    <button id="justifyRight" class="option-button align"><i
-                                                            class="mdi mdi-format-align-right"></i></button>
-                                                    <button id="justifyFull" class="option-button align"><i
-                                                            class="mdi mdi-format-align-justify"></i></button>
-
-                                                </div>
-                                                <div id="text-input" contenteditable="true" name="isi_berita"></div>
-                                                <textarea id="isi_berita" name="isi_berita" hidden></textarea>
-                                            </div>
-                                        </div>
-                                    </div> --}}
+                                
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="kutipan_sumber">Kutipan
                                             Sumber</label>

@@ -176,9 +176,16 @@ class AthleteController extends Controller
         return redirect()->back()->with('success', 'Athlete data successfully deleted!');
     }
 
-    public function showAthletes() {
-        $athletes = Athlete::paginate(12);  // or paginate if necessary
-        return view('viewpublik.atlet', compact('athletes'));
+    public function showAthletes(Request $request) {
+        // Ambil query pencarian dari input
+        $search = $request->input('search');
+    
+        // Query pencarian berdasarkan nama atau cabang olahraga
+        $athletes = Athlete::where('name', 'like', '%' . $search . '%')
+            ->orWhere('sport_category', 'like', '%' . $search . '%')
+            ->paginate(12);
+    
+        return view('viewpublik.atlet', compact('athletes', 'search'));
     }
     
 }
