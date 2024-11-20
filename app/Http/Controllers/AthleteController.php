@@ -185,7 +185,7 @@ class AthleteController extends Controller
             ->orWhere('sport_category', 'like', '%' . $search . '%')
             ->paginate(12);
     
-        return view('viewpublik.atlet', compact('athletes', 'search'));
+        return view('viewpublik.olahraga.atlet', compact('athletes', 'search'));
     }
     
 }

@@ -88,7 +88,7 @@
             <h2 class="text-center mb-4">Ragam Cabang Olahraga</h2>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 @forelse($SportCategories as $SportCategory)
-                    <div class="col">
+                    <div class="col-md-3">
                         <a href="{{ route('cabor.show', $SportCategory->id) }}" class="text-decoration-none">
                             <div class="card text-center p-4 sport-card">
                                 <img src="{{ asset($SportCategory->logo ?? 'img/default.png') }}" 

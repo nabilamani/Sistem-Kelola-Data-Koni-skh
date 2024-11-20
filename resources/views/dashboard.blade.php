@@ -469,7 +469,7 @@
                                                                     class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
                                                             </p>
                                                             <p class="card-text">
-                                                                {{ Str::limit($berita->isi_berita, 100) }}
+                                                                {{ Str::limit(strip_tags($berita->isi_berita), 100) }}
                                                             </p>
                                                             <p class="card-text"><strong>Lokasi :</strong>
                                                                 {{ $berita->lokasi_peristiwa }}</p>
@@ -491,7 +491,7 @@
                                                     tabindex="-1" role="dialog"
                                                     aria-labelledby="newsDetailModalLabel{{ $berita->id }}"
                                                     aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg" role="document">
+                                                    <div class="modal-dialog modal-lg px-3" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title"
@@ -523,8 +523,8 @@
                                                                         </p>
                                                                         <p><strong>Lokasi Peristiwa :</strong>
                                                                             {{ $berita->lokasi_peristiwa }}</p>
-                                                                        <p><strong>Isi Berita :</strong>
-                                                                            {{ $berita->isi_berita }}</p>
+                                                                            <p><strong>Isi Berita :</strong> {!! $berita->isi_berita !!}</p>
+
                                                                         <p><strong>Kutipan Sumber :</strong>
                                                                             {{ $berita->kutipan_sumber }}</p>
                                                                     </div>

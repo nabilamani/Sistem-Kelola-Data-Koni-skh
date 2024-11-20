@@ -16,8 +16,8 @@ class CaborController extends Controller
     {
         $SportCategories = SportCategory::all();
 
-        // Kirim data ke view 'viewpublik.cabor'
-        return view('viewpublik.cabor', compact('SportCategories'));
+        // Kirim data ke view 'viewpublik.olahraga.cabor'
+        return view('viewpublik.olahraga.cabor', compact('SportCategories'));
     }
     public function show(Request $request, $id)
 {

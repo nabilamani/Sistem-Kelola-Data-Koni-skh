@@ -134,4 +134,21 @@ class BeritaController extends Controller
 
         return redirect()->back()->with('success', 'News article successfully deleted!');
     }
+
+    public function publik()
+    {
+        // Ambil berita utama sebagai "Berita Utama" (misalnya 1 artikel terbaru)
+        $beritaUtama = Berita::orderBy('tanggal_waktu', 'desc')
+            ->first(); // Ambil berita paling baru
+
+        // Ambil berita lainnya sebagai "Berita Latepost" (dikecualikan berita utama)
+        $beritaLatepost = Berita::orderBy('tanggal_waktu', 'desc')
+            ->skip(1) // Lewati berita utama yang sudah diambil
+            ->take(4) // Ambil 4 berita berikutnya
+            ->get();
+
+        // Kirim data ke view
+        return view('viewpublik.berita.home', compact('beritaUtama', 'beritaLatepost'));
+    }
+    
 }

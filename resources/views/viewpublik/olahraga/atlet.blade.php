@@ -16,26 +16,12 @@
     <style>
         body {
             overflow-x: hidden;
-            background-attachment: fixed;
-            background: linear-gradient(-45deg, #ee7752, #fff, #740831, #fff);
-            background-size: 1000% 1000%;
-            animation: gradient 15s ease infinite;
+            /* background-attachment: fixed; */
+            background: url('/gambar_aset/background_2.png') no-repeat center center fixed;
+            background-size: cover;
             height: 100vh;
         }
 
-        @keyframes gradient {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
 
         .hero-section {
             height: 100vh;

@@ -17,6 +17,7 @@
         body {
             overflow-x: hidden;
         }
+
         /* Hero Section with Parallax Effect */
         .hero-section {
             height: 100vh;
@@ -85,6 +86,8 @@
             color: #f39c12;
         }
 
+
+
         #contact {
             background-color: #f9f9f9;
         }
@@ -124,7 +127,7 @@
 </head>
 
 <body>
-    
+
     @include('viewpublik/layouts/navbar')
 
     <!-- Hero Section -->
@@ -180,7 +183,7 @@
                 <!-- Card 4: Berita Terkini -->
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
-                        onclick="window.location.href='berita.html';">
+                        onclick="window.location.href='/berita';">
                         <i class="mdi mdi-newspaper display-4 mb-3"></i>
                         <h5 class="fw-bold">Berita Terkini</h5>
                     </div>
@@ -208,30 +211,37 @@
     </section>
 
 
-    <section class="py-5 bg-dark text-white">
+    <section class="py-5 bg-dark">
         <div class="container text-center">
             <h2 class="fw-bold mb-4 text-white">Berita Terbaru</h2>
             <div class="row gy-4">
                 @foreach ($beritas as $berita)
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card border shadow-sm h-100 position-relative hover-card">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card border-0 shadow-sm position-relative hover-card h-100">
                             <img src="{{ asset($berita->photo) }}" class="card-img-top img-fluid"
                                 alt="{{ $berita->judul_berita }}"
-                                style="object-fit: cover; height: 200px; border-radius: 8px 8px 0 0;">
+                                style="object-fit: cover; height: 200px; border-radius: 8px;">
+
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">{{ $berita->judul_berita }}</h5>
-                                <p class="card-text">
-                                    <small
-                                        class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
-                                </p>
-                                <p class="card-text">
-                                    {!! Str::limit($berita->isi_berita, 200) !!}
-                                </p>
-                                <p class="card-text"><strong>Lokasi :</strong> {{ $berita->lokasi_peristiwa }}</p>
-                                <p class="card-text"><strong>Sumber :</strong> {{ $berita->kutipan_sumber }}</p>
-                                <button type="button" class="btn btn-warning text-white btn-sm mt-auto"
+                                <!-- Judul Berita -->
+                                <h5 class="card-title fw-bold mb-3">{{ $berita->judul_berita }}</h5>
+
+                                <!-- Waktu dan Lokasi -->
+                                <div class="d-flex align-items-center mb-n2">
+                                    <small class="text-muted">
+                                        {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d F Y') }}
+                                    </small>
+                                    <span class="mx-2 text-muted">|</span>
+                                    <small class="text-muted">{{ $berita->lokasi_peristiwa }}</small>
+                                </div>
+
+                                <!-- Isi Berita Singkat -->
+                                <p class="card-text mb-3">{!! Str::limit($berita->isi_berita, 500) !!}</p>
+
+                                <!-- Tombol Baca Selengkapnya -->
+                                <button type="button" class="btn btn-primary text-white btn-sm mt-auto"
                                     data-bs-toggle="modal" data-bs-target="#newsDetailModal{{ $berita->id }}">
-                                    Selengkapnya
+                                    Baca Selengkapnya
                                 </button>
                             </div>
                         </div>
@@ -239,35 +249,62 @@
                 @endforeach
             </div>
         </div>
+
         <!-- Modal Detail Berita -->
         @foreach ($beritas as $berita)
             <div class="modal fade" id="newsDetailModal{{ $berita->id }}" tabindex="-1"
                 aria-labelledby="newsDetailModalLabel{{ $berita->id }}" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="newsDetailModalLabel{{ $berita->id }}">
-                                {{ $berita->judul_berita }}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content border-0 shadow-lg">
+                        <!-- Modal Header -->
+                        <div class="modal-header bg-dark">
+                            <h5 class="modal-title fw-bold text-white" id="newsDetailModalLabel{{ $berita->id }}">
+                                {{ $berita->judul_berita }}
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
+
+                        <!-- Modal Body -->
                         <div class="modal-body">
-                            <img src="{{ asset($berita->photo) }}" class="img-fluid mb-3"
-                                alt="{{ $berita->judul_berita }}">
-                            <p><strong>Lokasi:</strong> {{ $berita->lokasi_peristiwa }}</p>
-                            <p><strong>Sumber:</strong> {{ $berita->kutipan_sumber }}</p>
-                            <p>{!! $berita->isi_berita !!}</p>
-                            <p><small
-                                    class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
+                            <!-- Gambar Berita -->
+                            <img src="{{ asset($berita->photo) }}" class="img-fluid rounded mb-4"
+                                alt="{{ $berita->judul_berita }}"
+                                style="max-height: 400px; object-fit: cover; width: 100%;">
+
+                            <!-- Lokasi dan Sumber -->
+                            <div class="d-flex justify-content-between mb-3">
+                                <small class="text-muted" style="font-size: 0.8rem;">
+                                    <strong>Lokasi :</strong> {{ $berita->lokasi_peristiwa }}
+                                </small>
+                                <small class="text-muted" style="font-size: 0.8rem;">
+                                    <strong>Sumber :</strong> {{ $berita->kutipan_sumber }}
+                                </small>
+                            </div>
+                            
+
+                            <!-- Konten Berita -->
+                            <p class="mb-4" style="line-height: 1.6;">
+                                {!! $berita->isi_berita !!}
+                            </p>
+                            
+
+                            <!-- Tanggal dan Waktu -->
+                            <hr>
+                            <p class="text-end text-muted">
+                                <small>{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d F Y, H:i') }}</small>
                             </p>
                         </div>
-                        <div class="modal-footer">
+
+                        <!-- Modal Footer -->
+                        <div class="modal-footer justify-content-end">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         </div>
                     </div>
                 </div>
             </div>
         @endforeach
+
 
     </section>
 
@@ -377,6 +414,7 @@
 
     @include('viewpublik/layouts/footer')
 
+    
 </body>
 
 </html>

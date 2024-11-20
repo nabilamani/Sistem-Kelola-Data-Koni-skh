@@ -4,6 +4,7 @@ use App\Http\Controllers\AchievementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AthleteController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CaborController;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\Controller;
@@ -33,6 +34,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 */
 
 Route::get('/', [Controller::class, 'home'])->name('home');
+
+Route::get('/berita', [BeritaController::class, 'publik'])->name('berita.publik');
 
 Route::get('/olahraga/cabor', [CaborController::class, 'home'])->name('home');
 Route::get('/olahraga/atlet', [AthleteController::class, 'showAthletes'])->name('showAthletes');
@@ -76,6 +79,9 @@ Route::get('/tambah', function () {
     return view('layouts.tambah');
 });
 
+// Route::get('/berita', function () {
+//     return view('viewpublik.berita.index');
+// });
 // Route::get('/daftar', function () {
 //     return view('Pelatih.daftar');
 // });
