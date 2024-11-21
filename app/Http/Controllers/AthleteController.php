@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Athlete;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AthleteController extends Controller
 {
@@ -82,11 +84,17 @@ class AthleteController extends Controller
         $athlete = new Athlete;
         $data['id'] = $athlete->generateId();
 
+        // if ($request->hasFile('photo')) {
+        //     $file = $request->file('photo');
+        //     $filename = time() . '_' . $file->getClientOriginalName();
+        //     $file->move(public_path('img'), $filename);
+        //     $data['photo'] = 'img/' . $filename;
+        // }
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img'), $filename);
-            $data['photo'] = 'img/' . $filename;
+            $filename = time() . '_' . Str::slug($file->getClientOriginalName());
+            $path = $file->storeAs('public/img/athletes', $filename);
+            $data['photo'] = str_replace('public/', 'storage/', $path);
         }
 
         Athlete::create($data);
@@ -128,38 +136,32 @@ class AthleteController extends Controller
 {
     $athlete = Athlete::findOrFail($id);
 
-    // Validate the incoming request
-    $request->validate([
-        'name' => ['required', 'string'],
-        'sport_category' => ['required', 'string'],
-        'birth_date' => ['required', 'date'],
-        'gender' => ['required', 'in:Laki-laki,Perempuan'],
-        'weight' => ['required', 'numeric'],
-        'height' => ['required', 'numeric'],
-        'achievements' => ['nullable', 'string'],
-        'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+    $data = $request->validate([
+        'name' => 'required|string',
+        'sport_category' => 'required|string',
+        'birth_date' => 'required|date',
+        'gender' => 'required|in:Laki-laki,Perempuan',
+        'weight' => 'required|numeric',
+        'height' => 'required|numeric',
+        'achievements' => 'nullable|string',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
     ]);
 
-    // Assign values from the request to the athlete model
-    $athlete->name = $request->name;
-    $athlete->sport_category = $request->sport_category;
-    $athlete->birth_date = $request->birth_date;
-    $athlete->gender = $request->gender;
-    $athlete->weight = $request->weight;
-    $athlete->height = $request->height;
-    $athlete->achievements = $request->achievements;
-
-    // Handle the photo file if uploaded
     if ($request->hasFile('photo')) {
-        $photoPath = $request->file('photo')->store('photos', 'public');
-        $athlete->photo = $photoPath;
+        if ($athlete->photo) {
+            Storage::delete(str_replace('storage/', 'public/', $athlete->photo));
+        }
+        $file = $request->file('photo');
+        $filename = time() . '_' . Str::slug($file->getClientOriginalName());
+        $path = $file->storeAs('public/img/athletes', $filename);
+        $data['photo'] = str_replace('public/', 'storage/', $path);
     }
 
-    // Save the updated athlete data
-    $athlete->save();
+    $athlete->update($data);
 
-    return redirect()->back()->with('success', 'Athlete data successfully updated!');
+    return redirect()->back()->with('success', 'Data Athlete berhasil diperbarui!');
 }
+
 
 
     /**
@@ -169,12 +171,18 @@ class AthleteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $athlete = Athlete::findOrFail($id);
-        $athlete->delete();
+{
+    $athlete = Athlete::findOrFail($id);
 
-        return redirect()->back()->with('success', 'Athlete data successfully deleted!');
+    if ($athlete->photo) {
+        Storage::delete(str_replace('storage/', 'public/', $athlete->photo));
     }
+
+    $athlete->delete();
+
+    return redirect()->back()->with('success', 'Data Athlete berhasil dihapus!');
+}
+
 
     public function showAthletes(Request $request) {
         // Ambil query pencarian dari input

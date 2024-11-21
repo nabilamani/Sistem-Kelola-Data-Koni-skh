@@ -82,7 +82,7 @@
                 </ul>
                 <!-- Social Media Icons -->
                 <div class="mt-3">
-                    <a href="#" class="text-white me-3"><i class="mdi mdi-instagram mdi-24px"></i></a>
+                    <a href="https://www.instagram.com/konikabupatensukoharjo/"  class="text-white me-3"><i class="mdi mdi-instagram mdi-24px"></i></a>
                     <a href="#" class="text-white"><i class="mdi mdi-youtube mdi-24px"></i></a>
                 </div>
             </div>

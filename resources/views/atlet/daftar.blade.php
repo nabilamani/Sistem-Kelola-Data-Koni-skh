@@ -291,6 +291,11 @@
                                                                                     value="{{ \Carbon\Carbon::parse($athlete->birth_date)->format('Y-m-d') }}"
                                                                                     required>
                                                                             </div>
+                                                                            <div class="form-group">
+                                                                                <label
+                                                                                    for="achievements">Prestasi</label>
+                                                                                <textarea class="form-control" id="achievements" name="achievements" required>{{ $athlete->achievements }}</textarea>
+                                                                            </div>
                                                                         </div>
 
                                                                         <!-- Right column -->
@@ -310,7 +315,8 @@
                                                                             </div>
                                                                             <div class="form-group">
                                                                                 <label for="weight">Berat Badan
-                                                                                    (kg)</label>
+                                                                                    (kg)
+                                                                                </label>
                                                                                 <input type="number"
                                                                                     class="form-control"
                                                                                     id="weight" name="weight"
@@ -326,21 +332,22 @@
                                                                                     value="{{ $athlete->height }}"
                                                                                     required>
                                                                             </div>
-                                                                            <div class="form-group">
-                                                                                <label
-                                                                                    for="achievements">Prestasi</label>
-                                                                                <textarea class="form-control" id="achievements" name="achievements" required>{{ $athlete->achievements }}</textarea>
-                                                                            </div>
+                                                                            
                                                                             <div class="form-group">
                                                                                 <label for="photo">Foto</label>
                                                                                 <input type="file"
                                                                                     class="form-control-file"
                                                                                     id="photo" name="photo">
                                                                                 <div class="mt-2">
-                                                                                    <img src="{{ $athlete->photo }}"
-                                                                                        class="img-fluid rounded"
-                                                                                        width="100"
-                                                                                        alt="Foto Atlet">
+                                                                                    @if ($athlete->photo)
+                                                                                        <img src="{{ asset($athlete->photo) }}"
+                                                                                            class="img-fluid rounded"
+                                                                                            width="100"
+                                                                                            alt="Foto Atlet {{ $athlete->nama_cabor }}">
+                                                                                    @else
+                                                                                        <span class="text-muted">Tidak
+                                                                                            ada Foto</span>
+                                                                                    @endif
                                                                                 </div>
                                                                                 <small>Biarkan kosong jika tidak ingin
                                                                                     mengubah foto.</small>

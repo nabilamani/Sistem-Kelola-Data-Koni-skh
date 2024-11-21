@@ -107,7 +107,6 @@
 
                     <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-account-box"></i><span class="nav-text">Akun</span></a>
                         <ul aria-expanded="false">
-                            <li><a href="/profile"><i class="mdi mdi-account-multiple-plus"></i>Tambah Akun</a></li>
                             <li><a href="/users"><i class="mdi mdi-account-multiple"></i>Daftar Akun</a></li>
                         </ul>
                     </li>

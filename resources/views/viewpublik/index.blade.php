@@ -148,7 +148,7 @@
 
         <div class="container text-center" style="position: relative; z-index: 2;">
             <h2 class="fw-bold mb-4 text-white">KONI Sukoharjo</h2>
-            <p class="text-white mb-5 px-5">KONI (Komite Olahraga Nasional Indonesia) Sukoharjo adalah organisasi yang
+            <p class="text-white mb-5 px-5 mx-5">KONI (Komite Olahraga Nasional Indonesia) Sukoharjo adalah organisasi yang
                 bertanggung jawab untuk mengkoordinasikan kegiatan olahraga dan pembinaan atlet di Kabupaten Sukoharjo.
             </p>
 
@@ -174,7 +174,7 @@
                 <!-- Card 3: Pelatih -->
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
-                        onclick="window.location.href='pelatih.html';">
+                        onclick="window.location.href='/olahraga/pelatih';">
                         <i class="mdi mdi-account-multiple-outline display-4 mb-3"></i>
                         <h5 class="fw-bold">Pelatih</h5>
                     </div>
@@ -201,7 +201,7 @@
                 <!-- Card 6: Wasit -->
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
-                        onclick="window.location.href='wasit.html';">
+                        onclick="window.location.href='/olahraga/wasit';">
                         <i class="mdi mdi-whistle display-4 mb-3"></i>
                         <h5 class="fw-bold">Wasit</h5>
                     </div>
@@ -214,6 +214,10 @@
     <section class="py-5 bg-dark">
         <div class="container text-center">
             <h2 class="fw-bold mb-4 text-white">Berita Terbaru</h2>
+            <p class="text-white mb-5 mx-5">
+                Temukan berita terkini dan informasi menarik seputar program, kegiatan, dan pencapaian olahraga di Sukoharjo. 
+                Kami menghadirkan informasi yang akurat, terpercaya, dan relevan untuk mendukung kemajuan dunia olahraga di wilayah ini.
+            </p>          
             <div class="row gy-4">
                 @foreach ($beritas as $berita)
                     <div class="col-lg-4 col-md-6">
@@ -311,7 +315,11 @@
     <!-- FAQ Section -->
     <section id="faq" class="py-5 bg-white">
         <div class="container">
-            <h2 class="text-center mb-4 fw-bold">PERTANYAAN UMUM</h2>
+            <h2 class="text-center mb-3 fw-bold">PERTANYAAN UMUM</h2>
+            <p class="text-center mb-5 mx-5 text-black">
+                Temukan jawaban atas berbagai pertanyaan yang sering diajukan terkait program, kegiatan, dan layanan KONI Sukoharjo. 
+                Kami telah menyusun informasi ini untuk membantu Anda memahami peran dan kontribusi kami dalam mendukung dunia olahraga di Sukoharjo.
+            </p>
             <div class="accordion" id="faqAccordion">
                 <!-- FAQ 1 -->
                 <div class="accordion-item">
@@ -388,7 +396,13 @@
     </section>
     <section id="contact" class="py-5">
         <div class="container">
-            <h2 class="text-center fw-bold mb-5">Contact</h2>
+            <h2 class="text-center fw-bold mb-2">Contact</h2>
+            <p class="text-center mb-5 text-black">
+                KONI Sukoharjo siap menjalin komunikasi yang baik dengan masyarakat, atlet, pelatih, dan semua pihak yang 
+                mendukung pengembangan olahraga di Sukoharjo. Jika Anda memiliki pertanyaan, masukan, atau informasi yang 
+                ingin disampaikan, silakan hubungi kami melalui saluran yang tersedia di bawah ini. Kami akan berusaha memberikan 
+                respon terbaik untuk kebutuhan Anda.
+            </p>
             <div class="row align-items-center">
                 <!-- Embed Google Map -->
                 <div class="col-lg-6 mb-4 mb-lg-0">

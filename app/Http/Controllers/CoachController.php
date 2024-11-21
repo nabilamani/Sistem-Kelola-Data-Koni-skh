@@ -182,4 +182,15 @@ class CoachController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->back()->with('success', 'Data pelatih berhasil dihapus');
     }
+    public function showCoaches(Request $request) {
+        // Ambil query pencarian dari input
+        $search = $request->input('search');
+    
+        // Query pencarian berdasarkan nama atau cabang olahraga
+        $coaches = Coach::where('name', 'like', '%' . $search . '%')
+            ->orWhere('sport_category', 'like', '%' . $search . '%')
+            ->paginate(12);
+    
+        return view('viewpublik.olahraga.pelatih', compact('coaches', 'search'));
+    }
 }

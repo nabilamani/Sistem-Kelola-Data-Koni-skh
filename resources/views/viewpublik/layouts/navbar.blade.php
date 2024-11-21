@@ -87,6 +87,22 @@
         /* Orange background */
         border: none;
     }
+
+    /* Navbar Toggler Styling */
+    .navbar-toggler {
+        border: none;
+        background-color: rgba(255, 255, 255, 0.3);
+        /* Warna latar tombol awal */
+        padding: 8px 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Warna saat toggler diaktifkan */
+    .navbar-toggler.collapsed {
+        /* Warna oranye dengan transparansi */
+        color: white;
+    }
 </style>
 <nav class="navbar navbar-expand-lg shadow-sm">
     <div class="container">
@@ -95,7 +111,7 @@
             <span class="fw-bold">KONI KABUPATEN SUKOHARJO</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
+            <span class="mdi mdi-menu" style="font-size: 24px; color: white;"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">

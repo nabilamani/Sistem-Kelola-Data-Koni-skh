@@ -3,6 +3,7 @@
 use App\Http\Controllers\AchievementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AthleteController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CaborController;
@@ -39,6 +40,8 @@ Route::get('/berita', [BeritaController::class, 'publik'])->name('berita.publik'
 
 Route::get('/olahraga/cabor', [CaborController::class, 'home'])->name('home');
 Route::get('/olahraga/atlet', [AthleteController::class, 'showAthletes'])->name('showAthletes');
+Route::get('/olahraga/pelatih', [CoachController::class, 'showCoaches'])->name('showCoaches');
+Route::get('/olahraga/wasit', [RefereeController::class, 'showReferees'])->name('showReferees');
 Route::get('/olahraga/cabor/{id}', [CaborController::class, 'show'])->name('cabor.show');
 
 // Route::get('/', function () {
@@ -54,6 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 
 Route::get('Admin',function(){
@@ -141,7 +146,9 @@ Route::resource('sportcategories', SportCategoryController::class);
 Route::put('/edit-sportcategory/{id}', [SportCategoryController::class, 'update']);
 Route::delete('/delete-sportcategory/{id}', [SportCategoryController::class, 'destroy']);
 
-
+Route::resource('users', RegisteredUserController::class);
+Route::put('/edit-user/{id}', [RegisteredUserController::class, 'update']);
+Route::delete('/delete-user/{id}', [RegisteredUserController::class, 'destroy']);
 
 
 

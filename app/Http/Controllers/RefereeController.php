@@ -150,4 +150,15 @@ class RefereeController extends Controller
 
         return redirect()->back()->with('success', 'Referee data successfully deleted!');
     }
+    public function showReferees(Request $request)
+{
+    $search = $request->input('search');
+
+    // Query pencarian berdasarkan nama atau cabang olahraga
+    $referees = Referee::where('name', 'like', '%' . $search . '%')
+        ->orWhere('sport_category', 'like', '%' . $search . '%')
+        ->paginate(12);
+
+    return view('viewpublik.olahraga.wasit', compact('referees', 'search'));
+}
 }

@@ -52,4 +52,64 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+    public function index(): View
+    {
+        $users = User::paginate(10); // Menampilkan daftar pengguna dengan paginasi
+        return view('Akun.daftar', compact('users'));
+    }
+
+    /**
+     * Show the form for editing the specified user.
+     */
+    public function edit($id): View
+    {
+        // Cari user berdasarkan ID
+        $user = User::findOrFail($id);
+
+        // Tampilkan view edit dengan data user
+        return view('users.edit', compact('user'));
+    }
+
+    /**
+     * Update the specified user in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param string $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id): RedirectResponse
+    {
+        // Cari user berdasarkan ID
+        $user = User::findOrFail($id);
+
+        // Validasi input dari request
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+            'level' => ['required', 'string', 'in:Admin,Pengurus Cabor Sepak Bola,Pengurus Cabor Badminton,Pengurus Cabor Bola Basket,Pengurus Cabor Bola Voli,Pengurus Cabor Atletik,Pengurus Cabor Renang,Pengurus Cabor Tinju,Pengurus Cabor Pencak Silat'],
+        ]);
+
+        // Update data user
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'level' => $request->level,
+        ]);
+
+        // Redirect kembali dengan pesan sukses
+        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
+    }
+
+    /**
+     * Remove the specified user from storage.
+     */
+    public function destroy($id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+        $user->delete(); // Menghapus user
+
+        return redirect()->back()->with('success', 'User berhasil dihapus.');
+    }
 }
