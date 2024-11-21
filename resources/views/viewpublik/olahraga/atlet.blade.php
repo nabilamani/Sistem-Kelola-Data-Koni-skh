@@ -124,7 +124,10 @@
                         <div class="athlete-details text-center p-3">
                             <h5 class="text-dark">{{ $athlete->name }}</h5>
                             <p class="text-muted">Cabang: {{ $athlete->sport_category }}</p>
-                            <a href="#" class="btn btn-primary btn-sm">Detail</a>
+                            <a href="#" class="btn btn-primary btn-sm"
+                                onclick="showAthleteDetails({{ json_encode($athlete) }})" data-bs-toggle="modal"
+                                data-bs-target="#athleteDetailModal">Detail</a>
+
                         </div>
                     </div>
                 </div>
@@ -157,7 +160,9 @@
                                     alt="{{ $athlete->name }}" class="img-thumbnail" width="100">
                             </td>
                             <td>
-                                <a href="#" class="btn btn-primary btn-sm">Detail</a>
+                                <a href="#" class="btn btn-primary btn-sm"
+                                onclick="showAthleteDetails({{ json_encode($athlete) }})" data-bs-toggle="modal"
+                                data-bs-target="#athleteDetailModal">Detail</a>
                             </td>
                         </tr>
                     @endforeach
@@ -169,48 +174,112 @@
         <div class="mt-4">
             {{ $athletes->links() }}
         </div>
-    </div>
-    @include('viewpublik/layouts/footer')
+        <!-- Modal untuk Detail Atlet -->
+        <div class="modal fade mt-5 pt-2" id="athleteDetailModal" tabindex="-1" aria-labelledby="athleteDetailModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary d-flex align-items-center">
+                        <h5 class="modal-title text-white" id="athleteDetailModalLabel">Detail Atlet</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <!-- Foto Atlet -->
+                                <img id="athletePhoto" src="" alt="Foto Atlet" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <!-- Detail Atlet -->
+                                <h5 id="athleteName" class="text-dark mb-3"></h5>
+                                <p class="mb-0"><i class="mdi mdi-trophy text-primary"></i> <strong>Cabang Olahraga :</strong> <span
+                                        id="athleteSportCategory"></span></p>
+                                <p class="mb-0"><i class="mdi mdi-calendar text-primary"></i> <strong>Tanggal Lahir :</strong> <span
+                                        id="athleteBirthDate"></span> (<span id="athleteAge"></span> tahun)</p>
+                                <p class="mb-0"><i class="mdi mdi-gender-male-female text-primary"></i> <strong>Jenis Kelamin
+                                        :</strong> <span id="athleteGender"></span></p>
+                                <p class="mb-0"><i class="mdi mdi-human text-primary"></i> <strong>Tinggi Badan :</strong> <span
+                                        id="athleteHeight"></span> cm</p>
+                                <p class="mb-0"><i class="mdi mdi-weight-kilogram text-primary"></i> <strong>Berat Badan
+                                        :</strong> <span id="athleteWeight"></span> kg</p>
+                                <p class="mb-0"><i class="mdi mdi-medal text-primary"></i> <strong>Prestasi :</strong></p>
+                                <ul id="athleteAchievements" class="list-group list-group-flush"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer py-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        @include('viewpublik/layouts/footer')
 
 
-    <script>
-        // Fungsi untuk menyimpan preferensi tampilan ke localStorage
-        function setView(view) {
-            localStorage.setItem('athleteView', view);
-        }
+        <script>
+            // Fungsi untuk menyimpan preferensi tampilan ke localStorage
+            function setView(view) {
+                localStorage.setItem('athleteView', view);
+            }
 
-        // Fungsi untuk memuat preferensi tampilan dari localStorage
-        function loadView() {
-            const savedView = localStorage.getItem('athleteView');
-            if (savedView === 'table') {
-                document.getElementById('card-view').style.display = 'none';
-                document.getElementById('table-view').style.display = 'block';
-                document.getElementById('table-view-btn').classList.add('active');
-                document.getElementById('card-view-btn').classList.remove('active');
-            } else {
+            // Fungsi untuk memuat preferensi tampilan dari localStorage
+            function loadView() {
+                const savedView = localStorage.getItem('athleteView');
+                if (savedView === 'table') {
+                    document.getElementById('card-view').style.display = 'none';
+                    document.getElementById('table-view').style.display = 'block';
+                    document.getElementById('table-view-btn').classList.add('active');
+                    document.getElementById('card-view-btn').classList.remove('active');
+                } else {
+                    document.getElementById('card-view').style.display = 'flex';
+                    document.getElementById('table-view').style.display = 'none';
+                    document.getElementById('card-view-btn').classList.add('active');
+                    document.getElementById('table-view-btn').classList.remove('active');
+                }
+            }
+
+            // Event listeners untuk tombol tampilan
+            document.getElementById('card-view-btn').addEventListener('click', function() {
                 document.getElementById('card-view').style.display = 'flex';
                 document.getElementById('table-view').style.display = 'none';
-                document.getElementById('card-view-btn').classList.add('active');
-                document.getElementById('table-view-btn').classList.remove('active');
+                setView('card');
+            });
+
+            document.getElementById('table-view-btn').addEventListener('click', function() {
+                document.getElementById('card-view').style.display = 'none';
+                document.getElementById('table-view').style.display = 'block';
+                setView('table');
+            });
+
+            // Memuat tampilan saat halaman dimuat
+            document.addEventListener('DOMContentLoaded', loadView);
+        </script>
+        <script>
+            function showAthleteDetails(athlete) {
+                // Isi data ke modal
+                document.getElementById('athletePhoto').src = athlete.photo ? `{{ asset('') }}${athlete.photo}` :
+                    'https://via.placeholder.com/300x200';
+                document.getElementById('athleteName').textContent = athlete.name;
+                document.getElementById('athleteSportCategory').textContent = athlete.sport_category;
+                document.getElementById('athleteBirthDate').textContent = athlete.birth_date;
+                document.getElementById('athleteAge').textContent = athlete.age;
+                document.getElementById('athleteGender').textContent = athlete.gender || 'Tidak Diketahui';
+                document.getElementById('athleteHeight').textContent = athlete.height;
+                document.getElementById('athleteWeight').textContent = athlete.weight;
+
+                // Prestasi
+                const achievementsList = document.getElementById('athleteAchievements');
+                achievementsList.innerHTML = ''; // Hapus list sebelumnya
+                const achievements = athlete.achievements.split(';'); // Pisahkan prestasi berdasarkan ";"
+                achievements.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item.trim();
+                    achievementsList.appendChild(li);
+                });
             }
-        }
-
-        // Event listeners untuk tombol tampilan
-        document.getElementById('card-view-btn').addEventListener('click', function() {
-            document.getElementById('card-view').style.display = 'flex';
-            document.getElementById('table-view').style.display = 'none';
-            setView('card');
-        });
-
-        document.getElementById('table-view-btn').addEventListener('click', function() {
-            document.getElementById('card-view').style.display = 'none';
-            document.getElementById('table-view').style.display = 'block';
-            setView('table');
-        });
-
-        // Memuat tampilan saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', loadView);
-    </script>
+        </script>
 
 
 </body>

@@ -184,16 +184,21 @@ class AthleteController extends Controller
 }
 
 
-    public function showAthletes(Request $request) {
-        // Ambil query pencarian dari input
-        $search = $request->input('search');
-    
-        // Query pencarian berdasarkan nama atau cabang olahraga
-        $athletes = Athlete::where('name', 'like', '%' . $search . '%')
-            ->orWhere('sport_category', 'like', '%' . $search . '%')
-            ->paginate(12);
-    
-        return view('viewpublik.olahraga.atlet', compact('athletes', 'search'));
+public function showAthletes(Request $request)
+{
+    $search = $request->input('search');
+    $athletes = Athlete::when($search, function ($query, $search) {
+        $query->where('name', 'like', "%$search%")
+              ->orWhere('sport_category', 'like', "%$search%");
+    })->paginate(8);
+
+    foreach ($athletes as $athlete) {
+        $athlete->age = $athlete->age; // Hitung umur
+        $athlete->achievements = $athlete->achievements ?? 'Belum ada prestasi tercatat';
     }
+
+    return view('viewpublik.olahraga.atlet', compact('athletes'));
+}
+
     
 }

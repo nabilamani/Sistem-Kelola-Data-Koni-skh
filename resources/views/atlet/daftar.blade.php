@@ -178,8 +178,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-
-                                                <!-- Modal for Athlete Details -->
+                                                
                                                 <!-- Modal for Athlete Details -->
                                                 <div class="modal fade" id="athleteDetailModal{{ $athlete->id }}"
                                                     tabindex="-1" role="dialog"
