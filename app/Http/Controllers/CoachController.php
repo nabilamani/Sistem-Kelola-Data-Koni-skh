@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CoachController extends Controller
 {
@@ -75,7 +76,6 @@ class CoachController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $data = $request->validate([
             'name' => ['required', 'string'],
             'sport_category' => ['required', 'string'],
@@ -85,21 +85,22 @@ class CoachController extends Controller
             'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
 
-        // dd($data);
         $coach = new Coach;
         $data['id'] = $coach->generateId();
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img'), $filename);
-            $data['photo'] = 'img/' . $filename;
+            $filename = time() . '_' . Str::slug($file->getClientOriginalName());
+            $path = $file->storeAs('public/img/coaches', $filename);
+            $data['photo'] = str_replace('public/', 'storage/', $path);
         }
 
         Coach::create($data);
 
-        return redirect('/coaches');
+        return redirect('/coaches')->with('success', 'Coach successfully created!');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -134,30 +135,34 @@ class CoachController extends Controller
     public function update(Request $request, $id)
     {
         $coach = Coach::findOrFail($id);
-        $coach->name = $request->name;
-        $coach->age = $request->age;
-        $coach->address = $request->address;
-        $coach->sport_category = $request->sport_category;
-        $coach->description = $request->description;
+
+        $data = $request->validate([
+            'name' => 'required|string',
+            'sport_category' => 'required|string',
+            'age' => 'required|integer',
+            'address' => 'required|string',
+            'description' => 'required|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
         if ($request->hasFile('photo')) {
-            // Delete the old photo if it exists
-            if ($coach->photo && file_exists(public_path($coach->photo))) {
-                unlink(public_path($coach->photo));
+            // Delete old photo if exists
+            if ($coach->photo) {
+                Storage::delete(str_replace('storage/', 'public/', $coach->photo));
             }
 
-            // Upload the new photo
+            // Upload new photo
             $file = $request->file('photo');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img'), $filename);
-            $data['photo'] = 'img/' . $filename;
+            $filename = time() . '_' . Str::slug($file->getClientOriginalName());
+            $path = $file->storeAs('public/img/coaches', $filename);
+            $data['photo'] = str_replace('public/', 'storage/', $path);
         }
 
-        $coach->save();
+        $coach->update($data);
 
-        session()->flash('success', 'Data berhasil diperbarui.');
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Coach data successfully updated!');
     }
+
 
 
     /**
@@ -168,29 +173,27 @@ class CoachController extends Controller
      */
     public function destroy($id)
     {
-        // Cari pelatih berdasarkan ID
         $coach = Coach::findOrFail($id);
 
-        // Hapus data pelatih
-        $coach->delete();
-
         if ($coach->photo) {
-            Storage::delete('public/img/' . $coach->photo);
+            Storage::delete(str_replace('storage/', 'public/', $coach->photo));
         }
 
+        $coach->delete();
 
-        // Redirect dengan pesan sukses
-        return redirect()->back()->with('success', 'Data pelatih berhasil dihapus');
+        return redirect()->back()->with('success', 'Coach successfully deleted!');
     }
-    public function showCoaches(Request $request) {
+
+    public function showCoaches(Request $request)
+    {
         // Ambil query pencarian dari input
         $search = $request->input('search');
-    
+
         // Query pencarian berdasarkan nama atau cabang olahraga
         $coaches = Coach::where('name', 'like', '%' . $search . '%')
             ->orWhere('sport_category', 'like', '%' . $search . '%')
             ->paginate(12);
-    
+
         return view('viewpublik.olahraga.pelatih', compact('coaches', 'search'));
     }
 }

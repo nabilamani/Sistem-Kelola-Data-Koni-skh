@@ -127,7 +127,6 @@
                             <a href="#" class="btn btn-primary btn-sm"
                                 onclick="showAthleteDetails({{ json_encode($athlete) }})" data-bs-toggle="modal"
                                 data-bs-target="#athleteDetailModal">Detail</a>
-
                         </div>
                     </div>
                 </div>
@@ -161,29 +160,35 @@
                             </td>
                             <td>
                                 <a href="#" class="btn btn-primary btn-sm"
-                                onclick="showAthleteDetails({{ json_encode($athlete) }})" data-bs-toggle="modal"
-                                data-bs-target="#athleteDetailModal">Detail</a>
+                                    onclick="showAthleteDetails({{ json_encode($athlete) }})" data-bs-toggle="modal"
+                                    data-bs-target="#athleteDetailModal">Detail</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+    </div>
 
         <!-- Pagination -->
         <div class="mt-4">
             {{ $athletes->links() }}
         </div>
         <!-- Modal untuk Detail Atlet -->
-        <div class="modal fade mt-5 pt-2" id="athleteDetailModal" tabindex="-1" aria-labelledby="athleteDetailModalLabel"
-            aria-hidden="true">
+        <div class="modal fade mt-5 pt-2" id="athleteDetailModal" tabindex="-1"
+            aria-labelledby="athleteDetailModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-primary d-flex align-items-center">
                         <h5 class="modal-title text-white" id="athleteDetailModalLabel">Detail Atlet</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body position-relative">
+                        <!-- Logo di kanan atas -->
+                        <img id="athleteLogo" src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo"
+                            class="position-absolute"
+                            style="top: 0; right: 0; width: 80px; height: 80px; margin: 10px; z-index: 10;">
+
                         <div class="row">
                             <div class="col-md-4">
                                 <!-- Foto Atlet -->
@@ -192,17 +197,21 @@
                             <div class="col-md-8">
                                 <!-- Detail Atlet -->
                                 <h5 id="athleteName" class="text-dark mb-3"></h5>
-                                <p class="mb-0"><i class="mdi mdi-trophy text-primary"></i> <strong>Cabang Olahraga :</strong> <span
-                                        id="athleteSportCategory"></span></p>
-                                <p class="mb-0"><i class="mdi mdi-calendar text-primary"></i> <strong>Tanggal Lahir :</strong> <span
-                                        id="athleteBirthDate"></span> (<span id="athleteAge"></span> tahun)</p>
-                                <p class="mb-0"><i class="mdi mdi-gender-male-female text-primary"></i> <strong>Jenis Kelamin
+                                <p class="mb-0"><i class="mdi mdi-trophy text-primary"></i> <strong>Cabang Olahraga
+                                        :</strong> <span id="athleteSportCategory"></span></p>
+                                <p class="mb-0"><i class="mdi mdi-calendar text-primary"></i> <strong>Tanggal Lahir
+                                        :</strong> <span id="athleteBirthDate"></span> (<span id="athleteAge"></span>
+                                    tahun)</p>
+                                <p class="mb-0"><i class="mdi mdi-gender-male-female text-primary"></i>
+                                    <strong>Jenis Kelamin
                                         :</strong> <span id="athleteGender"></span></p>
-                                <p class="mb-0"><i class="mdi mdi-human text-primary"></i> <strong>Tinggi Badan :</strong> <span
-                                        id="athleteHeight"></span> cm</p>
-                                <p class="mb-0"><i class="mdi mdi-weight-kilogram text-primary"></i> <strong>Berat Badan
+                                <p class="mb-0"><i class="mdi mdi-human text-primary"></i> <strong>Tinggi Badan
+                                        :</strong> <span id="athleteHeight"></span> cm</p>
+                                <p class="mb-0"><i class="mdi mdi-weight-kilogram text-primary"></i> <strong>Berat
+                                        Badan
                                         :</strong> <span id="athleteWeight"></span> kg</p>
-                                <p class="mb-0"><i class="mdi mdi-medal text-primary"></i> <strong>Prestasi :</strong></p>
+                                <p class="mb-0"><i class="mdi mdi-medal text-primary"></i> <strong>Prestasi
+                                        :</strong></p>
                                 <ul id="athleteAchievements" class="list-group list-group-flush"></ul>
                             </div>
                         </div>
@@ -213,7 +222,7 @@
                 </div>
             </div>
         </div>
-        </div>
+
 
         @include('viewpublik/layouts/footer')
 
@@ -280,8 +289,6 @@
                 });
             }
         </script>
-
-
 </body>
 
 </html>

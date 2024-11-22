@@ -316,11 +316,17 @@
                                                                         <input type="file"
                                                                             class="form-control-file" id="photo"
                                                                             name="photo">
-                                                                        <div class="mt-2">
-                                                                            <img src="{{ $coach->photo }}"
-                                                                                class="img-fluid rounded"
-                                                                                width="100" alt="Foto Pelatih">
-                                                                        </div>
+                                                                            <div class="mt-2">
+                                                                                @if ($coach->photo)
+                                                                                    <img src="{{ asset($coach->photo) }}" 
+                                                                                        class="img-fluid rounded" 
+                                                                                        width="100" 
+                                                                                        alt="Foto Pelatih {{ $coach->name }}">
+                                                                                @else
+                                                                                    <span class="text-muted">Tidak ada Foto</span>
+                                                                                @endif
+                                                                            </div>
+                                                                            
                                                                     </div>
                                                                 </div>
                                                             </div>

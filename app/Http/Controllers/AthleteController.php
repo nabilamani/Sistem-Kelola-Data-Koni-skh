@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\SportCategory;
 
 class AthleteController extends Controller
 {
@@ -48,20 +49,20 @@ class AthleteController extends Controller
     }
 
     public function cetakAthlete()
-{
-    $user = Auth::user(); // Get the authenticated user
+    {
+        $user = Auth::user(); // Get the authenticated user
 
-    // Filter athletes based on user level
-    $athletes = athlete::when($user->level !== 'Admin', function ($query) use ($user) {
-        // Extract sport category from user level if not an Admin
-        $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
-        $query->where('sport_category', $sportCategory);
-    })
-    ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
-    ->get(); // Retrieve all results based on filtering
+        // Filter athletes based on user level
+        $athletes = athlete::when($user->level !== 'Admin', function ($query) use ($user) {
+            // Extract sport category from user level if not an Admin
+            $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
+            $query->where('sport_category', $sportCategory);
+        })
+            ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
+            ->get(); // Retrieve all results based on filtering
 
-    return view('atlet.cetak-atlet', compact('athletes'));
-}
+        return view('atlet.cetak-atlet', compact('athletes'));
+    }
     /**
      * Store a newly created athlete in storage.
      *
@@ -133,34 +134,34 @@ class AthleteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-{
-    $athlete = Athlete::findOrFail($id);
+    {
+        $athlete = Athlete::findOrFail($id);
 
-    $data = $request->validate([
-        'name' => 'required|string',
-        'sport_category' => 'required|string',
-        'birth_date' => 'required|date',
-        'gender' => 'required|in:Laki-laki,Perempuan',
-        'weight' => 'required|numeric',
-        'height' => 'required|numeric',
-        'achievements' => 'nullable|string',
-        'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-    ]);
+        $data = $request->validate([
+            'name' => 'required|string',
+            'sport_category' => 'required|string',
+            'birth_date' => 'required|date',
+            'gender' => 'required|in:Laki-laki,Perempuan',
+            'weight' => 'required|numeric',
+            'height' => 'required|numeric',
+            'achievements' => 'nullable|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
-    if ($request->hasFile('photo')) {
-        if ($athlete->photo) {
-            Storage::delete(str_replace('storage/', 'public/', $athlete->photo));
+        if ($request->hasFile('photo')) {
+            if ($athlete->photo) {
+                Storage::delete(str_replace('storage/', 'public/', $athlete->photo));
+            }
+            $file = $request->file('photo');
+            $filename = time() . '_' . Str::slug($file->getClientOriginalName());
+            $path = $file->storeAs('public/img/athletes', $filename);
+            $data['photo'] = str_replace('public/', 'storage/', $path);
         }
-        $file = $request->file('photo');
-        $filename = time() . '_' . Str::slug($file->getClientOriginalName());
-        $path = $file->storeAs('public/img/athletes', $filename);
-        $data['photo'] = str_replace('public/', 'storage/', $path);
+
+        $athlete->update($data);
+
+        return redirect()->back()->with('success', 'Data Athlete berhasil diperbarui!');
     }
-
-    $athlete->update($data);
-
-    return redirect()->back()->with('success', 'Data Athlete berhasil diperbarui!');
-}
 
 
 
@@ -171,34 +172,34 @@ class AthleteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-{
-    $athlete = Athlete::findOrFail($id);
+    {
+        $athlete = Athlete::findOrFail($id);
 
-    if ($athlete->photo) {
-        Storage::delete(str_replace('storage/', 'public/', $athlete->photo));
+        if ($athlete->photo) {
+            Storage::delete(str_replace('storage/', 'public/', $athlete->photo));
+        }
+
+        $athlete->delete();
+
+        return redirect()->back()->with('success', 'Data Athlete berhasil dihapus!');
     }
 
-    $athlete->delete();
 
-    return redirect()->back()->with('success', 'Data Athlete berhasil dihapus!');
-}
+    public function showAthletes(Request $request)
+    {
+        $search = $request->input('search');
+        $athletes = Athlete::when($search, function ($query, $search) {
+            $query->where('name', 'like', "%$search%")
+                ->orWhere('sport_category', 'like', "%$search%");
+        })->paginate(8);
 
+        $SportCategories = SportCategory::all();
 
-public function showAthletes(Request $request)
-{
-    $search = $request->input('search');
-    $athletes = Athlete::when($search, function ($query, $search) {
-        $query->where('name', 'like', "%$search%")
-              ->orWhere('sport_category', 'like', "%$search%");
-    })->paginate(8);
+        foreach ($athletes as $athlete) {
+            $athlete->age = $athlete->age; // Hitung umur
+            $athlete->achievements = $athlete->achievements ?? 'Belum ada prestasi tercatat';
+        }
 
-    foreach ($athletes as $athlete) {
-        $athlete->age = $athlete->age; // Hitung umur
-        $athlete->achievements = $athlete->achievements ?? 'Belum ada prestasi tercatat';
+        return view('viewpublik.olahraga.atlet', compact('athletes'));
     }
-
-    return view('viewpublik.olahraga.atlet', compact('athletes'));
-}
-
-    
 }

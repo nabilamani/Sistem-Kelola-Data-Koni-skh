@@ -133,8 +133,8 @@
                     <button type="submit" class="btn btn-primary">Cari</button>
                 </form>
             </div>
-            <table class="table table-bordered mt-3">
-                <thead>
+            <table class="table table-bordered table-striped table-hover mt-3">
+                <thead class="bg-primary text-white">
                     <tr>
                         <th>No</th>
                         <th>Nama Atlet</th>
@@ -168,6 +168,7 @@
                     @endforeach
                 </tbody>
             </table>
+            
             {{ $athletes->links() }} <!-- Pagination links -->
         </div>
     

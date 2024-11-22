@@ -122,7 +122,9 @@
                         <div class="referee-details text-center p-3">
                             <h5 class="text-dark">{{ $referee->name }}</h5>
                             <p class="text-muted">Cabang: {{ $referee->sport_category }}</p>
-                            <a href="#" class="btn btn-primary btn-sm">Detail</a>
+                            <a href="#" class="btn btn-primary btn-sm" 
+                                onclick="showRefereeDetails({{ json_encode($referee) }})" 
+                                data-bs-toggle="modal" data-bs-target="#refereeDetailModal">Detail</a>
                         </div>
                     </div>
                 </div>
@@ -155,7 +157,9 @@
                                     alt="{{ $referee->name }}" class="img-thumbnail" width="100">
                             </td>
                             <td>
-                                <a href="#" class="btn btn-primary btn-sm">Detail</a>
+                                <a href="#" class="btn btn-primary btn-sm" 
+                                onclick="showRefereeDetails({{ json_encode($referee) }})" 
+                                data-bs-toggle="modal" data-bs-target="#refereeDetailModal">Detail</a>
                             </td>
                         </tr>
                     @endforeach
@@ -167,6 +171,52 @@
         <div class="mt-4">
             {{ $referees->links() }}
         </div>
+        <!-- Modal untuk Detail Wasit -->
+    <div class="modal fade mt-5 pt-2" id="refereeDetailModal" tabindex="-1" aria-labelledby="refereeDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-white" id="refereeDetailModalLabel">Detail Wasit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img id="refereePhoto" src="" alt="Foto Wasit" class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-8">
+                            <h5 id="refereeName" class="text-dark mb-3"></h5>
+                            <p class="mb-0">
+                                <strong><i class="mdi mdi-soccer mr-1 text-primary"></i> Cabang Olahraga :</strong> 
+                                <span id="refereeSportCategory"></span>
+                            </p>
+                            <p class="mb-0">
+                                <strong><i class="mdi mdi-gender-male-female mr-1 text-primary"></i> Jenis Kelamin :</strong> 
+                                <span id="refereeGender"></span>
+                            </p>
+                            <p class="mb-0">
+                                <strong><i class="mdi mdi-calendar mr-1 text-primary"></i> Tanggal Lahir :</strong> 
+                                <span id="refereeBirthDate"></span> 
+                                (<span id="refereeAge"></span> tahun)
+                            </p>
+                            <p class="mb-0">
+                                <strong><i class="mdi mdi-certificate mr-1 text-primary"></i> Lisensi :</strong> 
+                                <span id="refereeLicense"></span>
+                            </p>
+                            <p class="mb-0">
+                                <strong><i class="mdi mdi-briefcase mr-1 text-primary"></i> Pengalaman :</strong> 
+                                <span id="refereeExperience"></span>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer py-2">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     
     
@@ -211,6 +261,19 @@
         // Memuat tampilan saat halaman dimuat
         document.addEventListener('DOMContentLoaded', loadView);
     </script>
+    <script>
+        function showRefereeDetails(referee) {
+            document.getElementById('refereePhoto').src = referee.photo ? `{{ asset('') }}${referee.photo}` : 'https://via.placeholder.com/300x200';
+            document.getElementById('refereeName').textContent = referee.name;
+            document.getElementById('refereeSportCategory').textContent = referee.sport_category;
+            document.getElementById('refereeGender').textContent = referee.gender || 'Tidak Diketahui';
+            document.getElementById('refereeBirthDate').textContent = referee.birth_date;
+            document.getElementById('refereeAge').textContent = referee.age;
+            document.getElementById('refereeLicense').textContent = referee.license || 'Tidak Diketahui';
+            document.getElementById('refereeExperience').textContent = referee.experience || 'Tidak Diketahui';
+        }
+    </script>
+    
 
 
 </body>

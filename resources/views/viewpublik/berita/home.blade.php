@@ -240,6 +240,43 @@
                                 <button class="btn btn-primary w-100" id="btnLainnya">Lihat Semua Berita</button>
                             </div>
                         </div>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Event Mendatang</h5>
+                                <hr>
+                                <div class="mb-4">
+                                    <form>
+                                        <label for="search" class="form-label">Cari</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="search"
+                                                placeholder="Cari...">
+                                            <button class="btn btn-primary">Cari</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                @foreach ($beritaLatepost as $berita)
+                                    <div class="d-flex align-items-start mb-3 berita-item p-1"
+                                        data-id="{{ $berita->id }}" data-judul="{{ $berita->judul_berita }}"
+                                        data-photo="{{ asset($berita->photo) }}" data-isi="{{ $berita->isi_berita }}"
+                                        data-tanggal="{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d F Y') }}"
+                                        data-lokasi="{{ $berita->lokasi_peristiwa }}"
+                                        data-sumber="{{ $berita->kutipan_sumber }}">
+                                        <img src="{{ asset($berita->photo ?? 'https://via.placeholder.com/80x80') }}"
+                                            class="me-3 rounded" alt="Gambar Berita"
+                                            style="width: 80px; height: 80px; object-fit: cover;">
+                                        <div>
+                                            <h6 class="mb-1 text-dark text-decoration-none">
+                                                {{ $berita->judul_berita }}
+                                            </h6>
+                                            <small class="text-muted"><i class="mdi mdi-calendar me-2"></i>
+                                                <!-- Calendar Icon -->{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d F Y') }}</small>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                @endforeach
+                                <button class="btn btn-primary w-100" id="btnLainnya">Lihat Semua Berita</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

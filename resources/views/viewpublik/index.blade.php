@@ -139,6 +139,40 @@
             <a href="#" class="btn btn-warning">Selengkapnya</a>
         </div>
     </section>
+
+    <!-- New Section for Accumulated Data (outside hero-overlay) -->
+    <div class="hero-stats py-4 bg-dark">
+        <div class="container text-center">
+            <h2 class="text-white mb-2">Statistik Olahraga Sukoharjo</h2>
+            <p class="">Data terkini mengenai atlet, wasit, pelatih, event, dan prestasi olahraga di
+                Sukoharjo.</p>
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-2 text-center border-end akumulasi">
+                    <h3 class="count mt-1 text-primary" data-count="{{ $athleteCount }}">0</h3>
+                    <p>Atlet</p>
+                </div>
+                <div class="col-md-2 text-center border-end">
+                    <h3 class="count mt-1 text-primary" data-count="{{ $refereeteCount }}">0</h3>
+                    <p>Wasit</p>
+                </div>
+                <div class="col-md-2 text-center border-end">
+                    <h3 class="count mt-1 text-primary" data-count="{{ $coachCount }}">0</h3>
+                    <p>Pelatih</p>
+                </div>
+                <div class="col-md-2 text-center border-end">
+                    <h3 class="count mt-1 text-primary" data-count="{{ $eventCount }}">0</h3>
+                    <p>Event</p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <h3 class="count mt-1 text-primary" data-count="{{ $achievementCount }}">0</h3>
+                    <p>Prestasi</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <section class="py-5 bg-light"
         style="position: relative; background-image: url('https://images.vexels.com/media/users/3/297088/raw/3ff1701de8a5291ad893656da9bfaf18-running-sports-pattern-design.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
         <!-- Dark overlay effect -->
@@ -148,7 +182,8 @@
 
         <div class="container text-center" style="position: relative; z-index: 2;">
             <h2 class="fw-bold mb-4 text-white">KONI Sukoharjo</h2>
-            <p class="text-white mb-5 px-5 mx-5">KONI (Komite Olahraga Nasional Indonesia) Sukoharjo adalah organisasi yang
+            <p class="text-white mb-5 px-5 mx-5">KONI (Komite Olahraga Nasional Indonesia) Sukoharjo adalah organisasi
+                yang
                 bertanggung jawab untuk mengkoordinasikan kegiatan olahraga dan pembinaan atlet di Kabupaten Sukoharjo.
             </p>
 
@@ -215,9 +250,11 @@
         <div class="container text-center">
             <h2 class="fw-bold mb-4 text-white">Berita Terbaru</h2>
             <p class="text-white mb-5 mx-5">
-                Temukan berita terkini dan informasi menarik seputar program, kegiatan, dan pencapaian olahraga di Sukoharjo. 
-                Kami menghadirkan informasi yang akurat, terpercaya, dan relevan untuk mendukung kemajuan dunia olahraga di wilayah ini.
-            </p>          
+                Temukan berita terkini dan informasi menarik seputar program, kegiatan, dan pencapaian olahraga di
+                Sukoharjo.
+                Kami menghadirkan informasi yang akurat, terpercaya, dan relevan untuk mendukung kemajuan dunia olahraga
+                di wilayah ini.
+            </p>
             <div class="row gy-4">
                 @foreach ($beritas as $berita)
                     <div class="col-lg-4 col-md-6">
@@ -285,13 +322,13 @@
                                     <strong>Sumber :</strong> {{ $berita->kutipan_sumber }}
                                 </small>
                             </div>
-                            
+
 
                             <!-- Konten Berita -->
                             <p class="mb-4" style="line-height: 1.6;">
                                 {!! $berita->isi_berita !!}
                             </p>
-                            
+
 
                             <!-- Tanggal dan Waktu -->
                             <hr>
@@ -317,8 +354,10 @@
         <div class="container">
             <h2 class="text-center mb-3 fw-bold">PERTANYAAN UMUM</h2>
             <p class="text-center mb-5 mx-5 text-black">
-                Temukan jawaban atas berbagai pertanyaan yang sering diajukan terkait program, kegiatan, dan layanan KONI Sukoharjo. 
-                Kami telah menyusun informasi ini untuk membantu Anda memahami peran dan kontribusi kami dalam mendukung dunia olahraga di Sukoharjo.
+                Temukan jawaban atas berbagai pertanyaan yang sering diajukan terkait program, kegiatan, dan layanan
+                KONI Sukoharjo.
+                Kami telah menyusun informasi ini untuk membantu Anda memahami peran dan kontribusi kami dalam mendukung
+                dunia olahraga di Sukoharjo.
             </p>
             <div class="accordion" id="faqAccordion">
                 <!-- FAQ 1 -->
@@ -398,9 +437,12 @@
         <div class="container">
             <h2 class="text-center fw-bold mb-2">Contact</h2>
             <p class="text-center mb-5 text-black">
-                KONI Sukoharjo siap menjalin komunikasi yang baik dengan masyarakat, atlet, pelatih, dan semua pihak yang 
-                mendukung pengembangan olahraga di Sukoharjo. Jika Anda memiliki pertanyaan, masukan, atau informasi yang 
-                ingin disampaikan, silakan hubungi kami melalui saluran yang tersedia di bawah ini. Kami akan berusaha memberikan 
+                KONI Sukoharjo siap menjalin komunikasi yang baik dengan masyarakat, atlet, pelatih, dan semua pihak
+                yang
+                mendukung pengembangan olahraga di Sukoharjo. Jika Anda memiliki pertanyaan, masukan, atau informasi
+                yang
+                ingin disampaikan, silakan hubungi kami melalui saluran yang tersedia di bawah ini. Kami akan berusaha
+                memberikan
                 respon terbaik untuk kebutuhan Anda.
             </p>
             <div class="row align-items-center">
@@ -428,7 +470,36 @@
 
     @include('viewpublik/layouts/footer')
 
-    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll('.count');
+            const animationDuration = 2000; // Duration in milliseconds (2 seconds)
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const frameRate = 20; // Update the count every 20ms
+                const totalFrames = animationDuration / frameRate;
+                const increment = target / totalFrames;
+
+                let currentCount = 0;
+
+                const updateCount = () => {
+                    currentCount += increment;
+
+                    if (currentCount < target) {
+                        counter.innerText = Math.ceil(currentCount);
+                        setTimeout(updateCount, frameRate);
+                    } else {
+                        counter.innerText = target; // Set the final count
+                    }
+                };
+
+                updateCount();
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>
