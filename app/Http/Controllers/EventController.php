@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -23,17 +25,17 @@ class EventController extends Controller
             $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
             $query->where('sport_category', $sportCategory);
         })
-        ->when($search, function ($query) use ($search) {
-            $query->where('name', 'like', "%$search%")
-                  ->orWhere('sport_category', 'like', "%$search%")
-                  ->orWhere('location', 'like', "%$search%");
-        })
-        ->orderBy('created_at', 'asc')
-        ->paginate(4);
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('sport_category', 'like', "%$search%")
+                    ->orWhere('location', 'like', "%$search%");
+            })
+            ->orderBy('created_at', 'asc')
+            ->paginate(4);
 
         return view('Event.daftar', ['events' => $events, 'search' => $search]);
     }
-    
+
 
     /**
      * Display a printable view of the events.
@@ -48,8 +50,8 @@ class EventController extends Controller
             $sportCategory = str_replace('Pengurus Cabor ', '', $user->level);
             $query->where('sport_category', $sportCategory);
         })
-        ->orderBy('created_at', 'asc')
-        ->get();
+            ->orderBy('created_at', 'asc')
+            ->get();
 
         return view('Event.cetak-event', compact('events'));
     }
@@ -77,8 +79,20 @@ class EventController extends Controller
             'event_date' => ['required', 'date'],
             'sport_category' => ['required', 'string'],
             'location' => ['required', 'string'],
+            'banner' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'], // Validasi banner
+            'location_map' => ['required', 'string'], // Validasi iframe map lokasi
         ]);
 
+        // Handle the banner image upload
+        if ($request->hasFile('banner')) {
+            $file = $request->file('banner');
+            $filename = time() . '_' . Str::slug($file->getClientOriginalName());
+            $path = $file->storeAs('public/img/events', $filename);
+            $data['banner'] = str_replace('public/', 'storage/', $path); // Menyimpan path banner
+        }
+
+
+        // Generate ID and store event
         $event = new Event;
         $data['id'] = $event->generateId();
         Event::create($data);
@@ -117,6 +131,7 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // Update the specified resource in storage.
     public function update(Request $request, $id)
     {
         $data = $request->validate([
@@ -124,8 +139,20 @@ class EventController extends Controller
             'event_date' => ['required', 'date'],
             'sport_category' => ['required', 'string'],
             'location' => ['required', 'string'],
+            'banner' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif', 'max:2048'], // Validasi banner
+            'location_map' => ['required', 'string'], // Validasi URL map lokasi
         ]);
 
+        // Handle the banner image upload
+        if ($request->hasFile('banner')) {
+            $file = $request->file('banner');
+            $filename = time() . '_' . Str::slug($file->getClientOriginalName());
+            $path = $file->storeAs('public/img/events', $filename);
+            $data['banner'] = str_replace('public/', 'storage/', $path); // Menyimpan path banner
+        }
+
+
+        // Find and update the event
         $event = Event::findOrFail($id);
         $event->update($data);
 
@@ -141,8 +168,25 @@ class EventController extends Controller
     public function destroy($id)
     {
         $event = Event::findOrFail($id);
+
+        if ($event->banner) {
+            Storage::delete(str_replace('storage/', 'public/', $event->banner));
+        }
+        
         $event->delete();
 
         return redirect()->back()->with('success', 'Event berhasil dihapus');
     }
+    public function showEvents(Request $request)
+{
+    $search = $request->input('search');
+
+    // Query pencarian berdasarkan nama atau kategori event
+    $events = Event::where('name', 'like', '%' . $search . '%')
+        ->orWhere('sport_category', 'like', '%' . $search . '%')
+        ->paginate(8);
+
+    return view('viewpublik.olahraga.event', compact('events', 'search'));
+}
+
 }

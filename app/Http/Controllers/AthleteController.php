@@ -85,12 +85,7 @@ class AthleteController extends Controller
         $athlete = new Athlete;
         $data['id'] = $athlete->generateId();
 
-        // if ($request->hasFile('photo')) {
-        //     $file = $request->file('photo');
-        //     $filename = time() . '_' . $file->getClientOriginalName();
-        //     $file->move(public_path('img'), $filename);
-        //     $data['photo'] = 'img/' . $filename;
-        // }
+
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $filename = time() . '_' . Str::slug($file->getClientOriginalName());

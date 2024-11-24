@@ -2,7 +2,7 @@
 
 // Daftar kategori olahraga
 const sportCategories = [
-    "Badminton", "Sepak Bola", "Bola Basket", "Bola Voli",
+    "Semua","Badminton", "Sepak Bola", "Bola Basket", "Bola Voli",
     "Balap Sepeda", "Atletik", "Renang", "Tinju", "Pencak Silat"
   ];
   

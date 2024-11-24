@@ -15,7 +15,9 @@ class Event extends Model
         'name',
         'event_date',
         'sport_category',
-        'location'
+        'location',
+        'banner',
+        'location_map',
     ];
 
     protected $keyType = 'string';

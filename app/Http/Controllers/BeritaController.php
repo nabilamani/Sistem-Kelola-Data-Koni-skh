@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -23,8 +24,8 @@ class BeritaController extends Controller
             $query->where('judul_berita', 'like', "%$search%")
                 ->orWhere('lokasi_peristiwa', 'like', "%$search%");
         })
-        ->orderBy('tanggal_waktu', 'desc') // Sort results by date in descending order
-        ->paginate(4); // Display 4 items per page
+            ->orderBy('tanggal_waktu', 'desc') // Sort results by date in descending order
+            ->paginate(4); // Display 4 items per page
 
         return view('berita.daftar', compact('beritas', 'search'));
     }
@@ -64,8 +65,8 @@ class BeritaController extends Controller
         $berita = new Berita;
         $data['id'] = $berita->generateId(); // Generate and assign the custom ID
         $berita->fill($data); // Fill the model with the validated data
-        
-        
+
+
         Berita::create($data);
 
         return redirect('/beritas')->with('success', 'News article successfully created!');
@@ -147,8 +148,13 @@ class BeritaController extends Controller
             ->take(4) // Ambil 4 berita berikutnya
             ->get();
 
+        // Ambil event mendatang (future events) yang tanggal_event > sekarang
+        $upcomingEvents = Event::where('event_date', '>', now())
+            ->orderBy('event_date', 'asc') // Urutkan berdasarkan tanggal event
+            ->take(4) // Ambil 4 event mendatang
+            ->get();
+
         // Kirim data ke view
-        return view('viewpublik.berita.home', compact('beritaUtama', 'beritaLatepost'));
+        return view('viewpublik.berita.home', compact('beritaUtama', 'beritaLatepost','upcomingEvents'));
     }
-    
 }

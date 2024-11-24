@@ -39,10 +39,13 @@ Route::get('/', [Controller::class, 'home'])->name('home');
 Route::get('/berita', [BeritaController::class, 'publik'])->name('berita.publik');
 
 Route::get('/olahraga/cabor', [CaborController::class, 'home'])->name('home');
+Route::get('/olahraga/event', [EventController::class, 'showEvents'])->name('showEvents');
 Route::get('/olahraga/atlet', [AthleteController::class, 'showAthletes'])->name('showAthletes');
 Route::get('/olahraga/pelatih', [CoachController::class, 'showCoaches'])->name('showCoaches');
 Route::get('/olahraga/wasit', [RefereeController::class, 'showReferees'])->name('showReferees');
 Route::get('/olahraga/cabor/{id}', [CaborController::class, 'show'])->name('cabor.show');
+
+Route::get('/galeri/foto', [GaleriController::class, 'showPhoto'])->name('showPhoto');
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -72,7 +75,6 @@ Route::get('pengurus',function(){
 Route::get('badminton',function(){
     return view('badminton');
 })->middleware(['auth', 'verified', 'role_or_permission:lihat-data|Admin']);
-
 
 
 
@@ -131,10 +133,10 @@ Route::put('/edit-berita/{id}', [BeritaController::class, 'update']);
 Route::delete('/delete-berita/{id}', [BeritaController::class, 'destroy']);
 Route::get('/cetak-berita', [BeritaController::class, 'cetakBerita'])->name('cetak-berita');
 
-Route::resource('galeris', GaleriController::class);
-Route::put('/edit-galeri/{id}', [GaleriController::class, 'update']);
-Route::delete('/delete-galeri/{id}', [GaleriController::class, 'destroy']);
-Route::get('/cetak-galeri', [GaleriController::class, 'cetakGaleri'])->name('cetak-geleri');
+Route::resource('galleries', GaleriController::class);
+Route::put('/edit-gallery/{id}', [GaleriController::class, 'update']);
+Route::delete('/delete-gallery/{id}', [GaleriController::class, 'destroy']);
+Route::get('/cetak-gallery', [GaleriController::class, 'cetakGaleri'])->name('cetak-geleri');
 
 
 Route::resource('konistructures', KoniStructureController::class);

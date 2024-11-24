@@ -142,6 +142,8 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item {{ Request::is('olahraga/cabor') ? 'active' : '' }}"
                                 href="{{ url('/olahraga/cabor') }}">Cabor</a></li>
+                        <li><a class="dropdown-item {{ Request::is('olahraga/event') ? 'active' : '' }}"
+                                href="{{ url('/olahraga/event') }}">Events</a></li>
                         <li><a class="dropdown-item {{ Request::is('olahraga/atlet') ? 'active' : '' }}"
                                 href="{{ url('/olahraga/atlet') }}">Atlet</a></li>
                         <li><a class="dropdown-item {{ Request::is('olahraga/pelatih') ? 'active' : '' }}"

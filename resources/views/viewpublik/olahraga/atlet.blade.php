@@ -168,12 +168,11 @@
                 </tbody>
             </table>
         </div>
-    </div>
-
         <!-- Pagination -->
         <div class="mt-4">
-            {{ $athletes->links() }}
+            {{ $athletes->links('layouts.pagination') }}
         </div>
+    </div>
         <!-- Modal untuk Detail Atlet -->
         <div class="modal fade mt-5 pt-2" id="athleteDetailModal" tabindex="-1"
             aria-labelledby="athleteDetailModalLabel" aria-hidden="true">

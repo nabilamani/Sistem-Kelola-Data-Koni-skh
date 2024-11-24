@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Atlet - KONI Sukoharjo</title>
+    <title>Daftar Wasit - KONI Sukoharjo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('gambar_aset/images/koni.png') }}">
     <link rel="stylesheet" href="{{ asset('gambar_aset/vendor/owl-carousel/css/owl.carousel.min.css') }}">
@@ -87,7 +87,7 @@
 
     <section class="hero-section">
         <div class="hero-overlay mt-5">
-            <h1 class="hero-title text-white fst-italic">#PELATIH_KONI_SKH</h1>
+            <h1 class="hero-title text-white fst-italic">#WASIT_KONI_SKH</h1>
             <p class="hero-subtitle">KONI Sukoharjo, wujudkan olahraga yang berprestasi dan menjunjung tinggi
                 sportivitas.</p>
             <a href="#" class="btn btn-warning">Selengkapnya</a>

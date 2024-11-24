@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Galeri</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Jadwal Pertandingan</a></li>
                             <li class="breadcrumb-item active"><a href="javascript:void(0)">Tambah +</a></li>
                         </ol>
                     </div>
@@ -99,55 +99,71 @@
                     <div class="col-xxl">
                         <div class="card mb-4">
                             <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Tambah Galeri</h5>
+                                <h5 class="mb-0">Tambah Data Galeri</h5>
                             </div>
                             <div class="card-body">
-                                <form action="/galeris" method="post" enctype="multipart/form-data">
+                                <form action="/galleries" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="judul_galeri">Judul Galeri</label>
+                                        <label class="col-sm-2 col-form-label" for="title">Judul</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="judul_galeri" class="form-control"
-                                                   placeholder="Masukkan judul galeri..." required />
+                                            <input type="text" name="title" class="form-control"
+                                                placeholder="Masukkan judul galeri..." required />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="deskripsi">Deskripsi</label>
-                                        <div class="col-sm-10">
-                                            <textarea name="deskripsi" class="form-control" placeholder="Masukkan deskripsi galeri..." rows="4"></textarea>
+                                        <label for="sportCategorySelect" class="col-sm-2 col-form-label">Pilih
+                                            Cabor</label>
+                                        <div class="col-sm-4">
+                                            <select id="sportCategorySelect" name="sport_category"
+                                                class="form-control sport-category-select">
+                                                <option value="" hidden selected disabled>Pilih kategori..
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="kategori">Kategori</label>
+                                        <label class="col-sm-2 col-form-label" for="description">Deskripsi</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="kategori" class="form-control"
-                                                   placeholder="Masukkan kategori..." />
+                                            <textarea name="description" class="form-control" placeholder="Masukkan deskripsi galeri..." rows="4"></textarea>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="tanggal">Tanggal</label>
+                                        <label class="col-sm-2 col-form-label" for="date">Tanggal</label>
                                         <div class="col-sm-10">
-                                            <input type="date" name="tanggal" class="form-control" required />
+                                            <input type="date" name="date" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="location">Lokasi</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="location" class="form-control"
+                                                placeholder="Masukkan lokasi galeri..." required />
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="media_type">Tipe Media</label>
-                                        <div class="col-sm-10">
-                                            <select name="media_type" class="form-control" required>
+                                        <div class="col-sm-4">
+                                            <select name="media_type" id="mediaTypeSelect" class="form-control">
+                                                <option value="" hidden selected disabled>Pilih tipe media...
+                                                </option>
                                                 <option value="photo">Foto</option>
                                                 <option value="video">Video</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="media_path">Upload Media</label>
+                                        <label class="col-sm-2 col-form-label" for="media_path">Unggah Media</label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" type="file" name="media_path" id="media_path" accept="image/*,video/*" required />
+                                            <input type="file" name="media_path" class="form-control"
+                                                accept="image/*,video/*" required />
+                                            <small class="form-text text-muted">Unggah file foto atau video sesuai
+                                                dengan tipe media yang dipilih.</small>
                                         </div>
                                     </div>
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                            <button type="submit" class="btn btn-primary">Tambah Galeri</button>
                                         </div>
                                     </div>
                                 </form>
@@ -155,8 +171,9 @@
                         </div>
                     </div>
                 </div>
-                
-                
+
+
+
 
 
 
@@ -178,6 +195,7 @@
         <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
         <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
 
     </div>
 </body>

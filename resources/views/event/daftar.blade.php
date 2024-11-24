@@ -69,6 +69,7 @@
             Header start
         ***********************************-->
         @include('layouts/header')
+
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -77,6 +78,7 @@
             Sidebar start
         ***********************************-->
         @include('layouts/sidebar')
+
         <!--**********************************
             Sidebar end
         ***********************************-->
@@ -102,7 +104,7 @@
                     </div>
                 </div>
                 <!-- row -->
-                 <div class="row">
+                <div class="row">
                     <!-- Basic Layout -->
                     <div class="col-12">
                         <div class="card">
@@ -125,7 +127,8 @@
                                                 <th>Tanggal Acara</th>
                                                 <th>Cabang Olahraga</th>
                                                 <th>Lokasi</th>
-                                                <th style="width: 20%">Aksi</th>
+                                                <th>Peta Lokasi</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-dark">
@@ -140,6 +143,18 @@
                                                     </td>
                                                     <td>{{ $event->sport_category }}</td>
                                                     <td>{{ $event->location }}</td>
+                                                    <!-- Add View Map Button -->
+                                                    <td>
+                                                        @if ($event->location_map)
+                                                            <button class="btn btn-sm btn-outline-info"
+                                                                data-toggle="modal"
+                                                                data-target="#viewMapModal{{ $event->id }}">
+                                                                <i class="mdi mdi-map-marker"></i> Lihat Peta
+                                                            </button>
+                                                        @else
+                                                            <span>No Map</span>
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <div class="dropdown">
                                                             <button
@@ -175,110 +190,6 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    @foreach ($events as $event)
-                                        <!-- Modal for Event Details -->
-                                        @if (session('success'))
-                                            <div class="alert alert-success">
-                                                {{ session('success') }}
-                                            </div>
-                                        @endif
-
-
-                                        <div class="modal fade" id="eventDetailModal{{ $event->id }}"
-                                            tabindex="-1" role="dialog"
-                                            aria-labelledby="eventDetailModalLabel{{ $event->id }}"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title"
-                                                            id="eventDetailModalLabel{{ $event->id }}">Detail
-                                                            Acara: {{ $event->name }}</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- Isi detail acara -->
-                                                        <p><strong>Nama Acara:</strong> {{ $event->name }}</p>
-                                                        <p><strong>Tanggal Acara:</strong>
-                                                            {{ \Carbon\Carbon::parse($event->event_date)->format('d-m-Y') }}
-                                                        </p>
-                                                        <p><strong>Cabang Olahraga:</strong>
-                                                            {{ $event->sport_category }}</p>
-                                                        <p><strong>Lokasi:</strong> {{ $event->location }}</p>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Tutup</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Modal for Editing Event -->
-                                        <div class="modal fade" id="eventEditModal{{ $event->id }}"
-                                            tabindex="-1" role="dialog"
-                                            aria-labelledby="eventEditModalLabel{{ $event->id }}"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title"
-                                                            id="eventEditModalLabel{{ $event->id }}">Edit Acara:
-                                                            {{ $event->name }}</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!-- Form Edit Acara -->
-                                                        <form action="/edit-event/{{ $event->id }}" method="POST"
-                                                            enctype="multipart/form-data">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="form-group">
-                                                                <label for="name">Nama Acara</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="name" name="name"
-                                                                    value="{{ $event->name }}" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="event_date">Tanggal Acara</label>
-                                                                <input type="date" class="form-control"
-                                                                    id="event_date" name="event_date"
-                                                                    value="{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d') }}"
-                                                                    required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sport_category">Cabang Olahraga</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="sport_category" name="sport_category"
-                                                                    value="{{ $event->sport_category }}" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="location">Lokasi</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="location" name="location"
-                                                                    value="{{ $event->location }}" required>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-primary">Simpan
-                                                                    Perubahan</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-
-
-
                                     {{ $events->appends(request()->except('page'))->links() }}
                                 </div>
                             </div>
@@ -291,9 +202,191 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
+
+                <!-- Modal for Viewing Map -->
+                @foreach ($events as $event)
+                    <div class="modal fade" id="viewMapModal{{ $event->id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="viewMapModalLabel{{ $event->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-info text-white">
+                                    <h5 class="modal-title" id="viewMapModalLabel{{ $event->id }}">Peta Lokasi:
+                                        {{ $event->name }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @if ($event->location_map)
+                                        <iframe src="{{ $event->location_map }}" width="100%" height="400"
+                                            style="border: 0;" allowfullscreen="" loading="lazy"></iframe>
+                                    @else
+                                        <p>Tidak ada peta lokasi yang tersedia.</p>
+                                    @endif
+                                </div>
+                                <div class="modal-footer py-3">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Tutup</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                @foreach ($events as $event)
+                    <!-- Modal for Event Details -->
+                    <div class="modal fade" id="eventDetailModal{{ $event->id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="eventDetailModalLabel{{ $event->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header bg-primary">
+                                    <h5 class="modal-title text-light" id="eventDetailModalLabel{{ $event->id }}">
+                                        Detail Acara: {{ $event->name }}
+                                    </h5>
+                                    <button type="button" class="close text-white" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <p><strong>Nama Acara:</strong> {{ $event->name }}</p>
+                                            <p><strong>Tanggal Acara:</strong>
+                                                {{ \Carbon\Carbon::parse($event->event_date)->format('d-m-Y') }}</p>
+                                            <p><strong>Cabang Olahraga:</strong> {{ $event->sport_category }}</p>
+                                            <p><strong>Lokasi:</strong> {{ $event->location }}</p>
+                                        </div>
+                                        <div class="col-md-6 text-center">
+                                            <p><strong>Banner:</strong></p>
+                                            @if ($event->banner)
+                                                <img src="{{ asset($event->banner) }}" alt="Banner"
+                                                    class="img-fluid rounded shadow-sm"
+                                                    style="max-width: 100%; height: auto;">
+                                            @else
+                                                <p class="text-muted">No Banner</p>
+                                            @endif
+                                        </div>
+
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p><strong>Peta Lokasi:</strong></p>
+                                            @if ($event->location_map)
+                                                <iframe src="{{ $event->location_map }}" width="100%"
+                                                    height="300" style="border: 0; border-radius: 8px;"
+                                                    allowfullscreen="" loading="lazy">
+                                                </iframe>
+                                            @else
+                                                <p class="text-muted">No Map Available</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Footer -->
+                                <div class="modal-footer bg-light">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Tutup</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal for Editing Event -->
+                    <div class="modal fade" id="eventEditModal{{ $event->id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="eventEditModalLabel{{ $event->id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                    <h5 class="modal-title text-light" id="eventEditModalLabel{{ $event->id }}">
+                                        Edit Acara:
+                                        {{ $event->name }}</h5>
+                                    <button type="button" class="close text-light" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form Edit Acara -->
+                                    <form action="/edit-event/{{ $event->id }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="row">
+                                            <!-- Kolom Kiri -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="name">Nama Acara</label>
+                                                    <input type="text" class="form-control" id="name"
+                                                        name="name" value="{{ $event->name }}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="event_date">Tanggal Acara</label>
+                                                    <input type="date" class="form-control" id="event_date"
+                                                        name="event_date"
+                                                        value="{{ \Carbon\Carbon::parse($event->event_date)->format('Y-m-d') }}"
+                                                        required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="sport_category">Cabang Olahraga</label>
+                                                    <input type="text" class="form-control" id="sport_category"
+                                                        name="sport_category" value="{{ $event->sport_category }}"
+                                                        required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="location">Lokasi</label>
+                                                    <input type="text" class="form-control" id="location"
+                                                        name="location" value="{{ $event->location }}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="location_map">Peta Lokasi (iframe)</label>
+                                                    <textarea class="form-control" id="location_map" name="location_map" rows="3" required>{{ $event->location_map }}</textarea>
+                                                    <small class="form-text text-muted">Masukkan kode iframe dari
+                                                        Google Maps.</small>
+                                                </div>
+                                            </div>
+                                            <!-- Kolom Kanan -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="banner" class="form-label">Banner</label>
+                                                    <div class="mb-3">
+                                                        @if ($event->banner)
+                                                            <img src="{{ asset($event->banner) }}"
+                                                                alt="Current Banner"
+                                                                class="img-fluid rounded shadow-sm mb-2"
+                                                                style="max-width: 100%; height: auto;">
+                                                        @else
+                                                            <p class="text-muted">Tidak ada banner yang tersedia.</p>
+                                                        @endif
+                                                    </div>
+                                                    <input type="file" class="form-control-file" id="banner"
+                                                        name="banner" accept="image/*">
+                                                    <small class="form-text text-muted">
+                                                        Upload file gambar baru (format: JPG, PNG, JPEG. Ukuran
+                                                        maksimum: 2MB).
+                                                        Jika diunggah, banner lama akan diganti.
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Tombol di Bagian Footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
                 <!--**********************************
             Content body end
         ***********************************-->
@@ -310,47 +403,50 @@
 
 
             </div>
-            <!--**********************************
+        </div>
+        @include('layouts/footer')
+
+        <!--**********************************
         Main wrapper end
     ***********************************-->
 
-            <!--**********************************
+        <!--**********************************
         Scripts
     ***********************************-->
-            <!-- Required vendors -->
-            <script src="{{ asset('gambar_aset/vendor/global/global.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/js/quixnav-init.js') }}"></script>
-            <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
+        <!-- Required vendors -->
+        <script src="{{ asset('gambar_aset/vendor/global/global.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/quixnav-init.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
 
 
-            <!-- Vectormap -->
-            <script src="{{ asset('gambar_aset/vendor/raphael/raphael.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/morris/morris.min.js') }}"></script>
+        <!-- Vectormap -->
+        <script src="{{ asset('gambar_aset/vendor/raphael/raphael.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/morris/morris.min.js') }}"></script>
 
 
-            <script src="{{ asset('gambar_aset/vendor/circle-progress/circle-progress.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/chart.js') }}/Chart.bundle.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/circle-progress/circle-progress.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/chart.js') }}/Chart.bundle.min.js') }}"></script>
 
-            <script src="{{ asset('gambar_aset/vendor/gaugeJS/dist/gauge.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/gaugeJS/dist/gauge.min.js') }}"></script>
 
-            <!--  flot-chart js -->
-            <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.resize.js') }}"></script>
+        <!--  flot-chart js -->
+        <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.resize.js') }}"></script>
 
-            <!-- Owl Carousel -->
-            <script src="{{ asset('gambar_aset/vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
+        <!-- Owl Carousel -->
+        <script src="{{ asset('gambar_aset/vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
 
-            <!-- Counter Up -->
-            <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
+        <!-- Counter Up -->
+        <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
 
 
-            <script src="{{ asset('gambar_aset/js/dashboard/dashboard-1.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/dashboard/dashboard-1.js') }}"></script>
 
-            <!-- Datatable -->
-            <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+        <!-- Datatable -->
+        <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
 
 </body>
 

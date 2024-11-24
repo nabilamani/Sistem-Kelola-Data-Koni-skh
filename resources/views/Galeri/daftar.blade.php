@@ -96,18 +96,17 @@
                     </div>
                     <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Galeri</a></li>
-                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Daftar Galeri</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Jadwal Pertandingan</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0)">Daftar Jadwal</a></li>
                         </ol>
                     </div>
                 </div>
-                <!-- row -->
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Daftar Galeri</h4>
-                                <form action="{{ route('galeris.index') }}" method="GET" class="form-inline">
+                                <form action="{{ route('galleries.index') }}" method="GET" class="form-inline">
                                     <input type="text" name="search" class="form-control mr-2"
                                         placeholder="Cari galeri..." value="{{ request('search') }}">
                                     <button type="submit" class="btn btn-outline-primary">Cari</button>
@@ -115,53 +114,56 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    @foreach ($galeris as $galeri)
-                                        <div class="col-md-6 mb-1">
-                                            <div class="card border shadow-sm mb-3">
-                                                <div class="row no-gutters align-items-stretch">
-                                                    <!-- Pratinjau media (Gambar/Video) -->
-                                                    <div class="col-md-4 d-flex">
-                                                        @if ($galeri->media_type === 'photo')
-                                                            <img src="{{ asset($galeri->media_path) }}"
-                                                                class="card-img img-fluid my-3 mx-2" alt="Galeri Foto"
-                                                                style="width: 100%; object-fit: cover; border-radius: 8px;">
-                                                        @elseif($galeri->media_type === 'video')
-                                                            <video controls class="card-img img-fluid my-3 mx-2"
-                                                                style="width: 100%; object-fit: cover; border-radius: 8px;">
-                                                                <source src="{{ asset($galeri->media_path) }}"
-                                                                    type="video/mp4"> Peramban Anda tidak mendukung tag
-                                                                video.
-                                                            </video>
-                                                        @endif
-                                                    </div>
-                                                    <!-- Detail di sisi kanan -->
-                                                    <div class="col-md-8">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title mb-0">{{ $galeri->judul_galeri }}
-                                                            </h5>
-                                                            <p class="card-text mb-0">
-                                                                <small
-                                                                    class="text-muted">{{ $galeri->tanggal }}</small>
-                                                            </p>
-                                                            <p class="card-text mb-0">{{ $galeri->deskripsi }}</p>
-                                                            <p class="card-text"><strong>Kategori:</strong>
-                                                                {{ $galeri->kategori }}</p>
-                                                            <!-- Tombol tindakan -->
-                                                            <div class="btn-group" role="group" aria-label="Aksi">
-                                                                <a href="#" class="btn btn-info btn-sm"
+                                    @foreach ($galleries as $gallery)
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card shadow-sm h-100">
+                                                <div class="card-img-wrapper">
+                                                    @if ($gallery->media_type == 'photo')
+                                                        <img src="{{ asset($gallery->media_path) }}"
+                                                            class="card-img-top" alt="{{ $gallery->title }}">
+                                                    @elseif ($gallery->media_type == 'video')
+                                                        <video controls class="card-img-top"
+                                                            style="width: 100%; height: 200px; object-fit: cover;">
+                                                            <source src="{{ asset($gallery->media_path) }}"
+                                                                type="video/mp4">
+                                                            Your browser does not support the video tag.
+                                                        </video>
+                                                    @endif
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ $gallery->title }}</h5>
+                                                    <p class="card-text">
+                                                        <strong>Kategori Olahraga :</strong>
+                                                        {{ $gallery->sport_category }}<br>
+                                                        <strong>Tanggal :</strong> {{ $gallery->date }}<br>
+                                                        <strong>Lokasi :</strong> {{ $gallery->location }}
+                                                    </p>
+                                                    <div class="d-flex justify-content-between">
+                                                        <a href="#" class="btn btn-outline-info btn-sm"
+                                                            data-toggle="modal"
+                                                            data-target="#galleryDetailModal{{ $gallery->id }}">Lihat
+                                                            Detail</a>
+                                                        <div class="dropdown">
+                                                            <button
+                                                                class="btn btn-outline-primary btn-sm dropdown-toggle"
+                                                                type="button" data-toggle="dropdown"
+                                                                aria-expanded="false">
+                                                                Aksi
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="#"
                                                                     data-toggle="modal"
-                                                                    data-target="#galleryDetailModal{{ $galeri->id }}">Lihat
-                                                                    Detail</a>
-                                                                <a href="#" class="btn btn-warning btn-sm"
-                                                                    data-toggle="modal"
-                                                                    data-target="#galleryEditModal{{ $galeri->id }}">Sunting</a>
-                                                                <form action="/delete-galeri/{{ $galeri->id }}"
+                                                                    data-target="#galleryEditModal{{ $gallery->id }}">
+                                                                    <i class="bx bx-edit-alt"></i> Edit
+                                                                </a>
+                                                                <form action="/delete-gallery/{{ $gallery->id }}"
                                                                     method="POST" class="d-inline">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit"
-                                                                        class="btn btn-danger btn-sm"
-                                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus galeri ini?')">Hapus</button>
+                                                                    <button type="submit" class="dropdown-item"
+                                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus galeri ini?')">
+                                                                        <i class="bx bx-trash"></i> Hapus
+                                                                    </button>
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -169,137 +171,148 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Modal for Gallery Details -->
+                                        <div class="modal fade" id="galleryDetailModal{{ $gallery->id }}"
+                                            tabindex="-1" role="dialog"
+                                            aria-labelledby="galleryDetailModalLabel{{ $gallery->id }}"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-primary text-white">
+                                                        <h5 class="modal-title"
+                                                            id="galleryDetailModalLabel{{ $gallery->id }}">Detail
+                                                            Galeri : {{ $gallery->title }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <!-- Body -->
+                                                    <div class="modal-body">
+                                                        <div class="container-fluid">
+                                                            <div class="row mb-3">
+                                                                <div class="col-4"><strong>Judul</strong></div>
+                                                                <div class="col-8">: {{ $gallery->title }}</div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-4"><strong>Kategori Olahraga</strong>
+                                                                </div>
+                                                                <div class="col-8">: {{ $gallery->sport_category }}
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-4"><strong>Tanggal</strong></div>
+                                                                <div class="col-8">: {{ $gallery->date }}</div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-4"><strong>Lokasi</strong></div>
+                                                                <div class="col-8">: {{ $gallery->location }}</div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-4"><strong>Media</strong></div>
+                                                                <div class="col-8">
+                                                                    @if ($gallery->media_type == 'photo')
+                                                                        <img src="{{ asset($gallery->media_path) }}"
+                                                                            alt="{{ $gallery->title }}"
+                                                                            class="img-fluid rounded shadow">
+                                                                    @elseif ($gallery->media_type == 'video')
+                                                                        <video controls class="w-100 rounded shadow">
+                                                                            <source
+                                                                                src="{{ asset($gallery->media_path) }}"
+                                                                                type="video/mp4">
+                                                                        </video>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Tutup</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal for Editing Gallery -->
+                                        <div class="modal fade" id="galleryEditModal{{ $gallery->id }}"
+                                            tabindex="-1" role="dialog"
+                                            aria-labelledby="galleryEditModalLabel{{ $gallery->id }}"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-warning text-dark">
+                                                        <h5 class="modal-title"
+                                                            id="galleryEditModalLabel{{ $gallery->id }}">Edit Galeri:
+                                                            {{ $gallery->title }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body p-3">
+                                                        <form action="/edit-gallery/{{ $gallery->id }}"
+                                                            method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="form-group mb-3">
+                                                                <label for="title">Judul</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="title" name="title"
+                                                                    value="{{ $gallery->title }}" required>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label for="sport_category">Kategori Olahraga</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="sport_category" name="sport_category"
+                                                                    value="{{ $gallery->sport_category }}" required>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label for="date">Tanggal</label>
+                                                                <input type="date" class="form-control"
+                                                                    id="date" name="date"
+                                                                    value="{{ $gallery->date }}" required>
+                                                            </div>
+                                                            <div class="form-group mb-3">
+                                                                <label for="location">Lokasi</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="location" name="location"
+                                                                    value="{{ $gallery->location }}" required>
+                                                            </div>
+                                                            {{-- <div class="form-group mb-3">
+                                                                <label for="media_path">Unggah Media Baru</label>
+                                                                <input type="file" class="form-control"
+                                                                    id="media_path" name="media_path"
+                                                                    accept="image/*,video/*">
+                                                            </div> --}}
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan
+                                                                    Perubahan</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 </div>
-
-                                <!-- Paginasi -->
-                                {{ $galeris->appends(request()->except('page'))->links() }}
+                                <!-- Pagination Links -->
+                                {{ $galleries->appends(request()->except('page'))->links() }}
                             </div>
                             <div class="card-footer">
-                                <a href="/galeris/create" class="btn btn-rounded btn-primary">Tambah Galeri</a>
+                                <a href="/galleries/create" class="btn btn-rounded btn-primary">
+                                    <i class="mdi mdi-folder-image"></i> Tambah Galeri
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Modal untuk Melihat dan Mengedit Item Galeri -->
-                @foreach ($galeris as $galeri)
-                    <!-- Modal untuk Detail Galeri -->
-                    <div class="modal fade" id="galleryDetailModal{{ $galeri->id }}" tabindex="-1"
-                        role="dialog" aria-labelledby="galleryDetailModalLabel{{ $galeri->id }}"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="galleryDetailModalLabel{{ $galeri->id }}">Galeri
-                                        Detail: {{ $galeri->judul_galeri }}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <!-- Kolom Media -->
-                                        <div class="col-md-5">
-                                            @if ($galeri->media_type === 'photo')
-                                                <img src="{{ asset($galeri->media_path) }}" alt="Galeri Foto"
-                                                    class="img-fluid rounded mb-3"
-                                                    style="width: 100%; object-fit: cover;">
-                                            @elseif($galeri->media_type === 'video')
-                                                <video controls class="img-fluid rounded mb-3"
-                                                    style="width: 100%; object-fit: cover;">
-                                                    <source src="{{ asset($galeri->media_path) }}" type="video/mp4">
-                                                    Browser Anda tidak mendukung tag video.
-                                                </video>
-                                            @endif
-                                        </div>
-                                        <!-- Kolom Isi Teks -->
-                                        <div class="col-md-7">
-                                            <p><strong>Judul Galeri:</strong> {{ $galeri->judul_galeri }}</p>
-                                            <p><strong>Tanggal:</strong> {{ $galeri->tanggal }}</p>
-                                            <p><strong>Kategori:</strong> {{ $galeri->kategori }}</p>
-                                            <p><strong>Deskripsi:</strong> {{ $galeri->deskripsi }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Tutup</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Modal untuk Mengedit Galeri -->
-                    <div class="modal fade" id="galleryEditModal{{ $galeri->id }}" tabindex="-1" role="dialog"
-                        aria-labelledby="galleryEditModalLabel{{ $galeri->id }}" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="galleryEditModalLabel{{ $galeri->id }}">Edit
-                                        Galeri: {{ $galeri->judul_galeri }}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Tutup">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="/edit-galeri/{{ $galeri->id }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="row">
-                                            <!-- Kolom Pratinjau Media -->
-                                            <div class="col-md-5">
-                                                <label for="media_path">Foto/Video</label>
-                                                <input type="file" class="form-control-file" id="media_path"
-                                                    name="media_path" accept="image/*,video/*">
-                                                @if ($galeri->media_type === 'photo')
-                                                    <img src="{{ asset($galeri->media_path) }}" alt="Foto"
-                                                        class="img-fluid rounded mt-2"
-                                                        style="width: 100%; object-fit: cover;">
-                                                @elseif($galeri->media_type === 'video')
-                                                    <video controls class="img-fluid rounded mt-2"
-                                                        style="width: 100%; object-fit: cover;">
-                                                        <source src="{{ asset($galeri->media_path) }}"
-                                                            type="video/mp4"> Browser Anda tidak mendukung tag video.
-                                                    </video>
-                                                @endif
-                                            </div>
-                                            <!-- Kolom Bidang Formulir -->
-                                            <div class="col-md-7">
-                                                <div class="form-group">
-                                                    <label for="judul_galeri">Judul Galeri</label>
-                                                    <input type="text" class="form-control" id="judul_galeri"
-                                                        name="judul_galeri" value="{{ $galeri->judul_galeri }}"
-                                                        required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="tanggal">Tanggal</label>
-                                                    <input type="date" class="form-control" id="tanggal"
-                                                        name="tanggal" value="{{ $galeri->tanggal }}" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="kategori">Kategori</label>
-                                                    <input type="text" class="form-control" id="kategori"
-                                                        name="kategori" value="{{ $galeri->kategori }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="deskripsi">Deskripsi</label>
-                                                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4">{{ $galeri->deskripsi }}</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+
 
 
 
@@ -360,6 +373,7 @@
             <!-- Datatable -->
             <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
             <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+            {{-- Debugging line --}}
 
 </body>
 

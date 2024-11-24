@@ -246,7 +246,6 @@
                                 <hr>
                                 <div class="mb-4">
                                     <form>
-                                        <label for="search" class="form-label">Cari</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="search"
                                                 placeholder="Cari...">
@@ -254,29 +253,33 @@
                                         </div>
                                     </form>
                                 </div>
-                                @foreach ($beritaLatepost as $berita)
-                                    <div class="d-flex align-items-start mb-3 berita-item p-1"
-                                        data-id="{{ $berita->id }}" data-judul="{{ $berita->judul_berita }}"
-                                        data-photo="{{ asset($berita->photo) }}" data-isi="{{ $berita->isi_berita }}"
-                                        data-tanggal="{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d F Y') }}"
-                                        data-lokasi="{{ $berita->lokasi_peristiwa }}"
-                                        data-sumber="{{ $berita->kutipan_sumber }}">
-                                        <img src="{{ asset($berita->photo ?? 'https://via.placeholder.com/80x80') }}"
-                                            class="me-3 rounded" alt="Gambar Berita"
+
+                                @foreach ($upcomingEvents as $event)
+                                    <div class="d-flex align-items-start mb-3 event-item p-1"
+                                        data-id="{{ $event->id }}" data-name="{{ $event->name }}"
+                                        data-event_date="{{ \Carbon\Carbon::parse($event->event_date)->format('d F Y') }}"
+                                        data-banner="{{ asset($event->banner) }}"
+                                        data-location_map="{{ $event->location_map }}">
+                                        <img src="{{ asset($event->banner ?? 'https://via.placeholder.com/80x80') }}"
+                                            class="me-3 rounded" alt="Banner Event"
                                             style="width: 80px; height: 80px; object-fit: cover;">
                                         <div>
                                             <h6 class="mb-1 text-dark text-decoration-none">
-                                                {{ $berita->judul_berita }}
+                                                {{ $event->name }}
                                             </h6>
                                             <small class="text-muted"><i class="mdi mdi-calendar me-2"></i>
-                                                <!-- Calendar Icon -->{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d F Y') }}</small>
+                                                <!-- Calendar Icon -->{{ \Carbon\Carbon::parse($event->event_date)->format('d F Y') }}</small>
                                         </div>
                                     </div>
                                     <hr>
                                 @endforeach
-                                <button class="btn btn-primary w-100" id="btnLainnya">Lihat Semua Berita</button>
+
+                                <a href="/olahraga/event" class="btn btn-primary w-100">
+                                    Lihat Semua Event
+                                </a>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

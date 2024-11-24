@@ -108,6 +108,30 @@
                                         </div>
                                     </div>
 
+                                    <!-- Banner Input -->
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="banner">Banner/Foto</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" name="banner" class="form-control"
+                                                accept="image/*" />
+                                        </div>
+                                    </div>
+
+                                    <!-- Lokasi Peta (iframe) -->
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="location_map">Peta
+                                            (iframe)</label>
+                                        <div class="col-sm-10">
+                                            <textarea name="location_map" class="form-control" placeholder="Masukkan iframe peta..." required></textarea>
+                                            <small class="form-text text-muted">
+                                                Masukkan kode iframe dari Google Maps.
+                                                <a href="https://www.google.com/maps" target="_blank"
+                                                    class="text-primary">Buka Google Maps</a> untuk mendapatkan iframe.
+                                            </small>
+                                        </div>
+                                    </div>
+
+
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
                                             <button type="submit" class="btn btn-primary">Tambah Event</button>
@@ -115,12 +139,13 @@
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
+        @include('layouts/footer')
         <!-- Main content end -->
     </div>
 

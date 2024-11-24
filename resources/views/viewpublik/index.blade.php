@@ -473,7 +473,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const counters = document.querySelectorAll('.count');
-            const animationDuration = 2000; // Duration in milliseconds (2 seconds)
+            const animationDuration = 5000; // Duration in milliseconds (2 seconds)
 
             counters.forEach(counter => {
                 const target = +counter.getAttribute('data-count');
