@@ -227,7 +227,7 @@
                 <!-- Card 5: Prestasi Atlet -->
                 <div class="col-md-4">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
-                        onclick="window.location.href='prestasi.html';">
+                        onclick="window.location.href='/galeri/prestasi';">
                         <i class="mdi mdi-trophy-outline display-4 mb-3"></i>
                         <h5 class="fw-bold">Prestasi Atlet</h5>
                     </div>

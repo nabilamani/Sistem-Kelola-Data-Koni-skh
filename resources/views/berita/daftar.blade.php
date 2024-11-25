@@ -254,12 +254,13 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <label for="photo">Foto</label>
-                                            <input type="file" class="form-control-file" id="photo"
-                                                name="photo" accept="image/*">
-                                            <img id="photoPreview" src="" alt="Foto"
-                                                class="img-fluid rounded mt-2"
-                                                style="width: 100%; object-fit: cover;">
+                                            <input type="file" class="form-control-file" id="photo" name="photo" accept="image/*" onchange="previewPhoto(event)">
+                                            <img id="photoPreview" src="{{ old('photo', isset($berita->photo) ? asset($berita->photo) : '') }}" 
+                                                 alt="Foto" 
+                                                 class="img-fluid rounded mt-2"
+                                                 style="width: 100%; object-fit: cover;">
                                         </div>
+                                        
                                         <div class="col-md-7">
                                             <div class="form-group">
                                                 <label for="judul_berita">Judul Berita</label>

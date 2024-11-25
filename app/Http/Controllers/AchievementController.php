@@ -155,4 +155,16 @@ class AchievementController extends Controller
 
         return view('Prestasi.cetak-prestasi', compact('achievements'));
     }
+    public function showPrestasi(Request $request)
+    {
+        $search = $request->input('search');
+
+        // Query pencarian berdasarkan nama atau cabang olahraga
+        $achievements = Achievement::when($search, function ($query, $search) {
+            $query->where('athlete_name', 'like', "%$search%")
+                ->orWhere('sport_category', 'like', "%$search%");
+        })->paginate(8);
+
+        return view('viewpublik.galeri.prestasi', compact('achievements'));
+    }
 }

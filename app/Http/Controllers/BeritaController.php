@@ -7,6 +7,7 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class BeritaController extends Controller
@@ -57,9 +58,9 @@ class BeritaController extends Controller
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img/berita'), $filename);
-            $data['photo'] = 'img/berita/' . $filename;
+            $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('public/img/berita', $filename);
+            $data['photo'] = str_replace('public/', 'storage/', $path);
         }
 
         $berita = new Berita;
@@ -108,11 +109,14 @@ class BeritaController extends Controller
 
         $data['tanggal_waktu'] = Carbon::parse($request->tanggal_waktu);
 
-        if ($request->hasFile('foto')) {
-            if ($berita->foto) {
-                Storage::disk('public')->delete($berita->foto);
+        if ($request->hasFile('photo')) {
+            if ($berita->photo) {
+                Storage::delete(str_replace('storage/', 'public/', $berita->photo));
             }
-            $data['foto'] = $request->file('foto')->store('photos', 'public');
+            $file = $request->file('photo');
+            $filename = time() . '_' . Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('public/img/berita', $filename);
+            $data['photo'] = str_replace('public/', 'storage/', $path);
         }
 
         $berita->update($data);
@@ -127,8 +131,8 @@ class BeritaController extends Controller
     {
         $berita = Berita::findOrFail($id);
 
-        if ($berita->foto) {
-            Storage::disk('public')->delete($berita->foto);
+        if ($berita->photo) {
+            Storage::delete(str_replace('storage/', 'public/', $berita->photo));
         }
 
         $berita->delete();

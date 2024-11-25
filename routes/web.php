@@ -46,6 +46,11 @@ Route::get('/olahraga/wasit', [RefereeController::class, 'showReferees'])->name(
 Route::get('/olahraga/cabor/{id}', [CaborController::class, 'show'])->name('cabor.show');
 
 Route::get('/galeri/foto', [GaleriController::class, 'showPhoto'])->name('showPhoto');
+Route::get('/galeri/prestasi', [AchievementController::class, 'showPrestasi'])->name('showPrestasi');
+
+Route::get('/kontak', function () {
+    return view('viewpublik.kontak');
+});
 
 // Route::get('/', function () {
 //     return view('welcome');

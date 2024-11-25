@@ -63,13 +63,14 @@
     </section>
 
     <section class="container my-5">
-        <h2 class="text-center text-uppercase mb-4">Galeri Dokumentasi</h2>
+        <h2 class="text-center text-uppercase mb-4 text-white">Galeri Dokumentasi</h2>
         <div class="row">
             @foreach ($galleries as $gallery)
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="card shadow-sm border-0 d-flex flex-column h-100">
                         @if ($gallery->media_type === 'photo')
-                            <img src="{{ asset($gallery->media_path) }}" class="card-img-top" alt="{{ $gallery->title }}">
+                            <img src="{{ asset($gallery->media_path) }}" class="card-img-top"
+                                alt="{{ $gallery->title }}">
                         @elseif ($gallery->media_type === 'video')
                             <video class="card-img-top" controls>
                                 <source src="{{ asset($gallery->media_path) }}" type="video/mp4">
@@ -87,11 +88,11 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @endforeach 
         </div>
     </section>
-    
-    
+
+
 
     @include('viewpublik/layouts/footer')
 

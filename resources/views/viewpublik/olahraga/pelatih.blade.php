@@ -172,7 +172,7 @@
 
         <!-- Pagination -->
         <div class="mt-4">
-            {{ $coaches->links() }}
+            {{ $coaches->links('layouts.pagination') }}
         </div>
         <!-- Modal untuk Detail Pelatih -->
         <div class="modal fade mt-5 pt-2" id="coachDetailModal" tabindex="-1" aria-labelledby="coachDetailModalLabel"

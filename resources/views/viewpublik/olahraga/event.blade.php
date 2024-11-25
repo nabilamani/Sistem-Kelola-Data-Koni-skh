@@ -176,7 +176,7 @@
         </table>
 
         <!-- Pagination (if applicable) -->
-        {{ $events->links() }}
+        {{ $events->links('layouts.pagination') }}
     </section>
 
     @include('viewpublik/layouts/footer')

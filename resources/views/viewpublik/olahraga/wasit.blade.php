@@ -169,7 +169,7 @@
     
         <!-- Pagination -->
         <div class="mt-4">
-            {{ $referees->links() }}
+            {{ $referees->links('layouts.pagination') }}
         </div>
         <!-- Modal untuk Detail Wasit -->
     <div class="modal fade mt-5 pt-2" id="refereeDetailModal" tabindex="-1" aria-labelledby="refereeDetailModalLabel" aria-hidden="true">

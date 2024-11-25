@@ -76,6 +76,11 @@
             transition: background-color 0.3s ease;
             /* Efek transisi halus */
         }
+
+        .modal-backdrop {
+            background-color: rgba(255, 255, 255, 0.6);
+            /* Warna putih semi-transparan */
+        }
     </style>
 </head>
 
@@ -255,28 +260,56 @@
                                 </div>
 
                                 @foreach ($upcomingEvents as $event)
-                                    <div class="d-flex align-items-start mb-3 event-item p-1"
+                                    <div class="d-flex align-items-start event-item p-1"
                                         data-id="{{ $event->id }}" data-name="{{ $event->name }}"
                                         data-event_date="{{ \Carbon\Carbon::parse($event->event_date)->format('d F Y') }}"
                                         data-banner="{{ asset($event->banner) }}"
-                                        data-location_map="{{ $event->location_map }}">
+                                        data-location_map="{{ $event->location_map }}"
+                                        data-sport_category="{{ $event->sport_category }}">
+
+                                        <!-- Banner -->
                                         <img src="{{ asset($event->banner ?? 'https://via.placeholder.com/80x80') }}"
                                             class="me-3 rounded" alt="Banner Event"
-                                            style="width: 80px; height: 80px; object-fit: cover;">
+                                            style="width: 80px; height: 80px; object-fit: cover; cursor: pointer;">
+
+                                        <!-- Event Details -->
                                         <div>
                                             <h6 class="mb-1 text-dark text-decoration-none">
                                                 {{ $event->name }}
                                             </h6>
-                                            <small class="text-muted"><i class="mdi mdi-calendar me-2"></i>
-                                                <!-- Calendar Icon -->{{ \Carbon\Carbon::parse($event->event_date)->format('d F Y') }}</small>
+
+                                            <!-- Event Date -->
+                                            <small class="text-muted">
+                                                <i
+                                                    class="mdi mdi-calendar me-2"></i>{{ \Carbon\Carbon::parse($event->event_date)->format('d F Y') }}
+                                            </small><br>
+
+                                            <!-- Sport Category -->
+                                            <small class="text-muted">
+                                                <i
+                                                    class="mdi mdi-soccer me-2"></i>{{ $event->sport_category }}
+                                            </small>
                                         </div>
                                     </div>
-                                    <hr>
+                                    <hr class="my-1">
+
                                 @endforeach
+
 
                                 <a href="/olahraga/event" class="btn btn-primary w-100">
                                     Lihat Semua Event
                                 </a>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="imageModal" data-bs-backdrop="false" tabindex="-1"
+                            aria-labelledby="imageModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <img id="modalImage" src="" alt="Full Banner"
+                                            class="img-fluid rounded">
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -379,6 +412,21 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const eventItems = document.querySelectorAll('.event-item img');
+            const modalImage = document.getElementById('modalImage');
+            const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+
+            eventItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    modalImage.src = e.target.src; // Set the source of the modal image
+                    imageModal.show(); // Show the modal
+                });
+            });
+        });
+    </script>
+
 </body>
 
 </html>

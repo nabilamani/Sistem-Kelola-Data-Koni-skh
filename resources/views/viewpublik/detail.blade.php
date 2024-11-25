@@ -133,41 +133,44 @@
                     <button type="submit" class="btn btn-primary">Cari</button>
                 </form>
             </div>
-            <table class="table table-bordered table-striped table-hover mt-3">
-                <thead class="bg-primary text-white">
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Atlet</th>
-                        <th>Cabang Olahraga</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Berat Badan (kg)</th>
-                        <th>Tinggi Badan (cm)</th>
-                        <th>Prestasi</th>
-                        {{-- <th>Aksi</th> --}}
-                    </tr>
-                </thead>
-                <tbody class="text-dark">
-                    @php
-                        $no = ($athletes->currentPage() - 1) * $athletes->perPage() + 1;
-                    @endphp
-                    @foreach ($athletes as $athlete)
+            <div class="table-responsive">
+                <table id="athleteTable" class="table table-bordered table-striped table-hover mt-3" style="min-width: 845px;">
+                    <thead class="bg-primary text-white">
                         <tr>
-                            <td>{{ $no++ }}</td>
-                            <td>{{ $athlete->name }}</td>
-                            <td>{{ $athlete->sport_category }}</td> <!-- assuming the relationship is defined -->
-                            <td>{{ \Carbon\Carbon::parse($athlete->birth_date)->format('d-m-Y') }}</td>
-                            <td>{{ $athlete->gender }}</td>
-                            <td>{{ $athlete->weight }} kg</td>
-                            <td>{{ $athlete->height }} cm</td>
-                            <td>{{ $athlete->achievements }}</td>
-                            {{-- <td>
-                                <a href="{{ route('', $athlete->id) }}" class="btn btn-info btn-sm">Detail</a>
-                            </td> --}}
+                            <th>No</th>
+                            <th>Nama Atlet</th>
+                            <th>Cabang Olahraga</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Berat Badan (kg)</th>
+                            <th>Tinggi Badan (cm)</th>
+                            <th>Prestasi</th>
+                            {{-- <th>Aksi</th> --}}
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="text-dark">
+                        @php
+                            $no = ($athletes->currentPage() - 1) * $athletes->perPage() + 1;
+                        @endphp
+                        @foreach ($athletes as $athlete)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $athlete->name }}</td>
+                                <td>{{ $athlete->sport_category }}</td> <!-- assuming the relationship is defined -->
+                                <td>{{ \Carbon\Carbon::parse($athlete->birth_date)->format('d-m-Y') }}</td>
+                                <td>{{ $athlete->gender }}</td>
+                                <td>{{ $athlete->weight }} kg</td>
+                                <td>{{ $athlete->height }} cm</td>
+                                <td>{{ $athlete->achievements }}</td>
+                                {{-- <td>
+                                    <a href="{{ route('', $athlete->id) }}" class="btn btn-info btn-sm">Detail</a>
+                                </td> --}}
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            
             
             {{ $athletes->links() }} <!-- Pagination links -->
         </div>
