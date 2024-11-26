@@ -51,13 +51,9 @@
             transform: scale(1.05);
             /* Slight zoom-in */
         }
-        .sport-card {
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease;
-        }
-        .sport-card:hover {
-            transform: translateY(-10px);
+        .card {
+            border-top: 5px solid #FF9800;
+            border-radius: 15px;
         }
         .sport-logo {
             width: 80px;

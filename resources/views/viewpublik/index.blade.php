@@ -289,6 +289,13 @@
                     </div>
                 @endforeach
             </div>
+            <!-- Tombol Baca Berita Lain -->
+            <div class="text-center mt-5">
+                <a href="/berita" class="btn btn-outline-light btn-lg px-5 py-2 fw-bold bg-light">
+                    Baca Berita Lain...
+
+                </a>
+            </div>
         </div>
 
         <!-- Modal Detail Berita -->
@@ -352,19 +359,23 @@
     <!-- FAQ Section -->
     <section id="faq" class="py-5 bg-white">
         <div class="container">
-            <h2 class="text-center mb-3 fw-bold">PERTANYAAN UMUM</h2>
-            <p class="text-center mb-5 mx-5 text-black">
+            <!-- Judul -->
+            <h2 class="text-center mb-3 fw-bold text-primary">PERTANYAAN UMUM</h2>
+            <p class="text-center mb-5 mx-5 text-secondary">
                 Temukan jawaban atas berbagai pertanyaan yang sering diajukan terkait program, kegiatan, dan layanan
-                KONI Sukoharjo.
-                Kami telah menyusun informasi ini untuk membantu Anda memahami peran dan kontribusi kami dalam mendukung
-                dunia olahraga di Sukoharjo.
+                KONI Sukoharjo. Kami telah menyusun informasi ini untuk membantu Anda memahami peran dan kontribusi kami
+                dalam mendukung dunia olahraga di Sukoharjo.
             </p>
+
+            <!-- Accordion -->
             <div class="accordion" id="faqAccordion">
                 <!-- FAQ 1 -->
-                <div class="accordion-item">
+                <div class="accordion-item border-0 mb-3 shadow-sm">
                     <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="accordion-button d-flex align-items-center" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                            aria-controls="collapseOne">
+                            <i class="mdi mdi-help-circle-outline text-primary me-2"></i>
                             Apa itu KONI?
                         </button>
                     </h2>
@@ -372,18 +383,22 @@
                         data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
                             Komite Olahraga Nasional Indonesia (KONI) adalah organisasi yang memiliki wewenang dan
-                            tanggung jawab dalam mengelola, membina, mengembangkan, dan mengkoordinasikan seluruh
-                            kegiatan olahraga prestasi di Indonesia. KONI bertujuan untuk meningkatkan prestasi atlet
-                            nasional di berbagai cabang olahraga.
+                            tanggung
+                            jawab dalam mengelola, membina, mengembangkan, dan mengkoordinasikan seluruh kegiatan
+                            olahraga
+                            prestasi di Indonesia. KONI bertujuan untuk meningkatkan prestasi atlet nasional di berbagai
+                            cabang olahraga.
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ 2 -->
-                <div class="accordion-item">
+                <div class="accordion-item border-0 mb-3 shadow-sm">
                     <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button class="accordion-button collapsed d-flex align-items-center" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                            aria-controls="collapseTwo">
+                            <i class="mdi mdi-account-multiple-plus text-primary me-2"></i>
                             Bagaimana cara bergabung dengan program pembinaan atlet KONI?
                         </button>
                     </h2>
@@ -398,10 +413,12 @@
                 </div>
 
                 <!-- FAQ 3 -->
-                <div class="accordion-item">
+                <div class="accordion-item border-0 mb-3 shadow-sm">
                     <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <button class="accordion-button collapsed d-flex align-items-center" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                            aria-controls="collapseThree">
+                            <i class="mdi mdi-trophy-outline text-primary me-2"></i>
                             Apa saja cabang olahraga yang berada di bawah naungan KONI?
                         </button>
                     </h2>
@@ -409,16 +426,19 @@
                         data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
                             KONI menaungi berbagai cabang olahraga seperti atletik, renang, bulu tangkis, dan banyak
-                            lagi. Untuk informasi lengkap mengenai cabang olahraga, kunjungi situs resmi KONI.
+                            lagi.
+                            Untuk informasi lengkap mengenai cabang olahraga, kunjungi situs resmi KONI.
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ 4 -->
-                <div class="accordion-item">
+                <div class="accordion-item border-0 shadow-sm">
                     <h2 class="accordion-header" id="headingFour">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        <button class="accordion-button collapsed d-flex align-items-center" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
+                            aria-controls="collapseFour">
+                            <i class="mdi mdi-calendar-clock text-primary me-2"></i>
                             Bagaimana cara mendapatkan informasi mengenai kompetisi yang diselenggarakan oleh KONI?
                         </button>
                     </h2>
@@ -433,6 +453,7 @@
             </div>
         </div>
     </section>
+
     <section id="contact" class="py-5">
         <div class="container">
             <h2 class="text-center fw-bold mb-2">Contact</h2>

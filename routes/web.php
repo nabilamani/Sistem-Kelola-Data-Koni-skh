@@ -38,6 +38,12 @@ Route::get('/', [Controller::class, 'home'])->name('home');
 
 Route::get('/berita', [BeritaController::class, 'publik'])->name('berita.publik');
 
+Route::get('/profil', [BeritaController::class, 'publik'])->name('berita.publik');
+
+Route::get('/profil/tentang', function () {
+    return view('viewpublik.profil.tentang');
+});
+
 Route::get('/olahraga/cabor', [CaborController::class, 'home'])->name('home');
 Route::get('/olahraga/event', [EventController::class, 'showEvents'])->name('showEvents');
 Route::get('/olahraga/atlet', [AthleteController::class, 'showAthletes'])->name('showAthletes');

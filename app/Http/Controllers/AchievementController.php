@@ -158,8 +158,6 @@ class AchievementController extends Controller
     public function showPrestasi(Request $request)
     {
         $search = $request->input('search');
-
-        // Query pencarian berdasarkan nama atau cabang olahraga
         $achievements = Achievement::when($search, function ($query, $search) {
             $query->where('athlete_name', 'like', "%$search%")
                 ->orWhere('sport_category', 'like', "%$search%");

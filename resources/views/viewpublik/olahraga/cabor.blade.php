@@ -55,6 +55,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease;
+            border-top: solid 3px #E00818;
         }
         .sport-card:hover {
             transform: translateY(-10px);
@@ -84,7 +85,8 @@
 
     <section>
         <div class="container my-5">
-            <h2 class="text-center mb-4">Ragam Cabang Olahraga</h2>
+            <h2 class="text-center">Ragam Cabang Olahraga</h2>
+            <p class="text-center mb-4 text-dark">Temukan berbagai cabang olahraga yang tersedia untuk mendukung aktivitas dan prestasi Anda.</p>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 @forelse($SportCategories as $SportCategory)
                     <div class="col-md-3">

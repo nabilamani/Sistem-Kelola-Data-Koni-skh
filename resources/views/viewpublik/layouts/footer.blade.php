@@ -88,7 +88,7 @@
                 </ul>
                 <!-- Social Media Icons -->
                 <div class="mt-3">
-                    <a href="https://www.instagram.com/konikabupatensukoharjo/" class="text-white me-3"><i
+                    <a href="https://www.instagram.com/konikabupatensukoharjo/" target="_blank" class="text-white me-3"><i
                             class="mdi mdi-instagram mdi-24px"></i></a>
                     <a href="#" class="text-white"><i class="mdi mdi-youtube mdi-24px"></i></a>
                 </div>
@@ -97,7 +97,7 @@
         <hr class="text-secondary">
         <!-- Footer Bottom -->
         <div class="text-center">
-            <small>Developed By <a href="#"
+            <small>Developed By <a href="https://diskominfo.sukoharjokab.go.id/" target="_blank"
                     class="text-white text-decoration-none">kominfosukoharjo.com</a></small>
         </div>
     </div>

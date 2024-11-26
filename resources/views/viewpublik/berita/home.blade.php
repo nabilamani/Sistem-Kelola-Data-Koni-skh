@@ -120,6 +120,10 @@
                 <div class="row">
                     <!-- Konten Utama -->
                     <div class="col-md-8" style="margin-top: 4.5rem;">
+                        <nav class="breadcrumb bg-transparent p-0 mb-2">
+                            <a class="breadcrumb-item text-decoration-none" href="/">Home</a>
+                            <span class="breadcrumb-item active text-primary" style="color: #FF6924;">Berita</span>
+                        </nav>
                         <div id="beritaUtamaContent">
                             <!-- Default content of beritaUtama -->
                             @if ($beritaUtama)

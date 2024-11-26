@@ -74,7 +74,7 @@
             </div>
     
             <!-- Form Pencarian -->
-            <form action="{{ route('achievements.index') }}" method="GET" class="d-flex">
+            <form action="{{ route('showPrestasi') }}" method="GET" class="d-flex">
                 <input type="text" name="search" class="form-control me-2"
                     placeholder="Cari prestasi atau cabang olahraga..." value="{{ request('search') }}">
                 <button type="submit" class="btn btn-primary">Cari</button>
