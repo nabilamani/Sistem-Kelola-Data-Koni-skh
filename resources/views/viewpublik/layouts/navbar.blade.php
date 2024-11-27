@@ -128,8 +128,6 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item {{ Request::is('profil/tentang') ? 'active' : '' }}"
                                 href="{{ url('/profil/tentang') }}">Tentang</a></li>
-                        <li><a class="dropdown-item {{ Request::is('profil/visi-misi') ? 'active' : '' }}"
-                                href="{{ url('/profil/visi-misi') }}">Visi dan Misi</a></li>
                         <li><a class="dropdown-item {{ Request::is('profil/struktur') ? 'active' : '' }}"
                                 href="{{ url('/profil/struktur') }}">Struktur Organisasi</a></li>
                         <li><a class="dropdown-item {{ Request::is('profil/program') ? 'active' : '' }}"

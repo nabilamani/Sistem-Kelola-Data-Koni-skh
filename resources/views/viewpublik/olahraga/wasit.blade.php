@@ -13,6 +13,7 @@
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         body {
             overflow-x: hidden;
@@ -107,7 +108,7 @@
             <!-- Form Pencarian -->
             <form action="{{ route('showReferees') }}" method="GET" class="d-flex">
                 <input type="text" name="search" class="form-control me-2"
-                    placeholder="Cari wasit atau cabang olahraga..." value="{{ request('search') }}">
+                    placeholder="Cari wasit atau cabor..." value="{{ request('search') }}">
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
         </div>
@@ -273,7 +274,10 @@
             document.getElementById('refereeExperience').textContent = referee.experience || 'Tidak Diketahui';
         }
     </script>
-    
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 
 
 </body>

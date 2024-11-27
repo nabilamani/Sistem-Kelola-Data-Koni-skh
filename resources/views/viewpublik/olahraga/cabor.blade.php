@@ -13,6 +13,7 @@
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         body {
             overflow-x: hidden;
@@ -65,7 +66,10 @@
             height: 80px;
             object-fit: contain;
         }
-
+        .breadcrumb {
+            border-right: 5px solid #E00818;
+            border-radius: 15px;
+        }
     </style>
 </head>
 
@@ -84,7 +88,12 @@
 
 
     <section>
-        <div class="container my-5">
+        <div class="container my-4">
+            <nav class="breadcrumb bg-transparent px-3 py-3 shadow-sm">
+                <a class="breadcrumb-item text-decoration-none" href="/">Home</a>
+                <span class="breadcrumb-item active text-primary">Olahraga</span>
+                <span class="breadcrumb-item active text-primary">Cabor</span>
+            </nav>
             <h2 class="text-center">Ragam Cabang Olahraga</h2>
             <p class="text-center mb-4 text-dark">Temukan berbagai cabang olahraga yang tersedia untuk mendukung aktivitas dan prestasi Anda.</p>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
@@ -113,7 +122,10 @@
     
 
     @include('viewpublik/layouts/footer')
-
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>

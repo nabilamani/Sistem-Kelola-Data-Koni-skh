@@ -13,6 +13,7 @@
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         body {
             overflow-x: hidden;
@@ -61,6 +62,10 @@
             height: auto;
             border-radius: 10px;
         }
+        .breadcrumb {
+            border-right: 5px solid #FF9800;
+            border-radius: 15px;
+        }
     </style>
 </head>
 
@@ -78,41 +83,47 @@
 
     <section class="profile-section py-4">
         <div class="container">
-            <nav class="breadcrumb bg-transparent px-2 py-3 shadow-sm">
+            <nav class="breadcrumb bg-transparent px-3 py-3 shadow-sm">
                 <a class="breadcrumb-item text-decoration-none" href="/">Home</a>
                 <span class="breadcrumb-item active text-primary">Profil</span>
             </nav>
-            <h2 class="fw-bold mb-4 text-center">PROFIL</h2>
-            <div class="row align-items-center">
-                <div class="col-md-4 text-center mb-4 mb-md-0">
-                    <img src="https://via.placeholder.com/250x300" alt="Ketua KONI Sukoharjo" class="img-fluid rounded shadow">
-                </div>
-                
-                <div class="col-md-8">
-                    <p style="text-align: justify;">
-                        <strong>KONI Sukoharjo</strong> adalah lembaga yang bertugas mengelola, mengembangkan, dan
-                        meningkatkan prestasi olahraga di Kabupaten Sukoharjo. Sebagai wadah pembinaan olahraga, KONI
-                        Sukoharjo memfasilitasi pelatihan atlet, pelatih, dan program-program yang mendukung olahraga
-                        secara berkelanjutan. Melalui visi dan misinya, KONI Sukoharjo berkomitmen untuk mencetak atlet
-                        yang berprestasi, baik di tingkat nasional maupun internasional, serta berkontribusi dalam
-                        memperkuat persatuan bangsa melalui olahraga.
-                    </p>
-                    <h3 class="mt-4 text-primary">Visi</h3>
-                    <p>
-                        Mewujudkan prestasi olahraga yang membanggakan di tingkat dunia, membangun watak, mengangkat
-                        harkat dan martabat bangsa, serta mempererat persatuan dan ketahanan nasional.
-                    </p>
-                    <h3 class="mt-4 text-primary">Misi</h3>
-                    <ul class="custom-list">
-                        <li><i class="mdi mdi-circle me-2" style="font-size: 8px;"></i>Mewujudkan Tata Kelola kelembagaan atau organisasi yang akuntabel dan profesional.</li>
-                        <li><i class="mdi mdi-circle me-2" style="font-size: 8px;"></i>Mengembangkan dan meningkatkan organisasi cabang olahraga yang solid.</li>
-                        <li><i class="mdi mdi-circle me-2" style="font-size: 8px;"></i>Mendukung atlet potensial dan berbakat dalam peningkatan prestasi olahraga yang lebih optimal.</li>
-                        <li><i class="mdi mdi-circle me-2" style="font-size: 8px;"></i>Merancang dan melaksanakan program pembinaan olahraga yang berkesinambungan,efektif dan efisien.</li>
-                        <li><i class="mdi mdi-circle me-2" style="font-size: 8px;"></i>Membangun Kerjasama yang harmonis dengan berbagai pihak dalam keterlibatan untuk peningkatan prestasi olahraga.</li>
-                    </ul>
-
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body">
+                    <h2 class="fw-bold mb-4 text-center">PROFIL</h2>
+                    <div class="row align-items-center">
+                        <!-- Image Section -->
+                        <div class="col-md-4 text-center mb-4 mb-md-0">
+                            <img src="https://via.placeholder.com/250x300" alt="Ketua KONI Sukoharjo" class="img-fluid rounded shadow">
+                        </div>
+            
+                        <!-- Content Section -->
+                        <div class="col-md-8">
+                            <p style="text-align: justify;">
+                                <strong>KONI Sukoharjo</strong> adalah lembaga yang bertugas mengelola, mengembangkan, dan
+                                meningkatkan prestasi olahraga di Kabupaten Sukoharjo. Sebagai wadah pembinaan olahraga, KONI
+                                Sukoharjo memfasilitasi pelatihan atlet, pelatih, dan program-program yang mendukung olahraga
+                                secara berkelanjutan. Melalui visi dan misinya, KONI Sukoharjo berkomitmen untuk mencetak atlet
+                                yang berprestasi, baik di tingkat nasional maupun internasional, serta berkontribusi dalam
+                                memperkuat persatuan bangsa melalui olahraga.
+                            </p>
+                            <h3 class="mt-4 text-primary">Visi</h3>
+                            <p>
+                                Mewujudkan prestasi olahraga yang membanggakan di tingkat dunia, membangun watak, mengangkat
+                                harkat dan martabat bangsa, serta mempererat persatuan dan ketahanan nasional.
+                            </p>
+                            <h3 class="mt-4 text-primary">Misi</h3>
+                            <ul class="custom-list">
+                                <li><i class="mdi mdi-circle me-2" style="font-size: 8px;"></i>Mewujudkan Tata Kelola kelembagaan atau organisasi yang akuntabel dan profesional.</li>
+                                <li><i class="mdi mdi-circle me-2" style="font-size: 8px;"></i>Mengembangkan dan meningkatkan organisasi cabang olahraga yang solid.</li>
+                                <li><i class="mdi mdi-circle me-2" style="font-size: 8px;"></i>Mendukung atlet potensial dan berbakat dalam peningkatan prestasi olahraga yang lebih optimal.</li>
+                                <li><i class="mdi mdi-circle me-2" style="font-size: 8px;"></i>Merancang dan melaksanakan program pembinaan olahraga yang berkesinambungan, efektif, dan efisien.</li>
+                                <li><i class="mdi mdi-circle me-2" style="font-size: 8px;"></i>Membangun Kerjasama yang harmonis dengan berbagai pihak dalam keterlibatan untuk peningkatan prestasi olahraga.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
         </div>
     </section>
 
@@ -121,6 +132,12 @@
 
 
     @include('viewpublik/layouts/footer')
+
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 
 </body>
 

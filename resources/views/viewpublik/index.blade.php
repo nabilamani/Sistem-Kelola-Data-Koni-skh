@@ -13,6 +13,7 @@
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         body {
             overflow-x: hidden;
@@ -123,6 +124,26 @@
         .contact-info button:hover {
             background-color: #ff5722;
         }
+
+        .map-frame {
+            border: 8px solid #ff7f50;
+            /* Warna kuning */
+            border-radius: 12px;
+            /* Sudut melengkung */
+            overflow: hidden;
+            /* Menjaga elemen iframe tetap dalam bingkai */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            /* Efek bayangan */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Animasi */
+        }
+
+        .map-frame:hover {
+            transform: scale(1.02);
+            /* Efek zoom saat hover */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            /* Bayangan lebih tebal saat hover */
+        }
     </style>
 </head>
 
@@ -132,38 +153,38 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-overlay mt-5">
-            <h1 class="hero-title text-white fst-italic">#SUKOHARJOMAKMUR</h1>
-            <p class="hero-subtitle">KONI Sukoharjo, wujudkan olahraga yang berprestasi dan menjunjung tinggi
+        <div class="hero-overlay mt-5" data-aos="zoom-in" data-aos-delay="0">
+            <h1 class="hero-title text-white fst-italic" data-aos="zoom-in" data-aos-delay="200">#SUKOHARJOMAKMUR</h1>
+            <p class="hero-subtitle" data-aos="zoom-in" data-aos-delay="400">KONI Sukoharjo, wujudkan olahraga yang berprestasi dan menjunjung tinggi
                 sportivitas.</p>
-            <a href="#" class="btn btn-warning">Selengkapnya</a>
+            <a href="#about-section" class="btn btn-warning" data-aos="zoom-in" data-aos-delay="600">Selengkapnya</a>
         </div>
     </section>
 
     <!-- New Section for Accumulated Data (outside hero-overlay) -->
     <div class="hero-stats py-4 bg-dark">
         <div class="container text-center">
-            <h2 class="text-white mb-2">Statistik Olahraga Sukoharjo</h2>
-            <p class="">Data terkini mengenai atlet, wasit, pelatih, event, dan prestasi olahraga di
-                Sukoharjo.</p>
+            <h2 class="text-white mb-2" data-aos="fade-up">Statistik Olahraga Sukoharjo</h2>
+            <p data-aos="fade-up" data-aos-delay="100">Data terkini mengenai atlet, wasit, pelatih, event, dan prestasi
+                olahraga di Sukoharjo.</p>
             <div class="row justify-content-center mt-4">
-                <div class="col-md-2 text-center border-end akumulasi">
+                <div class="col-md-2 text-center border-end akumulasi" data-aos="zoom-in" data-aos-delay="200">
                     <h3 class="count mt-1 text-primary" data-count="{{ $athleteCount }}">0</h3>
                     <p>Atlet</p>
                 </div>
-                <div class="col-md-2 text-center border-end">
+                <div class="col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="300">
                     <h3 class="count mt-1 text-primary" data-count="{{ $refereeteCount }}">0</h3>
                     <p>Wasit</p>
                 </div>
-                <div class="col-md-2 text-center border-end">
+                <div class="col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="400">
                     <h3 class="count mt-1 text-primary" data-count="{{ $coachCount }}">0</h3>
                     <p>Pelatih</p>
                 </div>
-                <div class="col-md-2 text-center border-end">
+                <div class="col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="500">
                     <h3 class="count mt-1 text-primary" data-count="{{ $eventCount }}">0</h3>
                     <p>Event</p>
                 </div>
-                <div class="col-md-2 text-center">
+                <div class="col-md-2 text-center" data-aos="zoom-in" data-aos-delay="600">
                     <h3 class="count mt-1 text-primary" data-count="{{ $achievementCount }}">0</h3>
                     <p>Prestasi</p>
                 </div>
@@ -173,7 +194,8 @@
 
 
 
-    <section class="py-5 bg-light"
+
+    <section class="py-5 bg-light" id="about-section"
         style="position: relative; background-image: url('https://images.vexels.com/media/users/3/297088/raw/3ff1701de8a5291ad893656da9bfaf18-running-sports-pattern-design.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
         <!-- Dark overlay effect -->
         <div
@@ -181,15 +203,16 @@
         </div>
 
         <div class="container text-center" style="position: relative; z-index: 2;">
-            <h2 class="fw-bold mb-4 text-white">KONI Sukoharjo</h2>
-            <p class="text-white mb-5 px-5 mx-5">KONI (Komite Olahraga Nasional Indonesia) Sukoharjo adalah organisasi
+            <h2 class="fw-bold mb-4 text-white" data-aos="fade-up">KONI Sukoharjo</h2>
+            <p class="text-white mb-5 px-5 mx-5" data-aos="fade-up" data-aos-delay="100">KONI (Komite Olahraga Nasional
+                Indonesia) Sukoharjo adalah organisasi
                 yang
                 bertanggung jawab untuk mengkoordinasikan kegiatan olahraga dan pembinaan atlet di Kabupaten Sukoharjo.
             </p>
 
             <div class="row gy-4">
                 <!-- Card 1: Cabor -->
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover cursor-pointer"
                         onclick="window.location.href='/olahraga/cabor'">
                         <i class="mdi mdi-basketball display-4 mb-3"></i>
@@ -198,7 +221,7 @@
                 </div>
 
                 <!-- Card 2: Atlet -->
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/olahraga/atlet';">
                         <i class="mdi mdi-account-outline display-4 mb-3"></i>
@@ -207,7 +230,7 @@
                 </div>
 
                 <!-- Card 3: Pelatih -->
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/olahraga/pelatih';">
                         <i class="mdi mdi-account-multiple-outline display-4 mb-3"></i>
@@ -216,7 +239,7 @@
                 </div>
 
                 <!-- Card 4: Berita Terkini -->
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/berita';">
                         <i class="mdi mdi-newspaper display-4 mb-3"></i>
@@ -225,7 +248,7 @@
                 </div>
 
                 <!-- Card 5: Prestasi Atlet -->
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/galeri/prestasi';">
                         <i class="mdi mdi-trophy-outline display-4 mb-3"></i>
@@ -234,7 +257,7 @@
                 </div>
 
                 <!-- Card 6: Wasit -->
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/olahraga/wasit';">
                         <i class="mdi mdi-whistle display-4 mb-3"></i>
@@ -242,22 +265,27 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
 
     <section class="py-5 bg-dark">
         <div class="container text-center">
-            <h2 class="fw-bold mb-4 text-white">Berita Terbaru</h2>
-            <p class="text-white mb-5 mx-5">
+            <!-- Judul Section -->
+            <h2 class="fw-bold mb-4 text-white" data-aos="fade-up">Berita Terbaru</h2>
+            <!-- Subjudul -->
+            <p class="text-white mb-5 mx-5" data-aos="fade-up" data-aos-delay="100">
                 Temukan berita terkini dan informasi menarik seputar program, kegiatan, dan pencapaian olahraga di
                 Sukoharjo.
                 Kami menghadirkan informasi yang akurat, terpercaya, dan relevan untuk mendukung kemajuan dunia olahraga
-                di wilayah ini.
+                di
+                wilayah ini.
             </p>
+            <!-- Berita Cards -->
             <div class="row gy-4">
                 @foreach ($beritas as $berita)
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                         <div class="card border-0 shadow-sm position-relative hover-card h-100">
                             <img src="{{ asset($berita->photo) }}" class="card-img-top img-fluid"
                                 alt="{{ $berita->judul_berita }}"
@@ -290,10 +318,9 @@
                 @endforeach
             </div>
             <!-- Tombol Baca Berita Lain -->
-            <div class="text-center mt-5">
+            <div class="text-center mt-5" data-aos="zoom-in">
                 <a href="/berita" class="btn btn-outline-light btn-lg px-5 py-2 fw-bold bg-light">
                     Baca Berita Lain...
-
                 </a>
             </div>
         </div>
@@ -360,8 +387,8 @@
     <section id="faq" class="py-5 bg-white">
         <div class="container">
             <!-- Judul -->
-            <h2 class="text-center mb-3 fw-bold text-primary">PERTANYAAN UMUM</h2>
-            <p class="text-center mb-5 mx-5 text-secondary">
+            <h2 class="text-center mb-3 fw-bold text-primary" data-aos="fade-up">PERTANYAAN UMUM</h2>
+            <p class="text-center mb-5 mx-5 text-secondary" data-aos="fade-up" data-aos-delay="100">
                 Temukan jawaban atas berbagai pertanyaan yang sering diajukan terkait program, kegiatan, dan layanan
                 KONI Sukoharjo. Kami telah menyusun informasi ini untuk membantu Anda memahami peran dan kontribusi kami
                 dalam mendukung dunia olahraga di Sukoharjo.
@@ -370,7 +397,7 @@
             <!-- Accordion -->
             <div class="accordion" id="faqAccordion">
                 <!-- FAQ 1 -->
-                <div class="accordion-item border-0 mb-3 shadow-sm">
+                <div class="accordion-item border-0 mb-3 shadow-sm" data-aos="fade-up" data-aos-delay="200">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button d-flex align-items-center" type="button"
                             data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
@@ -393,7 +420,7 @@
                 </div>
 
                 <!-- FAQ 2 -->
-                <div class="accordion-item border-0 mb-3 shadow-sm">
+                <div class="accordion-item border-0 mb-3 shadow-sm" data-aos="fade-up" data-aos-delay="300">
                     <h2 class="accordion-header" id="headingTwo">
                         <button class="accordion-button collapsed d-flex align-items-center" type="button"
                             data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
@@ -413,7 +440,7 @@
                 </div>
 
                 <!-- FAQ 3 -->
-                <div class="accordion-item border-0 mb-3 shadow-sm">
+                <div class="accordion-item border-0 mb-3 shadow-sm" data-aos="fade-up" data-aos-delay="400">
                     <h2 class="accordion-header" id="headingThree">
                         <button class="accordion-button collapsed d-flex align-items-center" type="button"
                             data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
@@ -433,7 +460,7 @@
                 </div>
 
                 <!-- FAQ 4 -->
-                <div class="accordion-item border-0 shadow-sm">
+                <div class="accordion-item border-0 shadow-sm" data-aos="fade-up" data-aos-delay="500">
                     <h2 class="accordion-header" id="headingFour">
                         <button class="accordion-button collapsed d-flex align-items-center" type="button"
                             data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
@@ -456,38 +483,52 @@
 
     <section id="contact" class="py-5">
         <div class="container">
-            <h2 class="text-center fw-bold mb-2">Contact</h2>
-            <p class="text-center mb-5 text-black">
+            <!-- Judul -->
+            <h2 class="text-center fw-bold mb-2" data-aos="fade-up">Contact</h2>
+            <p class="text-center mb-5 text-black" data-aos="fade-up" data-aos-delay="100">
                 KONI Sukoharjo siap menjalin komunikasi yang baik dengan masyarakat, atlet, pelatih, dan semua pihak
-                yang
-                mendukung pengembangan olahraga di Sukoharjo. Jika Anda memiliki pertanyaan, masukan, atau informasi
-                yang
-                ingin disampaikan, silakan hubungi kami melalui saluran yang tersedia di bawah ini. Kami akan berusaha
-                memberikan
-                respon terbaik untuk kebutuhan Anda.
+                yang mendukung pengembangan olahraga di Sukoharjo. Jika Anda memiliki pertanyaan, masukan, atau
+                informasi
+                yang ingin disampaikan, silakan hubungi kami melalui saluran yang tersedia di bawah ini. Kami akan
+                berusaha
+                memberikan respon terbaik untuk kebutuhan Anda.
             </p>
+
             <div class="row align-items-center">
                 <!-- Embed Google Map -->
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7908.018331383531!2d110.84037000000001!3d-7.682162!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a3c415b43c431%3A0xa7e9cde5bba00946!2sKONI%20Kabupaten%20Sukoharjo!5e0!3m2!1sid!2sid!4v1731592172597!5m2!1sid!2sid"
-                        width="100%" height="300" style="border:0; border-radius: 8px;" allowfullscreen=""
-                        loading="lazy"></iframe>
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1200">
+                    <div class="map-frame">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7908.018331383531!2d110.84037000000001!3d-7.682162!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a3c415b43c431%3A0xa7e9cde5bba00946!2sKONI%20Kabupaten%20Sukoharjo!5e0!3m2!1sid!2sid!4v1731592172597!5m2!1sid!2sid"
+                            width="100%" height="300" style="border:0;" allowfullscreen=""
+                            loading="lazy"></iframe>
+                    </div>
                 </div>
 
+
                 <!-- Contact Information -->
-                <div class="col-lg-6">
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1200">
                     <div class="contact-info">
-                        <p><i class="mdi mdi-map-marker"></i> Jl. Veteran, Kutorejo, Jetis, Kec. Sukoharjo, Kabupaten
-                            Sukoharjo, Jawa Tengah 57511</p>
-                        <p><i class="mdi mdi-phone"></i> (021)593023</p>
-                        <p><i class="mdi mdi-email"></i> konisukoharjo@yahoo.com</p>
-                        <button class="btn btn-warning text-white">Kirim Pesan</button>
+                        <p data-aos="zoom-in" data-aos-delay="200">
+                            <i class="mdi mdi-map-marker me-2"></i>
+                            Jl. Veteran, Kutorejo, Jetis, Kec. Sukoharjo, Kabupaten Sukoharjo, Jawa Tengah 57511
+                        </p>
+                        <p data-aos="zoom-in" data-aos-delay="300">
+                            <i class="mdi mdi-phone me-2"></i>
+                            (021)593023
+                        </p>
+                        <p data-aos="zoom-in" data-aos-delay="400">
+                            <i class="mdi mdi-email me-2"></i>
+                            konisukoharjo@yahoo.com
+                        </p>
+                        <button href="/kontak" class="btn btn-warning text-white mt-3" data-aos="flip-up" data-aos-delay="500">Kirim
+                            Pesan</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 
     @include('viewpublik/layouts/footer')
 
@@ -519,6 +560,21 @@
             });
         });
     </script>
+    <script>
+        document.querySelector('.scroll-to-section').addEventListener('click', function(e) {
+            e.preventDefault(); // Mencegah aksi default anchor
+            const target = document.querySelector('#about-section');
+            target.scrollIntoView({
+                behavior: 'smooth', // Efek smooth scroll
+                block: 'start' // Mulai scroll ke bagian atas target
+            });
+        });
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
 
 
 </body>

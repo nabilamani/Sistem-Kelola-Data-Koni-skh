@@ -13,6 +13,7 @@
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
         body {
             overflow-x: hidden;
@@ -64,7 +65,7 @@
 
     <div class="container my-5">
         <h2 class="text-center mb-4 text-white">Daftar Prestasi Atlet KONI Sukoharjo</h2>
-    
+
         <!-- Tombol untuk mengganti tampilan -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <!-- Tombol untuk mengganti tampilan -->
@@ -72,15 +73,15 @@
                 <button id="card-view-btn" class="btn btn-primary active">Card View</button>
                 <button id="table-view-btn" class="btn btn-secondary">Table View</button>
             </div>
-    
+
             <!-- Form Pencarian -->
             <form action="{{ route('showPrestasi') }}" method="GET" class="d-flex">
-                <input type="text" name="search" class="form-control me-2"
-                    placeholder="Cari prestasi atau cabang olahraga..." value="{{ request('search') }}">
+                <input type="text" name="search" class="form-control me-2" placeholder="Cari prestasi atau cabor..."
+                    value="{{ request('search') }}">
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
         </div>
-    
+
         <!-- Tampilan Card -->
         <div id="card-view" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
             @foreach ($achievements as $achievement)
@@ -91,14 +92,14 @@
                             <p class="text-muted">Cabang: {{ $achievement->sport_category }}</p>
                             <p class="text-muted">Event: {{ $achievement->event_type }}</p>
                             <a href="#" class="btn btn-primary btn-sm"
-                                onclick="showAchievementDetails({{ json_encode($achievement) }})" data-bs-toggle="modal"
-                                data-bs-target="#achievementDetailModal">Detail</a>
+                                onclick="showAchievementDetails({{ json_encode($achievement) }})"
+                                data-bs-toggle="modal" data-bs-target="#achievementDetailModal">Detail</a>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
-    
+
         <!-- Tampilan Tabel -->
         <div id="table-view" class="table-responsive rounded" style="display: none;">
             <table class="table table-bordered table-striped">
@@ -125,21 +126,21 @@
                             <td>{{ Str::limit($achievement->description, 50) }}</td>
                             <td>
                                 <a href="#" class="btn btn-primary btn-sm"
-                                    onclick="showAchievementDetails({{ json_encode($achievement) }})" data-bs-toggle="modal"
-                                    data-bs-target="#achievementDetailModal">Detail</a>
+                                    onclick="showAchievementDetails({{ json_encode($achievement) }})"
+                                    data-bs-toggle="modal" data-bs-target="#achievementDetailModal">Detail</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-    
+
         <!-- Pagination -->
         <div class="mt-4">
             {{ $achievements->links('layouts.pagination') }}
         </div>
     </div>
-    
+
     <!-- Modal Detail -->
     <div class="modal fade" id="achievementDetailModal" tabindex="-1" aria-labelledby="achievementDetailModalLabel"
         aria-hidden="true">
@@ -210,6 +211,9 @@
     // Memuat tampilan saat halaman dimuat
     document.addEventListener('DOMContentLoaded', loadAchievementView);
 </script>
-
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 
 </html>

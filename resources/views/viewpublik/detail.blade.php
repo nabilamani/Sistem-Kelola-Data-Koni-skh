@@ -60,7 +60,10 @@
             height: 80px;
             object-fit: contain;
         }
-
+        .breadcrumb {
+            border-top: 5px solid #FF9800;
+            border-radius: 15px;
+        }
     </style>
 </head>
 
@@ -79,7 +82,13 @@
     </section>
 
 
-    <div class="container my-5">
+    <div class="container my-4">
+        <nav class="breadcrumb bg-transparent px-3 py-3 shadow-sm">
+            <a class="breadcrumb-item text-decoration-none" href="/">Home</a>
+            <span class="breadcrumb-item active text-primary">Olahraga</span>
+            <a class="breadcrumb-item text-decoration-none text-primary" href="/olahraga/cabor">Cabor</a>
+            <span class="breadcrumb-item active text-primary">Detail</span>
+        </nav>
         <h2 class="mb-4">{{ $SportCategory->nama_cabor }}</h2>
         <div class="card p-4">
             <div class="row">
