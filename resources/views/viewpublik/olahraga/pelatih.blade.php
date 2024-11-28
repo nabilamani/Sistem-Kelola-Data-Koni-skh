@@ -80,6 +80,29 @@
         .coach-details {
             padding: 20px;
         }
+
+        .table-borderless td {
+            vertical-align: top;
+            padding: 0.3rem 0;
+            /* Mengurangi jarak atas dan bawah */
+        }
+
+        .table-borderless td:first-child {
+            width: 40px;
+            /* Kolom untuk ikon */
+            text-align: center;
+        }
+
+        .table-borderless td:nth-child(2) {
+            width: 150px;
+            /* Kolom untuk label */
+            text-align: left;
+        }
+
+        .table-borderless td:last-child {
+            text-align: left;
+            /* Konten dinamis rata kiri */
+        }
     </style>
 </head>
 
@@ -108,8 +131,8 @@
 
             <!-- Form Pencarian -->
             <form action="{{ route('showCoaches') }}" method="GET" class="d-flex">
-                <input type="text" name="search" class="form-control me-2"
-                    placeholder="Cari pelatih atau cabor..." value="{{ request('search') }}">
+                <input type="text" name="search" class="form-control me-2" placeholder="Cari pelatih atau cabor..."
+                    value="{{ request('search') }}">
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
         </div>
@@ -191,22 +214,30 @@
                             </div>
                             <div class="col-md-8">
                                 <h5 id="coachName" class="text-dark mb-3"></h5>
-                                <p class="mb-0">
-                                    <strong><i class="mdi mdi-soccer mr-1 text-primary"></i> Cabang Olahraga :</strong>
-                                    <span id="coachSportCategory"></span>
-                                </p>
-                                <p class="mb-0">
-                                    <strong><i class="mdi mdi-map-marker mr-1 text-primary"></i> Alamat :</strong>
-                                    <span id="coachAddress"></span>
-                                </p>
-                                <p class="mb-0">
-                                    <strong><i class="mdi mdi-calendar mr-1 text-primary"></i> Usia :</strong>
-                                    <span id="coachAge"></span> tahun
-                                </p>
-                                <p class="mb-0">
-                                    <strong><i class="mdi mdi-information mr-1 text-primary"></i> Deskripsi :</strong>
-                                    <span id="coachDescription"></span>
-                                </p>
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="mdi mdi-soccer text-primary"></i></td>
+                                            <td><strong>Cabang Olahraga</strong></td>
+                                            <td id="coachSportCategory">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="mdi mdi-map-marker text-primary"></i></td>
+                                            <td><strong>Alamat</strong></td>
+                                            <td id="coachAddress">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="mdi mdi-calendar text-primary"></i></td>
+                                            <td><strong>Usia</strong></td>
+                                            <td><span id="coachAge">-</span> tahun</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="mdi mdi-information text-primary"></i></td>
+                                            <td><strong>Deskripsi</strong></td>
+                                            <td id="coachDescription">-</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

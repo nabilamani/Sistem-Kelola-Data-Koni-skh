@@ -35,18 +35,39 @@
         }
 
         .hero-overlay {
-            text-align: center;
+            width: 100%;
+            height: 100vh;
             background: rgba(0, 0, 0, 0.6);
+            /* Semi-transparent background */
             backdrop-filter: blur(5px);
-            padding: 50px;
-            border-radius: 10px;
+            /* Blurring the background for the glass effect */
+            padding: 50px 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            /* Optional: Border to enhance glass effect */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Optional: Adds depth */
             transition: transform 0.3s ease;
+            /* Smooth zoom effect */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
-        .hero-overlay:hover {
-            transform: scale(1.05);
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+        }
+
+        .hero-overlay .btn {
+            font-size: 1rem;
+            border-radius: 25px;
+            transition: transform 0.3s ease;
         }
 
         .profile-section {
@@ -72,16 +93,35 @@
 <body>
     @include('viewpublik/layouts/navbar')
 
+    <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-overlay mt-5">
-            <h1 class="hero-title text-white fst-italic">#TENTANG_KONI_SKH</h1>
-            <p class="hero-subtitle">KONI Sukoharjo, wujudkan olahraga yang berprestasi dan menjunjung tinggi
-                sportivitas.</p>
-            <a href="#" class="btn btn-warning">Selengkapnya</a>
+        <div class="hero-overlay d-flex flex-column justify-content-center align-items-center text-center px-5 py-5"
+            data-aos="zoom-in" data-aos-delay="0">
+            <!-- Lottie Player -->
+            <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+            <div class="lottie-container mb-4">
+                <dotlottie-player src="https://lottie.host/f7e21688-11aa-41f4-bfc3-885a4483adf5/lK6R71kTw0.lottie" background="transparent" speed="1" style="width: 250px; height: 250px" loop autoplay></dotlottie-player>
+            </div>
+
+            <!-- Hero Title -->
+            <h1 class="hero-title text-white fst-italic mb-3" data-aos="zoom-in" data-aos-delay="200">
+                #TENTANG_KONI_SKH
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="hero-subtitle text-white mb-4" data-aos="zoom-in" data-aos-delay="400">
+                KONI Sukoharjo, wujudkan olahraga yang berprestasi dan menjunjung tinggi
+                sportivitas.
+            </p>
+
+            <!-- Button -->
+            <a href="#tentang-section" class="btn btn btn-warning px-4 py-2" data-aos="zoom-in" data-aos-delay="600">
+                Selengkapnya
+            </a>
         </div>
     </section>
 
-    <section class="profile-section py-4">
+    <section class="profile-section py-4" id="tentang-section">
         <div class="container">
             <nav class="breadcrumb bg-transparent px-3 py-3 shadow-sm">
                 <a class="breadcrumb-item text-decoration-none" href="/">Home</a>

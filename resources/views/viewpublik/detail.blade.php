@@ -74,7 +74,7 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-overlay mt-5">
-            <h1 class="hero-title text-white fst-italic">#SUKOHARJOMAKMUR</h1>
+            <h1 class="hero-title text-white fst-italic">#DETAIL_CABOR_SKH</h1>
             <p class="hero-subtitle">KONI Sukoharjo, wujudkan olahraga yang berprestasi dan menjunjung tinggi
                 sportivitas.</p>
             <a href="#" class="btn btn-warning">Selengkapnya</a>

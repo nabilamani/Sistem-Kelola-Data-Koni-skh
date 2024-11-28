@@ -18,6 +18,7 @@
         body {
             overflow-x: hidden;
         }
+
         .hero-section {
             height: 100vh;
             background: url('https://portal.sukoharjokab.go.id/wp-content/uploads/2024/01/20240111-peresmian-gor-dprri1.jpg') no-repeat center center;
@@ -28,44 +29,63 @@
             justify-content: center;
             position: relative;
             color: white;
-            
+
         }
 
         .hero-overlay {
-            text-align: center;
+            width: 100%;
+            height: 100vh;
             background: rgba(0, 0, 0, 0.6);
             /* Semi-transparent background */
             backdrop-filter: blur(5px);
             /* Blurring the background for the glass effect */
-            padding: 50px;
-            border-radius: 10px;
+            padding: 50px 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             /* Optional: Border to enhance glass effect */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             /* Optional: Adds depth */
             transition: transform 0.3s ease;
             /* Smooth zoom effect */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
-        /* Optional: Zoom-in effect on hover */
-        .hero-overlay:hover {
-            transform: scale(1.05);
-            /* Slight zoom-in */
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
         }
+
+        .hero-subtitle {
+            font-size: 16px;
+        }
+
+        .hero-overlay .btn {
+            font-size: 1rem;
+            border-radius: 25px;
+            transition: transform 0.3s ease;
+        }
+
+
         .sport-card {
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease;
             border-top: solid 3px #E00818;
         }
+
         .sport-card:hover {
             transform: translateY(-10px);
         }
+
         .sport-logo {
             width: 80px;
             height: 80px;
             object-fit: contain;
         }
+
         .breadcrumb {
             border-right: 5px solid #E00818;
             border-radius: 15px;
@@ -74,20 +94,40 @@
 </head>
 
 <body>
-    
+
     @include('viewpublik/layouts/navbar')
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-overlay mt-5">
-            <h1 class="hero-title text-white fst-italic">#CABOR_KONI_SKH</h1>
-            <p class="hero-subtitle">KONI Sukoharjo, wujudkan Peluang Emas untuk Para Atlet Muda Sukoharjo.</p>
-            <a href="#" class="btn btn-warning">Selengkapnya</a>
+        <div class="hero-overlay d-flex flex-column justify-content-center align-items-center text-center px-5 py-5"
+            data-aos="zoom-in" data-aos-delay="0">
+            <!-- Lottie Player -->
+            <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+            <div class="lottie-container mb-4">
+                <dotlottie-player src="https://lottie.host/55b08a51-c7ba-4378-b360-11de20d377bd/GAHH8rAzYz.lottie" background="transparent" speed="1" style="width: 250px; height: 250px" loop autoplay></dotlottie-player>
+            </div>
+
+            <!-- Hero Title -->
+            <h1 class="hero-title text-white fst-italic mb-3" data-aos="zoom-in" data-aos-delay="200">
+                #CABOR_KONI_SKH
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="hero-subtitle text-white mb-4" data-aos="zoom-in" data-aos-delay="400">
+                KONI Sukoharjo, wujudkan Peluang Emas untuk Para Atlet Muda Sukoharjo.
+            </p>
+
+            <!-- Button -->
+            <a href="#cabor-section" class="btn btn btn-warning px-4 py-2" data-aos="zoom-in" data-aos-delay="600">
+                Selengkapnya
+            </a>
         </div>
     </section>
 
 
-    <section>
+
+
+    <section id="cabor-section">
         <div class="container my-4">
             <nav class="breadcrumb bg-transparent px-3 py-3 shadow-sm">
                 <a class="breadcrumb-item text-decoration-none" href="/">Home</a>
@@ -95,16 +135,16 @@
                 <span class="breadcrumb-item active text-primary">Cabor</span>
             </nav>
             <h2 class="text-center">Ragam Cabang Olahraga</h2>
-            <p class="text-center mb-4 text-dark">Temukan berbagai cabang olahraga yang tersedia untuk mendukung aktivitas dan prestasi Anda.</p>
+            <p class="text-center mb-4 text-dark">Temukan berbagai cabang olahraga yang tersedia untuk mendukung
+                aktivitas dan prestasi Anda.</p>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 @forelse($SportCategories as $SportCategory)
                     <div class="col-md-3">
                         <a href="{{ route('cabor.show', $SportCategory->id) }}" class="text-decoration-none">
                             <div class="card text-center p-4 sport-card">
-                                <img src="{{ asset($SportCategory->logo ?? 'img/default.png') }}" 
-                                     alt="{{ $SportCategory->nama_cabor }}" 
-                                     class="sport-logo mx-auto mb-3" 
-                                     style="width: 100px; height: 100px; object-fit: cover;">
+                                <img src="{{ asset($SportCategory->logo ?? 'img/default.png') }}"
+                                    alt="{{ $SportCategory->nama_cabor }}" class="sport-logo mx-auto mb-3"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
                                 <h5 class="text-dark">{{ $SportCategory->nama_cabor }}</h5>
                                 <p class="text-muted">{{ $SportCategory->sport_category }}</p>
                             </div>
@@ -118,8 +158,8 @@
             </div>
         </div>
     </section>
-    
-    
+
+
 
     @include('viewpublik/layouts/footer')
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

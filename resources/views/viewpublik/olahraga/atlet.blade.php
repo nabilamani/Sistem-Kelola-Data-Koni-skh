@@ -80,6 +80,28 @@
         .athlete-details {
             padding: 20px;
         }
+
+        .table-borderless td {
+            vertical-align: top;
+            padding: 0.2rem 0;
+            /* Mengurangi jarak atas dan bawah */
+        }
+
+        .table-borderless td:first-child {
+            width: 40px;
+            /* Kolom untuk ikon */
+            text-align: center;
+        }
+
+        .table-borderless td:nth-child(2) {
+            width: 150px;
+            /* Kolom untuk label */
+        }
+
+        .table-borderless td:last-child {
+            text-align: left;
+            /* Konten dinamis rata kiri */
+        }
     </style>
 </head>
 
@@ -108,8 +130,8 @@
 
             <!-- Form Pencarian -->
             <form action="{{ route('showAthletes') }}" method="GET" class="d-flex">
-                <input type="text" name="search" class="form-control me-2"
-                    placeholder="Cari atlet atau cabor..." value="{{ request('search') }}">
+                <input type="text" name="search" class="form-control me-2" placeholder="Cari atlet atau cabor..."
+                    value="{{ request('search') }}">
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
         </div>
@@ -197,23 +219,45 @@
                         <div class="col-md-8">
                             <!-- Detail Atlet -->
                             <h5 id="athleteName" class="text-dark mb-3"></h5>
-                            <p class="mb-0"><i class="mdi mdi-trophy text-primary"></i> <strong>Cabang Olahraga
-                                    :</strong> <span id="athleteSportCategory"></span></p>
-                            <p class="mb-0"><i class="mdi mdi-calendar text-primary"></i> <strong>Tanggal Lahir
-                                    :</strong> <span id="athleteBirthDate"></span> (<span id="athleteAge"></span>
-                                tahun)</p>
-                            <p class="mb-0"><i class="mdi mdi-gender-male-female text-primary"></i>
-                                <strong>Jenis Kelamin
-                                    :</strong> <span id="athleteGender"></span>
-                            </p>
-                            <p class="mb-0"><i class="mdi mdi-human text-primary"></i> <strong>Tinggi Badan
-                                    :</strong> <span id="athleteHeight"></span> cm</p>
-                            <p class="mb-0"><i class="mdi mdi-weight-kilogram text-primary"></i> <strong>Berat
-                                    Badan
-                                    :</strong> <span id="athleteWeight"></span> kg</p>
-                            <p class="mb-0"><i class="mdi mdi-medal text-primary"></i> <strong>Prestasi
-                                    :</strong></p>
-                            <ul id="athleteAchievements" class="list-group list-group-flush"></ul>
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td><i class="mdi mdi-trophy text-primary"></i></td>
+                                        <td><strong>Cabang Olahraga</strong></td>
+                                        <td id="athleteSportCategory">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="mdi mdi-calendar text-primary"></i></td>
+                                        <td><strong>Tanggal Lahir</strong></td>
+                                        <td>
+                                            <span id="athleteBirthDate">-</span> (<span id="athleteAge">-</span>
+                                            tahun)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="mdi mdi-gender-male-female text-primary"></i></td>
+                                        <td><strong>Jenis Kelamin</strong></td>
+                                        <td id="athleteGender">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="mdi mdi-human text-primary"></i></td>
+                                        <td><strong>Tinggi Badan</strong></td>
+                                        <td id="athleteHeight">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="mdi mdi-weight-kilogram text-primary"></i></td>
+                                        <td><strong>Berat Badan</strong></td>
+                                        <td id="athleteWeight">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="mdi mdi-medal text-primary"></i></td>
+                                        <td><strong>Prestasi</strong></td>
+                                        <td>
+                                            <ul id="athleteAchievements" class="list-unstyled mb-0"></ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

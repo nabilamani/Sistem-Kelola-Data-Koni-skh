@@ -35,18 +35,73 @@
         }
 
         .hero-overlay {
-            text-align: center;
+            width: 100%;
+            height: 100vh;
             background: rgba(0, 0, 0, 0.6);
+            /* Semi-transparent background */
             backdrop-filter: blur(5px);
-            padding: 50px;
-            border-radius: 10px;
+            /* Blurring the background for the glass effect */
+            padding: 50px 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            /* Optional: Border to enhance glass effect */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Optional: Adds depth */
+            transition: transform 0.3s ease;
+            /* Smooth zoom effect */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+        }
+
+        .hero-overlay .btn {
+            font-size: 1rem;
+            border-radius: 25px;
             transition: transform 0.3s ease;
         }
 
-        .hero-overlay:hover {
-            transform: scale(1.05);
+        .modal-content {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            border-bottom: 2px solid #ffca2c;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .table-borderless td {
+            vertical-align: middle;
+            padding: 0.5rem 0;
+        }
+
+        .table-borderless td:first-child {
+            width: 40px;
+            /* Ukuran kolom ikon */
+            text-align: center;
+        }
+
+        .table-borderless td:nth-child(2) {
+            width: 150px;
+            /* Ukuran kolom label */
+        }
+
+        .table-borderless td:last-child {
+            text-align: left;
+            /* Konten dinamis rata kiri */
         }
     </style>
 </head>
@@ -54,12 +109,32 @@
 <body>
     @include('viewpublik/layouts/navbar')
 
+    <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-overlay mt-5">
-            <h1 class="hero-title text-white fst-italic">#PRESTASI_KONI_SKH</h1>
-            <p class="hero-subtitle">KONI Sukoharjo, wujudkan olahraga yang berprestasi dan menjunjung tinggi
-                sportivitas.</p>
-            <a href="#" class="btn btn-warning">Selengkapnya</a>
+        <div class="hero-overlay d-flex flex-column justify-content-center align-items-center text-center px-5 py-5"
+            data-aos="zoom-in" data-aos-delay="0">
+            <!-- Lottie Player -->
+            <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+            <div class="lottie-container mb-4">
+                <dotlottie-player src="https://lottie.host/0c528def-1a6e-4b23-a603-012f2e44ec81/sckT9avbgL.lottie"
+                    background="transparent" speed="1" style="width: 250px; height: 250px" loop
+                    autoplay></dotlottie-player>
+            </div>
+
+            <!-- Hero Title -->
+            <h1 class="hero-title text-white fst-italic mb-3" data-aos="zoom-in" data-aos-delay="200">
+                #PRESTASI_KONI_SKH
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="hero-subtitle text-white mb-4" data-aos="zoom-in" data-aos-delay="400">
+                KONI Sukoharjo, wujudkan Peluang Emas untuk Para Atlet Muda Sukoharjo.
+            </p>
+
+            <!-- Button -->
+            <a href="#cabor-section" class="btn btn btn-warning px-4 py-2" data-aos="zoom-in" data-aos-delay="600">
+                Selengkapnya
+            </a>
         </div>
     </section>
 
@@ -108,7 +183,7 @@
                         <th>No</th>
                         <th>Nama Atlet</th>
                         <th>Cabang Olahraga</th>
-                        <th>Event</th>
+                        <th>Format</th>
                         <th>Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
@@ -144,21 +219,49 @@
     <!-- Modal Detail -->
     <div class="modal fade" id="achievementDetailModal" tabindex="-1" aria-labelledby="achievementDetailModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="achievementDetailModalLabel">Detail Prestasi</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow-lg">
+                <!-- Modal Header -->
+                <div class="modal-header bg-warning d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title text-white" id="achievementDetailModalLabel">
+                        <i class="mdi mdi-trophy-outline me-2 text-white"></i>Detail Prestasi
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white text-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
+
+                <!-- Modal Body -->
                 <div class="modal-body">
-                    <p><strong>Nama Atlet:</strong> <span id="modal-athlete-name"></span></p>
-                    <p><strong>Cabang Olahraga:</strong> <span id="modal-sport-category"></span></p>
-                    <p><strong>Event:</strong> <span id="modal-event-type"></span></p>
-                    <p><strong>Deskripsi:</strong> <span id="modal-description"></span></p>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <td class="text-primary"><i class="mdi mdi-account-outline"></i></td>
+                                <td><strong>Nama Atlet</strong></td>
+                                <td id="modal-athlete-name">-</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><i class="mdi mdi-run-fast"></i></td>
+                                <td><strong>Cabang Olahraga</strong></td>
+                                <td id="modal-sport-category">-</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><i class="mdi mdi-account-group"></i></td>
+                                <td><strong>Format Team</strong></td>
+                                <td id="modal-event-type">-</td>
+                            </tr>
+                            <tr>
+                                <td class="text-primary"><i class="mdi mdi-information-outline"></i></td>
+                                <td><strong>Deskripsi</strong></td>
+                                <td id="modal-description">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+
+
 
 
 

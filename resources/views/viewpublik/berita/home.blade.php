@@ -35,25 +35,39 @@
         }
 
         .hero-overlay {
-            text-align: center;
+            width: 100%;
+            height: 100vh;
             background: rgba(0, 0, 0, 0.6);
             /* Semi-transparent background */
             backdrop-filter: blur(5px);
             /* Blurring the background for the glass effect */
-            padding: 50px;
-            border-radius: 10px;
+            padding: 50px 20px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             /* Optional: Border to enhance glass effect */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             /* Optional: Adds depth */
             transition: transform 0.3s ease;
             /* Smooth zoom effect */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
-        /* Optional: Zoom-in effect on hover */
-        .hero-overlay:hover {
-            transform: scale(1.05);
-            /* Slight zoom-in */
+        .hero-title {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+        }
+
+        .hero-overlay .btn {
+            font-size: 1rem;
+            border-radius: 25px;
+            transition: transform 0.3s ease;
         }
 
         @keyframes scrollingText {
@@ -91,16 +105,36 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-overlay mt-5">
-            <h1 class="hero-title text-white fst-italic">#SEPUTAR_BERITA</h1>
-            <p class="hero-subtitle">KONI Sukoharjo, wujudkan olahraga yang berprestasi dan menjunjung tinggi
-                sportivitas.</p>
-            <a href="#" class="btn btn-warning">Selengkapnya</a>
+        <div class="hero-overlay d-flex flex-column justify-content-center align-items-center text-center px-5 py-5"
+            data-aos="zoom-in" data-aos-delay="0">
+            <!-- Lottie Player -->
+            <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+            <div class="lottie-container mb-4">
+                <dotlottie-player src="https://lottie.host/57d4c8ea-7162-4113-ab37-4b6c30135c79/R0LluXh7G3.lottie"
+                    background="transparent" speed="1" style="width: 250px; height: 250px" loop
+                    autoplay></dotlottie-player>
+            </div>
+
+            <!-- Hero Title -->
+            <h1 class="hero-title text-white fst-italic mb-3" data-aos="zoom-in" data-aos-delay="200">
+                #SEPUTAR_BERITA
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="hero-subtitle text-white mb-4" data-aos="zoom-in" data-aos-delay="400">
+                KONI Sukoharjo, wujudkan olahraga yang berprestasi dan menjunjung tinggi
+                sportivitas.
+            </p>
+
+            <!-- Button -->
+            <a href="#berita-section" class="btn btn btn-warning px-4 py-2" data-aos="zoom-in" data-aos-delay="600">
+                Selengkapnya
+            </a>
         </div>
     </section>
 
 
-    <section
+    <section id="berita-section"
         style="background-image: url('https://images.vexels.com/media/users/3/297088/raw/3ff1701de8a5291ad893656da9bfaf18-running-sports-pattern-design.jpg'); background-size: cover; background-position: center; background-attachment: fixed; position: relative;">
         <!-- Running Text -->
         <div style="position: absolute; top: 0; width: 100%; background-color: #FF6924; z-index: 3; overflow: hidden;">
@@ -230,7 +264,8 @@
                                 @foreach ($beritaLatepost as $berita)
                                     <div class="d-flex align-items-start mb-3 berita-item p-1"
                                         data-id="{{ $berita->id }}" data-judul="{{ $berita->judul_berita }}"
-                                        data-photo="{{ asset($berita->photo) }}" data-isi="{{ $berita->isi_berita }}"
+                                        data-photo="{{ asset($berita->photo) }}"
+                                        data-isi="{{ $berita->isi_berita }}"
                                         data-tanggal="{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d F Y') }}"
                                         data-lokasi="{{ $berita->lokasi_peristiwa }}"
                                         data-sumber="{{ $berita->kutipan_sumber }}">
@@ -291,13 +326,11 @@
 
                                             <!-- Sport Category -->
                                             <small class="text-muted">
-                                                <i
-                                                    class="mdi mdi-soccer me-2"></i>{{ $event->sport_category }}
+                                                <i class="mdi mdi-soccer me-2"></i>{{ $event->sport_category }}
                                             </small>
                                         </div>
                                     </div>
                                     <hr class="my-1">
-
                                 @endforeach
 
 
@@ -435,7 +468,6 @@
     <script>
         AOS.init();
     </script>
-
 </body>
 
 </html>

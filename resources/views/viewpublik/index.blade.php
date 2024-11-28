@@ -157,7 +157,7 @@
             <h1 class="hero-title text-white fst-italic" data-aos="zoom-in" data-aos-delay="200">#SUKOHARJOMAKMUR</h1>
             <p class="hero-subtitle" data-aos="zoom-in" data-aos-delay="400">KONI Sukoharjo, wujudkan olahraga yang berprestasi dan menjunjung tinggi
                 sportivitas.</p>
-            <a href="#about-section" class="btn btn-warning" data-aos="zoom-in" data-aos-delay="600">Selengkapnya</a>
+            <a href="#about-section" class="btn btn-warning rounded-5" data-aos="zoom-in" data-aos-delay="600">Selengkapnya</a>
         </div>
     </section>
 
