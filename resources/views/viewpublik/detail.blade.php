@@ -96,7 +96,7 @@
                     <img src="{{ asset($SportCategory->logo ?? 'img/default.png') }}" 
                          alt="{{ $SportCategory->nama_cabor }}" 
                          class="img-fluid mb-3" 
-                         style="width: 150px; height: 150px; object-fit: cover;">
+                         style="width: 150px; height: 150px; object-fit: contain;">
                 </div>
                 <div class="col-md-8">
                     <table class="table table-bordered">

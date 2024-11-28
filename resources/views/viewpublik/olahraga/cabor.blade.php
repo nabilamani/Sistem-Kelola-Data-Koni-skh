@@ -104,7 +104,9 @@
             <!-- Lottie Player -->
             <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
             <div class="lottie-container mb-4">
-                <dotlottie-player src="https://lottie.host/55b08a51-c7ba-4378-b360-11de20d377bd/GAHH8rAzYz.lottie" background="transparent" speed="1" style="width: 250px; height: 250px" loop autoplay></dotlottie-player>
+                <dotlottie-player src="https://lottie.host/55b08a51-c7ba-4378-b360-11de20d377bd/GAHH8rAzYz.lottie"
+                    background="transparent" speed="1" style="width: 250px; height: 250px" loop
+                    autoplay></dotlottie-player>
             </div>
 
             <!-- Hero Title -->
@@ -144,7 +146,8 @@
                             <div class="card text-center p-4 sport-card">
                                 <img src="{{ asset($SportCategory->logo ?? 'img/default.png') }}"
                                     alt="{{ $SportCategory->nama_cabor }}" class="sport-logo mx-auto mb-3"
-                                    style="width: 100px; height: 100px; object-fit: cover;">
+                                    style="width: 100px; height: 100px; object-fit: contain; background-color: #ffff;">
+
                                 <h5 class="text-dark">{{ $SportCategory->nama_cabor }}</h5>
                                 <p class="text-muted">{{ $SportCategory->sport_category }}</p>
                             </div>

@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="{{ asset('gambar_aset/vendor/owl-carousel/css/owl.theme.default.min.css') }}">
     <link href="{{ asset('gambar_aset/vendor/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <style>
@@ -338,6 +339,22 @@
     <script>
         AOS.init();
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#table-view').DataTable({
+                order: [], // Tidak ada kolom diurutkan secara default
+                columnDefs: [{
+                        orderable: false,
+                        targets: 8
+                    } // Kolom aksi tidak bisa diurutkan
+                ],
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/Indonesian.json' // Bahasa Indonesia
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 </body>
 
 </html>

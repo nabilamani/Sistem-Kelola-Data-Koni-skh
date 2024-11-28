@@ -104,32 +104,66 @@
 
     <section class="container my-5">
         <h2 class="text-center text-uppercase mb-4 text-white">Galeri Dokumentasi</h2>
-        <div class="row">
+        <div class="row g-4">
             @foreach ($galleries as $gallery)
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card shadow-sm border-0 d-flex flex-column h-100">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm border-0 h-80 overflow-hidden">
                         @if ($gallery->media_type === 'photo')
-                            <img src="{{ asset($gallery->media_path) }}" class="card-img-top"
-                                alt="{{ $gallery->title }}">
+                            <img src="{{ asset($gallery->media_path) }}" class="card-img-top img-fluid"
+                                alt="{{ $gallery->title }}" style="object-fit: cover; height: 200px;">
                         @elseif ($gallery->media_type === 'video')
-                            <video class="card-img-top" controls>
+                            <video class="card-img-top" controls style="height: 200px; width: 101%; object-fit: cover;">
                                 <source src="{{ asset($gallery->media_path) }}" type="video/mp4">
                                 Browser Anda tidak mendukung video.
                             </video>
                         @endif
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title fw-bold">{{ $gallery->title }}</h5>
+                            <h5 class="card-title fw-bold text-primary">{{ $gallery->title }}</h5>
                             <p class="card-text text-muted small">
-                                <span class="badge bg-primary">{{ $gallery->sport_category }}</span>
+                                <span class="badge bg-primary mb-2">{{ $gallery->sport_category }}</span>
                                 <br>{{ $gallery->date }} | {{ $gallery->location }}
                             </p>
-                            <p class="card-text">{{ Str::limit($gallery->description, 100, '...') }}</p>
-                            <a href="#" class="btn btn-warning btn-sm mt-auto">Lihat Detail</a>
+                            <button type="button" class="btn btn-warning btn-sm mt-auto" data-bs-toggle="modal"
+                                data-bs-target="#modalDetail{{ $gallery->id }}">
+                                Lihat Detail
+                            </button>
                         </div>
                     </div>
                 </div>
-            @endforeach 
-        </div>
+        
+                <!-- Modal -->
+                <div class="modal fade" id="modalDetail{{ $gallery->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $gallery->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel{{ $gallery->id }}">{{ $gallery->title }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                @if ($gallery->media_type === 'photo')
+                                    <img src="{{ asset($gallery->media_path) }}" class="img-fluid w-100 mb-3" alt="{{ $gallery->title }}">
+                                @elseif ($gallery->media_type === 'video')
+                                    <video class="w-100" controls>
+                                        <source src="{{ asset($gallery->media_path) }}" type="video/mp4">
+                                        Browser Anda tidak mendukung video.
+                                    </video>
+                                @endif
+                                <p class="mt-3">
+                                    <span class="badge bg-primary">{{ $gallery->sport_category }}</span>
+                                    <br><strong>Date:</strong> {{ $gallery->date }}
+                                    <br><strong>Location:</strong> {{ $gallery->location }}
+                                </p>
+                                <p>{{ $gallery->description }}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>        
+        
     </section>
 
 

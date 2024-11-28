@@ -15,6 +15,7 @@
     <link href="{{ asset('gambar_aset/vendor/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css"> --}}
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
 
 
@@ -131,7 +132,7 @@
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="text-dark">
+                                        <tbody class="text-dark table-striped">
                                             @php
                                                 $no = ($athletes->currentPage() - 1) * $athletes->perPage() + 1;
                                             @endphp
@@ -178,7 +179,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                
+
                                                 <!-- Modal for Athlete Details -->
                                                 <div class="modal fade" id="athleteDetailModal{{ $athlete->id }}"
                                                     tabindex="-1" role="dialog"
@@ -331,7 +332,7 @@
                                                                                     value="{{ $athlete->height }}"
                                                                                     required>
                                                                             </div>
-                                                                            
+
                                                                             <div class="form-group">
                                                                                 <label for="photo">Foto</label>
                                                                                 <input type="file"
@@ -369,7 +370,9 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    {{ $athletes->appends(request()->except('page'))->links() }}
+                                    <div class="mt-4">
+                                        {{ $athletes->appends(request()->except('page'))->links() }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -440,6 +443,21 @@
             <!-- Datatable -->
             <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
             <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#athleteTable').DataTable({
+                        paging: false, // Menonaktifkan paginasi
+                        searching: false, // Menonaktifkan pencarian
+                        info: false, // Menonaktifkan informasi tabel
+                        order: [], // Tidak ada kolom yang diurutkan secara default
+                        columnDefs: [{
+                                orderable: false,
+                                targets: 8
+                            } // Kolom aksi tidak bisa diurutkan
+                        ]
+                    });
+                });
+            </script>
 
 </body>
 
