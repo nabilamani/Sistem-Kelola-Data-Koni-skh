@@ -155,7 +155,7 @@
                         id="galeriDropdown" role="button" data-bs-toggle="dropdown">Galeri</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item {{ Request::is('galeri/foto') ? 'active' : '' }}"
-                                href="{{ url('/galeri/foto') }}">Foto</a></li>
+                                href="{{ url('/galeri/foto') }}">Dokumentasi</a></li>
                         <li><a class="dropdown-item {{ Request::is('galeri/video') ? 'active' : '' }}"
                                 href="{{ url('/galeri/video') }}">Video</a></li>
                         <li><a class="dropdown-item {{ Request::is('galeri/prestasi') ? 'active' : '' }}"
@@ -163,8 +163,8 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('kontak') ? 'active' : '' }}"
-                        href="{{ url('/kontak') }}">Kontak</a>
+                    <a class="nav-link {{ Request::is('messages/create') ? 'active' : '' }}"
+                        href="/messages/create">Kontak</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-warning text-white ms-3 px-3" href="{{ route('login') }}"

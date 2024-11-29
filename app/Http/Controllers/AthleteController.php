@@ -33,7 +33,7 @@ class AthleteController extends Controller
                     ->orWhere('sport_category', 'like', "%$search%");
             })
             ->orderBy('created_at', 'asc') // Sort results by creation date in ascending order
-            ->paginate(4); // Display 4 items per page
+            ->get(); // Display 4 items per page
 
         return view('Atlet.daftar', ['athletes' => $athletes, 'search' => $search]);
     }
@@ -95,7 +95,7 @@ class AthleteController extends Controller
 
         Athlete::create($data);
 
-        return redirect('/athletes')->with('success', 'Athlete successfully created!');
+        return redirect('/athletes')->with('message', 'Athlete successfully created!');
     }
 
     /**

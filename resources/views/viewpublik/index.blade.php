@@ -111,7 +111,7 @@
             margin-right: 10px;
         }
 
-        .contact-info button {
+        .contact-info a {
             background-color: #ff7f50;
             border: none;
             padding: 10px 20px;
@@ -121,7 +121,7 @@
             border-radius: 5px;
         }
 
-        .contact-info button:hover {
+        .contact-info a:hover {
             background-color: #ff5722;
         }
 
@@ -521,8 +521,8 @@
                             <i class="mdi mdi-email me-2"></i>
                             konisukoharjo@yahoo.com
                         </p>
-                        <button href="/kontak" class="btn btn-warning text-white mt-3" data-aos="flip-up" data-aos-delay="500">Kirim
-                            Pesan</button>
+                        <a href="/kontak" class="btn text-white mt-3" data-aos="flip-up" data-aos-delay="500">Kirim Pesan</a>
+
                     </div>
                 </div>
             </div>

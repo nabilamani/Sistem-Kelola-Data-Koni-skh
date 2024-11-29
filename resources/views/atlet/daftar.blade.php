@@ -15,8 +15,10 @@
     <link href="{{ asset('gambar_aset/vendor/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css"> --}}
+    {{-- <link rel="stylesheet" href="https//cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css"> --}}
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 
@@ -134,7 +136,7 @@
                                         </thead>
                                         <tbody class="text-dark table-striped">
                                             @php
-                                                $no = ($athletes->currentPage() - 1) * $athletes->perPage() + 1;
+                                                $no = 1;
                                             @endphp
                                             @foreach ($athletes as $athlete)
                                                 <tr>
@@ -370,9 +372,9 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <div class="mt-4">
+                                    {{-- <div class="mt-4">
                                         {{ $athletes->appends(request()->except('page'))->links() }}
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -446,18 +448,30 @@
             <script>
                 $(document).ready(function() {
                     $('#athleteTable').DataTable({
-                        paging: false, // Menonaktifkan paginasi
-                        searching: false, // Menonaktifkan pencarian
-                        info: false, // Menonaktifkan informasi tabel
-                        order: [], // Tidak ada kolom yang diurutkan secara default
-                        columnDefs: [{
+                        paging: true, // Enable pagination
+                        pageLength: 5, // Display 5 rows per page
+                        searching: true, // Enable search
+                        info: true, // Show table information
+                        order: [], // No default column sorting
+                        columnDefs: [
+                            {
                                 orderable: false,
-                                targets: 8
-                            } // Kolom aksi tidak bisa diurutkan
+                                targets: 8 // Disable sorting for the "actions" column
+                            }
                         ]
                     });
                 });
             </script>
+            
+            @if (Session::has('message'))
+            <script>
+                swal("Message","{{ Session::get('message') }}",'success',{
+                    button:true,
+                    button:"Ok",
+                    timer:3000
+                });
+            </script>
+            @endif
 
 </body>
 

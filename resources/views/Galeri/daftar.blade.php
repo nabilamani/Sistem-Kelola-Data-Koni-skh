@@ -280,12 +280,17 @@
                                                                     id="location" name="location"
                                                                     value="{{ $gallery->location }}" required>
                                                             </div>
+                                                            <div class="form-group mb-3">
+                                                                <label for="description">Deskripsi</label>
+                                                                <textarea class="form-control" id="description" name="description" rows="4" required>{{ $gallery->description }}</textarea>
+                                                            </div>
+
                                                             {{-- <div class="form-group mb-3">
                                                                 <label for="media_path">Unggah Media Baru</label>
                                                                 <input type="file" class="form-control"
                                                                     id="media_path" name="media_path"
                                                                     accept="image/*,video/*">
-                                                            </div> --}}
+                                                            </div> --}} 
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Batal</button>

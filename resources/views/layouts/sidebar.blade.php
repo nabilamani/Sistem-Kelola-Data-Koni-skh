@@ -105,13 +105,17 @@
                         </ul>
                     </li>
                     
-                    <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-volleyball"></i><span class="nav-text">Kelola Cabor</span></a>
+                    <li>
+                        <a class="has-arrow shadow" href="javascript:void()" aria-expanded="false">
+                            <i class="mdi mdi-comment-text"></i>  <!-- Changed icon to reflect message-related content -->
+                            <span class="nav-text">Pesan Saran</span>
+                        </a>
                         <ul aria-expanded="false">
-                            <li><a href="/sportcategories/create"><i class="mdi mdi-plus-circle-outline"></i>Tambah Cabor</a></li>
-                            <li><a href="/sportcategories"><i class="mdi mdi-format-list-bulleted"></i>Daftar Cabor</a></li>
+                            <li><a href="/messages"><i class="mdi mdi-format-list-bulleted"></i>Daftar Masukan</a></li>
                             {{-- <li><a href="/exportpem"><i class="mdi mdi-file-export"></i>Laporan</a></li> --}}
                         </ul>
                     </li>
+                    
 
                     <li><a class="has-arrow shadow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-account-box"></i><span class="nav-text">Akun</span></a>
                         <ul aria-expanded="false">

@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\KoniStructureController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RefereeController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SportCategoryController;
@@ -163,8 +164,9 @@ Route::resource('users', RegisteredUserController::class);
 Route::put('/edit-user/{id}', [RegisteredUserController::class, 'update']);
 Route::delete('/delete-user/{id}', [RegisteredUserController::class, 'destroy']);
 
-
-
+Route::resource('messages', MessageController::class);
+Route::put('/edit-message/{id}', [MessageController::class, 'update']);
+Route::delete('/delete-message/{id}', [MessageController::class, 'destroy']);
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

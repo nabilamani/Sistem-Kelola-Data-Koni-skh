@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Event - KONI Sukoharjo</title>
+    <title>Daftar Dokumentasi - KONI Sukoharjo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('gambar_aset/images/koni.png') }}">
     <link rel="stylesheet" href="{{ asset('gambar_aset/vendor/owl-carousel/css/owl.carousel.min.css') }}">
@@ -69,6 +69,28 @@
             border-radius: 25px;
             transition: transform 0.3s ease;
         }
+
+        .modal-header {
+            background: var(--bs-primary);
+            color: #fff;
+            border-bottom: none;
+        }
+
+        .modal-body img,
+        .modal-body video {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .modal-body hr {
+            margin: 1.5rem 0;
+        }
+
+        .modal-footer .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
     </style>
 </head>
 
@@ -82,7 +104,9 @@
             <!-- Lottie Player -->
             <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
             <div class="lottie-container mb-4">
-                <dotlottie-player src="https://lottie.host/4c230ea2-f229-4f12-8999-e233fd39e994/vxPccYpbmc.lottie" background="transparent" speed="1" style="width: 250px; height: 250px" loop autoplay></dotlottie-player>
+                <dotlottie-player src="https://lottie.host/4c230ea2-f229-4f12-8999-e233fd39e994/vxPccYpbmc.lottie"
+                    background="transparent" speed="1" style="width: 250px; height: 250px" loop
+                    autoplay></dotlottie-player>
             </div>
 
             <!-- Hero Title -->
@@ -130,40 +154,66 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <!-- Modal -->
-                <div class="modal fade" id="modalDetail{{ $gallery->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $gallery->id }}" aria-hidden="true">
+                <div class="modal fade" id="modalDetail{{ $gallery->id }}" tabindex="-1"
+                    aria-labelledby="modalLabel{{ $gallery->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalLabel{{ $gallery->id }}">{{ $gallery->title }}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <!-- Modal Header -->
+                            <div class="modal-header bg-primary text-white">
+                                <h5 class="modal-title" id="modalLabel{{ $gallery->id }}">
+                                    <i class="mdi mdi-image-multiple me-2"></i>{{ $gallery->title }}
+                                </h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
+
+                            <!-- Modal Body -->
                             <div class="modal-body">
+                                <!-- Media Display -->
                                 @if ($gallery->media_type === 'photo')
-                                    <img src="{{ asset($gallery->media_path) }}" class="img-fluid w-100 mb-3" alt="{{ $gallery->title }}">
+                                    <img src="{{ asset($gallery->media_path) }}"
+                                        class="img-fluid rounded w-100 mb-3 shadow" alt="{{ $gallery->title }}">
                                 @elseif ($gallery->media_type === 'video')
-                                    <video class="w-100" controls>
+                                    <video class="w-100 rounded shadow" controls>
                                         <source src="{{ asset($gallery->media_path) }}" type="video/mp4">
                                         Browser Anda tidak mendukung video.
                                     </video>
                                 @endif
-                                <p class="mt-3">
-                                    <span class="badge bg-primary">{{ $gallery->sport_category }}</span>
-                                    <br><strong>Date:</strong> {{ $gallery->date }}
-                                    <br><strong>Location:</strong> {{ $gallery->location }}
+
+                                <!-- Details -->
+                                <p class="mt-4">
+                                    <span class="badge bg-primary">
+                                        <i class="mdi mdi-soccer me-1"></i>{{ $gallery->sport_category }}
+                                    </span>
                                 </p>
-                                <p>{{ $gallery->description }}</p>
+                                <div class="d-flex align-items-center">
+                                    <p>
+                                        <i class="mdi mdi-calendar me-2 text-primary"></i>
+                                        <strong>Tanggal:</strong> {{ $gallery->date }}
+                                    </p>
+                                    <p>
+                                        <i class="mdi mdi-map-marker me-2 text-primary ms-2"></i>
+                                        <strong>Lokasi:</strong> {{ $gallery->location }}
+                                    </p>
+                                </div>
+                                <hr class="my-1">
+                                <p class="text-muted text-justify">{{ $gallery->description }}</p>
                             </div>
+
+                            <!-- Modal Footer -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    <i class="mdi mdi-close-circle-outline me-1"></i>Tutup
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
-        </div>        
-        
+        </div>
+
     </section>
 
 

@@ -14,6 +14,7 @@
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         body {
             overflow-x: hidden;
@@ -113,7 +114,9 @@
             <!-- Lottie Player -->
             <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
             <div class="lottie-container mb-4">
-                <dotlottie-player src="https://lottie.host/775e8687-9638-4575-bbb8-98c94cc476b7/stGPivomeJ.lottie" background="transparent" speed="1" style="width: 250px; height: 250px" loop autoplay></dotlottie-player>
+                <dotlottie-player src="https://lottie.host/775e8687-9638-4575-bbb8-98c94cc476b7/stGPivomeJ.lottie"
+                    background="transparent" speed="1" style="width: 250px; height: 250px" loop
+                    autoplay></dotlottie-player>
             </div>
 
             <!-- Hero Title -->
@@ -182,23 +185,28 @@
                     <h4 class="text-primary">
                         <i class="mdi mdi-message-text"></i> Kirim Pesan atau Saran
                     </h4>
-                    <form>
+                    <form action="{{ route('messages.store') }}" method="POST">
+                        @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label"><i class="mdi mdi-account-circle text-primary"></i>
-                                Nama Lengkap</label>
-                            <input type="text" id="name" class="form-control" placeholder="Masukkan nama Anda"
-                                required>
+                            <label for="name" class="form-label">
+                                <i class="mdi mdi-account-circle text-primary"></i> Nama Lengkap
+                            </label>
+                            <input type="text" id="name" name="name" class="form-control"
+                                placeholder="Masukkan nama Anda" required>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label"><i class="mdi mdi-email text-primary"></i>
-                                Email</label>
-                            <input type="email" id="email" class="form-control" placeholder="Masukkan email Anda"
-                                required>
+                            <label for="email" class="form-label">
+                                <i class="mdi mdi-email text-primary"></i> Email
+                            </label>
+                            <input type="email" id="email" name="email" class="form-control"
+                                placeholder="Masukkan email Anda" required>
                         </div>
                         <div class="mb-3">
-                            <label for="message" class="form-label"><i
-                                    class="mdi mdi-message-text-outline text-primary"></i> Pesan atau Saran</label>
-                            <textarea id="message" class="form-control" rows="5" placeholder="Tulis pesan atau saran Anda" required></textarea>
+                            <label for="message" class="form-label">
+                                <i class="mdi mdi-message-text-outline text-primary"></i> Pesan atau Saran
+                            </label>
+                            <textarea id="message" name="message" class="form-control" rows="5" placeholder="Tulis pesan atau saran Anda"
+                                required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">
                             <i class="mdi mdi-send"></i> Kirim Pesan
@@ -206,6 +214,7 @@
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -216,6 +225,15 @@
     <script>
         AOS.init();
     </script>
+    @if (Session::has('message'))
+    <script>
+        swal("Message","{{ Session::get('message') }}",'success',{
+            button:true,
+            button:"Ok",
+            timer:3000
+        });
+    </script>
+    @endif
 </body>
 
 </html>
