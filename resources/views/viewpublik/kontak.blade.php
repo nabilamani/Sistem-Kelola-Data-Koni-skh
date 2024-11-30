@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Event - KONI Sukoharjo</title>
+    <title>KONI Sukoharjo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('gambar_aset/images/koni.png') }}">
     <link rel="stylesheet" href="{{ asset('gambar_aset/vendor/owl-carousel/css/owl.carousel.min.css') }}">
@@ -14,7 +14,9 @@
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         body {
             overflow-x: hidden;
@@ -101,6 +103,23 @@
         .form-control {
             border-radius: 5px;
         }
+
+        .btn-custom {
+            background-color: #4CAF50;
+            /* Warna hijau custom */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-custom:hover {
+            background-color: #45a049;
+            color: #fff;
+            /* Warna hijau lebih gelap untuk hover */
+        }
     </style>
 </head>
 
@@ -185,7 +204,7 @@
                     <h4 class="text-primary">
                         <i class="mdi mdi-message-text"></i> Kirim Pesan atau Saran
                     </h4>
-                    <form action="{{ route('messages.store') }}" method="POST">
+                    <form id="messageForm" action="{{ route('messages.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">
@@ -225,15 +244,55 @@
     <script>
         AOS.init();
     </script>
-    @if (Session::has('message'))
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        swal("Message","{{ Session::get('message') }}",'success',{
-            button:true,
-            button:"Ok",
-            timer:3000
+        $(document).ready(function () {
+            $('#messageForm').on('submit', function (e) {
+                e.preventDefault(); // Mencegah reload halaman
+    
+                let formData = $(this).serialize(); // Ambil data form
+    
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            swal({
+                                title: "Berhasil!",
+                                text: response.message,
+                                icon: "success",
+                                buttons: {
+                                    confirm: {
+                                        text: "OK",
+                                        className: "btn btn-custom"
+                                    }
+                                }
+                            });
+                            $('#messageForm')[0].reset(); // Reset form
+                        }
+                    },
+                    error: function (xhr) {
+                        swal({
+                            title: "Gagal!",
+                            text: "Terjadi kesalahan. Silakan coba lagi.",
+                            icon: "error",
+                            buttons: {
+                                confirm: {
+                                    text: "OK",
+                                    className: "btn btn-danger"
+                                }
+                            }
+                        });
+                    }
+                });
+            });
         });
     </script>
-    @endif
+    
+    
+
+
 </body>
 
 </html>

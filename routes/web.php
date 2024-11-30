@@ -167,6 +167,9 @@ Route::delete('/delete-user/{id}', [RegisteredUserController::class, 'destroy'])
 Route::resource('messages', MessageController::class);
 Route::put('/edit-message/{id}', [MessageController::class, 'update']);
 Route::delete('/delete-message/{id}', [MessageController::class, 'destroy']);
+Route::patch('/messages/{message}/update-status', [MessageController::class, 'updateStatus'])->name('messages.updateStatus');
+
+
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

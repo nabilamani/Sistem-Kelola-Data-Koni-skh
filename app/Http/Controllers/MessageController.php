@@ -8,18 +8,18 @@ use Illuminate\Http\Request;
 class MessageController extends Controller
 {
     public function index(Request $request)
-{
-    $search = $request->input('search');
-    $messages = Message::when($search, function ($query) use ($search) {
+    {
+        $search = $request->input('search');
+        $messages = Message::when($search, function ($query) use ($search) {
             $query->where('name', 'like', "%$search%")
-                  ->orWhere('email', 'like', "%$search%")
-                  ->orWhere('message', 'like', "%$search%");
+                ->orWhere('email', 'like', "%$search%")
+                ->orWhere('message', 'like', "%$search%");
         })
-        ->orderBy('created_at', 'desc')
-        ->paginate(10);  // Paginate results with 10 per page
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);  // Paginate results with 10 per page
 
-    return view('pesan.daftar', compact('messages', 'search'));
-}
+        return view('pesan.daftar', compact('messages', 'search'));
+    }
 
     public function create()
     {
@@ -27,18 +27,19 @@ class MessageController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email',
-        'message' => 'required|string',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'message' => 'required|string',
+        ]);
 
-    Message::create($request->all());
-    
-    // Kirim session flash untuk notifikasi sukses
-    return redirect()->back()->with('message', 'Pesan berhasil dikirim!');
-}
+        Message::create($request->all());
+
+        // Kembalikan respons JSON untuk AJAX
+        return response()->json(['success' => true, 'message' => 'Pesan Anda telah berhasil terkirim. Terima kasih! 😊']);
+    }
+
 
 
     public function show(Message $message)
@@ -68,4 +69,15 @@ class MessageController extends Controller
         $message->delete();
         return redirect()->back()->with('success', 'Pesan berhasil dihapus!');
     }
+    public function updateStatus(Request $request, Message $message)
+{
+    $request->validate([
+        'is_read' => 'required|boolean',
+    ]);
+
+    $message->update(['is_read' => $request->is_read]);
+
+    return redirect()->back()->with('success', 'Status pesan berhasil diperbarui!');
+}
+
 }

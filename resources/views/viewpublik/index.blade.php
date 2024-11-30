@@ -521,7 +521,7 @@
                             <i class="mdi mdi-email me-2"></i>
                             konisukoharjo@yahoo.com
                         </p>
-                        <a href="/kontak" class="btn text-white mt-3" data-aos="flip-up" data-aos-delay="500">Kirim Pesan</a>
+                        <a href="/messages/create" class="btn text-white mt-3" data-aos="flip-up" data-aos-delay="500">Kirim Pesan</a>
 
                     </div>
                 </div>

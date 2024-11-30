@@ -21,6 +21,33 @@
 
 
 </head>
+<style>
+    /* Warna latar belakang dan tampilan untuk status */
+    .status-select {
+        appearance: none;
+        border-radius: 25px;
+        padding: 5px 10px;
+        border: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .status-read {
+        background-color: #28a745;
+        /* Hijau untuk Dibaca */
+    }
+
+    .status-unread {
+        background-color: #dc3545;
+        /* Merah untuk Belum Dibaca */
+    }
+
+    /* Tambahan untuk hover efek */
+    .status-select:hover {
+        opacity: 0.9;
+    }
+</style>
 
 <body>
 
@@ -125,6 +152,7 @@
                                                 <th>Nama Pengirim</th>
                                                 <th>Email</th>
                                                 <th>Pesan</th>
+                                                <th>Status</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -138,6 +166,21 @@
                                                     <td>{{ $message->name }}</td>
                                                     <td>{{ $message->email }}</td>
                                                     <td>{{ Str::limit($message->message, 50, '...') }}</td>
+                                                    <td>
+                                                        <form action="{{ route('messages.updateStatus', $message->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            
+                                                                <select name="is_read" class="form-control form-control-sm status-select {{ $message->is_read ? 'status-read' : 'status-unread' }}" onchange="this.form.submit()">
+                                                                    <option value="1" {{ $message->is_read ? 'selected' : '' }}>Dibaca</option>
+                                                                    <option value="0" {{ !$message->is_read ? 'selected' : '' }}>Belum Dibaca</option>
+                                                                </select>
+                                                            
+                                                        </form>
+                                                    </td>
+                                                    
+
+
                                                     <td>
                                                         <div class="dropdown">
                                                             <button
