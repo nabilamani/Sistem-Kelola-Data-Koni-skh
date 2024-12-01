@@ -17,8 +17,10 @@
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     {{-- <link rel="stylesheet" href="https//cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css"> --}}
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 
@@ -440,11 +442,19 @@
             <script src="{{ asset('gambar_aset/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
 
 
+
             <script src="{{ asset('gambar_aset/js/dashboard/dashboard-1.js') }}"></script>
 
             <!-- Datatable -->
             <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+
+            {{-- <!-- DataTables JavaScript -->
+            <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+
+            <!-- DataTables Bootstrap 5 integration -->
+            <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script> --}}
+
+
             <script>
                 $(document).ready(function() {
                     $('#athleteTable').DataTable({
@@ -453,24 +463,22 @@
                         searching: true, // Enable search
                         info: true, // Show table information
                         order: [], // No default column sorting
-                        columnDefs: [
-                            {
-                                orderable: false,
-                                targets: 8 // Disable sorting for the "actions" column
-                            }
-                        ]
+                        columnDefs: [{
+                            orderable: false,
+                            targets: 8 // Disable sorting for the "actions" column
+                        }]
                     });
                 });
             </script>
-            
+
             @if (Session::has('message'))
-            <script>
-                swal("Message","{{ Session::get('message') }}",'success',{
-                    button:true,
-                    button:"Ok",
-                    timer:3000
-                });
-            </script>
+                <script>
+                    swal("Berhasil", "{{ Session::get('message') }}", 'success', {
+                        button: true,
+                        button: "Ok",
+                        timer: 5000
+                    });
+                </script>
             @endif
 
 </body>

@@ -71,13 +71,16 @@ class MessageController extends Controller
     }
     public function updateStatus(Request $request, Message $message)
 {
-    $request->validate([
-        'is_read' => 'required|boolean',
-    ]);
-
+    // Validate the input
+    $request->validate(['is_read' => 'required|boolean']);
+    
+    // Update the message's status
     $message->update(['is_read' => $request->is_read]);
 
-    return redirect()->back()->with('success', 'Status pesan berhasil diperbarui!');
+    // Return a JSON response
+    return response()->json(['success' => true, 'message' => 'Status pesan berhasil diperbarui!']);
 }
+
+
 
 }

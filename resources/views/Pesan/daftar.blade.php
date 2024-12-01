@@ -16,7 +16,9 @@
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 
@@ -167,18 +169,26 @@
                                                     <td>{{ $message->email }}</td>
                                                     <td>{{ Str::limit($message->message, 50, '...') }}</td>
                                                     <td>
-                                                        <form action="{{ route('messages.updateStatus', $message->id) }}" method="POST">
+                                                        <form
+                                                            action="{{ route('messages.updateStatus', $message->id) }}"
+                                                            method="POST">
                                                             @csrf
                                                             @method('PATCH')
-                                                            
-                                                                <select name="is_read" class="form-control form-control-sm status-select {{ $message->is_read ? 'status-read' : 'status-unread' }}" onchange="this.form.submit()">
-                                                                    <option value="1" {{ $message->is_read ? 'selected' : '' }}>Dibaca</option>
-                                                                    <option value="0" {{ !$message->is_read ? 'selected' : '' }}>Belum Dibaca</option>
-                                                                </select>
-                                                            
+
+                                                            <select name="is_read"
+                                                                class="form-control form-control-sm status-select {{ $message->is_read ? 'status-read' : 'status-unread' }}">
+                                                                <option value="1"
+                                                                    {{ $message->is_read ? 'selected' : '' }}>Dibaca
+                                                                </option>
+                                                                <option value="0"
+                                                                    {{ !$message->is_read ? 'selected' : '' }}>Belum
+                                                                    Dibaca</option>
+                                                            </select>
                                                         </form>
+
+
                                                     </td>
-                                                    
+
 
 
                                                     <td>
@@ -202,11 +212,12 @@
                                                                     method="POST" class="d-inline">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit" class="dropdown-item"
-                                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus pesan ini?')">
+                                                                    <button type="button"
+                                                                        class="dropdown-item delete-button">
                                                                         <i class="bx bx-trash"></i> Hapus
                                                                     </button>
                                                                 </form>
+
                                                             </div>
                                                         </div>
                                                     </td>
@@ -316,6 +327,85 @@
             <!-- Datatable -->
             <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
             <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).on('click', '.delete-button', function(e) {
+                    e.preventDefault();
+                    let form = $(this).closest('form'); // Form yang menghapus pesan
+                    swal({
+                        title: "Apakah Anda yakin?",
+                        text: "Pesan ini akan dihapus secara permanen!",
+                        icon: "warning",
+                        buttons: {
+                            cancel: {
+                                text: "Batal",
+                                visible: true,
+                                className: "btn btn-secondary"
+                            },
+                            confirm: {
+                                text: "Ya, Hapus",
+                                className: "btn btn-danger"
+                            }
+                        },
+                        dangerMode: true,
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            form.submit();
+                        }
+                    });
+                });
+                $(document).on('change', '.status-select', function(event) {
+                    event.preventDefault(); // Mencegah pengiriman form default
+
+                    let select = $(this); // Elemen select saat ini
+                    let form = select.closest('form'); // Cari form terdekat
+                    let formData = form.serialize(); // Serialize data form
+
+                    // Kirimkan data melalui AJAX
+                    $.ajax({
+                        url: form.attr('action'), // URL dari form
+                        method: form.attr('method'), // Metode dari form (PATCH)
+                        data: formData, // Data form
+                        success: function(response) {
+                            if (response.success) {
+                                // Perbarui kelas berdasarkan nilai terpilih
+                                if (select.val() === "1") {
+                                    select.removeClass('status-unread').addClass('status-read');
+                                } else {
+                                    select.removeClass('status-read').addClass('status-unread');
+                                }
+
+                                // Tampilkan notifikasi
+                                swal({
+                                    title: "Berhasil!",
+                                    text: response.message,
+                                    icon: "success",
+                                    buttons: {
+                                        confirm: {
+                                            text: "OK",
+                                            className: "btn btn-success"
+                                        }
+                                    }
+                                });
+                            }
+                        },
+                        error: function() {
+                            swal({
+                                title: "Gagal!",
+                                text: "Terjadi kesalahan. Silakan coba lagi.",
+                                icon: "error",
+                                buttons: {
+                                    confirm: {
+                                        text: "OK",
+                                        className: "btn btn-danger"
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
 
 </body>
 

@@ -97,7 +97,7 @@ class CoachController extends Controller
 
         Coach::create($data);
 
-        return redirect('/coaches')->with('success', 'Coach successfully created!');
+        return redirect('/coaches')->with('message', 'Pelatih berhasil ditambahkan!');
     }
 
 
@@ -160,7 +160,7 @@ class CoachController extends Controller
 
         $coach->update($data);
 
-        return redirect()->back()->with('success', 'Coach data successfully updated!');
+        return redirect()->back()->with('message', 'Data Pelatih berhasil diperbarui!');
     }
 
 
@@ -181,7 +181,7 @@ class CoachController extends Controller
 
         $coach->delete();
 
-        return redirect()->back()->with('success', 'Coach successfully deleted!');
+        return redirect()->back()->with('message', 'Data Pelatih berhasil dihapus!');
     }
 
     public function showCoaches(Request $request)

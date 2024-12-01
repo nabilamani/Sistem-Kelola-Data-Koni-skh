@@ -95,7 +95,7 @@ class AthleteController extends Controller
 
         Athlete::create($data);
 
-        return redirect('/athletes')->with('message', 'Athlete successfully created!');
+        return redirect('/athletes')->with('message', 'Atlet berhasil ditambahkan!');
     }
 
     /**
@@ -155,7 +155,7 @@ class AthleteController extends Controller
 
         $athlete->update($data);
 
-        return redirect()->back()->with('success', 'Data Athlete berhasil diperbarui!');
+        return redirect()->back()->with('message', 'Data Athlete berhasil diperbarui!');
     }
 
 
@@ -176,7 +176,7 @@ class AthleteController extends Controller
 
         $athlete->delete();
 
-        return redirect()->back()->with('success', 'Data Athlete berhasil dihapus!');
+        return redirect()->back()->with('message', 'Data Athlete berhasil dihapus!');
     }
 
 
