@@ -159,6 +159,33 @@ class BeritaController extends Controller
             ->get();
 
         // Kirim data ke view
-        return view('viewpublik.berita.home', compact('beritaUtama', 'beritaLatepost','upcomingEvents'));
+        return view('viewpublik.berita.home', compact('beritaUtama', 'beritaLatepost', 'upcomingEvents'));
+    }
+
+    public function daftarberita(Request $request)
+    {
+        $user = Auth::user();
+        $search = $request->input('search'); // Capture the search input from the request
+
+        // Filter news articles based on user level and search query if provided
+        $beritas = Berita::when($search, function ($query) use ($search) {
+            $query->where('judul_berita', 'like', "%$search%")
+                ->orWhere('lokasi_peristiwa', 'like', "%$search%");
+        })
+            ->orderBy('tanggal_waktu', 'desc') // Sort results by date in descending order
+            ->paginate(4); // Display 4 items per page
+
+        // Ambil event mendatang (future events) yang tanggal_event > sekarang
+        $upcomingEvents = Event::where('event_date', '>', now())
+            ->orderBy('event_date', 'asc') // Urutkan berdasarkan tanggal event
+            ->take(4) // Ambil 4 event mendatang
+            ->get();
+
+        return view('viewpublik.berita.daftar', compact('beritas', 'search','upcomingEvents'));
+    }
+    public function detail($id)
+    {
+        $berita = Berita::findOrFail($id);
+        return view('viewpublik.berita.detail', compact('berita'));
     }
 }

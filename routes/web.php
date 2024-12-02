@@ -38,8 +38,11 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', [Controller::class, 'home'])->name('home');
 
 Route::get('/berita', [BeritaController::class, 'publik'])->name('berita.publik');
+Route::get('/berita/daftar', [BeritaController::class, 'daftarberita'])->name('berita.daftar');
+Route::get('/berita/{id}', [BeritaController::class, 'detail'])->name('berita.detail');
 
-Route::get('/profil', [BeritaController::class, 'publik'])->name('berita.publik');
+
+Route::get('/profil', [BeritaController::class, 'publik'])->name('profil.publik');
 
 Route::get('/profil/tentang', function () {
     return view('viewpublik.profil.tentang');

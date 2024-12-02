@@ -282,7 +282,9 @@
                                     </div>
                                     <hr>
                                 @endforeach
-                                <button class="btn btn-primary w-100" id="btnLainnya">Lihat Semua Berita</button>
+                                <a href="/berita/daftar" class="btn btn-primary w-100">
+                                    Lihat Semua Berita
+                                </a>
                             </div>
                         </div>
                         <div class="card mb-4">
