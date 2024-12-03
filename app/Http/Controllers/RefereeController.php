@@ -73,7 +73,7 @@ class RefereeController extends Controller
 
         Referee::create($data);
 
-        return redirect('/referees')->with('success', 'Referee successfully created!');
+        return redirect('/referees')->with('message', 'Referee successfully created!');
     }
 
     /**
@@ -134,7 +134,7 @@ class RefereeController extends Controller
 
         $referee->save();
 
-        return redirect()->back()->with('success', 'Referee data successfully updated!');
+        return redirect()->back()->with('message', 'Referee data successfully updated!');
     }
 
     /**
@@ -148,7 +148,7 @@ class RefereeController extends Controller
         $referee = Referee::findOrFail($id);
         $referee->delete();
 
-        return redirect()->back()->with('success', 'Referee data successfully deleted!');
+        return redirect()->back()->with('message', 'Referee data successfully deleted!');
     }
     public function showReferees(Request $request)
     {

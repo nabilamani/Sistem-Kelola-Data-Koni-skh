@@ -80,15 +80,15 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('Admin',function(){
+Route::get('Admin', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified', 'role:Admin']);
 
-Route::get('pengurus',function(){
+Route::get('pengurus', function () {
     return '<h1>Hello Pengurus Cabor</h1>';
 })->middleware(['auth', 'verified', 'role:pengurus|Admin']);
 
-Route::get('badminton',function(){
+Route::get('badminton', function () {
     return view('badminton');
 })->middleware(['auth', 'verified', 'role_or_permission:lihat-data|Admin']);
 
@@ -140,8 +140,8 @@ Route::delete('/delete-schedule/{id}', [ScheduleController::class, 'destroy']);
 Route::get('/cetak-schedule', [ScheduleController::class, 'cetakVenue'])->name('cetak-venue');
 
 Route::resource('achievements', AchievementController::class);
-Route::put('/edit-achievement/{id}', [AchievementController::class, 'update']);
-Route::delete('/delete-achievement/{id}', [AchievementController::class, 'destroy']);
+Route::put('/edit-achievment/{id}', [AchievementController::class, 'update']);
+Route::delete('/delete-achievment/{id}', [AchievementController::class, 'destroy']);
 Route::get('/cetak-achievement', [AchievementController::class, 'cetakPrestasi'])->name('cetak-prestasi');
 
 Route::resource('beritas', BeritaController::class);
@@ -182,4 +182,4 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

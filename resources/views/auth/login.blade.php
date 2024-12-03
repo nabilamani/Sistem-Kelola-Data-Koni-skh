@@ -9,7 +9,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #F9B11A, #E00818);
+            background: linear-gradient(135deg, yellow, #E00818);
+            background-size: 400% 400%;
+            animation: gradientAnimation 8s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,10 +19,22 @@
             margin: 0;
         }
 
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         .login-container {
             background-color: white;
             padding: 40px;
-            border-radius: 8px;
+            border-radius: 40px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             max-width: 400px;
             width: 100%;
@@ -105,7 +119,8 @@
         .logo {
             max-width: 100px;
             display: block;
-            margin: -20px auto;
+            margin: -5px auto;
+            border-radius: 50%;
         }
 
         .welcome-message {

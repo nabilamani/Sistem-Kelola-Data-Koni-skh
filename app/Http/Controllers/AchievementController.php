@@ -68,7 +68,7 @@ class AchievementController extends Controller
 
         Achievement::create($data);
 
-        return redirect('/achievements')->with('success', 'Achievement successfully created!');
+        return redirect('/achievements')->with('message', 'Achievement successfully created!');
     }
 
     /**
@@ -123,7 +123,7 @@ class AchievementController extends Controller
         // Save the updated achievement data
         $achievement->save();
 
-        return redirect()->back()->with('success', 'Achievement data successfully updated!');
+        return redirect()->back()->with('message', 'Achievement data successfully updated!');
     }
 
     /**
@@ -137,7 +137,7 @@ class AchievementController extends Controller
         $achievement = Achievement::findOrFail($id);
         $achievement->delete();
 
-        return redirect()->back()->with('success', 'Achievement data successfully deleted!');
+        return redirect()->back()->with('message', 'Achievement data successfully deleted!');
     }
 
     public function cetakPrestasi()

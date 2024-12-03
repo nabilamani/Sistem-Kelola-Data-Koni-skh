@@ -66,7 +66,7 @@ class ScheduleController extends Controller
 
         Schedule::create($data);
 
-        return redirect('/schedules')->with('success', 'Schedule successfully created!');
+        return redirect('/schedules')->with('message', 'Schedule successfully created!');
     }
 
     /**
@@ -115,7 +115,7 @@ class ScheduleController extends Controller
         $schedule->fill($data);
         $schedule->save();
 
-        return redirect()->back()->with('success', 'Schedule data successfully updated!');
+        return redirect()->back()->with('message', 'Schedule data successfully updated!');
     }
 
     /**
@@ -129,6 +129,6 @@ class ScheduleController extends Controller
         $schedule = Schedule::findOrFail($id);
         $schedule->delete();
 
-        return redirect()->back()->with('success', 'Schedule data successfully deleted!');
+        return redirect()->back()->with('message', 'Schedule data successfully deleted!');
     }
 }

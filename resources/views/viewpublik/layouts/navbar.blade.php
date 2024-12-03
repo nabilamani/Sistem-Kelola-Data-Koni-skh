@@ -107,7 +107,7 @@
 <nav class="navbar navbar-expand-lg shadow-sm">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="#">
-            <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="KONI Sukoharjo" style="height: 50px;" class="me-3">
+            <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="KONI Sukoharjo" style="height: 50px; border-radius: 50px;" class="me-3">
             <span class="fw-bold">KONI KABUPATEN SUKOHARJO</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

@@ -65,7 +65,7 @@ class VenueController extends Controller
 
         Venue::create($data);
 
-        return redirect('/venues')->with('success', 'Venue successfully created!');
+        return redirect('/venues')->with('message', 'Venue successfully created!');
     }
 
     /**
@@ -114,7 +114,7 @@ class VenueController extends Controller
         $venue->fill($data);
         $venue->save();
 
-        return redirect()->back()->with('success', 'Venue data successfully updated!');
+        return redirect()->back()->with('message', 'Venue data successfully updated!');
     }
 
     /**
@@ -128,6 +128,6 @@ class VenueController extends Controller
         $venue = Venue::findOrFail($id);
         $venue->delete();
 
-        return redirect()->back()->with('success', 'Venue data successfully deleted!');
+        return redirect()->back()->with('message', 'Venue data successfully deleted!');
     }
 }

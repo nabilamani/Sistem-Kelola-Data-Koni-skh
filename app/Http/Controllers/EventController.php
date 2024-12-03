@@ -97,7 +97,7 @@ class EventController extends Controller
         $data['id'] = $event->generateId();
         Event::create($data);
 
-        return redirect('/events')->with('success', 'Event berhasil ditambahkan');
+        return redirect('/events')->with('message', 'Event berhasil ditambahkan');
     }
 
     /**
@@ -156,7 +156,7 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
         $event->update($data);
 
-        return redirect()->back()->with('success', 'Event berhasil diperbarui');
+        return redirect()->back()->with('message', 'Event berhasil diperbarui');
     }
 
     /**
@@ -175,7 +175,7 @@ class EventController extends Controller
         
         $event->delete();
 
-        return redirect()->back()->with('success', 'Event berhasil dihapus');
+        return redirect()->back()->with('message', 'Event berhasil dihapus');
     }
     public function showEvents(Request $request)
 {

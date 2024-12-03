@@ -17,6 +17,14 @@
         body {
             overflow-x: hidden;
         }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #ffbd59;
+
+        }
+
         .hero-section {
             height: 100vh;
             background: url('https://portal.sukoharjokab.go.id/wp-content/uploads/2024/01/20240111-peresmian-gor-dprri1.jpg') no-repeat center center;
