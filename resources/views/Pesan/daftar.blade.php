@@ -350,10 +350,22 @@
                         dangerMode: true,
                     }).then((willDelete) => {
                         if (willDelete) {
-                            form.submit();
+                            form.submit(); // Kirim formulir untuk menghapus data
+
+                            // Tampilkan notifikasi sukses setelah penghapusan
+                            swal({
+                                title: "Berhasil!",
+                                text: "Pesan berhasil dihapus.",
+                                icon: "success",
+                                button: {
+                                    text: "OK",
+                                    className: "btn btn-primary"
+                                }
+                            });
                         }
                     });
                 });
+
                 $(document).on('change', '.status-select', function(event) {
                     event.preventDefault(); // Mencegah pengiriman form default
 

@@ -176,16 +176,24 @@ class BeritaController extends Controller
             ->paginate(4); // Display 4 items per page
 
         // Ambil event mendatang (future events) yang tanggal_event > sekarang
-        $upcomingEvents = Event::where('event_date', '>', now())
+        $upcomingEvents = Event::where('event_date', '>', now()->startOfDay())
             ->orderBy('event_date', 'asc') // Urutkan berdasarkan tanggal event
             ->take(4) // Ambil 4 event mendatang
             ->get();
 
-        return view('viewpublik.berita.daftar', compact('beritas', 'search','upcomingEvents'));
+        return view('viewpublik.berita.daftar', compact('beritas', 'search', 'upcomingEvents'));
     }
     public function detail($id)
     {
         $berita = Berita::findOrFail($id);
-        return view('viewpublik.berita.detail', compact('berita'));
+
+        // Ambil event mendatang (future events) yang tanggal_event > sekarang
+        $upcomingEvents = Event::where('event_date', '>=', now()->startOfDay()) // Menyertakan hari ini
+            ->orderBy('event_date', 'asc') // Urutkan berdasarkan tanggal event
+            ->take(4) // Ambil 4 event mendatang
+            ->get();
+
+
+        return view('viewpublik.berita.detail', compact('berita', 'upcomingEvents'));
     }
 }

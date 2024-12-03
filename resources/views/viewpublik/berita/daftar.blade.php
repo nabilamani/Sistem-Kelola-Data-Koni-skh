@@ -173,6 +173,11 @@
             <div class="row">
                 <!-- News List Section -->
                 <div class="col-md-8" style="margin-top: 4.5rem;">
+                    <nav class="breadcrumb bg-transparent p-0 mb-2">
+                        <a class="breadcrumb-item text-decoration-none" href="/">Home</a>
+                        <a class="breadcrumb-item text-decoration-none text-primary" href="/berita">Berita</a>
+                        <span class="breadcrumb-item active text-primary">Daftar</span>
+                    </nav>
                     <h2 class="text-white mb-4">Daftar Berita</h2>
 
                     <!-- Search Form -->

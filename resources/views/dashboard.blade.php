@@ -14,6 +14,9 @@
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 </head>
@@ -203,21 +206,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
-                                <div class="card mb-2">
-                                    <div class="card-body">
-                                        <div class="media align-items-center">
-                                            <div class="media-body">
-                                                <h2 class="mb-0 count" data-count="{{ $eventCount }}">0</h2>
-                                                <p class="text-muted mb-0">Total Events</p>
-                                            </div>
-                                            <div class="icon-block">
-                                                <i class="bx bx-calendar font-size-50"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
+
 
                             <!-- Total Achievements -->
                             <div class="col-xl-3 col-lg-6 col-sm-6">
@@ -238,21 +227,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
-                                <div class="card mb-2">
-                                    <div class="card-body">
-                                        <div class="media align-items-center">
-                                            <div class="media-body">
-                                                <h2 class="mb-0 count" data-count="{{ $achievementCount }}">0</h2>
-                                                <p class="text-muted mb-0">Total Prestasi</p>
-                                            </div>
-                                            <div class="icon-block">
-                                                <i class="bx bx-trophy font-size-50"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
+
 
                             <!-- Total Coaches -->
                             <div class="col-xl-3 col-lg-6 col-sm-6">
@@ -272,21 +247,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
-                                <div class="card mb-2">
-                                    <div class="card-body">
-                                        <div class="media align-items-center">
-                                            <div class="media-body">
-                                                <h2 class="mb-0 count" data-count="{{ $coachCount }}">0</h2>
-                                                <p class="text-muted mb-0">Total Pelatih</p>
-                                            </div>
-                                            <div class="icon-block">
-                                                <i class="bx bx-user-circle font-size-50"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
+
 
                             <!-- Toggle More Info -->
                             <div class="col-12 text-center mb-2">
@@ -319,21 +280,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <h2 class="mb-0 count" data-count="{{ $refereeteCount }}">0</h2>
-                                                    <p class="text-muted mb-0">Total Wasit</p>
-                                                </div>
-                                                <div class="icon-block">
-                                                    <i class="bx bx-id-card font-size-50"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
+
 
                                 <!-- Total Venues -->
                                 <div class="col-xl-3 col-lg-6 col-sm-6">
@@ -354,21 +301,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <h2 class="mb-0 count" data-count="{{ $venueCount }}">0</h2>
-                                                    <p class="text-muted mb-0">Total Lokasi</p>
-                                                </div>
-                                                <div class="icon-block">
-                                                    <i class="bx bx-map font-size-50"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
+
 
                                 <!-- Total Sports -->
                                 <div class="col-xl-3 col-lg-6 col-sm-6">
@@ -389,21 +322,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <h2 class="mb-0 count" data-count="" id="sportCategoryCount">0</h2>
-                                                    <p class="text-muted mb-0">Total Cabor</p>
-                                                </div>
-                                                <div class="icon-block">
-                                                    <i class="bx bx-basketball font-size-50"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
+
 
                                 <!-- Total Accounts -->
                                 <div class="col-xl-3 col-lg-6 col-sm-6">
@@ -424,22 +343,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="col-xl-3 col-lg-6 col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <h2 class="mb-0 count" data-count="{{ $userCount }}">0</h2>
-                                                    <p class="text-muted mb-0">Total Akun</p>
-                                                </div>
-                                                <div class="icon-block">
-                                                    <i class="bx bx-user font-size-50"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
+
                             </div>
                         </div>
 
@@ -464,17 +368,23 @@
                                                         <div class="card-body d-flex flex-column">
                                                             <h5 class="card-title">{{ $berita->judul_berita }}
                                                             </h5>
-                                                            <p class="card-text">
-                                                                <small
-                                                                    class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</small>
+                                                            <p class="card-text text-muted mb-2"
+                                                                style="font-size: 12px;">
+                                                                <i class="mdi mdi-calendar me-1"></i>
+                                                                {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}
                                                             </p>
-                                                            <p class="card-text">
+                                                            <p class="card-text mb-2">
                                                                 {{ Str::limit(strip_tags($berita->isi_berita), 100) }}
                                                             </p>
-                                                            <p class="card-text"><strong>Lokasi :</strong>
-                                                                {{ $berita->lokasi_peristiwa }}</p>
-                                                            <p class="card-text"><strong>Sumber :</strong>
-                                                                {{ $berita->kutipan_sumber }}</p>
+                                                            <p class="card-text mb-2">
+                                                                <i class="mdi mdi-map-marker-outline me-1"></i>
+                                                                <strong>Lokasi:</strong>
+                                                                {{ $berita->lokasi_peristiwa }}
+                                                            </p>
+                                                            <p class="card-text mb-3">
+                                                                <i class="mdi mdi-bookmark-outline me-1"></i>
+                                                                <strong>Sumber:</strong> {{ $berita->kutipan_sumber }}
+                                                            </p>
                                                             <button type="button"
                                                                 class="btn btn-primary btn-sm mt-auto"
                                                                 data-toggle="modal"
@@ -493,44 +403,75 @@
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-lg px-3" role="document">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
+                                                            <!-- Header -->
+                                                            <div class="modal-header bg-primary text-white">
                                                                 <h5 class="modal-title"
                                                                     id="newsDetailModalLabel{{ $berita->id }}">
-                                                                    Berita Selengkapnya :
-                                                                    {{ $berita->judul_berita }}</h5>
+                                                                    <i class="mdi mdi-newspaper me-2"> </i>Berita
+                                                                    Selengkapnya:
+                                                                    {{ $berita->judul_berita }}
+                                                                </h5>
                                                                 <button type="button" class="close"
                                                                     data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
                                                             </div>
+
+                                                            <!-- Body -->
                                                             <div class="modal-body">
                                                                 <div class="row">
+                                                                    <!-- News Image -->
                                                                     <div class="col-md-5">
                                                                         @if ($berita->photo)
                                                                             <img src="{{ asset($berita->photo) }}"
                                                                                 alt="Foto Berita"
-                                                                                class="img-fluid rounded mb-3"
+                                                                                class="img-fluid rounded shadow-sm mb-3"
                                                                                 style="width: 100%; object-fit: cover;">
                                                                         @else
-                                                                            <span>No image</span>
+                                                                            <div class="d-flex align-items-center justify-content-center bg-light border rounded shadow-sm"
+                                                                                style="height: 250px;">
+                                                                                <i
+                                                                                    class="mdi mdi-image-off-outline mdi-48px text-muted"></i>
+                                                                            </div>
                                                                         @endif
+                                                                        <div class="mb-3 p-3 rounded shadow-sm" style="background-color: #f8f9fa;">
+                                                                            <p class="mb-3">
+                                                                                <strong class="text-primary"><i class="mdi mdi-bookmark-outline me-2"></i>Judul Berita:</strong><br>
+                                                                                <span class="text-dark">{{ $berita->judul_berita }}</span>
+                                                                            </p>
+                                                                            <p class="mb-3">
+                                                                                <strong class="text-success"><i class="mdi mdi-calendar me-2"></i>Tanggal Waktu:</strong><br>
+                                                                                <span class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</span>
+                                                                            </p>
+                                                                            <p class="mb-3">
+                                                                                <strong class="text-info"><i class="mdi mdi-map-marker-outline me-2"></i>Lokasi Peristiwa:</strong><br>
+                                                                                <span class="text-dark">{{ $berita->lokasi_peristiwa }}</span>
+                                                                            </p>
+                                                                            <p class="mb-0">
+                                                                                <strong class="text-warning"><i class="mdi mdi-source-branch me-2"></i>Kutipan Sumber:</strong><br>
+                                                                                <span class="text-muted">{{ $berita->kutipan_sumber }}</span>
+                                                                            </p>
+                                                                        </div>
+                                                                        
                                                                     </div>
-                                                                    <div class="col-md-7">
-                                                                        <p><strong>Judul Berita :</strong>
-                                                                            {{ $berita->judul_berita }}</p>
-                                                                        <p><strong>Tanggal Waktu :</strong>
-                                                                            {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}
-                                                                        </p>
-                                                                        <p><strong>Lokasi Peristiwa :</strong>
-                                                                            {{ $berita->lokasi_peristiwa }}</p>
-                                                                            <p><strong>Isi Berita :</strong> {!! $berita->isi_berita !!}</p>
 
-                                                                        <p><strong>Kutipan Sumber :</strong>
-                                                                            {{ $berita->kutipan_sumber }}</p>
+                                                                    <!-- News Details -->
+                                                                    <div class="col-md-7">
+
+
+                                                                        <div class="mb-3">
+                                                                            
+                                                                            <div
+                                                                                class="bg-light p-3 rounded shadow-sm">
+                                                                                {!! $berita->isi_berita !!}
+                                                                            </div>
+                                                                        </div>
+
+
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="modal-footer">
+
+                                                            <!-- Footer -->
+                                                            <div class="modal-footer bg-light">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Tutup</button>
                                                             </div>
@@ -712,6 +653,32 @@
                         });
                     </script>
                     <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+                        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+                    @if (Session::has('message'))
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                toastr.options = {
+                                    "closeButton": true, // Menambahkan tombol close
+                                    "progressBar": true, // Menampilkan progress bar
+                                    "positionClass": "toast-top-right", // Mengubah posisi alert
+                                    "showDuration": "1000", // Durasi animasi muncul (ms)
+                                    "hideDuration": "1000", // Durasi animasi hilang (ms)
+                                    "timeOut": "5000", // Waktu tampil (ms)
+                                    "extendedTimeOut": "1000", // Waktu ekstra saat hover (ms)
+                                    "showEasing": "swing", // Animasi muncul
+                                    "hideEasing": "linear", // Animasi hilang
+                                    "showMethod": "fadeIn", // Metode muncul
+                                    "hideMethod": "fadeOut" // Metode hilang
+                                };
+
+                                toastr.success("{{ Session::get('message') }}", "Berhasil!"); // Judul alert
+                            });
+                        </script>
+                    @endif
+
 
 
 

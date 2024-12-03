@@ -198,24 +198,16 @@
                                     </table>
                                     @foreach ($coaches as $coach)
                                         <!-- Modal -->
-                                        @if (session('success'))
-                                            <div class="alert alert-success" id="success-alert">
-                                                {{ session('success') }}
-                                            </div>
-                                        @endif
 
-                                        <div class="modal fade" id="coachDetailModal{{ $coach->id }}"
-                                            tabindex="-1" role="dialog"
-                                            aria-labelledby="coachDetailModalLabel{{ $coach->id }}"
-                                            aria-hidden="true">
+                                        <div class="modal fade" id="coachDetailModal{{ $coach->id }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="coachDetailModalLabel{{ $coach->id }}" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header bg-primary text-white">
-                                                        <h5 class="modal-title"
-                                                            id="coachDetailModalLabel{{ $coach->id }}">Detail
-                                                            Pelatih: {{ $coach->name }}</h5>
-                                                        <button type="button" class="close text-white"
-                                                            data-dismiss="modal" aria-label="Close">
+                                                        <h5 class="modal-title" id="coachDetailModalLabel{{ $coach->id }}">
+                                                            Detail Pelatih: {{ $coach->name }}
+                                                        </h5>
+                                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
@@ -223,32 +215,56 @@
                                                         <div class="row">
                                                             <!-- Left column: Coach photo -->
                                                             <div class="col-md-4 text-center">
-                                                                <img src="{{ $coach->photo }}"
-                                                                    class="img-fluid rounded" alt="Foto Pelatih"
+                                                                <img src="{{ $coach->photo }}" class="img-fluid rounded" alt="Foto Pelatih"
                                                                     style="max-height: 300px; object-fit: cover;">
                                                             </div>
-                                                            <!-- Right column: Coach details -->
+                                                            <!-- Right column: Coach details with table -->
                                                             <div class="col-md-8">
-                                                                <p class="mb-2"><strong>Nama:</strong>
-                                                                    {{ $coach->name }}</p>
-                                                                <p class="mb-2"><strong>Umur:</strong>
-                                                                    {{ $coach->age }}</p>
-                                                                <p class="mb-2"><strong>Alamat:</strong>
-                                                                    {{ $coach->address }}</p>
-                                                                <p class="mb-2"><strong>Cabang Olahraga:</strong>
-                                                                    {{ $coach->sport_category }}</p>
-                                                                <p class="mb-2"><strong>Deskripsi:</strong>
-                                                                    {{ $coach->description }}</p>
+                                                                <table class="table table-borderless table-sm">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td scope="row" style="width: 30%;">
+                                                                                <i class="mdi mdi-account text-primary"></i> Nama:
+                                                                            </td>
+                                                                            <td>{{ $coach->name }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">
+                                                                                <i class="mdi mdi-cake text-primary"></i> Umur:
+                                                                            </th>
+                                                                            <td>{{ $coach->age }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">
+                                                                                <i class="mdi mdi-home text-primary"></i> Alamat:
+                                                                            </th>
+                                                                            <td>{{ $coach->address }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">
+                                                                                <i class="mdi mdi-soccer text-primary"></i> Cabang Olahraga:
+                                                                            </th>
+                                                                            <td>{{ $coach->sport_category }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th scope="row">
+                                                                                <i class="mdi mdi-information text-primary"></i> Deskripsi:
+                                                                            </th>
+                                                                            <td>{{ $coach->description }}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Tutup</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
 
                                         <div class="modal fade" id="coachEditModal{{ $coach->id }}"
                                             tabindex="-1" role="dialog"

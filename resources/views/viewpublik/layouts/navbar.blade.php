@@ -119,7 +119,7 @@
                     <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/') }}">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('berita') ? 'active' : '' }}"
+                    <a class="nav-link {{ Request::is('berita','berita/*') ? 'active' : '' }}"
                         href="{{ url('/berita') }}">Berita</a>
                 </li>
                 <li class="nav-item dropdown">

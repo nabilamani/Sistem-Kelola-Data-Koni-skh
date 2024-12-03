@@ -31,7 +31,7 @@ class DashboardController extends Controller
         // Retrieve the latest news (adjust the number as needed)
         $beritas = Berita::orderBy('tanggal_waktu', 'desc')->take(3)->get();
 
-        $upcomingEvents = Event::where('event_date', '>=', now())
+        $upcomingEvents = Event::where('event_date', '>=', now()->startOfDay())
             ->orderBy('event_date', 'asc')
             ->get(['name', 'event_date', 'location']);
 

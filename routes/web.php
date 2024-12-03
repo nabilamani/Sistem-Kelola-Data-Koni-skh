@@ -42,6 +42,7 @@ Route::get('/berita/daftar', [BeritaController::class, 'daftarberita'])->name('b
 Route::get('/berita/{id}', [BeritaController::class, 'detail'])->name('berita.detail');
 
 
+
 Route::get('/profil', [BeritaController::class, 'publik'])->name('profil.publik');
 
 Route::get('/profil/tentang', function () {

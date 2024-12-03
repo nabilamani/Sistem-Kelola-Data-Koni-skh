@@ -132,13 +132,13 @@
             </p>
 
             <!-- Button -->
-            <a href="#cabor-section" class="btn btn btn-warning px-4 py-2" data-aos="zoom-in" data-aos-delay="600">
+            <a href="#prestasi-section" class="btn btn btn-warning px-4 py-2" data-aos="zoom-in" data-aos-delay="600">
                 Selengkapnya
             </a>
         </div>
     </section>
 
-    <div class="container my-5">
+    <div id="prestasi-section" class="container my-5">
         <h2 class="text-center mb-4 text-white">Daftar Prestasi Atlet KONI Sukoharjo</h2>
 
         <!-- Tombol untuk mengganti tampilan -->
