@@ -75,15 +75,6 @@
 </head>
 <body>
     <!-- Header -->
-    {{-- <div class="header">
-        <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo KONI Sukoharjo"> <!-- Ganti dengan path logo yang sesuai -->
-        <div class="header-info">
-            <h1>Komite Olahraga Nasional Indonesia (KONI)</h1>
-            <p>Sukoharjo</p>
-            <p>Alamat: Jl. Contoh Alamat No. 123, Sukoharjo, Indonesia</p>
-            <p>Telepon: (0271) 1234567 | Email: info@koni-sukoharjo.org</p>
-        </div>
-    </div> --}}
     <table style="width: 100%; border-bottom: 4px solid #000000;">
         <tr>
             <td style="width: 15%; border: none;">

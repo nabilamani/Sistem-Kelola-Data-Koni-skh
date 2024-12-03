@@ -188,30 +188,43 @@
                                     <!-- Modals for each Referee -->
                                     @foreach ($referees as $referee)
                                         <!-- Modal for Referee Details -->
-                                        <div class="modal fade" id="refereeDetailModal{{ $referee->id }}" tabindex="-1" role="dialog" aria-labelledby="refereeDetailModalLabel{{ $referee->id }}" aria-hidden="true">
+                                        <div class="modal fade" id="refereeDetailModal{{ $referee->id }}"
+                                            tabindex="-1" role="dialog"
+                                            aria-labelledby="refereeDetailModalLabel{{ $referee->id }}"
+                                            aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="refereeDetailModalLabel{{ $referee->id }}">Detail Wasit: {{ $referee->name }}</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <h5 class="modal-title"
+                                                            id="refereeDetailModalLabel{{ $referee->id }}">Detail
+                                                            Wasit: {{ $referee->name }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <p><strong>Nama Wasit:</strong> {{ $referee->name }}</p>
-                                                        <p><strong>Kategori Olahraga:</strong> {{ $referee->sport_category }}</p>
+                                                        <p><strong>Kategori Olahraga:</strong>
+                                                            {{ $referee->sport_category }}</p>
                                                         <p><strong>Jenis Kelamin:</strong> {{ $referee->gender }}</p>
-                                                        <p><strong>Tanggal Lahir:</strong> {{ \Carbon\Carbon::parse($referee->birth_date)->format('d-m-Y') }}</p>
+                                                        <p><strong>Tanggal Lahir:</strong>
+                                                            {{ \Carbon\Carbon::parse($referee->birth_date)->format('d-m-Y') }}
+                                                        </p>
                                                         <p><strong>Usia:</strong> {{ $referee->age ?? '-' }}</p>
                                                         <p><strong>Lisensi:</strong> {{ $referee->license ?? '-' }}</p>
-                                                        <p><strong>Pengalaman:</strong> {{ $referee->experience ?? '-' }}</p>
-                                                        @if($referee->photo)
+                                                        <p><strong>Pengalaman:</strong>
+                                                            {{ $referee->experience ?? '-' }}</p>
+                                                        @if ($referee->photo)
                                                             <p><strong>Foto:</strong></p>
-                                                            <img src="{{ asset('storage/'.$referee->photo) }}" alt="Foto" style="width: 100px; height: 100px; border-radius: 50%;">
+                                                            <img src="{{ asset('storage/' . $referee->photo) }}"
+                                                                alt="Foto"
+                                                                style="width: 100px; height: 100px; border-radius: 50%;">
                                                         @endif
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Tutup</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -252,6 +265,24 @@
                                                                     value="{{ $referee->sport_category }}" required>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label for="birth_date">Tanggal Lahir</label>
+                                                                <input type="date" class="form-control"
+                                                                    id="birth_date" name="birth_date"
+                                                                    value="{{ $referee->birth_date }}" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="gender">Jenis Kelamin</label>
+                                                                <select class="form-control" id="gender"
+                                                                    name="gender" required>
+                                                                    <option value="Laki-laki"
+                                                                        {{ $referee->gender == 'Laki-laki' ? 'selected' : '' }}>
+                                                                        Laki-laki</option>
+                                                                    <option value="Perempuan"
+                                                                        {{ $referee->gender == 'Perempuan' ? 'selected' : '' }}>
+                                                                        Perempuan</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label for="license">Lisensi</label>
                                                                 <input type="text" class="form-control"
                                                                     id="license" name="license"
@@ -261,6 +292,22 @@
                                                                 <label for="experience">Pengalaman</label>
                                                                 <textarea class="form-control" id="experience" name="experience">{{ $referee->experience }}</textarea>
                                                             </div>
+                                                            <div class="form-group">
+                                                                <label for="photo">Foto</label>
+                                                                <input type="file" class="form-control-file"
+                                                                    id="photo" name="photo">
+                                                                <div class="mt-2">
+                                                                    @if ($referee->photo)
+                                                                        <img src="{{ asset($referee->photo) }}"
+                                                                            class="img-fluid rounded" width="100"
+                                                                            alt="Foto Wasit {{ $referee->name }}">
+                                                                    @else
+                                                                        <span class="text-muted">Tidak ada Foto</span>
+                                                                    @endif
+                                                                </div>
+                                                                <small>Biarkan kosong jika tidak ingin mengubah
+                                                                    foto.</small>
+                                                            </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Batal</button>
@@ -269,6 +316,7 @@
                                                             </div>
                                                         </form>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>

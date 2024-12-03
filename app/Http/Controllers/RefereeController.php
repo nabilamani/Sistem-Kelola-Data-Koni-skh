@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Referee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class RefereeController extends Controller
 {
@@ -66,9 +68,9 @@ class RefereeController extends Controller
 
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img'), $filename);
-            $data['photo'] = 'img/' . $filename;
+            $filename = time() . '_' . Str::slug($file->getClientOriginalName());
+            $path = $file->storeAs('public/img/referees', $filename);
+            $data['photo'] = str_replace('public/', 'storage/', $path);
         }
 
         Referee::create($data);
@@ -127,9 +129,9 @@ class RefereeController extends Controller
         // Handle photo file if uploaded
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('img'), $filename);
-            $referee->photo = 'img/' . $filename;
+            $filename = time() . '_' . Str::slug($file->getClientOriginalName());
+            $path = $file->storeAs('public/img/referees', $filename);
+            $referee->photo = str_replace('public/', 'storage/', $path);
         }
 
         $referee->save();
@@ -146,6 +148,11 @@ class RefereeController extends Controller
     public function destroy($id)
     {
         $referee = Referee::findOrFail($id);
+
+        if ($referee->photo) {
+            Storage::delete(str_replace('storage/', 'public/', $referee->photo));
+        }
+
         $referee->delete();
 
         return redirect()->back()->with('message', 'Referee data successfully deleted!');

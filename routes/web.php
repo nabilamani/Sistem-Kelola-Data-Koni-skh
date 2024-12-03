@@ -21,8 +21,7 @@ use App\Http\Controllers\SportCategoryController;
 use App\Http\Controllers\VenueController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
-// use App\Models\Athlete;
-// use App\Models\KoniStructures;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -63,9 +62,6 @@ Route::get('/kontak', function () {
     return view('viewpublik.kontak');
 });
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -102,12 +98,6 @@ Route::get('/tambah', function () {
     return view('layouts.tambah');
 });
 
-// Route::get('/berita', function () {
-//     return view('viewpublik.berita.index');
-// });
-// Route::get('/daftar', function () {
-//     return view('Pelatih.daftar');
-// });
 
 Route::resource('coaches', CoachController::class);
 Route::put('/edit-pelatih/{id}', [CoachController::class, 'update']);
