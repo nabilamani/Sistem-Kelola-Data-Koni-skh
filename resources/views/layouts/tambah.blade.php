@@ -105,13 +105,7 @@
                     </div>
                     <div class="card-body">
                       <form action="/coaches" method="post" enctype="multipart/form-data">
-                      @csrf
-                        {{-- <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-default-name">Id Pelatih</label>
-                          <div class="col-sm-10">
-                            <input type="text" name="id_aset" class="form-control" id="basic-default-name" placeholder="Masukkan id pelatih.." />
-                          </div>
-                        </div> --}}
+                        @csrf
                         <div class="row mb-3">
                           <label class="col-sm-2 col-form-label" for="basic-default-name">Nama Pelatih</label>
                           <div class="col-sm-10">
@@ -119,41 +113,38 @@
                           </div>
                         </div>
                         <div class="row mb-3">
-                          <label for="sportCategorySelect" class="col-sm-2 col-form-label">Pilih
-                              Cabor</label>
+                          <label for="sportCategorySelect" class="col-sm-2 col-form-label">Pilih Cabor</label>
                           <div class="col-sm-4">
-                              <select id="sportCategorySelect" name="sport_category"
-                                  class="form-control sport-category-select">
-                                  <option value="" hidden selected disabled>Pilih kategori..
-                                  </option>
-                              </select>
+                            <select id="sportCategorySelect" name="sport_category" class="form-control sport-category-select">
+                              <option value="" hidden selected disabled>Pilih kategori..</option>
+                            </select>
                           </div>
-                      </div>
+                        </div>
                         <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-default-name">Alamat</label>
+                          <label class="col-sm-2 col-form-label" for="basic-default-address">Alamat</label>
                           <div class="col-sm-10">
-                            <input type="text" name="address" class="form-control" id="basic-default-name" placeholder="Masukkan alamat pelatih.." />
+                            <input type="text" name="address" class="form-control" id="basic-default-address" placeholder="Masukkan alamat pelatih.." />
                           </div>
                         </div>
                         <div class="row mb-3">
                           <label for="html5-number-input" class="col-md-2 col-form-label">Umur</label>
                           <div class="col-md-4">
-                            <input class="form-control" name="age" type="number" value="" id="html5-number-input" placeholder="Masukkan Umur skrg.."/>
+                            <input class="form-control" name="age" type="number" id="html5-number-input" placeholder="Masukkan umur sekarang.." />
                           </div>
                         </div>
                         <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-default-name">Deskripsi</label>
+                          <label class="col-sm-2 col-form-label" for="comment">Deskripsi</label>
                           <div class="col-sm-10">
-                            <textarea name="description" class="form-control" rows="3" id="comment" placeholder="Masukkan deskripsi pelatih.. (opt)"></textarea>
+                            <textarea name="description" class="form-control" rows="3" id="comment" placeholder="Masukkan deskripsi pelatih.. (opsional)"></textarea>
                           </div>
                         </div>
                         <div class="row mb-3">
-                          <label class="col-sm-2 col-form-label" for="basic-default-name">Foto</label>
+                          <label class="col-sm-2 col-form-label" for="gambar">Foto</label>
                           <div class="col-sm-4">
-                            <input class="form-control" type="file" name="photo" id="gambar" style="height: 100%;"/>
+                            <input class="form-control" type="file" name="photo" id="gambar" onchange="previewImage()" />
+                            <img id="preview" src="#" alt="Preview Foto" class="img-fluid mt-3 d-none" style="max-height: 200px; border: 1px solid #ddd; padding: 5px;" />
                           </div>
-                        </div>                        
-                        
+                        </div>
                         <div class="row justify-content-end">
                           <div class="col-sm-10">
                             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -183,7 +174,21 @@
     <!--**********************************
         Main wrapper end
     ***********************************-->
-
+    {{-- <script>
+      function previewImage() {
+        const fileInput = document.getElementById('gambar');
+        const preview = document.getElementById('preview');
+        
+        if (fileInput.files && fileInput.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.classList.remove('d-none');
+          };
+          reader.readAsDataURL(fileInput.files[0]);
+        }
+      }
+    </script> --}}
     <!--**********************************
         Scripts
     ***********************************-->
@@ -222,6 +227,7 @@
     <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
     <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
+    <script src="{{ asset('gambar_aset/js/imgpreview.js') }}"></script>
 
 </body>
 

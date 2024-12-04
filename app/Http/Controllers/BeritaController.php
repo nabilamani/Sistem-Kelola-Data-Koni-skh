@@ -70,7 +70,7 @@ class BeritaController extends Controller
 
         Berita::create($data);
 
-        return redirect('/beritas')->with('success', 'News article successfully created!');
+        return redirect('/beritas')->with('message', 'News article successfully created!');
     }
 
     /**
@@ -121,7 +121,7 @@ class BeritaController extends Controller
 
         $berita->update($data);
 
-        return redirect()->back()->with('success', 'News article successfully updated!');
+        return redirect()->back()->with('message', 'News article successfully updated!');
     }
 
     /**
@@ -137,7 +137,7 @@ class BeritaController extends Controller
 
         $berita->delete();
 
-        return redirect()->back()->with('success', 'News article successfully deleted!');
+        return redirect()->back()->with('message', 'News article successfully deleted!');
     }
 
     public function publik()

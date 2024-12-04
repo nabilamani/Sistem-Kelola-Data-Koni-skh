@@ -283,43 +283,32 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <!-- Form Edit Pelatih -->
-                                                        <form action="/edit-pelatih/{{ $coach->id }}"
-                                                            method="POST" enctype="multipart/form-data">
+                                                        <form action="/edit-pelatih/{{ $coach->id }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('PUT')
-
+                                                        
                                                             <div class="row">
                                                                 <!-- Left column -->
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label for="name">Nama</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="name" name="name"
-                                                                            value="{{ $coach->name }}" required>
+                                                                        <input type="text" class="form-control" id="name" name="name" value="{{ $coach->name }}" required>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="age">Umur</label>
-                                                                        <input type="number" class="form-control"
-                                                                            id="age" name="age"
-                                                                            value="{{ $coach->age }}" required>
+                                                                        <input type="number" class="form-control" id="age" name="age" value="{{ $coach->age }}" required>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="sport_category">Cabang
-                                                                            Olahraga</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="sport_category" name="sport_category"
-                                                                            value="{{ $coach->sport_category }}"
-                                                                            required>
+                                                                        <label for="sport_category">Cabang Olahraga</label>
+                                                                        <input type="text" class="form-control" id="sport_category" name="sport_category" value="{{ $coach->sport_category }}" required>
                                                                     </div>
                                                                 </div>
-
+                                                        
                                                                 <!-- Right column -->
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
                                                                         <label for="address">Alamat</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="address" name="address"
-                                                                            value="{{ $coach->address }}" required>
+                                                                        <input type="text" class="form-control" id="address" name="address" value="{{ $coach->address }}" required>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="description">Deskripsi</label>
@@ -327,30 +316,22 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="photo">Foto</label>
-                                                                        <input type="file"
-                                                                            class="form-control-file" id="photo"
-                                                                            name="photo">
+                                                                        <input type="file" class="form-control-file" id="photo" name="photo" onchange="previewNewPhoto()">
                                                                         <div class="mt-2">
-                                                                            @if ($coach->photo)
-                                                                                <img src="{{ asset($coach->photo) }}"
-                                                                                    class="img-fluid rounded"
-                                                                                    width="100"
-                                                                                    alt="Foto Pelatih {{ $coach->name }}">
-                                                                            @else
-                                                                                <span class="text-muted">Tidak ada
-                                                                                    Foto</span>
-                                                                            @endif
+                                                                            <img id="photo-preview" 
+                                                                                 src="{{ $coach->photo ? asset($coach->photo) : '#' }}" 
+                                                                                 class="img-fluid rounded {{ $coach->photo ? '' : 'd-none' }}" 
+                                                                                 width="100" 
+                                                                                 alt="Foto Pelatih">
+                                                                            <span id="no-photo-text" class="text-muted {{ $coach->photo ? 'd-none' : '' }}">Tidak ada Foto</span>
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
-
+                                                        
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-primary">Simpan
-                                                                    Perubahan</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -395,7 +376,27 @@
             <!--**********************************
         Main wrapper end
     ***********************************-->
+<script>
+    function previewNewPhoto() {
+        const fileInput = document.getElementById('photo');
+        const preview = document.getElementById('photo-preview');
+        const noPhotoText = document.getElementById('no-photo-text');
 
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.classList.remove('d-none');
+                noPhotoText.classList.add('d-none');
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            preview.src = '#';
+            preview.classList.add('d-none');
+            noPhotoText.classList.remove('d-none');
+        }
+    }
+</script>
             <!--**********************************
         Scripts
     ***********************************-->

@@ -188,138 +188,157 @@
                                     <!-- Modals for each Referee -->
                                     @foreach ($referees as $referee)
                                         <!-- Modal for Referee Details -->
-                                        <div class="modal fade" id="refereeDetailModal{{ $referee->id }}"
-                                            tabindex="-1" role="dialog"
-                                            aria-labelledby="refereeDetailModalLabel{{ $referee->id }}"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
+                                        <div class="modal fade" id="refereeDetailModal{{ $referee->id }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="refereeDetailModalLabel{{ $referee->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title"
-                                                            id="refereeDetailModalLabel{{ $referee->id }}">Detail
-                                                            Wasit: {{ $referee->name }}</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                    <div class="modal-header bg-primary text-white">
+                                                        <h5 class="modal-title" id="refereeDetailModalLabel{{ $referee->id }}">
+                                                            Detail Wasit: {{ $referee->name }}
+                                                        </h5>
+                                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p><strong>Nama Wasit:</strong> {{ $referee->name }}</p>
-                                                        <p><strong>Kategori Olahraga:</strong>
-                                                            {{ $referee->sport_category }}</p>
-                                                        <p><strong>Jenis Kelamin:</strong> {{ $referee->gender }}</p>
-                                                        <p><strong>Tanggal Lahir:</strong>
-                                                            {{ \Carbon\Carbon::parse($referee->birth_date)->format('d-m-Y') }}
-                                                        </p>
-                                                        <p><strong>Usia:</strong> {{ $referee->age ?? '-' }}</p>
-                                                        <p><strong>Lisensi:</strong> {{ $referee->license ?? '-' }}</p>
-                                                        <p><strong>Pengalaman:</strong>
-                                                            {{ $referee->experience ?? '-' }}</p>
-                                                        @if ($referee->photo)
-                                                            <p><strong>Foto:</strong></p>
-                                                            <img src="{{ asset('storage/' . $referee->photo) }}"
-                                                                alt="Foto"
-                                                                style="width: 100px; height: 100px; border-radius: 50%;">
-                                                        @endif
+                                                        <div class="row">
+                                                            <!-- Left column: Referee photo -->
+                                                            <div class="col-md-4 text-center">
+                                                                @if ($referee->photo)
+                                                                    <img src="{{ $referee->photo }}" class="img-fluid rounded" alt="Foto Wasit"
+                                                                        style="max-height: 300px; object-fit: cover;">
+                                                                @else
+                                                                    <img src="{{ asset('default-profile.png') }}" class="img-fluid rounded" alt="Foto Default"
+                                                                        style="max-height: 300px; object-fit: cover;">
+                                                                @endif
+                                                            </div>
+                                                            <!-- Right column: Referee details with table -->
+                                                            <div class="col-md-8">
+                                                                <table class="table table-borderless table-sm">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td style="width: 30%;"><i class="mdi mdi-account text-primary"></i> Nama:</td>
+                                                                            <td>{{ $referee->name }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><i class="mdi mdi-cake text-primary"></i> Tanggal Lahir:</td>
+                                                                            <td>{{ \Carbon\Carbon::parse($referee->birth_date)->format('d-m-Y') }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><i class="mdi mdi-calendar text-primary"></i> Usia:</td>
+                                                                            <td>{{ $referee->age ?? '-' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><i class="mdi mdi-gender-male-female text-primary"></i> Jenis Kelamin:</td>
+                                                                            <td>{{ $referee->gender }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><i class="mdi mdi-soccer text-primary"></i> Kategori Olahraga:</td>
+                                                                            <td>{{ $referee->sport_category }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><i class="mdi mdi-certificate text-primary"></i> Lisensi:</td>
+                                                                            <td>{{ $referee->license ?? '-' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><i class="mdi mdi-briefcase text-primary"></i> Pengalaman:</td>
+                                                                            <td>{{ $referee->experience ?? '-' }}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Tutup</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
 
                                         <!-- Modal for Editing Referee -->
-                                        <div class="modal fade" id="refereeEditModal{{ $referee->id }}"
-                                            tabindex="-1" role="dialog"
-                                            aria-labelledby="refereeEditModalLabel{{ $referee->id }}"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
+                                        <div class="modal fade" id="refereeEditModal{{ $referee->id }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="refereeEditModalLabel{{ $referee->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                 <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title"
-                                                            id="refereeEditModalLabel{{ $referee->id }}">
+                                                    <div class="modal-header bg-primary text-white">
+                                                        <h5 class="modal-title" id="refereeEditModalLabel{{ $referee->id }}">
                                                             Edit Wasit: {{ $referee->name }}
                                                         </h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="/edit-referee/{{ $referee->id }}"
-                                                            method="POST" enctype="multipart/form-data">
+                                                        <!-- Form Edit Wasit -->
+                                                        <form action="/edit-referee/{{ $referee->id }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('PUT')
-                                                            <div class="form-group">
-                                                                <label for="name">Nama Wasit</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="name" name="name"
-                                                                    value="{{ $referee->name }}" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="sport_category">Cabang Olahraga</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="sport_category" name="sport_category"
-                                                                    value="{{ $referee->sport_category }}" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="birth_date">Tanggal Lahir</label>
-                                                                <input type="date" class="form-control"
-                                                                    id="birth_date" name="birth_date"
-                                                                    value="{{ $referee->birth_date }}" required>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="gender">Jenis Kelamin</label>
-                                                                <select class="form-control" id="gender"
-                                                                    name="gender" required>
-                                                                    <option value="Laki-laki"
-                                                                        {{ $referee->gender == 'Laki-laki' ? 'selected' : '' }}>
-                                                                        Laki-laki</option>
-                                                                    <option value="Perempuan"
-                                                                        {{ $referee->gender == 'Perempuan' ? 'selected' : '' }}>
-                                                                        Perempuan</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="license">Lisensi</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="license" name="license"
-                                                                    value="{{ $referee->license }}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="experience">Pengalaman</label>
-                                                                <textarea class="form-control" id="experience" name="experience">{{ $referee->experience }}</textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="photo">Foto</label>
-                                                                <input type="file" class="form-control-file"
-                                                                    id="photo" name="photo">
-                                                                <div class="mt-2">
-                                                                    @if ($referee->photo)
-                                                                        <img src="{{ asset($referee->photo) }}"
-                                                                            class="img-fluid rounded" width="100"
-                                                                            alt="Foto Wasit {{ $referee->name }}">
-                                                                    @else
-                                                                        <span class="text-muted">Tidak ada Foto</span>
-                                                                    @endif
+                                        
+                                                            <div class="row">
+                                                                <!-- Left column -->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="name">Nama Wasit</label>
+                                                                        <input type="text" class="form-control" id="name" name="name" value="{{ $referee->name }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="birth_date">Tanggal Lahir</label>
+                                                                        <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ $referee->birth_date }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="gender">Jenis Kelamin</label>
+                                                                        <select class="form-control" id="gender" name="gender" required>
+                                                                            <option value="Laki-laki" {{ $referee->gender == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                                                            <option value="Perempuan" {{ $referee->gender == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="license">Lisensi</label>
+                                                                        <input type="text" class="form-control" id="license" name="license" value="{{ $referee->license }}">
+                                                                    </div>
                                                                 </div>
-                                                                <small>Biarkan kosong jika tidak ingin mengubah
-                                                                    foto.</small>
+                                        
+                                                                <!-- Right column -->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="sport_category">Cabang Olahraga</label>
+                                                                        <input type="text" class="form-control" id="sport_category" name="sport_category" value="{{ $referee->sport_category }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="experience">Pengalaman</label>
+                                                                        <textarea class="form-control" id="experience" name="experience" rows="3">{{ $referee->experience }}</textarea>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="photo">Foto</label>
+                                                                        <input type="file" class="form-control-file" id="photo" name="photo">
+                                                                        <div class="mt-2">
+                                                                            @if ($referee->photo)
+                                                                                <img id="photo-preview" 
+                                                                                     src="{{ $referee->photo }}" 
+                                                                                     class="img-fluid rounded" 
+                                                                                     width="100" 
+                                                                                     alt="Foto Wasit">
+                                                                            @else
+                                                                                <span class="text-muted">Tidak ada Foto</span>
+                                                                            @endif
+                                                                        </div>
+                                                                        <small>Biarkan kosong jika tidak ingin mengubah foto.</small>
+                                                                    </div>
+                                                                </div>
                                                             </div>
+                                        
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-primary">Simpan
-                                                                    Perubahan</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                                             </div>
                                                         </form>
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     @endforeach
 
                                     <!-- Pagination Links -->

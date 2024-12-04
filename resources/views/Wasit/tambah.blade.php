@@ -152,10 +152,13 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="photo">Foto</label>
-                                        <div class="col-sm-10">
+                                        <label class="col-sm-2 col-form-label" for="gambar">Foto</label>
+                                        <div class="col-sm-4">
                                             <input class="form-control" type="file" name="photo" id="gambar"
-                                                style="height: 100%;" />
+                                                onchange="previewImage()" />
+                                            <img id="preview" src="#" alt="Preview Foto"
+                                                class="img-fluid mt-3 d-none"
+                                                style="max-height: 200px; border: 1px solid #ddd; padding: 5px;" />
                                         </div>
                                     </div>
                                     <div class="row justify-content-end">
@@ -190,6 +193,7 @@
         <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
         <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/imgpreview.js') }}"></script>
 
     </div>
 </body>

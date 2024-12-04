@@ -73,7 +73,7 @@ class GaleriController extends Controller
         // Store data in the database
         Gallery::create($data);
 
-        return redirect('/galleries')->with('success', 'Gallery item successfully created!');
+        return redirect('/galleries')->with('message', 'Gallery item successfully created!');
     }
 
 
@@ -143,7 +143,7 @@ class GaleriController extends Controller
         $gallery->update($data);
 
         // Redirect with success message
-        return redirect()->back()->with('success', 'Gallery item successfully updated!');
+        return redirect()->back()->with('message', 'Gallery item successfully updated!');
     }
 
 
@@ -168,7 +168,7 @@ class GaleriController extends Controller
         // Delete the gallery item
         $gallery->delete();
 
-        return redirect()->back()->with('success', 'Gallery item successfully deleted!');
+        return redirect()->back()->with('message', 'Gallery item successfully deleted!');
     }
     public function showPhoto(Request $request)
     {

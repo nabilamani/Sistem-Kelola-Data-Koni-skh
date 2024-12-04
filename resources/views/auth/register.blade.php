@@ -23,6 +23,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            padding: 50px;
         }
 
         @keyframes gradientAnimation {

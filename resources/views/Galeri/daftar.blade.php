@@ -16,8 +16,9 @@
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 </head>
@@ -379,6 +380,16 @@
             <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
             <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
             {{-- Debugging line --}}
+            @if (Session::has('message'))
+                <script>
+                    swal("Berhasil", "{{ Session::get('message') }}", 'success', {
+                        button: true,
+                        button: "Ok",
+                        timer: 5000
+                    });
+                </script>
+            @endif
+
 
 </body>
 

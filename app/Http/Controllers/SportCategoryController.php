@@ -52,7 +52,7 @@ class SportCategoryController extends Controller
         // Simpan data
         SportCategory::create($data);
 
-        return redirect()->route('sportcategories.index')->with('success', 'Sport category berhasil ditambahkan!');
+        return redirect()->route('sportcategories.index')->with('message', 'Cabang Olahraga berhasil ditambahkan!');
     }
 
     // Edit sport category
@@ -89,7 +89,7 @@ class SportCategoryController extends Controller
 
         $category->update($data);
 
-        return redirect()->back()->with('success', 'Sport category berhasil diperbarui!');
+        return redirect()->back()->with('message', 'Cabang Olahraga berhasil diperbarui!');
     }
 
     // Hapus sport category
@@ -103,6 +103,6 @@ class SportCategoryController extends Controller
 
         $category->delete();
 
-        return redirect()->back()->with('success', 'Sport category berhasil dihapus!');
+        return redirect()->back()->with('message', 'Cabang Olahraga berhasil dihapus!');
     }
 }

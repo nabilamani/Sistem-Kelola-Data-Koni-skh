@@ -16,8 +16,9 @@
     <link href="{{ asset('gambar_aset/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 </head>
@@ -194,119 +195,149 @@
                                     <!-- Modals for each SportCategory -->
                                     @foreach ($SportCategories as $SportCategory)
                                         <!-- Modal for Category Details -->
-                                        <div class="modal fade" id="categoryDetailModal{{ $SportCategory->id }}"
-                                            tabindex="-1" role="dialog"
-                                            aria-labelledby="categoryDetailModalLabel{{ $SportCategory->id }}"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal fade" id="categoryDetailModal{{ $SportCategory->id }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="categoryDetailModalLabel{{ $SportCategory->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg px-3" role="document">
                                                 <div class="modal-content">
+                                                    <!-- Header -->
                                                     <div class="modal-header bg-primary text-white">
-                                                        <h5 class="modal-title"
-                                                            id="categoryDetailModalLabel{{ $SportCategory->id }}">
-                                                            Detail Kategori: {{ $SportCategory->nama_cabor }}</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        <h5 class="modal-title" id="categoryDetailModalLabel{{ $SportCategory->id }}">
+                                                            <i class="mdi mdi-view-list me-2"></i>Detail Kategori: {{ $SportCategory->nama_cabor }}
+                                                        </h5>
+                                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body p-3">
-                                                        <p><strong>Nama Kategori:</strong>
-                                                            {{ $SportCategory->nama_cabor }}</p>
-                                                        <p><strong>Deskripsi:</strong> {{ $SportCategory->deskripsi }}
-                                                        </p>
-                                                        <p><strong>Pusat Latihan Cabang:</strong>
-                                                            {{ $SportCategory->puslatcab }}</p>
-                                                        <p><strong>Kontak:</strong> {{ $SportCategory->kontak }}</p>
-                                                        <p><strong>Logo:</strong><br>
-                                                            @if ($SportCategory->logo)
-                                                                <img src="{{ asset($SportCategory->logo) }}"
-                                                                    alt="Logo {{ $SportCategory->nama_cabor }}"
-                                                                    style="width: 50px; height: 50px; object-fit: cover;">
-                                                            @else
-                                                                <span class="text-muted">Tidak ada logo</span>
-                                                            @endif
-                                                        </p>
+                                        
+                                                    <!-- Body -->
+                                                    <div class="modal-body">
+                                                        <div class="row g-3">
+                                                            <!-- Logo -->
+                                                            <div class="col-md-5 mt-3">
+                                                                @if ($SportCategory->logo)
+                                                                <div class="text-center">
+                                                                    <img src="{{ asset($SportCategory->logo) }}" alt="Logo {{ $SportCategory->nama_cabor }}"
+                                                                        class="img-fluid rounded mb-3" style="max-height: 250px; object-fit: contain;">
+                                                                </div>
+                                                                @else
+                                                                <div class="d-flex align-items-center justify-content-center bg-light border rounded shadow-sm"
+                                                                    style="height: 200px;">
+                                                                    <i class="mdi mdi-image-off-outline mdi-48px text-muted"></i>
+                                                                </div>
+                                                                @endif
+                                        
+                                                                
+                                                            </div>
+                                        
+                                                            <!-- Details -->
+                                                            <div class="col-md-7">
+                                                                <div class="mt-3 p-3 rounded shadow-sm bg-light">
+                                                                    <p class="mb-3">
+                                                                        <strong class="text-primary"><i class="mdi mdi-tag-outline me-2"></i> Nama Kategori:</strong><br>
+                                                                        <span class="text-dark">{{ $SportCategory->nama_cabor }}</span>
+                                                                    </p>
+                                                                    <p class="mb-3">
+                                                                        <strong class="text-info"><i class="mdi mdi-home-map-marker me-2"></i> Pusat Latihan:</strong><br>
+                                                                        <span class="text-dark">{{ $SportCategory->puslatcab }}</span>
+                                                                    </p>
+                                                                    <p class="mb-3">
+                                                                        <strong class="text-success"><i class="mdi mdi-phone-outline me-2"></i> Kontak:</strong><br>
+                                                                        <span class="text-dark">{{ $SportCategory->kontak }}</span>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="bg-light p-3 rounded shadow-sm">
+                                                                    <p><strong class="text-primary"><i class="mdi mdi-information-outline me-2"></i> eskripsi:</strong></p>
+                                                                    <p>{{ $SportCategory->deskripsi }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Tutup</button>
+                                        
+                                                    <!-- Footer -->
+                                                    <div class="modal-footer bg-light">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        
 
                                         <!-- Modal for Editing SportCategory -->
-                                        <div class="modal fade" id="categoryEditModal{{ $SportCategory->id }}"
-                                            tabindex="-1" role="dialog"
-                                            aria-labelledby="categoryEditModalLabel{{ $SportCategory->id }}"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
+                                        <div class="modal fade" id="categoryEditModal{{ $SportCategory->id }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="categoryEditModalLabel{{ $SportCategory->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header bg-warning text-dark">
-                                                        <h5 class="modal-title"
-                                                            id="categoryEditModalLabel{{ $SportCategory->id }}">Edit
-                                                            Kategori: {{ $SportCategory->nama_cabor }}</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
+                                                        <h5 class="modal-title" id="categoryEditModalLabel{{ $SportCategory->id }}">
+                                                            Edit Kategori: {{ $SportCategory->nama_cabor }}
+                                                        </h5>
+                                                        <button type="button" class="close text-dark" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body p-3">
-                                                        <form action="/edit-sportcategory/{{ $SportCategory->id }}"
-                                                            method="POST" enctype="multipart/form-data">
+                                                    <div class="modal-body">
+                                                        <!-- Form Edit Kategori -->
+                                                        <form action="/edit-sportcategory/{{ $SportCategory->id }}" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('PUT')
-                                                            <div class="form-group mb-3">
-                                                                <label for="nama_cabor">Nama Federasi</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="nama_cabor" name="nama_cabor"
-                                                                    value="{{ $SportCategory->nama_cabor }}" required>
+                                        
+                                                            <div class="row">
+                                                                <!-- Left column -->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="nama_cabor">Nama Federasi</label>
+                                                                        <input type="text" class="form-control" id="nama_cabor" name="nama_cabor"
+                                                                            value="{{ $SportCategory->nama_cabor }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="sport_category">Nama Kategori</label>
+                                                                        <input type="text" class="form-control" id="sport_category" name="sport_category"
+                                                                            value="{{ $SportCategory->sport_category }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="puslatcab">Pusat Latihan Cabang</label>
+                                                                        <input type="text" class="form-control" id="puslatcab" name="puslatcab"
+                                                                            value="{{ $SportCategory->puslatcab }}" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="kontak">Kontak</label>
+                                                                        <input type="text" class="form-control" id="kontak" name="kontak"
+                                                                            value="{{ $SportCategory->kontak }}" required>
+                                                                    </div>
+                                                                </div>
+                                        
+                                                                <!-- Right column -->
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="deskripsi">Deskripsi</label>
+                                                                        <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4"
+                                                                            required>{{ $SportCategory->deskripsi }}</textarea>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="logo">Logo</label>
+                                                                        <input type="file" class="form-control-file" id="logo" name="logo" onchange="previewLogo()">
+                                                                        <div class="mt-2">
+                                                                            <img id="logo-preview"
+                                                                                src="{{ $SportCategory->logo ? asset($SportCategory->logo) : '#' }}"
+                                                                                class="img-fluid rounded {{ $SportCategory->logo ? '' : 'd-none' }}"
+                                                                                width="100" alt="Logo Kategori">
+                                                                            <span id="no-logo-text" class="text-muted {{ $SportCategory->logo ? 'd-none' : '' }}">Tidak ada Logo</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="form-group mb-3">
-                                                                <label for="sport_category">Nama Kategori</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="sport_category" name="sport_category"
-                                                                    value="{{ $SportCategory->sport_category }}" required>
-                                                            </div>
-                                                            <div class="form-group mb-3">
-                                                                <label for="deskripsi">Deskripsi</label>
-                                                                <textarea class="form-control" id="deskripsi" name="deskripsi" required>{{ $SportCategory->deskripsi }}</textarea>
-                                                            </div>
-                                                            <div class="form-group mb-3">
-                                                                <label for="puslatcab">Pusat Latihan Cabang</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="puslatcab" name="puslatcab"
-                                                                    value="{{ $SportCategory->puslatcab }}" required>
-                                                            </div>
-                                                            <div class="form-group mb-3">
-                                                                <label for="kontak">Kontak</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="kontak" name="kontak"
-                                                                    value="{{ $SportCategory->kontak }}" required>
-                                                            </div>
-                                                            <div class="form-group mb-3">
-                                                                <label for="logo">Logo</label>
-                                                                <input type="file" class="form-control-file"
-                                                                    id="logo" name="logo">
-                                                                    @if ($SportCategory->logo)
-                                                                    <img src="{{ asset($SportCategory->logo) }}"
-                                                                        alt="Logo {{ $SportCategory->nama_cabor }}"
-                                                                        style="width: 100px; height: 100px; object-fit: cover;">
-                                                                @else
-                                                                    <span class="text-muted">Tidak ada logo</span>
-                                                                @endif
-                                                            </div>
+                                        
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Batal</button>
-                                                                <button type="submit" class="btn btn-primary">Simpan
-                                                                    Perubahan</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                                                             </div>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     @endforeach
 
                                     <!-- Pagination Links -->
@@ -380,7 +411,15 @@
             <!-- Datatable -->
             <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
             <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
-
+            @if (Session::has('message'))
+                <script>
+                    swal("Berhasil", "{{ Session::get('message') }}", 'success', {
+                        button: true,
+                        button: "Ok",
+                        timer: 5000
+                    });
+                </script>
+            @endif
 </body>
 
 </html>

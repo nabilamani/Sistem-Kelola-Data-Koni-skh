@@ -17,7 +17,9 @@
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
 </head>
@@ -194,46 +196,72 @@
                     <!-- Modal for News Details -->
                     <div class="modal fade" id="newsDetailModal{{ $berita->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="newsDetailModalLabel{{ $berita->id }}" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-dialog modal-lg px-3" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
+                                <!-- Header -->
+                                <div class="modal-header bg-primary text-white">
                                     <h5 class="modal-title" id="newsDetailModalLabel{{ $berita->id }}">
-                                        Detail Berita: {{ $berita->judul_berita }}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i class="mdi mdi-newspaper me-2"></i> Berita Selengkapnya:
+                                        {{ $berita->judul_berita }}
+                                    </h5>
+                                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
+                    
+                                <!-- Body -->
                                 <div class="modal-body">
                                     <div class="row">
-                                        <!-- Image Column -->
+                                        <!-- News Image -->
                                         <div class="col-md-5">
                                             @if ($berita->photo)
-                                                <img src="{{ asset($berita->photo) }}" alt="Foto Berita"
-                                                    class="img-fluid rounded mb-3"
-                                                    style="width: 100%; object-fit: cover;">
+                                            <img src="{{ asset($berita->photo) }}" alt="Foto Berita"
+                                                class="img-fluid rounded shadow-sm mb-3" style="width: 100%; object-fit: cover;">
                                             @else
-                                                <span>No image</span>
+                                            <div class="d-flex align-items-center justify-content-center bg-light border rounded shadow-sm"
+                                                style="height: 250px;">
+                                                <i class="mdi mdi-image-off-outline mdi-48px text-muted"></i>
+                                            </div>
                                             @endif
+                    
+                                            <div class="mt-3 p-3 rounded shadow-sm" style="background-color: #f8f9fa;">
+                                                <p class="mb-3">
+                                                    <strong class="text-primary"><i class="mdi mdi-bookmark-outline me-2"></i>Judul
+                                                        Berita:</strong><br>
+                                                    <span class="text-dark">{{ $berita->judul_berita }}</span>
+                                                </p>
+                                                <p class="mb-3">
+                                                    <strong class="text-success"><i class="mdi mdi-calendar me-2"></i>Tanggal Waktu:</strong><br>
+                                                    <span class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</span>
+                                                </p>
+                                                <p class="mb-3">
+                                                    <strong class="text-info"><i class="mdi mdi-map-marker-outline me-2"></i>Lokasi Peristiwa:</strong><br>
+                                                    <span class="text-dark">{{ $berita->lokasi_peristiwa }}</span>
+                                                </p>
+                                                <p class="mb-0">
+                                                    <strong class="text-warning"><i class="mdi mdi-source-branch me-2"></i>Kutipan Sumber:</strong><br>
+                                                    <span class="text-muted">{{ $berita->kutipan_sumber }}</span>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <!-- Text Content Column -->
+                    
+                                        <!-- News Details -->
                                         <div class="col-md-7">
-                                            <p><strong>Judul Berita:</strong> {{ $berita->judul_berita }}</p>
-                                            <p><strong>Tanggal Waktu:</strong>
-                                                {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}
-                                            </p>
-                                            <p><strong>Lokasi Peristiwa:</strong> {{ $berita->lokasi_peristiwa }}</p>
-                                            <p><strong>Isi Berita:</strong> {!! $berita->isi_berita !!}</p>
-                                            <p><strong>Kutipan Sumber:</strong> {{ $berita->kutipan_sumber }}</p>
+                                            <div class="mb-3 bg-light p-3 rounded shadow-sm">
+                                                {!! $berita->isi_berita !!}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Tutup</button>
+                    
+                                <!-- Footer -->
+                                <div class="modal-footer bg-light">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                 @endforeach
 
 
@@ -449,6 +477,15 @@
                     });
                 });
             </script>
+            @if (Session::has('message'))
+            <script>
+                swal("Berhasil", "{{ Session::get('message') }}", 'success', {
+                    button: true,
+                    button: "Ok",
+                    timer: 5000
+                });
+            </script>
+        @endif
 
 
 

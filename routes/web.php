@@ -98,6 +98,10 @@ Route::get('/tambah', function () {
     return view('layouts.tambah');
 });
 
+Route::get('/profil/struktur', function () {
+    return view('viewpublik.profil.strukturalkoni');
+});
+
 
 Route::resource('coaches', CoachController::class);
 Route::put('/edit-pelatih/{id}', [CoachController::class, 'update']);

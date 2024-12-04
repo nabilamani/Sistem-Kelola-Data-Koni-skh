@@ -126,6 +126,7 @@
             <nav class="breadcrumb bg-transparent px-3 py-3 shadow-sm">
                 <a class="breadcrumb-item text-decoration-none" href="/">Home</a>
                 <span class="breadcrumb-item active text-primary">Profil</span>
+                <span class="breadcrumb-item active text-primary">Tentang</span>
             </nav>
             <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-body">
