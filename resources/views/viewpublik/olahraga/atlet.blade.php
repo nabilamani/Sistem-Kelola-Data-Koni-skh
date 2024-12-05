@@ -119,8 +119,52 @@
     </section>
 
     <div class="container my-5">
-        <h2 class="text-center mb-4 text-white">Daftar Atlet KONI Sukoharjo</h2>
+        <h3 class="text-white mb-3">Akumulasi Atlet Per Cabang Olahraga</h3>
+        <div id="athleteCategoryCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach ($categories->chunk(4) as $chunkIndex => $chunk)
+                    <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
+                        <div class="row">
+                            @foreach ($chunk as $category)
+                                <div class="col-md-3 mb-3">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title text-dark">{{ $category->sport_category }}</h5>
+                                            <p class="card-text text-primary">
+                                                <strong>{{ $category->total }}</strong> Atlet
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
+            <!-- Carousel indicators (dots) -->
+            <div class="carousel-indicators">
+                @foreach ($categories->chunk(4) as $chunkIndex => $chunk)
+                    <button type="button" data-bs-target="#athleteCategoryCarousel"
+                        data-bs-slide-to="{{ $chunkIndex }}" class="{{ $chunkIndex == 0 ? 'active' : '' }}"
+                        aria-current="true" aria-label="Slide {{ $chunkIndex + 1 }}"></button>
+                @endforeach
+            </div>
+
+            {{-- <!-- Navigasi Carousel (arrows removed) -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#athleteCategoryCarousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#athleteCategoryCarousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button> --}}
+        </div>
+
+        <h2 class="text-center mb-4 text-white">Daftar Atlet KONI Sukoharjo</h2>
         <!-- Tombol untuk mengganti tampilan -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <!-- Tombol untuk mengganti tampilan -->
@@ -198,8 +242,8 @@
         </div>
     </div>
     <!-- Modal untuk Detail Atlet -->
-    <div class="modal fade mt-5 pt-2" id="athleteDetailModal" tabindex="-1" aria-labelledby="athleteDetailModalLabel"
-        aria-hidden="true">
+    <div class="modal fade mt-5 pt-2" id="athleteDetailModal" tabindex="-1"
+        aria-labelledby="athleteDetailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary d-flex align-items-center">
@@ -268,6 +312,8 @@
             </div>
         </div>
     </div>
+
+
 
 
     @include('viewpublik/layouts/footer')

@@ -188,6 +188,12 @@ class AthleteController extends Controller
                 ->orWhere('sport_category', 'like', "%$search%");
         })->paginate(8);
 
+        // Hitung akumulasi atlet per cabang olahraga
+        $categories = Athlete::select('sport_category')
+            ->selectRaw('COUNT(*) as total')
+            ->groupBy('sport_category')
+            ->get();
+
         $SportCategories = SportCategory::all();
 
         foreach ($athletes as $athlete) {
@@ -195,6 +201,6 @@ class AthleteController extends Controller
             $athlete->achievements = $athlete->achievements ?? 'Belum ada prestasi tercatat';
         }
 
-        return view('viewpublik.olahraga.atlet', compact('athletes'));
+        return view('viewpublik.olahraga.atlet', compact('athletes','categories'));
     }
 }

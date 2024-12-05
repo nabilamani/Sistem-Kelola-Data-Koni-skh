@@ -141,9 +141,7 @@
             data-aos="zoom-in" data-aos-delay="0">
             <!-- Lottie Player -->
             <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-            <div class="lottie-container mb-4">
-                <dotlottie-player src="https://lottie.host/f7e21688-11aa-41f4-bfc3-885a4483adf5/lK6R71kTw0.lottie" background="transparent" speed="1" style="width: 250px; height: 250px" loop autoplay></dotlottie-player>
-            </div>
+            <dotlottie-player src="https://lottie.host/88704d46-e4ea-4c33-937f-76265ef2b635/GLJkwbTevF.lottie" background="transparent" speed="1" style="width: 250px; height: 250px" loop autoplay></dotlottie-player>
 
             <!-- Hero Title -->
             <h1 class="hero-title text-white fst-italic mb-3" data-aos="zoom-in" data-aos-delay="200">
