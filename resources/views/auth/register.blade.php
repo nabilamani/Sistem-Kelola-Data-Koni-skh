@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('gambar_aset/images/koni.png') }}">
     <title>Register Page</title>
     <!-- Tambahkan di dalam <head> -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 
-<!-- Tambahkan sebelum tag penutup </body> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <!-- Tambahkan sebelum tag penutup </body> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         body {
@@ -23,16 +27,18 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            padding: 50px;
+            padding: 20px;
         }
 
         @keyframes gradientAnimation {
             0% {
                 background-position: 0% 50%;
             }
+
             50% {
                 background-position: 100% 50%;
             }
+
             100% {
                 background-position: 0% 50%;
             }
@@ -126,41 +132,58 @@
             margin-bottom: 30px;
             text-align: center;
         }
+
         .form-group {
-    margin-bottom: 1.5rem; /* Space below each form group */
-}
+            margin-bottom: 1.5rem;
+            /* Space below each form group */
+        }
 
-.form-label { 
-    color: #333; /* Dark color for better readability */
-}
+        .form-label {
+            color: #333;
+            /* Dark color for better readability */
+        }
 
-.form-select {
-    padding: 0.5rem; /* Inner padding */
-    border-radius: 0.375rem; /* Rounded corners */
-    border: 1px solid #ced4da; /* Border color */
-    background-color: #fff; /* White background */
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Smooth transitions */
-}
+        .form-select {
+            padding: 0.5rem;
+            /* Inner padding */
+            border-radius: 0.375rem;
+            /* Rounded corners */
+            border: 1px solid #ced4da;
+            /* Border color */
+            background-color: #fff;
+            /* White background */
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            /* Smooth transitions */
+        }
 
-.form-select:focus {
-    border-color: #80bdff; /* Border color on focus */
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Box shadow on focus */
-}
+        .form-select:focus {
+            border-color: #80bdff;
+            /* Border color on focus */
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            /* Box shadow on focus */
+        }
 
-.invalid-feedback {
-    display: none; /* Hide feedback by default */
-}
+        .invalid-feedback {
+            display: none;
+            /* Hide feedback by default */
+        }
 
-select:invalid:focus ~ .invalid-feedback {
-    display: block; /* Show feedback when the select is invalid */
-}
-
+        select:invalid:focus~.invalid-feedback {
+            display: block;
+            /* Show feedback when the select is invalid */
+        }
+        .toast-message {
+        font-size: 11px; /* Sesuaikan ukuran font sesuai kebutuhan */
+    }
     </style>
 </head>
+
 <body>
+
     <div class="register-container">
         <!-- Logo -->
-        <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo KONI Sukoharjo" class="logo" style="height: 100px;">
+        <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo KONI Sukoharjo" class="logo"
+            style="height: 100px;">
 
         <h2>Register</h2>
 
@@ -168,32 +191,47 @@ select:invalid:focus ~ .invalid-feedback {
         <div class="welcome-message">
             Selamat datang di Sistem Database KONI Sukoharjo
         </div>
-
+        {{-- <!-- Alert untuk menampilkan error -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        @error('level')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror --}}
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
             <!-- Name -->
             <div class="form-group">
                 <label for="name">{{ __('Name') }}</label>
-                <input id="name" type="text" name="name" :value="old('name')" required autofocus autocomplete="name">
+                <input id="name" type="text" name="name" :value="old('name')" required autofocus
+                    autocomplete="name">
             </div>
 
-            <!-- Email Address -->
+            <!-- Input Email -->
             <div class="form-group">
                 <label for="email">{{ __('Email') }}</label>
-                <input id="email" type="email" name="email" :value="old('email')" required autocomplete="username">
+                <input id="email" type="email" name="email" :value="old('email')" required
+                    autocomplete="username">
             </div>
 
-            <!-- Password -->
+            <!-- Input Password -->
             <div class="form-group">
                 <label for="password">{{ __('Password') }}</label>
                 <input id="password" type="password" name="password" required autocomplete="new-password">
             </div>
 
-            <!-- Confirm Password -->
+            <!-- Input Confirm Password -->
             <div class="form-group">
                 <label for="password_confirmation">{{ __('Confirm Password') }}</label>
-                <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
+                <input id="password_confirmation" type="password" name="password_confirmation" required
+                    autocomplete="new-password">
             </div>
             <!-- Level -->
             <div class="form-group">
@@ -215,7 +253,7 @@ select:invalid:focus ~ .invalid-feedback {
                     Please select a level.
                 </div>
             </div>
-            
+
 
             <button type="submit" class="btn-register">{{ __('Register') }}</button>
 
@@ -233,6 +271,34 @@ select:invalid:focus ~ .invalid-feedback {
             });
         });
     </script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Untuk Error Validasi -->
+@if ($errors->any())
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "showDuration": "1000",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        @foreach ($errors->all() as $error)
+            toastr.error("{{ $error }}", "Error!");
+        @endforeach
+    });
+</script>
+@endif
+
 </body>
+
 </html>

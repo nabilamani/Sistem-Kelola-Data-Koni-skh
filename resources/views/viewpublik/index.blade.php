@@ -83,6 +83,25 @@
             transform: translateY(-10px);
         }
 
+        /* Cards Styling */
+        .card-hover {
+            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            background-color: #f39c12;
+            /* Ganti warna sesuai kebutuhan */
+        }
+
+        .card-hover:hover h5,
+        .card-hover:hover i {
+            color: #ffffff;
+            /* Ganti warna teks sesuai kebutuhan */
+        }
+
+
         .mdi {
             color: #f39c12;
         }
@@ -155,9 +174,11 @@
     <section class="hero-section">
         <div class="hero-overlay mt-5" data-aos="zoom-in" data-aos-delay="0">
             <h1 class="hero-title text-white fst-italic" data-aos="zoom-in" data-aos-delay="200">#SUKOHARJOMAKMUR</h1>
-            <p class="hero-subtitle" data-aos="zoom-in" data-aos-delay="400">KONI Sukoharjo, wujudkan olahraga yang berprestasi dan menjunjung tinggi
+            <p class="hero-subtitle" data-aos="zoom-in" data-aos-delay="400">KONI Sukoharjo, wujudkan olahraga yang
+                berprestasi dan menjunjung tinggi
                 sportivitas.</p>
-            <a href="#about-section" class="btn btn-warning rounded-5" data-aos="zoom-in" data-aos-delay="600">Selengkapnya</a>
+            <a href="#about-section" class="btn btn-warning rounded-5" data-aos="zoom-in"
+                data-aos-delay="600">Selengkapnya</a>
         </div>
     </section>
 
@@ -213,7 +234,7 @@
             <div class="row gy-4">
                 <!-- Card 1: Cabor -->
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover cursor-pointer"
+                    <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/olahraga/cabor'">
                         <i class="mdi mdi-basketball display-4 mb-3"></i>
                         <h5 class="fw-bold">Cabor</h5>
@@ -521,7 +542,8 @@
                             <i class="mdi mdi-email me-2"></i>
                             konisukoharjo@yahoo.com
                         </p>
-                        <a href="/messages/create" class="btn text-white mt-3" data-aos="flip-up" data-aos-delay="500">Kirim Pesan</a>
+                        <a href="/messages/create" class="btn text-white mt-3" data-aos="flip-up"
+                            data-aos-delay="500">Kirim Pesan</a>
 
                     </div>
                 </div>

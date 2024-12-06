@@ -82,7 +82,7 @@
 
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="event_date">Tanggal</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             <input type="date" name="event_date" class="form-control"
                                                 placeholder="Masukkan durasi event..." required />
                                         </div>

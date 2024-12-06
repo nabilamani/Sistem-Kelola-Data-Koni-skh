@@ -174,11 +174,12 @@
             </div>
 
             <!-- Form Pencarian -->
-            <form action="{{ route('showAthletes') }}" method="GET" class="d-flex">
-                <input type="text" name="search" class="form-control me-2" placeholder="Cari atlet atau cabor..."
-                    value="{{ request('search') }}">
+            <form id="athleteSearchForm" action="{{ route('showAthletes') }}" method="GET" class="d-flex">
+                <input id="searchInput" type="text" name="search" class="form-control me-2" placeholder="Cari atlet atau cabor..."
+                    value="{{ request('search') }}" onkeyup="filterAthletes()">
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
+            
         </div>
 
         <!-- Tampilan Card -->
@@ -401,6 +402,36 @@
         });
     </script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script>
+        function filterAthletes() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+    
+            // Filter Card View
+            const cards = document.querySelectorAll('#card-view .athlete-card');
+            cards.forEach(card => {
+                const name = card.querySelector('h5').textContent.toLowerCase();
+                const category = card.querySelector('p').textContent.toLowerCase();
+                if (name.includes(input) || category.includes(input)) {
+                    card.parentElement.style.display = '';
+                } else {
+                    card.parentElement.style.display = 'none';
+                }
+            });
+    
+            // Filter Table View
+            const rows = document.querySelectorAll('#table-view tbody tr');
+            rows.forEach(row => {
+                const name = row.children[1].textContent.toLowerCase();
+                const category = row.children[2].textContent.toLowerCase();
+                if (name.includes(input) || category.includes(input)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+    </script>
+    
 </body>
 
 </html>

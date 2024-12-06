@@ -237,7 +237,7 @@
                                         </a>
                                         <!-- Copy Link -->
                                         <button class="btn btn-light" onclick="copyToClipboard()">
-                                            <i class="fas fa-copy fa-lg"></i>
+                                            <i class="fas fa-copy fa-lg"></i> Salin Tautan
                                         </button>
                                     </div>
                                 </div>
@@ -357,6 +357,18 @@
                 </div>
             </div>
         </div>
+        <!-- Tambahkan Toast di HTML -->
+        <div class="toast position-fixed bottom-0 end-0 m-3" id="copyToast" role="alert" aria-live="assertive"
+            aria-atomic="true" style="z-index: 1000;">
+            <div class="toast-header">
+                <strong class="me-auto">Notifikasi</strong>
+                <small>Baru saja</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Tautan berhasil disalin ke clipboard!
+            </div>
+        </div>
     </section>
 
 
@@ -442,7 +454,7 @@
                                         </a>
                                         <!-- Copy Link -->
                                         <button class="btn btn-light" onclick="copyToClipboard()">
-                                            <i class="fas fa-copy fa-lg"></i>
+                                            <i class="fas fa-copy fa-lg"></i> Salin Tautan
                                         </button>
                                     </div>
                                 </div>
@@ -466,6 +478,20 @@
             });
         });
     </script>
+    <script>
+        function copyToClipboard() {
+            const currentUrl = "{{ request()->fullUrl() }}";
+            navigator.clipboard.writeText(currentUrl).then(() => {
+                // Tampilkan toast
+                const toastEl = document.getElementById("copyToast");
+                const toast = new bootstrap.Toast(toastEl);
+                toast.show();
+            }).catch(err => {
+                alert("Gagal menyalin tautan.");
+            });
+        }
+    </script>
+
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();

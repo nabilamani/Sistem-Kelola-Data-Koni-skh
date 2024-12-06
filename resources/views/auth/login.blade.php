@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('gambar_aset/images/koni.png') }}">
     <title>Login Page</title>
+    <!-- Tambahkan di dalam <head> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Tambahkan sebelum tag penutup </body> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,15 +26,18 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            padding: 20px;
         }
 
         @keyframes gradientAnimation {
             0% {
                 background-position: 0% 50%;
             }
+
             50% {
                 background-position: 100% 50%;
             }
+
             100% {
                 background-position: 0% 50%;
             }
@@ -146,17 +158,9 @@
             text-decoration: underline;
         }
 
-        .alert {
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            font-size: 12px
-        }
-
-        .alert-danger {
-            color: #a94442;
-            background-color: #f2dede;
-            border-color: #ebccd1;
+        .toast-message {
+            font-size: 11px;
+            /* Sesuaikan ukuran font sesuai kebutuhan */
         }
     </style>
 </head>
@@ -164,8 +168,8 @@
 <body>
     <div class="login-container">
         <!-- Logo -->
-        <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo KONI Sukoharjo"
-            class="logo" style="height: 100px">
+        <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo KONI Sukoharjo" class="logo"
+            style="height: 100px">
 
         <!-- Welcome Message -->
         <h2>Login</h2>
@@ -178,35 +182,22 @@
             <x-auth-session-status class="mb-4" :status="session('status')" />
         </div>
 
-        <!-- Error Alert for Login Failure -->
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        @if (session('message'))
-            <div class="alert alert-warning">
-                {{ session('message') }}
-            </div>
-        @endif
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email Address -->
             <div class="form-group">
                 <label for="email">{{ __('Email') }}</label>
-                <input id="email" type="email" name="email" :value="old('email')" value="adminkoni@gmail.com" required autofocus
-                    autocomplete="username">
+                <input id="email" type="email" name="email" :value="old('email')" value="adminkoni@gmail.com"
+                    required autofocus autocomplete="username">
             </div>
 
             <!-- Password -->
             <div class="form-group">
                 <label for="password">{{ __('Password') }}</label>
-                <input id="password" type="password" name="password" value="koni321" required autocomplete="current-password">
+                <input id="password" type="password" name="password" value="koni321" required
+                    autocomplete="current-password">
             </div>
 
 
@@ -233,6 +224,33 @@
             </div>
         </form>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Untuk Error Validasi -->
+    @if ($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "showDuration": "1000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+
+                @foreach ($errors->all() as $error)
+                    toastr.error("{{ $error }}", "Error!");
+                @endforeach
+            });
+        </script>
+    @endif
 </body>
 
 </html>

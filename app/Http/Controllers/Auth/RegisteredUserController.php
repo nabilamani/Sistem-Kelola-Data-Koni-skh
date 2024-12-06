@@ -50,7 +50,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME)->with('message', 'Berhasil registrasi!');
     }
     public function index(): View
     {
@@ -99,7 +99,7 @@ class RegisteredUserController extends Controller
         ]);
 
         // Redirect kembali dengan pesan sukses
-        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
+        return redirect()->route('users.index')->with('message', 'Akun berhasil diperbarui.');
     }
 
     /**
@@ -110,6 +110,6 @@ class RegisteredUserController extends Controller
         $user = User::findOrFail($id);
         $user->delete(); // Menghapus user
 
-        return redirect()->back()->with('success', 'User berhasil dihapus.');
+        return redirect()->back()->with('message', 'User berhasil dihapus.');
     }
 }

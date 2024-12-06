@@ -432,25 +432,38 @@
                                                                                     class="mdi mdi-image-off-outline mdi-48px text-muted"></i>
                                                                             </div>
                                                                         @endif
-                                                                        <div class="mb-3 p-3 rounded shadow-sm" style="background-color: #f8f9fa;">
+                                                                        <div class="mb-3 p-3 rounded shadow-sm"
+                                                                            style="background-color: #f8f9fa;">
                                                                             <p class="mb-3">
-                                                                                <strong class="text-primary"><i class="mdi mdi-bookmark-outline me-2"></i>Judul Berita:</strong><br>
-                                                                                <span class="text-dark">{{ $berita->judul_berita }}</span>
+                                                                                <strong class="text-primary"><i
+                                                                                        class="mdi mdi-bookmark-outline me-2"></i>Judul
+                                                                                    Berita:</strong><br>
+                                                                                <span
+                                                                                    class="text-dark">{{ $berita->judul_berita }}</span>
                                                                             </p>
                                                                             <p class="mb-3">
-                                                                                <strong class="text-success"><i class="mdi mdi-calendar me-2"></i>Tanggal Waktu:</strong><br>
-                                                                                <span class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</span>
+                                                                                <strong class="text-success"><i
+                                                                                        class="mdi mdi-calendar me-2"></i>Tanggal
+                                                                                    Waktu:</strong><br>
+                                                                                <span
+                                                                                    class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</span>
                                                                             </p>
                                                                             <p class="mb-3">
-                                                                                <strong class="text-info"><i class="mdi mdi-map-marker-outline me-2"></i>Lokasi Peristiwa:</strong><br>
-                                                                                <span class="text-dark">{{ $berita->lokasi_peristiwa }}</span>
+                                                                                <strong class="text-info"><i
+                                                                                        class="mdi mdi-map-marker-outline me-2"></i>Lokasi
+                                                                                    Peristiwa:</strong><br>
+                                                                                <span
+                                                                                    class="text-dark">{{ $berita->lokasi_peristiwa }}</span>
                                                                             </p>
                                                                             <p class="mb-0">
-                                                                                <strong class="text-warning"><i class="mdi mdi-source-branch me-2"></i>Kutipan Sumber:</strong><br>
-                                                                                <span class="text-muted">{{ $berita->kutipan_sumber }}</span>
+                                                                                <strong class="text-warning"><i
+                                                                                        class="mdi mdi-source-branch me-2"></i>Kutipan
+                                                                                    Sumber:</strong><br>
+                                                                                <span
+                                                                                    class="text-muted">{{ $berita->kutipan_sumber }}</span>
                                                                             </p>
                                                                         </div>
-                                                                        
+
                                                                     </div>
 
                                                                     <!-- News Details -->
@@ -458,7 +471,7 @@
 
 
                                                                         <div class="mb-3">
-                                                                            
+
                                                                             <div
                                                                                 class="bg-light p-3 rounded shadow-sm">
                                                                                 {!! $berita->isi_berita !!}
@@ -525,7 +538,7 @@
                             <div class="col-xl-6">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-title">Upcoming Events</h5>
+                                        <h5 class="card-title">Event Mendatang</h5>
                                     </div>
                                     <div class="card-body">
                                         <table class="table table-bordered">
@@ -551,133 +564,138 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!--**********************************
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--**********************************
             Content body end
         ***********************************-->
 
 
 
-                        <!--**********************************
+    <!--**********************************
            Support ticket button start
         ***********************************-->
 
-                        <!--**********************************
+    <!--**********************************
            Support ticket button end
         ***********************************-->
 
 
-                    </div>
-                    <!--**********************************
+
+
+    <!--**********************************
         Main wrapper end
     ***********************************-->
 
-                    <!--**********************************
+    <!--**********************************
         Scripts
     ***********************************-->
-                    <!-- Required vendors -->
-                    <script src="{{ asset('gambar_aset/vendor/global/global.min.js') }}"></script>
-                    <script src="{{ asset('gambar_aset/js/quixnav-init.js') }}"></script>
-                    <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
+    <!-- Required vendors -->
+    <script src="{{ asset('gambar_aset/vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('gambar_aset/js/quixnav-init.js') }}"></script>
+    <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
 
 
-                    <!-- Vectormap -->
-                    <script src="{{ asset('gambar_aset/vendor/raphael/raphael.min.js') }}"></script>
-                    <script src="{{ asset('gambar_aset/vendor/morris/morris.min.js') }}"></script>
+    <!-- Vectormap -->
+    <script src="{{ asset('gambar_aset/vendor/raphael/raphael.min.js') }}"></script>
+    <script src="{{ asset('gambar_aset/vendor/morris/morris.min.js') }}"></script>
 
 
-                    <script src="{{ asset('gambar_aset/vendor/circle-progress/circle-progress.min.js') }}"></script>
-                    <script src="{{ asset('gambar_aset/vendor/chart.js') }}/Chart.bundle.min.js') }}"></script>
+    <script src="{{ asset('gambar_aset/vendor/circle-progress/circle-progress.min.js') }}"></script>
+    <script src="{{ asset('gambar_aset/vendor/chart.js') }}/Chart.bundle.min.js') }}"></script>
 
-                    <script src="{{ asset('gambar_aset/vendor/gaugeJS/dist/gauge.min.js') }}"></script>
+    <script src="{{ asset('gambar_aset/vendor/gaugeJS/dist/gauge.min.js') }}"></script>
 
-                    <!--  flot-chart js -->
-                    <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.js') }}"></script>
-                    <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.resize.js') }}"></script>
+    <!--  flot-chart js -->
+    <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.js') }}"></script>
+    <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.resize.js') }}"></script>
 
-                    <!-- Owl Carousel -->
-                    <script src="{{ asset('gambar_aset/vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
+    <!-- Owl Carousel -->
+    <script src="{{ asset('gambar_aset/vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
 
-                    <!-- Counter Up -->
-                    <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
-                    <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
-                    <script src="{{ asset('gambar_aset/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
+    <!-- Counter Up -->
+    <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
+    <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
+    <script src="{{ asset('gambar_aset/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
 
 
-                    <script src="{{ asset('gambar_aset/js/dashboard/dashboard-1.js') }}"></script>
+    <script src="{{ asset('gambar_aset/js/dashboard/dashboard-1.js') }}"></script>
 
-                    <!-- Datatable -->
-                    <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-                    <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+    <!-- Datatable -->
+    <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
 
-                    <!-- Counting Animation Script -->
-                    <script>
-                        document.addEventListener("DOMContentLoaded", () => {
-                            const counters = document.querySelectorAll('.count');
-                            const animationDuration = 2000; // Duration in milliseconds (2 seconds)
+    <!-- Counting Animation Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const counters = document.querySelectorAll('.count');
+            const animationDuration = 2000; // Duration in milliseconds (2 seconds)
 
-                            counters.forEach(counter => {
-                                const target = +counter.getAttribute('data-count');
-                                const frameRate = 20; // Update the count every 20ms
-                                const totalFrames = animationDuration / frameRate;
-                                const increment = target / totalFrames;
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const frameRate = 20; // Update the count every 20ms
+                const totalFrames = animationDuration / frameRate;
+                const increment = target / totalFrames;
 
-                                let currentCount = 0;
+                let currentCount = 0;
 
-                                const updateCount = () => {
-                                    currentCount += increment;
+                const updateCount = () => {
+                    currentCount += increment;
 
-                                    if (currentCount < target) {
-                                        counter.innerText = Math.ceil(currentCount);
-                                        setTimeout(updateCount, frameRate);
-                                    } else {
-                                        counter.innerText = target; // Set the final count
-                                    }
-                                };
+                    if (currentCount < target) {
+                        counter.innerText = Math.ceil(currentCount);
+                        setTimeout(updateCount, frameRate);
+                    } else {
+                        counter.innerText = target; // Set the final count
+                    }
+                };
 
-                                updateCount();
-                            });
-                        });
-                    </script>
-                    <script>
-                        document.getElementById("toggle-more-info").addEventListener("click", function(event) {
-                            event.preventDefault();
-                            const moreInfoSection = document.getElementById("more-info");
-                            if (moreInfoSection.style.display === "none") {
-                                moreInfoSection.style.display = "flex";
-                                this.innerHTML = '<i class="bx bx-chevron-up font-size-30"></i> Sembunyikan';
-                            } else {
-                                moreInfoSection.style.display = "none";
-                                this.innerHTML = '<i class="bx bx-chevron-down font-size-30"></i> Selengkapnya';
-                            }
-                        });
-                    </script>
-                    <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-                        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-                        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                updateCount();
+            });
+        });
+    </script>
+    <script>
+        document.getElementById("toggle-more-info").addEventListener("click", function(event) {
+            event.preventDefault();
+            const moreInfoSection = document.getElementById("more-info");
+            if (moreInfoSection.style.display === "none") {
+                moreInfoSection.style.display = "flex";
+                this.innerHTML = '<i class="bx bx-chevron-up font-size-30"></i> Sembunyikan';
+            } else {
+                moreInfoSection.style.display = "none";
+                this.innerHTML = '<i class="bx bx-chevron-down font-size-30"></i> Selengkapnya';
+            }
+        });
+    </script>
+    <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-                    @if (Session::has('message'))
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                toastr.options = {
-                                    "closeButton": true, // Menambahkan tombol close
-                                    "progressBar": true, // Menampilkan progress bar
-                                    "positionClass": "toast-top-right", // Mengubah posisi alert
-                                    "showDuration": "1000", // Durasi animasi muncul (ms)
-                                    "hideDuration": "1000", // Durasi animasi hilang (ms)
-                                    "timeOut": "5000", // Waktu tampil (ms)
-                                    "extendedTimeOut": "1000", // Waktu ekstra saat hover (ms)
-                                    "showEasing": "swing", // Animasi muncul
-                                    "hideEasing": "linear", // Animasi hilang
-                                    "showMethod": "fadeIn", // Metode muncul
-                                    "hideMethod": "fadeOut" // Metode hilang
-                                };
+    @if (Session::has('message'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                toastr.options = {
+                    "closeButton": true, // Menambahkan tombol close
+                    "progressBar": true, // Menampilkan progress bar
+                    "positionClass": "toast-top-right", // Mengubah posisi alert
+                    "showDuration": "1000", // Durasi animasi muncul (ms)
+                    "hideDuration": "1000", // Durasi animasi hilang (ms)
+                    "timeOut": "5000", // Waktu tampil (ms)
+                    "extendedTimeOut": "1000", // Waktu ekstra saat hover (ms)
+                    "showEasing": "swing", // Animasi muncul
+                    "hideEasing": "linear", // Animasi hilang
+                    "showMethod": "fadeIn", // Metode muncul
+                    "hideMethod": "fadeOut" // Metode hilang
+                };
 
-                                toastr.success("{{ Session::get('message') }}", "Berhasil!"); // Judul alert
-                            });
-                        </script>
-                    @endif
+                toastr.success("{{ Session::get('message') }}", "Berhasil!"); // Judul alert
+            });
+        </script>
+    @endif
 
 
 

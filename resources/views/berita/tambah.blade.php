@@ -152,7 +152,7 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="tanggal_waktu">Tanggal dan
                                             Waktu</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4">
                                             <input type="date" name="tanggal_waktu" class="form-control" required />
                                         </div>
                                     </div>

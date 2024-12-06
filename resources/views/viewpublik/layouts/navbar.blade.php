@@ -156,8 +156,8 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item {{ Request::is('galeri/foto') ? 'active' : '' }}"
                                 href="{{ url('/galeri/foto') }}">Dokumentasi</a></li>
-                        <li><a class="dropdown-item {{ Request::is('galeri/video') ? 'active' : '' }}"
-                                href="{{ url('/galeri/video') }}">Video</a></li>
+                        {{-- <li><a class="dropdown-item {{ Request::is('galeri/video') ? 'active' : '' }}"
+                                href="{{ url('/galeri/video') }}">Video</a></li> --}}
                         <li><a class="dropdown-item {{ Request::is('galeri/prestasi') ? 'active' : '' }}"
                                 href="{{ url('/galeri/prestasi') }}">Prestasi</a></li>
                     </ul>
