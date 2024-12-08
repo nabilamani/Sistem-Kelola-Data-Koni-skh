@@ -103,6 +103,9 @@
             text-align: left;
             /* Konten dinamis rata kiri */
         }
+        #sport-category-filter {
+        color: #6c757d; /* Ganti dengan warna yang diinginkan */
+    }
     </style>
 </head>
 
@@ -129,8 +132,19 @@
                 <button id="table-view-btn" class="btn btn-secondary">Table View</button>
             </div>
 
-            <!-- Form Pencarian -->
+            
             <form action="{{ route('showCoaches') }}" method="GET" class="d-flex">
+                <!-- Dropdown Filter Kategori Olahraga -->
+                <select id="sport-category-filter" class="form-select form-select-sm me-2">
+                    <option value="">Semua Cabang Olahraga</option>
+                    @foreach ($sportCategories as $category)
+                        <option value="{{ $category }}"
+                            {{ request('sport_category') == $category ? 'selected' : '' }}>
+                            {{ $category }}
+                        </option>
+                    @endforeach
+                </select>
+                <!-- Form Pencarian -->
                 <input type="text" name="search" class="form-control me-2" placeholder="Cari pelatih atau cabor..."
                     value="{{ request('search') }}">
                 <button type="submit" class="btn btn-primary">Cari</button>
@@ -301,6 +315,20 @@
             document.getElementById('coachAge').textContent = coach.age || 'Tidak Diketahui';
             document.getElementById('coachDescription').textContent = coach.description || 'Tidak Diketahui';
         }
+    </script>
+    <script>
+        document.getElementById('sport-category-filter').addEventListener('change', function() {
+            const selectedCategory = this.value;
+            const urlParams = new URLSearchParams(window.location.search);
+
+            if (selectedCategory) {
+                urlParams.set('sport_category', selectedCategory);
+            } else {
+                urlParams.delete('sport_category');
+            }
+
+            window.location.search = urlParams.toString();
+        });
     </script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>

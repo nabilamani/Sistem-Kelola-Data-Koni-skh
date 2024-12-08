@@ -247,6 +247,7 @@
                     <option value="Pengurus Cabor Renang">Pengurus Cabor Renang</option>
                     <option value="Pengurus Cabor Tinju">Pengurus Cabor Tinju</option>
                     <option value="Pengurus Cabor Pencak Silat">Pengurus Cabor Pencak Silat</option>
+                    <option value="Pengurus Cabor Futsal">Pengurus Cabor Futsal</option>
                     <!-- Add more levels if needed -->
                 </select>
                 <div class="invalid-feedback">

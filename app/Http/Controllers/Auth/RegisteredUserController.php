@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'level' => ['required', 'string', 'in:Admin,Pengurus Cabor Sepak Bola,Pengurus Cabor Badminton,Pengurus Cabor Bola Basket,Pengurus Cabor Bola Voli,Pengurus Cabor Atletik,Pengurus Cabor Renang,Pengurus Cabor Tinju, Pengurus Cabor Pencak Silat'],
+            'level' => ['required', 'string', 'in:Admin,Pengurus Cabor Sepak Bola,Pengurus Cabor Badminton,Pengurus Cabor Bola Basket,Pengurus Cabor Bola Voli,Pengurus Cabor Atletik,Pengurus Cabor Renang,Pengurus Cabor Tinju,Pengurus Cabor Pencak Silat,Pengurus Cabor Futsal'],
         ]);
 
         $user = User::create([
@@ -87,7 +87,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-            'level' => ['required', 'string', 'in:Admin,Pengurus Cabor Sepak Bola,Pengurus Cabor Badminton,Pengurus Cabor Bola Basket,Pengurus Cabor Bola Voli,Pengurus Cabor Atletik,Pengurus Cabor Renang,Pengurus Cabor Tinju,Pengurus Cabor Pencak Silat'],
+            'level' => ['required', 'string', 'in:Admin,Pengurus Cabor Sepak Bola,Pengurus Cabor Badminton,Pengurus Cabor Bola Basket,Pengurus Cabor Bola Voli,Pengurus Cabor Atletik,Pengurus Cabor Renang,Pengurus Cabor Tinju,Pengurus Cabor Pencak Silat,Pengurus Cabor Futsal'],
         ]);
 
         // Update data user

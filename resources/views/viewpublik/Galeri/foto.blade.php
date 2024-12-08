@@ -91,6 +91,34 @@
             align-items: center;
             gap: 0.5rem;
         }
+
+        .custom-category-menu .nav-pills .nav-link {
+            border-radius: 20px;
+            /* Membuat elemen kategori lebih menarik */
+            padding: 10px 15px;
+            margin: 5px;
+            transition: all 0.3s ease;
+            color: #ea8d03;
+        }
+
+        .custom-category-menu .nav-pills .nav-link.active {
+            background-color: #FF9800;
+            /* Warna aktif */
+            color: white;
+        }
+
+        .custom-category-menu .nav-pills .nav-link:hover {
+            background-color: #ea8d03;
+            color: white;
+        }
+        #toggleCategories {
+        color: #ea8d03;
+        transition: color 0.3s ease;
+    }
+
+    #toggleCategories:hover {
+        color: #FF9800;
+    }
     </style>
 </head>
 
@@ -128,9 +156,13 @@
 
     <section class="container my-5">
         <h2 class="text-center text-uppercase mb-4 text-white">Galeri Dokumentasi</h2>
+        <div class="d-flex flex-wrap align-items-center justify-content-center mb-4 p-2 rounded bg-white custom-category-menu">
+            <ul id="categoryMenu" class="nav nav-pills mb-0 me-3"></ul>
+            <button id="toggleCategories" class="btn btn-link text-decoration-none">Selengkapnya</button>
+        </div>
         <div class="row g-4">
             @foreach ($galleries as $gallery)
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $gallery->sport_category }}">
                     <div class="card shadow-sm border-0 h-80 overflow-hidden">
                         @if ($gallery->media_type === 'photo')
                             <img src="{{ asset($gallery->media_path) }}" class="card-img-top img-fluid"
@@ -219,9 +251,72 @@
 
 
     @include('viewpublik/layouts/footer')
+    <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryMenu = document.querySelector('.custom-category-menu');
+            const navLinks = categoryMenu.querySelectorAll('.nav-link'); // Pastikan hanya menu kategori
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const category = link.getAttribute('data-category');
+
+                    // Update active class
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    link.classList.add('active');
+
+                    // Filter gallery items
+                    galleryItems.forEach(item => {
+                        const itemCategory = item.getAttribute('data-category');
+                        if (category === 'Semua' || category === itemCategory) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <script>
+        const categoryMenu = document.getElementById("categoryMenu");
+        const toggleButton = document.getElementById("toggleCategories");
+        let showAllCategories = false;
+    
+        // Generate menu items dynamically
+        const maxVisibleCategories = 9; // Batas kategori yang terlihat secara default
+        sportCategories.forEach((category, index) => {
+            const isActive = index === 0 ? "active" : ""; // Set "Semua" as active by default
+            const hiddenClass = index >= maxVisibleCategories ? "d-none" : ""; // Sembunyikan kategori tambahan
+            const listItem = `
+            <li class="nav-item ${hiddenClass}">
+              <a class="nav-link ${isActive} rounded" href="#" data-category="${category}">
+                ${category}
+              </a>
+            </li>`;
+            categoryMenu.innerHTML += listItem;
+        });
+    
+        // Add toggle functionality
+        toggleButton.addEventListener("click", () => {
+            showAllCategories = !showAllCategories;
+            const categoryItems = categoryMenu.querySelectorAll(".nav-item");
+    
+            categoryItems.forEach((item, index) => {
+                if (index >= maxVisibleCategories) {
+                    item.classList.toggle("d-none", !showAllCategories);
+                }
+            });
+    
+            // Update button text
+            toggleButton.textContent = showAllCategories ? "Sembunyikan" : "Selengkapnya";
+        });
     </script>
 </body>
 

@@ -143,15 +143,6 @@
                                                 $no = ($coaches->currentPage() - 1) * $coaches->perPage() + 1;
                                             @endphp
                                             @foreach ($coaches as $key => $coach)
-                                                @if (Auth::user()->level === 'Admin' ||
-                                                        (Auth::user()->level === 'Pengurus Cabor Sepak Bola' && $coach->sport_category === 'Sepak Bola') ||
-                                                        (Auth::user()->level === 'Pengurus Cabor Badminton' && $coach->sport_category === 'Badminton') ||
-                                                        (Auth::user()->level === 'Pengurus Cabor Bola Voli' && $coach->sport_category === 'Bola Voli') ||
-                                                        (Auth::user()->level === 'Pengurus Cabor Bola Basket' && $coach->sport_category === 'Bola Basket') ||
-                                                        (Auth::user()->level === 'Pengurus Cabor Atletik' && $coach->sport_category === 'Atletik') ||
-                                                        (Auth::user()->level === 'Pengurus Cabor Renang' && $coach->sport_category === 'Renang') ||
-                                                        (Auth::user()->level === 'Pengurus Cabor Tinju' && $coach->sport_category === 'Tinju') ||
-                                                        (Auth::user()->level === 'Pengurus Cabor Pencak Silat' && $coach->sport_category === 'Pencak Silat'))
                                                     <tr>
                                                         <td>{{ $no++ }}</td>
                                                         <!-- Increment $no to continue numbering -->
@@ -204,7 +195,6 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                @endif
                                             @endforeach
                                         </tbody>
 
