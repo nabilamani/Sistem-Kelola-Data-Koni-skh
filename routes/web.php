@@ -107,6 +107,8 @@ Route::resource('coaches', CoachController::class);
 Route::put('/edit-pelatih/{id}', [CoachController::class, 'update']);
 Route::delete('/delete-pelatih/{id}', [CoachController::class, 'destroy']);
 Route::get('/cetak-pelatih', [CoachController::class, 'cetakPelatih'])->name('cetak-pelatih');
+Route::get('/api/cari-pelatih', [CoachController::class, 'cariPelatih'])->name('cari-pelatih');
+// localhost:8000/api/cari-pelatih?search=budi
 
 Route::resource('athletes', AthleteController::class);
 Route::put('/edit-athlete/{id}', [AthleteController::class, 'update']);

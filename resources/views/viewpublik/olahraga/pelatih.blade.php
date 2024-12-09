@@ -14,6 +14,7 @@
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
     <style>
         body {
             overflow-x: hidden;
@@ -133,9 +134,9 @@
             </div>
 
             
-            <form action="{{ route('showCoaches') }}" method="GET" class="d-flex">
+            <form hx-get="/api/cari-pelatih" hx-target="#data-wrapper" hx-swap="innerHTML" hx-trigger="change from:select, click from:button[type='submit']" class="d-flex" id="form-sport-category">
                 <!-- Dropdown Filter Kategori Olahraga -->
-                <select id="sport-category-filter" class="form-select form-select-sm me-2">
+                <select class="form-select form-select-sm me-2" name="sport_category">
                     <option value="">Semua Cabang Olahraga</option>
                     @foreach ($sportCategories as $category)
                         <option value="{{ $category }}"
@@ -146,71 +147,75 @@
                 </select>
                 <!-- Form Pencarian -->
                 <input type="text" name="search" class="form-control me-2" placeholder="Cari pelatih atau cabor..."
-                    value="{{ request('search') }}">
+                    value="{{ request('search') }}" id="sport-category-search">
+                <!-- View card/table -->
+                 <input type="hidden" name="_view" id="active-view" value="card">
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
         </div>
 
-        <!-- Tampilan Card -->
-        <div id="card-view" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-            @foreach ($coaches as $coach)
-                <div class="col-md-3">
-                    <div class="card coach-card">
-                        <img src="{{ $coach->photo ? asset($coach->photo) : 'https://via.placeholder.com/300x200' }}"
-                            alt="{{ $coach->name }}" class="coach-photo">
-                        <div class="coach-details text-center p-3">
-                            <h5 class="text-dark">{{ $coach->name }}</h5>
-                            <p class="text-muted">Cabang: {{ $coach->sport_category }}</p>
-                            <a href="#" class="btn btn-primary btn-sm"
-                                onclick="showCoachDetails({{ json_encode($coach) }})" data-bs-toggle="modal"
-                                data-bs-target="#coachDetailModal">Detail</a>
-
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-        <!-- Tampilan Tabel -->
-        <div id="table-view" class="table-responsive rounded" style="display: none;">
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Pelatih</th>
-                        <th>Cabang Olahraga</th>
-                        <th>Foto</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $no = ($coaches->currentPage() - 1) * $coaches->perPage() + 1;
-                    @endphp
-                    @foreach ($coaches as $index => $coach)
-                        <tr>
-                            <td>{{ $no++ }}</td>
-                            <td>{{ $coach->name }}</td>
-                            <td>{{ $coach->sport_category }}</td>
-                            <td>
-                                <img src="{{ $coach->photo ? asset($coach->photo) : 'https://via.placeholder.com/100x100' }}"
-                                    alt="{{ $coach->name }}" class="img-thumbnail" width="100">
-                            </td>
-                            <td>
+        <div id="data-wrapper">
+            <!-- Tampilan Card -->
+            <div id="card-view" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                @foreach ($coaches as $coach)
+                    <div class="col-md-3">
+                        <div class="card coach-card">
+                            <img src="{{ $coach->photo ? asset($coach->photo) : 'https://via.placeholder.com/300x200' }}"
+                                alt="{{ $coach->name }}" class="coach-photo">
+                            <div class="coach-details text-center p-3">
+                                <h5 class="text-dark">{{ $coach->name }}</h5>
+                                <p class="text-muted">Cabang: {{ $coach->sport_category }}</p>
                                 <a href="#" class="btn btn-primary btn-sm"
                                     onclick="showCoachDetails({{ json_encode($coach) }})" data-bs-toggle="modal"
                                     data-bs-target="#coachDetailModal">Detail</a>
 
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
-        <!-- Pagination -->
-        <div class="mt-4">
-            {{ $coaches->links('layouts.pagination') }}
+            <!-- Tampilan Tabel -->
+            <div id="table-view" class="table-responsive rounded" style="display: none;">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Pelatih</th>
+                            <th>Cabang Olahraga</th>
+                            <th>Foto</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $no = ($coaches->currentPage() - 1) * $coaches->perPage() + 1;
+                        @endphp
+                        @foreach ($coaches as $index => $coach)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $coach->name }}</td>
+                                <td>{{ $coach->sport_category }}</td>
+                                <td>
+                                    <img src="{{ $coach->photo ? asset($coach->photo) : 'https://via.placeholder.com/100x100' }}"
+                                        alt="{{ $coach->name }}" class="img-thumbnail" width="100">
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm"
+                                        onclick="showCoachDetails({{ json_encode($coach) }})" data-bs-toggle="modal"
+                                        data-bs-target="#coachDetailModal">Detail</a>
+    
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="mt-4">
+                {{ $coaches->links('layouts.pagination') }}
+            </div>
         </div>
         <!-- Modal untuk Detail Pelatih -->
         <div class="modal fade mt-5 pt-2" id="coachDetailModal" tabindex="-1" aria-labelledby="coachDetailModalLabel"
@@ -279,11 +284,13 @@
             if (savedView === 'table') {
                 document.getElementById('card-view').style.display = 'none';
                 document.getElementById('table-view').style.display = 'block';
+                document.getElementById('active-view').value = 'table';
                 document.getElementById('table-view-btn').classList.add('active');
                 document.getElementById('card-view-btn').classList.remove('active');
             } else {
                 document.getElementById('card-view').style.display = 'flex';
                 document.getElementById('table-view').style.display = 'none';
+                document.getElementById('active-view').value = 'card';
                 document.getElementById('card-view-btn').classList.add('active');
                 document.getElementById('table-view-btn').classList.remove('active');
             }
@@ -293,12 +300,14 @@
         document.getElementById('card-view-btn').addEventListener('click', function() {
             document.getElementById('card-view').style.display = 'flex';
             document.getElementById('table-view').style.display = 'none';
+            document.getElementById('active-view').value = 'card';
             setView('card');
         });
 
         document.getElementById('table-view-btn').addEventListener('click', function() {
             document.getElementById('card-view').style.display = 'none';
             document.getElementById('table-view').style.display = 'block';
+            document.getElementById('active-view').value = 'table';
             setView('table');
         });
 
@@ -317,17 +326,10 @@
         }
     </script>
     <script>
-        document.getElementById('sport-category-filter').addEventListener('change', function() {
-            const selectedCategory = this.value;
-            const urlParams = new URLSearchParams(window.location.search);
-
-            if (selectedCategory) {
-                urlParams.set('sport_category', selectedCategory);
-            } else {
-                urlParams.delete('sport_category');
-            }
-
-            window.location.search = urlParams.toString();
+        document.getElementById('table-wrapper').addEventListener('htmx:afterSwap', function(event) {
+            const responseUrl = event.detail.pathInfo.responsePath;
+            const nextUrl = responseUrl.replace('/api/cari-pelatih', '/olahraga/pelatih');
+            history.pushState(null, '', nextUrl);
         });
     </script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

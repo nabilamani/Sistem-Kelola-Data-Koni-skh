@@ -200,12 +200,34 @@ class CoachController extends Controller
         $query->where('sport_category', $sportCategory);
     }
 
-    $coaches = $query->paginate(8);
+    $coaches = $query->paginate(8)->withPath(url('/olahraga/pelatih'))->appends($request->except('page'));
 
     // Ambil semua kategori olahraga untuk dropdown filter
     $sportCategories = Coach::select('sport_category')->distinct()->pluck('sport_category');
 
     return view('viewpublik.olahraga.pelatih', compact('coaches', 'sportCategories'));
+}
+
+public function cariPelatih(Request $request)
+{
+    $search = $request->input('search');
+    $sportCategory = $request->input('sport_category');
+    $activeView = $request->input('_view');
+
+    $query = Coach::query();
+
+    if ($search) {
+        $query->where('name', 'like', "%$search%")
+              ->orWhere('sport_category', 'like', "%$search%");
+    }
+
+    if ($sportCategory) {
+        $query->where('sport_category', $sportCategory);
+    }
+
+    $coaches = $query->paginate(8)->withPath(url('/olahraga/pelatih'))->appends($request->except('page'));
+
+    return view('viewpublik.olahraga.table_pelatih', compact('coaches', 'activeView'));
 }
 
 }
