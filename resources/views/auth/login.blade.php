@@ -26,7 +26,6 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            padding: 20px;
         }
 
         @keyframes gradientAnimation {
@@ -189,39 +188,39 @@
             <!-- Email Address -->
             <div class="form-group">
                 <label for="email">{{ __('Email') }}</label>
-                <input id="email" type="email" name="email" :value="old('email')" value="adminkoni@gmail.com"
-                    required autofocus autocomplete="username">
+                <input id="email" type="email" name="email"
+                    required autofocus autocomplete="off">
             </div>
 
             <!-- Password -->
             <div class="form-group">
                 <label for="password">{{ __('Password') }}</label>
-                <input id="password" type="password" name="password" value="koni321" required
-                    autocomplete="current-password">
+                <input id="password" type="password" name="password" required
+                    autocomplete="off">
             </div>
 
 
             <!-- Remember Me -->
-            <div class="checkbox-group">
+            {{-- <div class="checkbox-group">
                 <input id="remember_me" type="checkbox" name="remember">
                 <label for="remember_me">{{ __('Remember me') }}</label>
-            </div>
+            </div> --}}
 
             <!-- Forgot Password -->
-            <div class="forgot-password">
+            {{-- <div class="forgot-password">
                 @if (Route::has('password.request'))
                     <a href="{{ route('password.request') }}">{{ __('Lupa kata sandi Anda?') }}</a>
                 @endif
-            </div>
+            </div> --}}
 
             <!-- Submit Button -->
             <button type="submit" class="btn-login">{{ __('Log in') }}</button>
 
-            <!-- Register Link -->
+            {{-- <!-- Register Link --> 
             <div class="register-link">
                 <p>Belum punya akun ?</p>
                 <a href="{{ route('register') }}">{{ __('Register') }}</a>
-            </div>
+            </div> --}}
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"

@@ -34,13 +34,12 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
+//Viewpublik
 Route::get('/', [Controller::class, 'home'])->name('home');
 
 Route::get('/berita', [BeritaController::class, 'publik'])->name('berita.publik');
 Route::get('/berita/daftar', [BeritaController::class, 'daftarberita'])->name('berita.daftar');
 Route::get('/berita/{id}', [BeritaController::class, 'detail'])->name('berita.detail');
-
-
 
 Route::get('/profil', [BeritaController::class, 'publik'])->name('profil.publik');
 
@@ -72,7 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+//viewpublik
 
 
 
@@ -103,55 +102,70 @@ Route::get('/profil/struktur', function () {
 });
 
 
-Route::resource('coaches', CoachController::class);
-Route::put('/edit-pelatih/{id}', [CoachController::class, 'update']);
-Route::delete('/delete-pelatih/{id}', [CoachController::class, 'destroy']);
-Route::get('/cetak-pelatih', [CoachController::class, 'cetakPelatih'])->name('cetak-pelatih');
-Route::get('/api/cari-pelatih', [CoachController::class, 'cariPelatih'])->name('cari-pelatih');
-// localhost:8000/api/cari-pelatih?search=budi
+Route::middleware(['auth'])->group(function () {
 
-Route::resource('athletes', AthleteController::class);
-Route::put('/edit-athlete/{id}', [AthleteController::class, 'update']);
-Route::delete('/delete-athlete/{id}', [AthleteController::class, 'destroy']);
-Route::get('/cetak-athlete', [AthleteController::class, 'cetakAthlete'])->name('cetak-athlete');
+    // Rute dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('referees', RefereeController::class);
-Route::put('/edit-referee/{id}', [RefereeController::class, 'update']);
-Route::delete('/delete-referee/{id}', [RefereeController::class, 'destroy']);
-Route::get('/cetak-referee', [RefereeController::class, 'cetakBerita'])->name('cetak-berita');
+    // // Rute register (hanya untuk admin)
+    // Route::get('/register', [RegisteredUserController::class, 'create'])
+    //     ->middleware('role:Admin')
+    //     ->name('register');
+    // Route::post('/register', [RegisteredUserController::class, 'store'])
+    //     ->middleware('role:Admin')
+    //     ->name('register.store');
 
-Route::resource('events', EventController::class);
-Route::put('/edit-event/{id}', [EventController::class, 'update']);
-Route::delete('/delete-event/{id}', [EventController::class, 'destroy']);
-Route::get('/cetak-event', [EventController::class, 'cetakEvent'])->name('cetak-event');
+    // Rute pelatih
+    Route::resource('coaches', CoachController::class);
+    Route::put('/edit-pelatih/{id}', [CoachController::class, 'update']);
+    Route::delete('/delete-pelatih/{id}', [CoachController::class, 'destroy']);
+    Route::get('/cetak-pelatih', [CoachController::class, 'cetakPelatih'])->name('cetak-pelatih');
+    Route::get('/api/cari-pelatih', [CoachController::class, 'cariPelatih'])->name('cari-pelatih');
 
-Route::resource('venues', VenueController::class);
-Route::put('/edit-venue/{id}', [VenueController::class, 'update']);
-Route::delete('/delete-venue/{id}', [VenueController::class, 'destroy']);
-Route::get('/cetak-venue', [VenueController::class, 'cetakVenue'])->name('cetak-venue');
+    // Rute atlet
+    Route::resource('athletes', AthleteController::class);
+    Route::put('/edit-athlete/{id}', [AthleteController::class, 'update']);
+    Route::delete('/delete-athlete/{id}', [AthleteController::class, 'destroy']);
+    Route::get('/cetak-athlete', [AthleteController::class, 'cetakAthlete'])->name('cetak-athlete');
+    Route::get('/api/cari-atlet', [AthleteController::class, 'cariAtlet'])->name('cari-atlet');
 
-Route::resource('schedules', ScheduleController::class);
-Route::put('/edit-schedule/{id}', [ScheduleController::class, 'update']);
-Route::delete('/delete-schedule/{id}', [ScheduleController::class, 'destroy']);
-Route::get('/cetak-schedule', [ScheduleController::class, 'cetakVenue'])->name('cetak-venue');
+    // Rute wasit
+    Route::resource('referees', RefereeController::class);
+    Route::put('/edit-referee/{id}', [RefereeController::class, 'update']);
+    Route::delete('/delete-referee/{id}', [RefereeController::class, 'destroy']);
+    Route::get('/cetak-referee', [RefereeController::class, 'cetakBerita'])->name('cetak-berita');
 
-Route::resource('achievements', AchievementController::class);
-Route::put('/edit-achievment/{id}', [AchievementController::class, 'update']);
-Route::delete('/delete-achievment/{id}', [AchievementController::class, 'destroy']);
-Route::get('/cetak-achievement', [AchievementController::class, 'cetakPrestasi'])->name('cetak-prestasi');
+    // Rute event
+    Route::resource('events', EventController::class);
+    Route::put('/edit-event/{id}', [EventController::class, 'update']);
+    Route::delete('/delete-event/{id}', [EventController::class, 'destroy']);
+    Route::get('/cetak-event', [EventController::class, 'cetakEvent'])->name('cetak-event');
 
-Route::resource('beritas', BeritaController::class);
-Route::put('/edit-berita/{id}', [BeritaController::class, 'update']);
-Route::delete('/delete-berita/{id}', [BeritaController::class, 'destroy']);
-Route::get('/cetak-berita', [BeritaController::class, 'cetakBerita'])->name('cetak-berita');
+    // Rute venue
+    Route::resource('venues', VenueController::class);
+    Route::put('/edit-venue/{id}', [VenueController::class, 'update']);
+    Route::delete('/delete-venue/{id}', [VenueController::class, 'destroy']);
+    Route::get('/cetak-venue', [VenueController::class, 'cetakVenue'])->name('cetak-venue');
 
-Route::resource('galleries', GaleriController::class);
-Route::put('/edit-gallery/{id}', [GaleriController::class, 'update']);
-Route::delete('/delete-gallery/{id}', [GaleriController::class, 'destroy']);
-Route::get('/cetak-gallery', [GaleriController::class, 'cetakGaleri'])->name('cetak-geleri');
+    // Rute prestasi
+    Route::resource('achievements', AchievementController::class);
+    Route::put('/edit-achievment/{id}', [AchievementController::class, 'update']);
+    Route::delete('/delete-achievment/{id}', [AchievementController::class, 'destroy']);
+    Route::get('/cetak-achievement', [AchievementController::class, 'cetakPrestasi'])->name('cetak-prestasi');
 
+    // Rute berita
+    Route::resource('beritas', BeritaController::class);
+    Route::put('/edit-berita/{id}', [BeritaController::class, 'update']);
+    Route::delete('/delete-berita/{id}', [BeritaController::class, 'destroy']);
+    Route::get('/cetak-berita', [BeritaController::class, 'cetakBerita'])->name('cetak-berita');
 
-Route::resource('konistructures', KoniStructureController::class);
+    // Rute galeri
+    Route::resource('galleries', GaleriController::class);
+    Route::put('/edit-gallery/{id}', [GaleriController::class, 'update']);
+    Route::delete('/delete-gallery/{id}', [GaleriController::class, 'destroy']);
+    Route::get('/cetak-gallery', [GaleriController::class, 'cetakGaleri'])->name('cetak-geleri');
+
+    Route::resource('konistructures', KoniStructureController::class);
 Route::put('/edit-konistructure/{id}', [KoniStructureController::class, 'update']);
 Route::delete('/delete-konistructure/{id}', [KoniStructureController::class, 'destroy']);
 Route::get('/cetak-konistructure', [KoniStructureController::class, 'cetakStructure'])->name('cetak-konistructure');
@@ -173,6 +187,9 @@ Route::patch('/messages/{message}/update-status', [MessageController::class, 'up
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Rute lainnya sesuai kebutuhan...
+});
 
 
 

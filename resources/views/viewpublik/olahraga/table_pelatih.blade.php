@@ -11,7 +11,6 @@
                     <a href="#" class="btn btn-primary btn-sm"
                         onclick="showCoachDetails({{ json_encode($coach) }})" data-bs-toggle="modal"
                         data-bs-target="#coachDetailModal">Detail</a>
-
                 </div>
             </div>
         </div>
