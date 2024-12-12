@@ -4,6 +4,7 @@ use App\Http\Controllers\AchievementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AthleteController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\CaborController;
@@ -166,27 +167,27 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/cetak-gallery', [GaleriController::class, 'cetakGaleri'])->name('cetak-geleri');
 
     Route::resource('konistructures', KoniStructureController::class);
-Route::put('/edit-konistructure/{id}', [KoniStructureController::class, 'update']);
-Route::delete('/delete-konistructure/{id}', [KoniStructureController::class, 'destroy']);
-Route::get('/cetak-konistructure', [KoniStructureController::class, 'cetakStructure'])->name('cetak-konistructure');
+    Route::put('/edit-konistructure/{id}', [KoniStructureController::class, 'update']);
+    Route::delete('/delete-konistructure/{id}', [KoniStructureController::class, 'destroy']);
+    Route::get('/cetak-konistructure', [KoniStructureController::class, 'cetakStructure'])->name('cetak-konistructure');
 
-Route::resource('sportcategories', SportCategoryController::class);
-Route::put('/edit-sportcategory/{id}', [SportCategoryController::class, 'update']);
-Route::delete('/delete-sportcategory/{id}', [SportCategoryController::class, 'destroy']);
+    Route::resource('sportcategories', SportCategoryController::class);
+    Route::put('/edit-sportcategory/{id}', [SportCategoryController::class, 'update']);
+    Route::delete('/delete-sportcategory/{id}', [SportCategoryController::class, 'destroy']);
 
-Route::resource('users', RegisteredUserController::class);
-Route::put('/edit-user/{id}', [RegisteredUserController::class, 'update']);
-Route::delete('/delete-user/{id}', [RegisteredUserController::class, 'destroy']);
+    Route::resource('users', UserController::class);
+    Route::put('/edit-user/{id}', [UserController::class, 'update']);
+    Route::delete('/delete-user/{id}', [UserController::class, 'destroy']);
 
-Route::resource('messages', MessageController::class);
-Route::put('/edit-message/{id}', [MessageController::class, 'update']);
-Route::delete('/delete-message/{id}', [MessageController::class, 'destroy']);
-Route::patch('/messages/{message}/update-status', [MessageController::class, 'updateStatus'])->name('messages.updateStatus');
-
-
+    Route::resource('messages', MessageController::class);
+    Route::put('/edit-message/{id}', [MessageController::class, 'update']);
+    Route::delete('/delete-message/{id}', [MessageController::class, 'destroy']);
+    Route::patch('/messages/{message}/update-status', [MessageController::class, 'updateStatus'])->name('messages.updateStatus');
 
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Rute lainnya sesuai kebutuhan...
 });

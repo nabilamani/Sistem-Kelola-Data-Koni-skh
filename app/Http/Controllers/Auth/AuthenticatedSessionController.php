@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -24,15 +25,26 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
-
-        $request->session()->regenerate();
-        
-
-        // Tambahkan flash message
-        return redirect()->intended(route('dashboard', absolute: false))
-            ->with('message', 'Login berhasil! Selamat datang kembali.');
-    }
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => config('recaptcha.secret_key'),
+            'response' => $request->input('g-recaptcha-response'),
+        ]);
+    
+        $recaptcha = json_decode($response->body());
+    
+        if (!$recaptcha->success) {
+            return back()->withErrors(['g-recaptcha-response' => 'Verifikasi reCAPTCHA gagal.']);
+        }
+            
+            $request->authenticate();
+    
+            $request->session()->regenerate();
+            
+    
+            // Tambahkan flash message
+            return redirect()->intended(route('dashboard', absolute: false))
+                ->with('message', 'Login berhasil! Selamat datang kembali.');
+        }
 
     /**
      * Destroy an authenticated session.

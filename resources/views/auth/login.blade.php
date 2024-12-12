@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
         integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -184,43 +185,26 @@
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
+        
             <!-- Email Address -->
             <div class="form-group">
                 <label for="email">{{ __('Email') }}</label>
-                <input id="email" type="email" name="email"
-                    required autofocus autocomplete="off">
+                <input id="email" type="email" name="email" required autofocus autocomplete="off">
             </div>
-
+        
             <!-- Password -->
             <div class="form-group">
                 <label for="password">{{ __('Password') }}</label>
-                <input id="password" type="password" name="password" required
-                    autocomplete="off">
+                <input id="password" type="password" name="password" required autocomplete="off">
             </div>
-
-
-            <!-- Remember Me -->
-            {{-- <div class="checkbox-group">
-                <input id="remember_me" type="checkbox" name="remember">
-                <label for="remember_me">{{ __('Remember me') }}</label>
-            </div> --}}
-
-            <!-- Forgot Password -->
-            {{-- <div class="forgot-password">
-                @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}">{{ __('Lupa kata sandi Anda?') }}</a>
-                @endif
-            </div> --}}
-
+        
+            <!-- Google reCAPTCHA -->
+            <div class="form-group">
+                <div class="g-recaptcha" data-sitekey="6LfpYJkqAAAAADJ9fO9GwH1IP-pcKvwppoeX2lDh"></div>
+            </div>
+        
             <!-- Submit Button -->
             <button type="submit" class="btn-login">{{ __('Log in') }}</button>
-
-            {{-- <!-- Register Link --> 
-            <div class="register-link">
-                <p>Belum punya akun ?</p>
-                <a href="{{ route('register') }}">{{ __('Register') }}</a>
-            </div> --}}
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
