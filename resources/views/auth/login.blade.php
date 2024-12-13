@@ -166,6 +166,12 @@
 </head>
 
 <body>
+    <!-- Menu Lihat View Publik -->
+    <div class="menu-view-publik" style="position: absolute; top: 10px; left: 10px;">
+        <a href="/" style="text-decoration: none; color: #fff; font-size: 14px; font-weight: bold;">
+            &#8592; Lihat View Publik
+        </a>
+    </div>
     <div class="login-container">
         <!-- Logo -->
         <img src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo KONI Sukoharjo" class="logo"

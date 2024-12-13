@@ -19,6 +19,19 @@
 <body>
 
     <!--*******************
+        alert error
+    ********************-->
+    @if ($errors->any())
+        <div class="text-red-500">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <!--*******************
         Preloader start
     ********************-->
     <div id="preloader">
@@ -113,13 +126,13 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="email">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="email" name="email" class="form-control" placeholder="Masukkan email..." required>
+                                            <input type="email" name="email" class="form-control" placeholder="Masukkan email..." autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="password">Password</label>
                                         <div class="col-sm-10">
-                                            <input type="password" name="password" class="form-control" placeholder="Masukkan password..." required>
+                                            <input type="password" name="password" class="form-control" placeholder="Masukkan password..." autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">

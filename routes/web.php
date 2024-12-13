@@ -108,14 +108,6 @@ Route::middleware(['auth'])->group(function () {
     // Rute dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // // Rute register (hanya untuk admin)
-    // Route::get('/register', [RegisteredUserController::class, 'create'])
-    //     ->middleware('role:Admin')
-    //     ->name('register');
-    // Route::post('/register', [RegisteredUserController::class, 'store'])
-    //     ->middleware('role:Admin')
-    //     ->name('register.store');
-
     // Rute pelatih
     Route::resource('coaches', CoachController::class);
     Route::put('/edit-pelatih/{id}', [CoachController::class, 'update']);
