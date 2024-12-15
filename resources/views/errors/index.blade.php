@@ -2,7 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight flex items-center">
             <span class="mdi mdi-alert-circle-outline text-red-500 text-2xl mr-2"></span>
-            {{ __('Errors') }}
+            {{ __('Errors') }} testing
         </h2>
     </x-slot>
 
