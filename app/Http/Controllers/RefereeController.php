@@ -59,6 +59,8 @@ class RefereeController extends Controller
             'birth_date' => ['required', 'date'],
             'gender' => ['required', 'in:Laki-laki,Perempuan'],
             'license' => ['nullable', 'string'],
+            'whatsapp' => ['nullable', 'string'],
+            'instagram' => ['nullable', 'string'],
             'experience' => ['nullable', 'string'],
             'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
@@ -119,6 +121,8 @@ class RefereeController extends Controller
             'birth_date' => ['required', 'date'],
             'gender' => ['required', 'in:Laki-laki,Perempuan'],
             'license' => ['nullable', 'string'],
+            'whatsapp' => ['nullable', 'string'],
+            'instagram' => ['nullable', 'string'],
             'experience' => ['nullable', 'string'],
             'photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);

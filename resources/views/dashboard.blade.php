@@ -25,6 +25,7 @@
         border-bottom: 3px solid orange;
         /* You can adjust the width (3px) as needed */
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #FDEED6;
     }
 
     .card-hover:hover {
@@ -67,7 +68,7 @@
     }
 
     .hover-card:hover .card-title {
-        color: #007bff;
+        color: #FF9800;
     }
 
     .btn-primary {
@@ -146,7 +147,7 @@
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
-                <div class="row page-titles mx-0 mb-0 shadow-sm">
+                <div class="row page-titles mx-0 mb-0 shadow-sm" style="background-color: #FDEED6">
                     <div class="col-sm-6 p-md-0">
                         <div class="welcome-text">
                             <h4>Hi, Selamat Datang Kembali!</h4>
@@ -360,7 +361,7 @@
                                             @foreach ($beritas as $berita)
                                                 <div class="col-lg-4 col-md-6 mb-4">
                                                     <div
-                                                        class="card border shadow-sm h-100 position-relative hover-card">
+                                                        class="card border bg-white shadow-sm h-100 position-relative hover-card">
                                                         <img src="{{ asset($berita->photo) }}"
                                                             class="card-img-top img-fluid"
                                                             alt="{{ $berita->judul_berita }}"
@@ -386,7 +387,7 @@
                                                                 <strong>Sumber:</strong> {{ $berita->kutipan_sumber }}
                                                             </p>
                                                             <button type="button"
-                                                                class="btn btn-primary btn-sm mt-auto"
+                                                                class="btn btn-warning btn-sm mt-auto text-white"
                                                                 data-toggle="modal"
                                                                 data-target="#newsDetailModal{{ $berita->id }}">
                                                                 Selengkapnya
@@ -509,7 +510,7 @@
                                         <h5 class="card-title">Rekapan Prestasi Cabang Olahraga</h5>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered bg-white">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th>Cabang Olahraga</th>
@@ -541,7 +542,7 @@
                                         <h5 class="card-title">Event Mendatang</h5>
                                     </div>
                                     <div class="card-body">
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered bg-white">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th>Nama Event</th>
@@ -569,6 +570,7 @@
             </div>
         </div>
     </div>
+    @include('layouts/footer')
     <!--**********************************
             Content body end
         ***********************************-->

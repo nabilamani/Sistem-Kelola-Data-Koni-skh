@@ -141,7 +141,7 @@
                 transform: translateY(0px);
             }
             100% {
-                transform: translateY(-20px);
+                transform: translateY(-40px);
             }
         }
     </style>
@@ -171,7 +171,7 @@
         <!-- Footer Section -->
         <div class="footer">
             <p>Maaf, halaman yang Anda minta tidak dapat ditemukan. Silakan kembali ke beranda!</p>
-            <button onclick="location.href='/'">GO HOME</button>
+            <button onclick="location.href='/'">BERANDA KONI</button>
         </div>
     </div>
 </body>

@@ -103,6 +103,26 @@
         /* Warna oranye dengan transparansi */
         color: white;
     }
+    /* Mobile Specific Styling */
+    @media (max-width: 768px) {
+        .navbar-brand{
+            font-size: 12pxrem;
+        }
+        .navbar .nav-item {
+            margin-bottom: 10px;
+        }
+
+        .navbar .dropdown-menu {
+            position: static;
+            float: none;
+            width: 100%;
+        }
+
+        .navbar .btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+    }
 </style>
 <nav class="navbar navbar-expand-lg shadow-sm">
     <div class="container">

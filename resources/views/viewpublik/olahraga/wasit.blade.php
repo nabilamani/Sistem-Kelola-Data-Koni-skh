@@ -97,22 +97,22 @@
 
     <div class="container my-5">
         <h2 class="text-center mb-4 text-white">Daftar Wasit KONI Sukoharjo</h2>
-    
+
         <!-- Tombol untuk mengganti tampilan -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <button id="card-view-btn" class="btn btn-primary active">Card View</button>
                 <button id="table-view-btn" class="btn btn-secondary">Table View</button>
             </div>
-    
+
             <!-- Form Pencarian -->
             <form action="{{ route('showReferees') }}" method="GET" class="d-flex">
-                <input type="text" name="search" class="form-control me-2"
-                    placeholder="Cari wasit atau cabor..." value="{{ request('search') }}">
+                <input type="text" name="search" class="form-control me-2" placeholder="Cari wasit atau cabor..."
+                    value="{{ request('search') }}">
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
         </div>
-    
+
         <!-- Tampilan Card -->
         <div id="card-view" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
             @foreach ($referees as $referee)
@@ -123,15 +123,15 @@
                         <div class="referee-details text-center p-3">
                             <h5 class="text-dark">{{ $referee->name }}</h5>
                             <p class="text-muted">Cabang: {{ $referee->sport_category }}</p>
-                            <a href="#" class="btn btn-primary btn-sm" 
-                                onclick="showRefereeDetails({{ json_encode($referee) }})" 
-                                data-bs-toggle="modal" data-bs-target="#refereeDetailModal">Detail</a>
+                            <a href="#" class="btn btn-primary btn-sm"
+                                onclick="showRefereeDetails({{ json_encode($referee) }})" data-bs-toggle="modal"
+                                data-bs-target="#refereeDetailModal">Detail</a>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
-    
+
         <!-- Tampilan Tabel -->
         <div id="table-view" class="table-responsive rounded" style="display: none;">
             <table class="table table-bordered table-striped">
@@ -158,69 +158,79 @@
                                     alt="{{ $referee->name }}" class="img-thumbnail" width="100">
                             </td>
                             <td>
-                                <a href="#" class="btn btn-primary btn-sm" 
-                                onclick="showRefereeDetails({{ json_encode($referee) }})" 
-                                data-bs-toggle="modal" data-bs-target="#refereeDetailModal">Detail</a>
+                                <a href="#" class="btn btn-primary btn-sm"
+                                    onclick="showRefereeDetails({{ json_encode($referee) }})" data-bs-toggle="modal"
+                                    data-bs-target="#refereeDetailModal">Detail</a>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-    
+
         <!-- Pagination -->
         <div class="mt-4">
             {{ $referees->links('layouts.pagination') }}
         </div>
         <!-- Modal untuk Detail Wasit -->
-    <div class="modal fade mt-5 pt-2" id="refereeDetailModal" tabindex="-1" aria-labelledby="refereeDetailModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-primary">
-                    <h5 class="modal-title text-white" id="refereeDetailModalLabel">Detail Wasit</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img id="refereePhoto" src="" alt="Foto Wasit" class="img-fluid rounded">
-                        </div>
-                        <div class="col-md-8">
-                            <h5 id="refereeName" class="text-dark mb-3"></h5>
-                            <p class="mb-0">
-                                <strong><i class="mdi mdi-soccer mr-1 text-primary"></i> Cabang Olahraga :</strong> 
-                                <span id="refereeSportCategory"></span>
-                            </p>
-                            <p class="mb-0">
-                                <strong><i class="mdi mdi-gender-male-female mr-1 text-primary"></i> Jenis Kelamin :</strong> 
-                                <span id="refereeGender"></span>
-                            </p>
-                            <p class="mb-0">
-                                <strong><i class="mdi mdi-calendar mr-1 text-primary"></i> Tanggal Lahir :</strong> 
-                                <span id="refereeBirthDate"></span> 
-                                (<span id="refereeAge"></span> tahun)
-                            </p>
-                            <p class="mb-0">
-                                <strong><i class="mdi mdi-certificate mr-1 text-primary"></i> Lisensi :</strong> 
-                                <span id="refereeLicense"></span>
-                            </p>
-                            <p class="mb-0">
-                                <strong><i class="mdi mdi-briefcase mr-1 text-primary"></i> Pengalaman :</strong> 
-                                <span id="refereeExperience"></span>
-                            </p>
-                            
+        <div class="modal fade mt-5 pt-2" id="refereeDetailModal" tabindex="-1"
+            aria-labelledby="refereeDetailModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title text-white" id="refereeDetailModalLabel">Detail Wasit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img id="refereePhoto" src="" alt="Foto Wasit" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-8">
+                                <h5 id="refereeName" class="text-dark mb-3"></h5>
+                                <p class="mb-0">
+                                    <strong><i class="mdi mdi-soccer mr-1 text-primary"></i> Cabang Olahraga :</strong>
+                                    <span id="refereeSportCategory"></span>
+                                </p>
+                                <p class="mb-0">
+                                    <strong><i class="mdi mdi-gender-male-female mr-1 text-primary"></i> Jenis Kelamin
+                                        :</strong>
+                                    <span id="refereeGender"></span>
+                                </p>
+                                <p class="mb-0">
+                                    <strong><i class="mdi mdi-calendar mr-1 text-primary"></i> Tanggal Lahir :</strong>
+                                    <span id="refereeBirthDate"></span>
+                                    (<span id="refereeAge"></span> tahun)
+                                </p>
+                                <p class="mb-0">
+                                    <strong><i class="mdi mdi-certificate mr-1 text-primary"></i> Lisensi :</strong>
+                                    <span id="refereeLicense"></span>
+                                </p>
+                                <p class="mb-0">
+                                    <strong><i class="mdi mdi-whatsapp mr-1 text-primary"></i> Whatsapp :</strong>
+                                    <span id="refereeWA"></span>
+                                </p>
+                                <p class="mb-0">
+                                    <strong><i class="mdi mdi-instagram mr-1 text-primary"></i> Instagram :</strong>
+                                    <span id="refereeIG"></span>
+                                </p>
+                                <p class="mb-0">
+                                    <strong><i class="mdi mdi-briefcase mr-1 text-primary"></i> Pengalaman :</strong>
+                                    <span id="refereeExperience"></span>
+                                </p>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer py-2">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <div class="modal-footer py-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    
-    
+
+
     @include('viewpublik/layouts/footer')
 
 
@@ -264,13 +274,16 @@
     </script>
     <script>
         function showRefereeDetails(referee) {
-            document.getElementById('refereePhoto').src = referee.photo ? `{{ asset('') }}${referee.photo}` : 'https://via.placeholder.com/300x200';
+            document.getElementById('refereePhoto').src = referee.photo ? `{{ asset('') }}${referee.photo}` :
+                'https://via.placeholder.com/300x200';
             document.getElementById('refereeName').textContent = referee.name;
             document.getElementById('refereeSportCategory').textContent = referee.sport_category;
             document.getElementById('refereeGender').textContent = referee.gender || 'Tidak Diketahui';
             document.getElementById('refereeBirthDate').textContent = referee.birth_date;
             document.getElementById('refereeAge').textContent = referee.age;
             document.getElementById('refereeLicense').textContent = referee.license || 'Tidak Diketahui';
+            document.getElementById('refereeWA').textContent = referee.whatsapp || 'Tidak Diketahui';
+            document.getElementById('refereeIG').textContent = referee.instagram || 'Tidak Diketahui';
             document.getElementById('refereeExperience').textContent = referee.experience || 'Tidak Diketahui';
         }
     </script>

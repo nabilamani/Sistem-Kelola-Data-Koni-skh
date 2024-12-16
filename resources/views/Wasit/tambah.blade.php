@@ -146,6 +146,20 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="whatsapp">Whatsapp</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="whatsapp" class="form-control"
+                                                placeholder="+62 ..." />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-sm-2 col-form-label" for="instagram">Instagram</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" name="instagram" class="form-control"
+                                                placeholder="Masukkan instagram wasit..." />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="experience">Pengalaman</label>
                                         <div class="col-sm-10">
                                             <textarea name="experience" class="form-control" placeholder="Masukkan pengalaman wasit..."></textarea>
@@ -180,6 +194,7 @@
 
             </div>
         </div>
+        @include('layouts/footer')
         <!--**********************************
             Main wrapper end
         ***********************************-->

@@ -291,7 +291,7 @@
                                                                 <input type="file" class="form-control"
                                                                     id="media_path" name="media_path"
                                                                     accept="image/*,video/*">
-                                                            </div> --}} 
+                                                            </div> --}}
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Batal</button>
@@ -338,57 +338,59 @@
 
 
             </div>
-            <!--**********************************
+        </div>
+        @include('layouts/footer')
+        <!--**********************************
         Main wrapper end
     ***********************************-->
 
-            <!--**********************************
+        <!--**********************************
         Scripts
     ***********************************-->
-            <!-- Required vendors -->
-            <script src="{{ asset('gambar_aset/vendor/global/global.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/js/quixnav-init.js') }}"></script>
-            <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
+        <!-- Required vendors -->
+        <script src="{{ asset('gambar_aset/vendor/global/global.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/quixnav-init.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
 
 
-            <!-- Vectormap -->
-            <script src="{{ asset('gambar_aset/vendor/raphael/raphael.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/morris/morris.min.js') }}"></script>
+        <!-- Vectormap -->
+        <script src="{{ asset('gambar_aset/vendor/raphael/raphael.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/morris/morris.min.js') }}"></script>
 
 
-            <script src="{{ asset('gambar_aset/vendor/circle-progress/circle-progress.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/chart.js') }}/Chart.bundle.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/circle-progress/circle-progress.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/chart.js') }}/Chart.bundle.min.js') }}"></script>
 
-            <script src="{{ asset('gambar_aset/vendor/gaugeJS/dist/gauge.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/gaugeJS/dist/gauge.min.js') }}"></script>
 
-            <!--  flot-chart js -->
-            <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.resize.js') }}"></script>
+        <!--  flot-chart js -->
+        <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.resize.js') }}"></script>
 
-            <!-- Owl Carousel -->
-            <script src="{{ asset('gambar_aset/vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
+        <!-- Owl Carousel -->
+        <script src="{{ asset('gambar_aset/vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
 
-            <!-- Counter Up -->
-            <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
+        <!-- Counter Up -->
+        <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
 
 
-            <script src="{{ asset('gambar_aset/js/dashboard/dashboard-1.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/dashboard/dashboard-1.js') }}"></script>
 
-            <!-- Datatable -->
-            <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
-            {{-- Debugging line --}}
-            @if (Session::has('message'))
-                <script>
-                    swal("Berhasil", "{{ Session::get('message') }}", 'success', {
-                        button: true,
-                        button: "Ok",
-                        timer: 5000
-                    });
-                </script>
-            @endif
+        <!-- Datatable -->
+        <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+        {{-- Debugging line --}}
+        @if (Session::has('message'))
+            <script>
+                swal("Berhasil", "{{ Session::get('message') }}", 'success', {
+                    button: true,
+                    button: "Ok",
+                    timer: 5000
+                });
+            </script>
+        @endif
 
 
 </body>

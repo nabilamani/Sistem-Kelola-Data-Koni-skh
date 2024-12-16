@@ -33,6 +33,35 @@
             color: white;
         }
 
+        .text-gradient {
+            font-size: 3rem;
+            /* Ukuran teks */
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff7e00, #ff0000, #fff, #ff7e00);
+            /* Gradasi oranye ke merah */
+            background-size: 200%;
+            /* Perluasan untuk animasi halus */
+            -webkit-background-clip: text;
+            /* Potong gradasi hanya untuk teks */
+            -webkit-text-fill-color: transparent;
+            /* Transparan agar gradasi terlihat */
+            animation: gradient-loop 3s linear infinite;
+            /* Animasi smooth looping ke kanan */
+        }
+
+        @keyframes gradient-loop {
+            0% {
+                background-position: 0% 50%;
+                /* Mulai dari kiri */
+            }
+
+            100% {
+                background-position: 200% 50%;
+                /* Bergerak ke kanan secara terus-menerus */
+            }
+        }
+
+
         .hero-overlay {
             text-align: center;
             background: rgba(0, 0, 0, 0.6);
@@ -67,11 +96,13 @@
         .hero-title {
             font-weight: bold;
             font-size: 4rem;
+            letter-spacing: 5px;
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
+            font-size: 1rem;
             margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
         /* Cards Styling */
@@ -164,6 +195,31 @@
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
             /* Bayangan lebih tebal saat hover */
         }
+
+        /* Media queries untuk layar kecil */
+        @media (max-width: 768px) {
+            .hero-overlay {
+                margin: 20px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                /* Lebih kecil untuk mobile */
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+                /* Subtitle lebih kecil */
+                padding: 0 15px;
+                /* Tambah padding agar teks tidak terlalu lebar */
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                /* Ukuran tombol lebih kecil */
+                padding: 8px 16px;
+            }
+        }
     </style>
 </head>
 
@@ -174,7 +230,8 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-overlay mt-5" data-aos="zoom-in" data-aos-delay="0">
-            <h1 class="hero-title text-white fst-italic" data-aos="zoom-in" data-aos-delay="200">#SUKOHARJOMAKMUR</h1>
+            <h1 class="hero-title text-gradient fst-italic" data-aos="zoom-in" data-aos-delay="200">#SUKOHARJOMAKMUR
+            </h1>
             <p class="hero-subtitle" data-aos="zoom-in" data-aos-delay="400">KONI Sukoharjo, wujudkan olahraga yang
                 berprestasi dan menjunjung tinggi
                 sportivitas.</p>
@@ -432,11 +489,9 @@
                         data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
                             Komite Olahraga Nasional Indonesia (KONI) adalah organisasi yang memiliki wewenang dan
-                            tanggung
-                            jawab dalam mengelola, membina, mengembangkan, dan mengkoordinasikan seluruh kegiatan
-                            olahraga
-                            prestasi di Indonesia. KONI bertujuan untuk meningkatkan prestasi atlet nasional di berbagai
-                            cabang olahraga.
+                            tanggung jawab dalam mengelola, membina, mengembangkan, dan mengkoordinasikan seluruh
+                            kegiatan olahraga prestasi di Indonesia. KONI bertujuan untuk meningkatkan prestasi atlet
+                            nasional di berbagai cabang olahraga.
                         </div>
                     </div>
                 </div>
@@ -455,7 +510,7 @@
                         data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
                             Untuk bergabung dengan program pembinaan atlet KONI, calon atlet atau orang tua/wali dapat
-                            mengunjungi halaman "Program" di situs kami dan mengisi formulir pendaftaran yang tersedia.
+                            mengunjungi halaman “Program” di situs kami dan mengisi formulir pendaftaran yang tersedia.
                             Tim KONI akan meninjau aplikasi dan menghubungi calon atlet untuk langkah selanjutnya.
                         </div>
                     </div>
@@ -474,15 +529,15 @@
                     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
                         data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
-                            KONI menaungi berbagai cabang olahraga seperti atletik, renang, bulu tangkis, dan banyak
-                            lagi.
-                            Untuk informasi lengkap mengenai cabang olahraga, kunjungi situs resmi KONI.
+                            KONI menaungi berbagai cabang olahraga termasuk sepak bola, bulu tangkis, atletik, renang,
+                            bola basket, dan banyak lagi. Daftar lengkap cabang olahraga dapat dilihat di halaman
+                            “Olahraga” pada situs kami.
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ 4 -->
-                <div class="accordion-item border-0 shadow-sm" data-aos="fade-up" data-aos-delay="500">
+                <div class="accordion-item border-0 mb-3 shadow-sm" data-aos="fade-up" data-aos-delay="500">
                     <h2 class="accordion-header" id="headingFour">
                         <button class="accordion-button collapsed d-flex align-items-center" type="button"
                             data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
@@ -494,8 +549,31 @@
                     <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
                         data-bs-parent="#faqAccordion">
                         <div class="accordion-body">
-                            Informasi mengenai kompetisi dapat ditemukan di situs resmi KONI pada bagian “Kompetisi”
-                            atau melalui pengumuman yang diberikan oleh KONI secara berkala.
+                            Informasi mengenai kompetisi yang diselenggarakan oleh KONI dapat ditemukan di halaman
+                            “Berita” dan “Program” di situs kami. Kami juga mengumumkan jadwal dan rincian kompetisi
+                            melalui media sosial resmi KONI. Pengunjung juga dapat mendaftar untuk mendapatkan
+                            newsletter kami agar selalu mendapatkan update terbaru.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="accordion-item border-0 shadow-sm" data-aos="fade-up" data-aos-delay="600">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button collapsed d-flex align-items-center" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false"
+                            aria-controls="collapseFive">
+                            <i class="mdi mdi-email-outline text-primary me-2"></i>
+                            Bagaimana cara menghubungi KONI untuk kemitraan atau sponsor?
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                        data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Untuk menghubungi KONI mengenai kemitraan atau sponsor, silakan kunjungi halaman “Kontak
+                            Kami” di situs kami. Anda dapat mengisi formulir kontak yang tersedia atau langsung
+                            menghubungi kami melalui alamat email: konisukoharjo@yahoo.com. Kami akan dengan senang hati
+                            mendiskusikan peluang kemitraan lebih lanjut.
                         </div>
                     </div>
                 </div>

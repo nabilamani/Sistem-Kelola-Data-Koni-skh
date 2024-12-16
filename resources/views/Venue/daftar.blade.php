@@ -182,20 +182,28 @@
                                     <!-- Modals for each Venue -->
                                     @foreach ($venues as $venue)
                                         <!-- Modal for Venue Map -->
-                                        <div class="modal fade" id="venueMapModal{{ $venue->id }}" tabindex="-1" role="dialog" aria-labelledby="venueMapModalLabel{{ $venue->id }}" aria-hidden="true">
+                                        <div class="modal fade" id="venueMapModal{{ $venue->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="venueMapModalLabel{{ $venue->id }}"
+                                            aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header bg-info text-white">
-                                                        <h5 class="modal-title" id="venueMapModalLabel{{ $venue->id }}">Peta Venue: {{ $venue->name }}</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <h5 class="modal-title"
+                                                            id="venueMapModalLabel{{ $venue->id }}">Peta Venue:
+                                                            {{ $venue->name }}</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body p-3">
-                                                        <iframe src="{{ $venue->map }}" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                                        <iframe src="{{ $venue->map }}" width="100%"
+                                                            height="400" style="border:0;" allowfullscreen=""
+                                                            loading="lazy"></iframe>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Tutup</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -322,61 +330,63 @@
 
 
             </div>
-            <!--**********************************
+        </div>
+        @include('layouts/footer')
+        <!--**********************************
         Main wrapper end
     ***********************************-->
 
-            <!--**********************************
+        <!--**********************************
         Scripts
     ***********************************-->
-            <!-- Required vendors -->
-            <script src="{{ asset('gambar_aset/vendor/global/global.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/js/quixnav-init.js') }}"></script>
-            <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
+        <!-- Required vendors -->
+        <script src="{{ asset('gambar_aset/vendor/global/global.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/quixnav-init.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/custom.min.js') }}"></script>
 
 
-            <!-- Vectormap -->
-            <script src="{{ asset('gambar_aset/vendor/raphael/raphael.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/morris/morris.min.js') }}"></script>
+        <!-- Vectormap -->
+        <script src="{{ asset('gambar_aset/vendor/raphael/raphael.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/morris/morris.min.js') }}"></script>
 
 
-            <script src="{{ asset('gambar_aset/vendor/circle-progress/circle-progress.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/chart.js') }}/Chart.bundle.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/circle-progress/circle-progress.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/chart.js') }}/Chart.bundle.min.js') }}"></script>
 
-            <script src="{{ asset('gambar_aset/vendor/gaugeJS/dist/gauge.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/gaugeJS/dist/gauge.min.js') }}"></script>
 
-            <!--  flot-chart js -->
-            <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.resize.js') }}"></script>
+        <!--  flot-chart js -->
+        <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/flot/jquery.flot.resize.js') }}"></script>
 
-            <!-- Owl Carousel -->
-            <script src="{{ asset('gambar_aset/vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
+        <!-- Owl Carousel -->
+        <script src="{{ asset('gambar_aset/vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
 
-            <!-- Counter Up -->
-            <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
-            <script src="{{ asset('gambar_aset/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
+        <!-- Counter Up -->
+        <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/jqvmap/js/jquery.vmap.usa.js') }}"></script>
+        <script src="{{ asset('gambar_aset/vendor/jquery.counterup/jquery.counterup.min.js') }}"></script>
 
 
-            <script src="{{ asset('gambar_aset/js/dashboard/dashboard-1.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/dashboard/dashboard-1.js') }}"></script>
 
-            <!-- Datatable -->
-            <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
-            <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
-            {{-- Debugging line --}}
-            {{-- <script>
+        <!-- Datatable -->
+        <script src="{{ asset('gambar_aset/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('gambar_aset/js/plugins-init/datatables.init.js') }}"></script>
+        {{-- Debugging line --}}
+        {{-- <script>
                 console.log("Map URL: {{ $venue->map }}");
             </script> --}}
 
-            @if (Session::has('message'))
-                <script>
-                    swal("Berhasil", "{{ Session::get('message') }}", 'success', {
-                        button: true,
-                        button: "Ok",
-                        timer: 5000
-                    });
-                </script>
-            @endif
+        @if (Session::has('message'))
+            <script>
+                swal("Berhasil", "{{ Session::get('message') }}", 'success', {
+                    button: true,
+                    button: "Ok",
+                    timer: 5000
+                });
+            </script>
+        @endif
 
 </body>
 

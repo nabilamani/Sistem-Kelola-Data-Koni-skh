@@ -298,6 +298,14 @@
                                                                         <label for="license">Lisensi</label>
                                                                         <input type="text" class="form-control" id="license" name="license" value="{{ $referee->license }}">
                                                                     </div>
+                                                                    <div class="form-group">
+                                                                        <label for="whatsapp">Whatsapp</label>
+                                                                        <input type="text" class="form-control" id="whatsapp" name="whatsapp" value="{{ $referee->whatsapp }}">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="instagram">Instagram</label>
+                                                                        <input type="text" class="form-control" id="instagram" name="instagram" value="{{ $referee->instagram }}">
+                                                                    </div>
                                                                 </div>
                                         
                                                                 <!-- Right column -->
@@ -371,6 +379,8 @@
 
 
             </div>
+        </div>
+            @include('layouts/footer')
             <!--**********************************
         Main wrapper end
     ***********************************-->

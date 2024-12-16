@@ -148,6 +148,7 @@
 
             </div>
         </div>
+        @include('layouts/footer')
         <!--**********************************
             Main wrapper end
         ***********************************-->
@@ -163,6 +164,7 @@
         <script src="{{ asset('gambar_aset/js/sport-category.js') }}"></script>
 
     </div>
+    
 </body>
 
 </html>

@@ -142,6 +142,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/delete-venue/{id}', [VenueController::class, 'destroy']);
     Route::get('/cetak-venue', [VenueController::class, 'cetakVenue'])->name('cetak-venue');
 
+    // Rute Jadwal
+    Route::resource('schedules', ScheduleController::class);
+    Route::put('/edit-schedule/{id}', [ScheduleController::class, 'update']);
+    Route::delete('/delete-schedules/{id}', [ScheduleController::class, 'destroy']);
+
     // Rute prestasi
     Route::resource('achievements', AchievementController::class);
     Route::put('/edit-achievment/{id}', [AchievementController::class, 'update']);
@@ -173,7 +178,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/edit-user/{id}', [UserController::class, 'update']);
     Route::delete('/delete-user/{id}', [UserController::class, 'destroy']);
 
-    Route::resource('messages', MessageController::class);
+    
     Route::put('/edit-message/{id}', [MessageController::class, 'update']);
     Route::delete('/delete-message/{id}', [MessageController::class, 'destroy']);
     Route::patch('/messages/{message}/update-status', [MessageController::class, 'updateStatus'])->name('messages.updateStatus');
@@ -186,6 +191,7 @@ Route::middleware(['auth'])->group(function () {
     // Rute lainnya sesuai kebutuhan...
 });
 
+Route::resource('messages', MessageController::class);
 
 
 

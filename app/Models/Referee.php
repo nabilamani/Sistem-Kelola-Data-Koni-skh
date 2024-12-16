@@ -18,6 +18,8 @@ class Referee extends Model
         'birth_date',
         'age',
         'license',
+        'whatsapp',
+        'instagram',
         'experience',
         'photo',
     ];
