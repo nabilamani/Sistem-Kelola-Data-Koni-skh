@@ -104,6 +104,7 @@ Route::get('/profil/struktur', function () {
     return view('viewpublik.profil.strukturalkoni');
 });
 
+Route::get('/api/cari-pelatih', [CoachController::class, 'cariPelatih'])->name('cari-pelatih');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -115,7 +116,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/edit-pelatih/{id}', [CoachController::class, 'update']);
     Route::delete('/delete-pelatih/{id}', [CoachController::class, 'destroy']);
     Route::get('/cetak-pelatih', [CoachController::class, 'cetakPelatih'])->name('cetak-pelatih');
-    Route::get('/api/cari-pelatih', [CoachController::class, 'cariPelatih'])->name('cari-pelatih');
+    
 
     // Rute atlet
     Route::resource('athletes', AthleteController::class);

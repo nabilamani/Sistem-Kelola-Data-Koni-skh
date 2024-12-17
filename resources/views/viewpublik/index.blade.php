@@ -83,16 +83,6 @@
             transform: scale(1.05);
             /* Slight zoom-in */
         }
-
-        /* For responsiveness */
-        @media (max-width: 768px) {
-            .hero-overlay {
-                padding: 30px;
-                /* Adjust padding for smaller screens */
-            }
-        }
-
-
         .hero-title {
             font-weight: bold;
             font-size: 4rem;
@@ -220,6 +210,28 @@
                 padding: 8px 16px;
             }
         }
+        /* Media queries untuk layar kecil */
+        @media (max-width: 576px) {
+            
+
+            .hero-title {
+                font-size: 1.2rem;
+                /* Lebih kecil untuk mobile */
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+                /* Subtitle lebih kecil */
+                padding: 0 15px;
+                /* Tambah padding agar teks tidak terlalu lebar */
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                /* Ukuran tombol lebih kecil */
+                padding: 8px 16px;
+            }
+        }
     </style>
 </head>
 
@@ -244,28 +256,32 @@
     <div class="hero-stats py-4 bg-dark">
         <div class="container text-center">
             <h2 class="text-white mb-2" data-aos="fade-up">Statistik Olahraga Sukoharjo</h2>
-            <p data-aos="fade-up" data-aos-delay="100">Data terkini mengenai atlet, wasit, pelatih, event, dan prestasi
+            <p class="mx-5" data-aos="fade-up" data-aos-delay="100">Data terkini mengenai atlet, wasit, pelatih, event, dan prestasi
                 olahraga di Sukoharjo.</p>
             <div class="row justify-content-center mt-4">
-                <div class="col-md-2 text-center border-end akumulasi" data-aos="zoom-in" data-aos-delay="200">
+                <div class="col-6 col-md-2 text-center border-end akumulasi" data-aos="zoom-in" data-aos-delay="200">
                     <h3 class="count mt-1 text-primary" data-count="{{ $athleteCount }}">0</h3>
                     <p>Atlet</p>
                 </div>
-                <div class="col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="300">
+                <div class="col-6 col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="300">
                     <h3 class="count mt-1 text-primary" data-count="{{ $refereeteCount }}">0</h3>
                     <p>Wasit</p>
                 </div>
-                <div class="col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="400">
+                <div class="col-6 col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="400">
                     <h3 class="count mt-1 text-primary" data-count="{{ $coachCount }}">0</h3>
                     <p>Pelatih</p>
                 </div>
-                <div class="col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="500">
+                <div class="col-6 col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="500">
                     <h3 class="count mt-1 text-primary" data-count="{{ $eventCount }}">0</h3>
                     <p>Event</p>
                 </div>
-                <div class="col-md-2 text-center" data-aos="zoom-in" data-aos-delay="600">
+                <div class="col-6 col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="600">
                     <h3 class="count mt-1 text-primary" data-count="{{ $achievementCount }}">0</h3>
                     <p>Prestasi</p>
+                </div>
+                <div class="col-6 col-md-2 text-center" data-aos="zoom-in" data-aos-delay="800">
+                    <h3 class="count mt-1 text-primary" data-count="{{ $venueCount }}">0</h3>
+                    <p>Venue</p>
                 </div>
             </div>
         </div>
@@ -283,7 +299,7 @@
 
         <div class="container text-center" style="position: relative; z-index: 2;">
             <h2 class="fw-bold mb-4 text-white" data-aos="fade-up">KONI Sukoharjo</h2>
-            <p class="text-white mb-5 px-5 mx-5" data-aos="fade-up" data-aos-delay="100">KONI (Komite Olahraga Nasional
+            <p class="text-white mb-5 mx-5" data-aos="fade-up" data-aos-delay="100">KONI (Komite Olahraga Nasional
                 Indonesia) Sukoharjo adalah organisasi
                 yang
                 bertanggung jawab untuk mengkoordinasikan kegiatan olahraga dan pembinaan atlet di Kabupaten Sukoharjo.
@@ -291,7 +307,7 @@
 
             <div class="row gy-4">
                 <!-- Card 1: Cabor -->
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-6 col-md-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/olahraga/cabor'">
                         <i class="mdi mdi-basketball display-4 mb-3"></i>
@@ -300,7 +316,7 @@
                 </div>
 
                 <!-- Card 2: Atlet -->
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-6 col-md-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/olahraga/atlet';">
                         <i class="mdi mdi-account-outline display-4 mb-3"></i>
@@ -309,7 +325,7 @@
                 </div>
 
                 <!-- Card 3: Pelatih -->
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="col-6 col-md-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/olahraga/pelatih';">
                         <i class="mdi mdi-account-multiple-outline display-4 mb-3"></i>
@@ -318,7 +334,7 @@
                 </div>
 
                 <!-- Card 4: Berita Terkini -->
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="col-6 col-md-4" data-aos="fade-up" data-aos-delay="400">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/berita';">
                         <i class="mdi mdi-newspaper display-4 mb-3"></i>
@@ -327,7 +343,7 @@
                 </div>
 
                 <!-- Card 5: Prestasi Atlet -->
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="col-6 col-md-4" data-aos="fade-up" data-aos-delay="500">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/galeri/prestasi';">
                         <i class="mdi mdi-trophy-outline display-4 mb-3"></i>
@@ -336,7 +352,7 @@
                 </div>
 
                 <!-- Card 6: Wasit -->
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="col-6 col-md-4" data-aos="fade-up" data-aos-delay="600">
                     <div class="card border-0 shadow-sm text-center p-4 h-100 card-hover"
                         onclick="window.location.href='/olahraga/wasit';">
                         <i class="mdi mdi-whistle display-4 mb-3"></i>

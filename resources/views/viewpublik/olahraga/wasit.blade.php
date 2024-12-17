@@ -100,7 +100,7 @@
 
         <!-- Tombol untuk mengganti tampilan -->
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
+            <div class="list-view">
                 <button id="card-view-btn" class="btn btn-primary active">Card View</button>
                 <button id="table-view-btn" class="btn btn-secondary">Table View</button>
             </div>
@@ -134,7 +134,7 @@
 
         <!-- Tampilan Tabel -->
         <div id="table-view" class="table-responsive rounded" style="display: none;">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" style="min-width: 845px;">
                 <thead>
                     <tr>
                         <th>No</th>

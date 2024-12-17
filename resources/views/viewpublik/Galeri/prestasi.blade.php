@@ -103,6 +103,15 @@
             text-align: left;
             /* Konten dinamis rata kiri */
         }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 16px;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 

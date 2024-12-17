@@ -119,6 +119,15 @@
     #toggleCategories:hover {
         color: #FF9800;
     }
+    @media (max-width: 768px) {
+            .hero-title {
+                font-size: 16px;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 

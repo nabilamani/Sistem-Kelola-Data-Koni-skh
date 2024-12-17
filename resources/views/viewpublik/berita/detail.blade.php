@@ -112,6 +112,15 @@
             font-weight: bold;
             /* Tambahkan ketebalan teks untuk penekanan */
         }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 16px;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 
@@ -183,7 +192,7 @@
                     <div class="card">
                         <img src="{{ asset($berita->photo ?? 'https://via.placeholder.com/800x400') }}"
                             class="card-img-top img-fluid" alt="Gambar Berita"
-                            style="height: 400px; object-fit: cover;">
+                            style=" object-fit: cover;">
                         <div class="card-body">
                             <h2 class="card-title text-primary">{{ $berita->judul_berita }}</h2>
                             <p class="card-text">

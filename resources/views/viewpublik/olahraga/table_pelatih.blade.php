@@ -19,7 +19,7 @@
 
 <!-- Tampilan Tabel -->
 <div id="table-view" class="table-responsive rounded" style="display: {{ $activeView == 'table' ? 'block' : 'none' }}">
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" style="min-width: 845px;">
         <thead>
             <tr>
                 <th>No</th>

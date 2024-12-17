@@ -103,6 +103,36 @@
             text-align: left;
             /* Konten dinamis rata kiri */
         }
+
+        @media (max-width: 576px) {
+            .col-6 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+            .list-view{
+                margin-bottom: 5px;
+            }
+
+            .athlete-photo {
+                height: 120px;
+                /* Ukuran foto dikurangi */
+            }
+
+            .athlete-details {
+                padding: 0.5rem;
+                /* Padding lebih kecil */
+            }
+
+            .athlete-details h6 {
+                font-size: 12px;
+                /* Ukuran judul lebih kecil */
+            }
+
+            .athlete-details p {
+                font-size: 10px;
+                /* Ukuran teks tambahan lebih kecil */
+            }
+        }
     </style>
 </head>
 
@@ -126,8 +156,8 @@
                     <div class="carousel-item {{ $chunkIndex == 0 ? 'active' : '' }}">
                         <div class="row">
                             @foreach ($chunk as $category)
-                                <div class="col-md-3 mb-3">
-                                    <div class="card">
+                                <div class="col-6 col-md-3 mb-3">
+                                    <div class="card mx-2">
                                         <div class="card-body text-center">
                                             <h5 class="card-title text-dark">{{ $category->sport_category }}</h5>
                                             <p class="card-text text-primary">
@@ -150,61 +180,52 @@
                         aria-current="true" aria-label="Slide {{ $chunkIndex + 1 }}"></button>
                 @endforeach
             </div>
-
-            {{-- <!-- Navigasi Carousel (arrows removed) -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#athleteCategoryCarousel"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#athleteCategoryCarousel"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button> --}}
         </div>
 
         <h2 class="text-center mb-4 text-white">Daftar Atlet KONI Sukoharjo</h2>
         <!-- Tombol untuk mengganti tampilan -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <!-- Tombol untuk mengganti tampilan -->
-            <div>
+            <div class="list-view">
                 <button id="card-view-btn" class="btn btn-primary active">Card View</button>
                 <button id="table-view-btn" class="btn btn-secondary">Table View</button>
             </div>
 
             <!-- Form Pencarian -->
             <form id="athleteSearchForm" action="{{ route('showAthletes') }}" method="GET" class="d-flex">
-                <input id="searchInput" type="text" name="search" class="form-control me-2" placeholder="Cari atlet atau cabor..."
-                    value="{{ request('search') }}" onkeyup="filterAthletes()">
+                <input id="searchInput" type="text" name="search" class="form-control me-2"
+                    placeholder="Cari atlet atau cabor..." value="{{ request('search') }}" onkeyup="filterAthletes()">
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
-            
+
         </div>
 
         <!-- Tampilan Card -->
         <div id="card-view" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
             @foreach ($athletes as $athlete)
-                <div class="col-md-3">
-                    <div class="card athlete-card">
+                <div class="col-6 col-sm-4 col-md-3">
+                    <div class="card athlete-card h-100">
                         <!-- Foto Atlet (Gunakan placeholder jika tidak ada gambar) -->
                         <img src="{{ $athlete->photo ? asset($athlete->photo) : 'https://via.placeholder.com/300x200' }}"
-                            alt="{{ $athlete->name }}" class="athlete-photo">
-                        <div class="athlete-details text-center p-3">
-                            <h5 class="text-dark">{{ $athlete->name }}</h5>
-                            <p class="text-muted">Cabang: {{ $athlete->sport_category }}</p>
+                            alt="{{ $athlete->name }}" class="athlete-photo img-fluid">
+                        <div class="athlete-details text-center p-2">
+                            <h6 class="text-dark mb-1">{{ $athlete->name }}</h6>
+                            <p class="text-muted small mb-2">Cabang: {{ $athlete->sport_category }}</p>
                             <a href="#" class="btn btn-primary btn-sm"
                                 onclick="showAthleteDetails({{ json_encode($athlete) }})" data-bs-toggle="modal"
-                                data-bs-target="#athleteDetailModal">Detail</a>
+                                data-bs-target="#athleteDetailModal">
+                                Detail
+                            </a>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
 
+
         <!-- Tampilan Tabel -->
         <div id="table-view" class="table-responsive rounded" style="display: none;">
-            <table class="table table-bordered table-striped">
+            <table class="table table-bordered table-striped" style="min-width: 845px;">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -243,8 +264,8 @@
         </div>
     </div>
     <!-- Modal untuk Detail Atlet -->
-    <div class="modal fade mt-5 pt-2" id="athleteDetailModal" tabindex="-1"
-        aria-labelledby="athleteDetailModalLabel" aria-hidden="true">
+    <div class="modal fade mt-5 pt-2" id="athleteDetailModal" tabindex="-1" aria-labelledby="athleteDetailModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary d-flex align-items-center">
@@ -405,7 +426,7 @@
     <script>
         function filterAthletes() {
             const input = document.getElementById('searchInput').value.toLowerCase();
-    
+
             // Filter Card View
             const cards = document.querySelectorAll('#card-view .athlete-card');
             cards.forEach(card => {
@@ -417,7 +438,7 @@
                     card.parentElement.style.display = 'none';
                 }
             });
-    
+
             // Filter Table View
             const rows = document.querySelectorAll('#table-view tbody tr');
             rows.forEach(row => {
@@ -431,7 +452,7 @@
             });
         }
     </script>
-    
+
 </body>
 
 </html>

@@ -79,102 +79,104 @@
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
         </div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Nama Event</th>
-                    <th>Tanggal Mulai</th>
-                    <th>Cabang Olahraga</th>
-                    <th>Lokasi</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($events as $event)
+        <div class="table-responsive">
+            <table class="table table-striped" style="min-width: 845px;">
+                <thead>
                     <tr>
-                        <td>{{ $event->name }}</td>
-                        <td>{{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}</td>
-                        <td>{{ $event->sport_category }}</td>
-                        <td>{{ $event->location }}</td>
-                        <td>
-                            @if ($event->location_map)
-                                <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal"
-                                    data-bs-target="#viewMapModal{{ $event->id }}">
-                                    <i class="mdi mdi-map-marker"></i> Lihat Peta
+                        <th>Nama Event</th>
+                        <th>Tanggal Mulai</th>
+                        <th>Cabang Olahraga</th>
+                        <th>Lokasi</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($events as $event)
+                        <tr>
+                            <td>{{ $event->name }}</td>
+                            <td>{{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}</td>
+                            <td>{{ $event->sport_category }}</td>
+                            <td>{{ $event->location }}</td>
+                            <td>
+                                @if ($event->location_map)
+                                    <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal"
+                                        data-bs-target="#viewMapModal{{ $event->id }}">
+                                        <i class="mdi mdi-map-marker"></i> Lihat Peta
+                                    </button>
+                                @else
+                                    <span>No Map</span>
+                                @endif
+                                <!-- View Banner Modal Trigger -->
+                                <button type="button" class="btn btn-info ms-1" data-bs-toggle="modal"
+                                    data-bs-target="#bannerModal{{ $event->id }}">
+                                    Lihat Banner
                                 </button>
-                            @else
-                                <span>No Map</span>
-                            @endif
-                            <!-- View Banner Modal Trigger -->
-                            <button type="button" class="btn btn-info ms-1" data-bs-toggle="modal"
-                                data-bs-target="#bannerModal{{ $event->id }}">
-                                Lihat Banner
-                            </button>
-                            <!-- Modal -->
-                            <div class="modal fade" id="bannerModal{{ $event->id }}" tabindex="-1"
-                                aria-labelledby="bannerModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-primary d-flex justify-content-between align-items-center">
-                                            <h5 class="modal-title" id="bannerModalLabel">Banner Event -
-                                                {{ $event->name }}</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body text-center">
-                                            @if ($event->banner)
-                                                <img src="{{ asset($event->banner) }}" alt="Banner"
-                                                    class="img-fluid" style="height: 300px; object-fit: cover;">
-                                            @else
-                                                <p>No banner available for this event.</p>
-                                            @endif
-                                        </div>
-                                        <div class="modal-footer py-2">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Modal for Viewing Map -->
-                            @foreach ($events as $event)
-                                <div class="modal fade" id="viewMapModal{{ $event->id }}" tabindex="-1"
-                                    role="dialog" aria-labelledby="viewMapModalLabel{{ $event->id }}"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-lg" role="document">
+                                <!-- Modal -->
+                                <div class="modal fade" id="bannerModal{{ $event->id }}" tabindex="-1"
+                                    aria-labelledby="bannerModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
-                                            <div class="modal-header bg-info text-white">
-                                                <h5 class="modal-title" id="viewMapModalLabel{{ $event->id }}">Peta
-                                                    Lokasi :
+                                            <div class="modal-header bg-primary d-flex justify-content-between align-items-center">
+                                                <h5 class="modal-title" id="bannerModalLabel">Banner Event -
                                                     {{ $event->name }}</h5>
-                                                <button type="button" class="close" data-bs-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
-                                                @if ($event->location_map)
-                                                    <iframe src="{{ $event->location_map }}" width="100%"
-                                                        height="400" style="border: 0;" allowfullscreen=""
-                                                        loading="lazy"></iframe>
+                                            <div class="modal-body text-center">
+                                                @if ($event->banner)
+                                                    <img src="{{ asset($event->banner) }}" alt="Banner"
+                                                        class="img-fluid" style="height: 300px; object-fit: cover;">
                                                 @else
-                                                    <p>Tidak ada peta lokasi yang tersedia.</p>
+                                                    <p>No banner available for this event.</p>
                                                 @endif
                                             </div>
-                                            <div class="modal-footer py-3">
+                                            <div class="modal-footer py-2">
                                                 <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Tutup</button>
+                                                    data-bs-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                                <!-- Modal for Viewing Map -->
+                                @foreach ($events as $event)
+                                    <div class="modal fade" id="viewMapModal{{ $event->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="viewMapModalLabel{{ $event->id }}"
+                                        aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-info text-white">
+                                                    <h5 class="modal-title" id="viewMapModalLabel{{ $event->id }}">Peta
+                                                        Lokasi :
+                                                        {{ $event->name }}</h5>
+                                                    <button type="button" class="close" data-bs-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    @if ($event->location_map)
+                                                        <iframe src="{{ $event->location_map }}" width="100%"
+                                                            height="400" style="border: 0;" allowfullscreen=""
+                                                            loading="lazy"></iframe>
+                                                    @else
+                                                        <p>Tidak ada peta lokasi yang tersedia.</p>
+                                                    @endif
+                                                </div>
+                                                <div class="modal-footer py-3">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Tutup</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+    
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
         <!-- Pagination (if applicable) -->
         {{ $events->links('layouts.pagination') }}

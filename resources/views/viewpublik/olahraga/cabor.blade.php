@@ -90,6 +90,15 @@
             border-right: 5px solid #E00818;
             border-radius: 15px;
         }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 16px;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 

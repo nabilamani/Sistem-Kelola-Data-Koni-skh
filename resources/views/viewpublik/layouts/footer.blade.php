@@ -40,7 +40,7 @@
             </div>
 
             <!-- Menu Navigasi -->
-            <div class="col-lg-2 mb-4">
+            <div class="col-6 col-lg-2 mb-4">
                 <h5 class="fw-bold">Menu</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-decoration-none text-white">Home</a></li>
@@ -52,7 +52,7 @@
             </div>
 
             <!-- Informasi -->
-            <div class="col-lg-2 mb-4">
+            <div class="col-6 col-lg-2 mb-4">
                 <h5 class="fw-bold">Informasi</h5>
                 <ul class="list-unstyled">
                     <li><a href="/olahraga/cabor" class="text-decoration-none text-white">Cabang Olahraga</a></li>
@@ -62,7 +62,7 @@
             </div>
 
             <!-- Situs Terkait -->
-            <div class="col-lg-3 mb-4">
+            <div class="col-6 col-lg-3 mb-4">
                 <h5 class="fw-bold">Situs Terkait</h5>
                 <ul class="list-unstyled">
                     <li><a href="https://koni.or.id/" target="_blank" class="text-decoration-none text-white">KONI
@@ -78,7 +78,7 @@
             </div>
 
             <!-- Syarat & Kebijakan -->
-            <div class="col-lg-2 mb-4">
+            <div class="col-6 col-lg-2 mb-4">
                 <h5 class="fw-bold">Syarat & Kebijakan</h5>
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-decoration-none text-white" data-bs-toggle="modal"

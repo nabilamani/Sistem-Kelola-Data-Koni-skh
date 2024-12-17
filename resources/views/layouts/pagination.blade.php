@@ -7,11 +7,31 @@
     .text-center {
         text-align: left;
     }
+    /* Responsif untuk layar kecil */
+    @media (max-width: 576px) {
+        .d-flex.justify-content-between {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .results-info {
+            margin-bottom: 10px;
+        }
+
+        .pagination {
+            justify-content: flex-start;
+        }
+
+        .page-link {
+            font-size: 12px;
+            padding: 4px 6px;
+        }
+    }
 </style>
 @if ($paginator->hasPages())
     <div class="d-flex justify-content-between align-items-center mt-2">
         {{-- Teks Menampilkan Jumlah Data --}}
-        <div>
+        <div class="results-info">
             Showing {{ ($paginator->currentPage() - 1) * $paginator->perPage() + 1 }}
             to {{ min($paginator->currentPage() * $paginator->perPage(), $paginator->total()) }}
             of {{ $paginator->total() }} result

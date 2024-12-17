@@ -106,7 +106,7 @@
     /* Mobile Specific Styling */
     @media (max-width: 768px) {
         .navbar-brand{
-            font-size: 12pxrem;
+            font-size: 12px;
         }
         .navbar .nav-item {
             margin-bottom: 10px;
@@ -119,7 +119,7 @@
         }
 
         .navbar .btn {
-            width: 100%;
+            width: 90%;
             margin-top: 10px;
         }
     }

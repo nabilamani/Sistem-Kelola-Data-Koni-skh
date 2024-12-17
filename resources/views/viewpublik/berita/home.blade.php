@@ -96,6 +96,20 @@
             background-color: rgba(255, 255, 255, 0.6);
             /* Warna putih semi-transparan */
         }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 16px;
+            }
+
+            .hero-subtitle {
+                font-size: 12px;
+            }
+
+            .tanggal {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 
@@ -171,7 +185,7 @@
                                         <h5 class="card-title">{{ $beritaUtama->judul_berita }}</h5>
 
                                         <!-- Date, Location, and Source -->
-                                        <div class="d-flex align-items-center mb-3">
+                                        <div class="d-flex align-items-center mb-3 tanggal">
                                             <!-- Date -->
                                             <p class="card-text text-muted mb-0 d-flex align-items-center">
                                                 <i class="mdi mdi-calendar me-2"></i> <!-- Date Icon -->
@@ -183,11 +197,6 @@
                                                 <i class="mdi mdi-map-marker-outline me-2"></i> <!-- Location Icon -->
                                                 <strong>Lokasi : </strong> {{ $beritaUtama->lokasi_peristiwa }}
                                             </p>
-                                            {{-- <!-- Source -->
-                                            <p class="card-text text-muted mb-0 d-flex align-items-center">
-                                                <i class="mdi mdi-source me-2"></i> <!-- Source Icon -->
-                                                <strong>Sumber:</strong> {{ $beritaUtama->kutipan_sumber }}
-                                            </p> --}}
                                         </div>
 
                                         <!-- News Content -->
@@ -400,7 +409,7 @@
                             <h5 class="card-title">${judul}</h5>
 
                             <!-- Date, Location, and Source -->
-                            <div class="d-flex align-items-center mb-3">
+                            <div class="d-flex align-items-center mb-3 tanggal">
                                 <!-- Date -->
                                 <p class="card-text text-muted mb-0 d-flex align-items-center">
                                     <i class="mdi mdi-calendar me-2"></i> <!-- Date Icon -->
