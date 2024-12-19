@@ -9,6 +9,7 @@ use App\Models\Athlete;
 use App\Models\Event;
 use App\Models\Coach;
 use App\Models\Referee;
+use App\Models\SportCategory;
 use App\Models\User;
 use App\Models\Venue;
 use Carbon\Carbon;
@@ -29,10 +30,11 @@ class Controller extends BaseController
         $refereeteCount = Referee::count();
         $venueCount = Venue::count();
         $achievementCount = Achievement::count();
+        $caborCount = SportCategory::count();
 
 
         $beritas = Berita::orderBy('tanggal_waktu', 'desc')->take(3)->get();
 
-        return view('viewpublik.index', compact('beritas', 'eventCount', 'coachCount', 'athleteCount', 'refereeteCount', 'venueCount', 'achievementCount',));
+        return view('viewpublik.index', compact('beritas', 'eventCount', 'coachCount', 'athleteCount', 'refereeteCount', 'venueCount', 'achievementCount','caborCount'));
     }
 }

@@ -22,7 +22,7 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8|confirmed',
-                'level' => 'required|string|in:Admin,Pengurus Cabor Sepak Bola,Pengurus Cabor Badminton,Pengurus Cabor Bola Basket,Pengurus Cabor Bola Voli,Pengurus Cabor Atletik,Pengurus Cabor Renang,Pengurus Cabor Tinju,Pengurus Cabor Pencak Silat,Pengurus Cabor Futsal',
+                'level' => 'required|string',
             ]);
         } catch(\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors($e->errors());
@@ -59,7 +59,7 @@ class UserController extends Controller
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users,email,' . $id,
         'password' => 'nullable|string|min:8|confirmed',
-        'level' => 'required|string|in:Admin,Pengurus Cabor Sepak Bola,Pengurus Cabor Badminton,Pengurus Cabor Bola Basket,Pengurus Cabor Bola Voli,Pengurus Cabor Atletik,Pengurus Cabor Renang,Pengurus Cabor Tinju,Pengurus Cabor Pencak Silat,Pengurus Cabor Futsal',
+        'level' => 'required|string',
     ]);
 
     try {

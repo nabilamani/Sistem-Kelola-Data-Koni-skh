@@ -3,7 +3,7 @@
 // Daftar kategori olahraga
 const sportCategories = [
     "Semua","Badminton", "Sepak Bola", "Bola Basket", "Bola Voli",
-    "Balap Sepeda", "Atletik", "Renang", "Tinju", "Pencak Silat","Futsal","Catur","Tenis Meja"
+    "Balap Sepeda", "Atletik", "Renang", "Tinju", "Pencak Silat","Futsal","Catur","Tenis Meja","Angkat Besi","Berkuda","Gulat","Menembak","Motor Balap","Panahan",
   ];
 
   // Simulate the Auth user and coach object (you would typically get this data from the server)
@@ -30,7 +30,16 @@ function canAccessSportCategory(userLevel, coachCategory) {
     'Pengurus Cabor Renang': 'Renang',
     'Pengurus Cabor Tinju': 'Tinju',
     'Pengurus Cabor Futsal': 'Futsal',
-    'Pengurus Cabor Pencak Silat': 'Pencak Silat'
+    'Pengurus Cabor Pencak Silat': 'Pencak Silat',
+    'Pengurus Cabor Futsal': 'Futsal',
+    'Pengurus Cabor Catur': 'Catur',
+    'Pengurus Cabor Tenis Meja': 'Tenis Meja',
+    'Pengurus Cabor Angkat Besi': 'Angkat Besi',
+    'Pengurus Cabor Berkuda': 'Berkuda',
+    'Pengurus Cabor Gulat': 'Gulat',
+    'Pengurus Cabor Menembak': 'Menembak',
+    'Pengurus Cabor Motor Balap': 'Motor Balap',
+    'Pengurus Cabor Panahan': 'Panahan',
   };
 
   return userLevel === 'Pengurus Cabor ' + coachCategory && sportCategoryAccess[userLevel] === coachCategory;
@@ -65,4 +74,48 @@ document.addEventListener("DOMContentLoaded", () => {
         categoryCountElement.textContent = sportCategoryCount;
     }
 });
+
+// Daftar level/pengurus
+const sportCategoryAccessLevels = [
+  'Admin',
+  'Pengurus Cabor Sepak Bola',
+  'Pengurus Cabor Badminton',
+  'Pengurus Cabor Bola Basket',
+  'Pengurus Cabor Bola Voli',
+  'Pengurus Cabor Atletik',
+  'Pengurus Cabor Renang',
+  'Pengurus Cabor Tinju',
+  'Pengurus Cabor Pencak Silat',
+  'Pengurus Cabor Futsal',
+  'Pengurus Cabor Catur',
+  'Pengurus Cabor Tenis Meja',
+  'Pengurus Cabor Angkat Besi',
+  'Pengurus Cabor Berkuda',
+  'Pengurus Cabor Gulat',
+  'Pengurus Cabor Menembak',
+  'Pengurus Cabor Motor Balap',
+  'Pengurus Cabor Panahan',
+];
+
+// Fungsi untuk mengisi elemen select dengan level/pengurus
+function populateUserLevelSelect(selectId) {
+  const selectElement = document.getElementById(selectId);
+  if (selectElement) {
+      sportCategoryAccessLevels.forEach(level => {
+          const option = document.createElement('option');
+          option.value = level;
+          option.textContent = level;
+          selectElement.appendChild(option);
+      });
+  }
+}
+
+// Panggil fungsi untuk select level setelah konten dimuat
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.user-level-select').forEach(select => {
+      populateUserLevelSelect(select.id);
+  });
+});
+
+
 

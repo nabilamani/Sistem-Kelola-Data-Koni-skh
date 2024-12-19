@@ -120,6 +120,7 @@
             color: #fff;
             /* Warna hijau lebih gelap untuk hover */
         }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 16px;
@@ -179,7 +180,7 @@
                         kerjasama.
                     </p>
 
-                    <div class="contact-info">
+                    <div class="contact-info mb-0">
                         <p class="text-dark">
                             <strong><i class="mdi mdi-office-building text-primary"></i> Alamat Kantor :</strong><br>
                             Gedung KONI Kabupaten Sukoharjo<br>
@@ -207,8 +208,26 @@
                 </div>
             </div>
 
-            <!-- Form Section -->
+            <!-- Map Section -->
             <div class="col-lg-6">
+                <div class="card shadow-lg rounded-3">
+                    <div class="bg-primary py-2 text-white d-flex justify-content-center align-items-center rounded-top-3">
+                        <h4 class="m-2">
+                            <i class="mdi mdi-map-marker"></i> Lokasi KONI Sukoharjo
+                        </h4>
+                    </div>                    
+                    <div class="card-body">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7908.018331383531!2d110.84037000000001!3d-7.682162!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a3c415b43c431%3A0xa7e9cde5bba00946!2sKONI%20Kabupaten%20Sukoharjo!5e0!3m2!1sid!2sid!4v1731592172597!5m2!1sid!2sid"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Form Section -->
+            {{-- <div class="col-lg-6">
                 <div class="form-section">
                     <h4 class="text-primary">
                         <i class="mdi mdi-message-text"></i> Kirim Pesan atau Saran
@@ -233,15 +252,15 @@
                             <label for="message" class="form-label">
                                 <i class="mdi mdi-message-text-outline text-primary"></i> Pesan atau Saran
                             </label>
-                            <textarea id="message" name="message" class="form-control" rows="5" placeholder="Tulis pesan atau saran Anda"
-                                required></textarea>
+                            <textarea id="message" name="message" class="form-control" rows="5"
+                                placeholder="Tulis pesan atau saran Anda" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">
                             <i class="mdi mdi-send"></i> Kirim Pesan
                         </button>
                     </form>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>
@@ -255,17 +274,17 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#messageForm').on('submit', function (e) {
+        $(document).ready(function() {
+            $('#messageForm').on('submit', function(e) {
                 e.preventDefault(); // Mencegah reload halaman
-    
+
                 let formData = $(this).serialize(); // Ambil data form
-    
+
                 $.ajax({
                     url: $(this).attr('action'),
                     type: $(this).attr('method'),
                     data: formData,
-                    success: function (response) {
+                    success: function(response) {
                         if (response.success) {
                             swal({
                                 title: "Berhasil!",
@@ -281,7 +300,7 @@
                             $('#messageForm')[0].reset(); // Reset form
                         }
                     },
-                    error: function (xhr) {
+                    error: function(xhr) {
                         swal({
                             title: "Gagal!",
                             text: "Terjadi kesalahan. Silakan coba lagi.",
@@ -298,8 +317,8 @@
             });
         });
     </script>
-    
-    
+
+
 
 
 </body>

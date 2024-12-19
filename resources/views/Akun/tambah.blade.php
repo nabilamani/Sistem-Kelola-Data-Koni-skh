@@ -115,42 +115,55 @@
                                 <h5 class="mb-0">Tambah Data User</h5>
                             </div>
                             <div class="card-body">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
                                 <form action="/users" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="name">Nama</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="name" class="form-control" placeholder="Masukkan nama..." required>
+                                            <input type="text" name="name" class="form-control"
+                                                placeholder="Masukkan nama..." required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="email">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="email" name="email" class="form-control" placeholder="Masukkan email..." autocomplete="off" required>
+                                            <input type="email" name="email" class="form-control"
+                                                placeholder="Masukkan email..." autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label" for="password">Password</label>
                                         <div class="col-sm-10">
-                                            <input type="password" name="password" class="form-control" placeholder="Masukkan password..." autocomplete="off" required>
+                                            <input type="password" name="password" class="form-control"
+                                                placeholder="Masukkan password..." autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="password_confirmation">Konfirmasi Password</label>
+                                        <label class="col-sm-2 col-form-label" for="password_confirmation">Konfirmasi
+                                            Password</label>
                                         <div class="col-sm-10">
-                                            <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi password..." required>
+                                            <input type="password" name="password_confirmation" class="form-control"
+                                                placeholder="Konfirmasi password..." required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="level">Level</label>
+                                        <label class="col-sm-2 col-form-label" for="level">Level/Pengurus</label>
                                         <div class="col-sm-10">
-                                            <select name="level" class="form-control" required>
+                                            <select id="level" name="level" class="form-control user-level-select" required>
                                                 <option value="" hidden selected>Pilih level...</option>
-                                                <option value="Admin">Admin</option>
-                                                <option value="Pengurus Cabor Sepak Bola">Pengurus Cabor Sepak Bola</option>
-                                                </select>
+                                            </select>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="row justify-content-end">
                                         <div class="col-sm-10">
                                             <button type="submit" class="btn btn-primary">Tambah Akun</button>

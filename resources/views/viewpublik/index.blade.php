@@ -100,7 +100,9 @@
             margin-bottom: 20px;
             letter-spacing: 1px;
         }
-
+        .count{
+            color: #f39c12;
+        }
         /* Cards Styling */
         .card {
             transition: transform 0.3s ease;
@@ -257,33 +259,33 @@
     <div class="hero-stats py-4 bg-dark">
         <div class="container text-center">
             <h2 class="text-white mb-2" data-aos="fade-up">Statistik Olahraga Sukoharjo</h2>
-            <p class="mx-5" data-aos="fade-up" data-aos-delay="100">Data terkini mengenai atlet, wasit, pelatih,
+            <p class="mx-5 text-light" data-aos="fade-up" data-aos-delay="100">Data terkini mengenai atlet, wasit, pelatih,
                 event, dan prestasi
                 olahraga di Sukoharjo.</p>
             <div class="row justify-content-center mt-4">
                 <div class="col-6 col-md-2 text-center border-end akumulasi" data-aos="zoom-in" data-aos-delay="200">
-                    <h3 class="count mt-1 text-primary" data-count="{{ $athleteCount }}">0</h3>
-                    <p>Atlet</p>
+                    <h3 class="count mt-1" data-count="{{ $athleteCount }}">0</h3>
+                    <p class="text-light">Atlet</p>
                 </div>
                 <div class="col-6 col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="300">
-                    <h3 class="count mt-1 text-primary" data-count="{{ $refereeteCount }}">0</h3>
-                    <p>Wasit</p>
+                    <h3 class="count mt-1" data-count="{{ $refereeteCount }}">0</h3>
+                    <p class="text-light">Wasit</p>
                 </div>
                 <div class="col-6 col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="400">
-                    <h3 class="count mt-1 text-primary" data-count="{{ $coachCount }}">0</h3>
-                    <p>Pelatih</p>
+                    <h3 class="count mt-1" data-count="{{ $coachCount }}">0</h3>
+                    <p class="text-light">Pelatih</p>
                 </div>
                 <div class="col-6 col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="500">
-                    <h3 class="count mt-1 text-primary" data-count="{{ $eventCount }}">0</h3>
-                    <p>Event</p>
+                    <h3 class="count mt-1" data-count="{{ $eventCount }}">0</h3>
+                    <p class="text-light">Event</p>
                 </div>
                 <div class="col-6 col-md-2 text-center border-end" data-aos="zoom-in" data-aos-delay="600">
-                    <h3 class="count mt-1 text-primary" data-count="{{ $achievementCount }}">0</h3>
-                    <p>Prestasi</p>
+                    <h3 class="count mt-1" data-count="{{ $achievementCount }}">0</h3>
+                    <p class="text-light">Prestasi</p>
                 </div>
                 <div class="col-6 col-md-2 text-center" data-aos="zoom-in" data-aos-delay="800">
-                    <h3 class="count mt-1 text-primary" data-count="{{ $venueCount }}">0</h3>
-                    <p>Venue</p>
+                    <h3 class="count mt-1" data-count="{{ $caborCount }}">0</h3>
+                    <p class="text-light">cabor</p>
                 </div>
             </div>
         </div>
@@ -301,7 +303,7 @@
 
         <div class="container text-center" style="position: relative; z-index: 2;">
             <h2 class="fw-bold mb-4 text-white" data-aos="fade-up">KONI Sukoharjo</h2>
-            <p class="text-white mb-5 mx-5" data-aos="fade-up" data-aos-delay="100">KONI (Komite Olahraga Nasional
+            <p class="text-white mb-5 mx-2" data-aos="fade-up" data-aos-delay="100">KONI (Komite Olahraga Nasional
                 Indonesia) Sukoharjo adalah organisasi
                 yang
                 bertanggung jawab untuk mengkoordinasikan kegiatan olahraga dan pembinaan atlet di Kabupaten Sukoharjo.
@@ -372,7 +374,7 @@
             <!-- Judul Section -->
             <h2 class="fw-bold mb-4 text-white" data-aos="fade-up">Berita Terbaru</h2>
             <!-- Subjudul -->
-            <p class="text-white mb-5 mx-5" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-white mb-5 mx-1" data-aos="fade-up" data-aos-delay="100">
                 Temukan berita terkini dan informasi menarik seputar program, kegiatan, dan pencapaian olahraga di
                 Sukoharjo.
                 Kami menghadirkan informasi yang akurat, terpercaya, dan relevan untuk mendukung kemajuan dunia olahraga
@@ -485,7 +487,7 @@
         <div class="container">
             <!-- Judul -->
             <h2 class="text-center mb-3 fw-bold text-primary" data-aos="fade-up">PERTANYAAN UMUM</h2>
-            <p class="text-center mb-5 mx-5 text-secondary" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-center mb-5 mx-1 text-secondary" data-aos="fade-up" data-aos-delay="100">
                 Temukan jawaban atas berbagai pertanyaan yang sering diajukan terkait program, kegiatan, dan layanan
                 KONI Sukoharjo. Kami telah menyusun informasi ini untuk membantu Anda memahami peran dan kontribusi kami
                 dalam mendukung dunia olahraga di Sukoharjo.
@@ -640,7 +642,7 @@
           </div>
         </div>
       
-        <!-- Modal for Sending Message -->
+        {{-- <!-- Modal for Sending Message -->
         <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -667,7 +669,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
       </section>
       
 

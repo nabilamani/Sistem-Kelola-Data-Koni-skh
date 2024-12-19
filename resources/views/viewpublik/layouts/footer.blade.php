@@ -43,7 +43,7 @@
             <div class="col-6 col-lg-2 mb-4">
                 <h5 class="fw-bold">Menu</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-decoration-none text-white">Home</a></li>
+                    <li><a href="/" class="text-decoration-none text-white">Home</a></li>
                     <li><a href="/profil/tentang" class="text-decoration-none text-white">Profil</a></li>
                     <li><a href="/olahraga/cabor" class="text-decoration-none text-white">Olahraga</a></li>
                     <li><a href="/galeri/foto" class="text-decoration-none text-white">Galeri</a></li>
