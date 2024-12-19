@@ -63,24 +63,19 @@
 
 
         .hero-overlay {
-            width: 100%;
-            height: 100vh;
+            text-align: center;
             background: rgba(0, 0, 0, 0.6);
             /* Semi-transparent background */
             backdrop-filter: blur(5px);
             /* Blurring the background for the glass effect */
-            padding: 50px 20px;
+            padding: 50px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             /* Optional: Border to enhance glass effect */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             /* Optional: Adds depth */
             transition: transform 0.3s ease;
             /* Smooth zoom effect */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
         }
 
         /* Optional: Zoom-in effect on hover */
@@ -88,7 +83,6 @@
             transform: scale(1.05);
             /* Slight zoom-in */
         }
-
         .hero-title {
             font-weight: bold;
             font-size: 4rem;
@@ -194,16 +188,48 @@
 
         /* Media queries untuk layar kecil */
         @media (max-width: 768px) {
+            .hero-overlay {
+                margin: 20px;
+            }
+
             .hero-title {
-                font-size: 22px;
+                font-size: 2rem;
+                /* Lebih kecil untuk mobile */
             }
 
             .hero-subtitle {
-                font-size: 12px;
+                font-size: 0.9rem;
+                /* Subtitle lebih kecil */
+                padding: 0 15px;
+                /* Tambah padding agar teks tidak terlalu lebar */
             }
 
-            .tanggal {
-                font-size: 12px;
+            .btn {
+                font-size: 0.9rem;
+                /* Ukuran tombol lebih kecil */
+                padding: 8px 16px;
+            }
+        }
+        /* Media queries untuk layar kecil */
+        @media (max-width: 576px) {
+            
+
+            .hero-title {
+                font-size: 1.2rem;
+                /* Lebih kecil untuk mobile */
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+                /* Subtitle lebih kecil */
+                padding: 0 15px;
+                /* Tambah padding agar teks tidak terlalu lebar */
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                /* Ukuran tombol lebih kecil */
+                padding: 8px 16px;
             }
         }
     </style>
@@ -215,33 +241,6 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-overlay d-flex flex-column justify-content-center align-items-center text-center px-5 py-5"
-            data-aos="zoom-in" data-aos-delay="0">
-            <!-- Lottie Player -->
-            {{-- <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-            <div class="lottie-container mb-4">
-                <dotlottie-player src="https://lottie.host/57d4c8ea-7162-4113-ab37-4b6c30135c79/R0LluXh7G3.lottie"
-                    background="transparent" speed="1" style="width: 250px; height: 250px" loop
-                    autoplay></dotlottie-player>
-            </div> --}}
-
-            <!-- Hero Title -->
-            <h1 class="hero-title text-gradient fst-italic" data-aos="zoom-in" data-aos-delay="200">#SUKOHARJOMAKMUR
-            </h1>
-
-            <!-- Subtitle -->
-            <p class="hero-subtitle" data-aos="zoom-in" data-aos-delay="400">KONI Sukoharjo, wujudkan olahraga yang
-                berprestasi dan menjunjung tinggi
-                sportivitas.</p>
-
-            <!-- Button -->
-            <a href="#about-section" class="btn btn-warning rounded-5" data-aos="zoom-in"
-                data-aos-delay="600">Selengkapnya</a>
-        </div>
-    </section>
-
-    {{-- <!-- Hero Section -->
-    <section class="hero-section">
         <div class="hero-overlay mt-5" data-aos="zoom-in" data-aos-delay="0">
             <h1 class="hero-title text-gradient fst-italic" data-aos="zoom-in" data-aos-delay="200">#SUKOHARJOMAKMUR
             </h1>
@@ -251,14 +250,13 @@
             <a href="#about-section" class="btn btn-warning rounded-5" data-aos="zoom-in"
                 data-aos-delay="600">Selengkapnya</a>
         </div>
-    </section> --}}
+    </section>
 
     <!-- New Section for Accumulated Data (outside hero-overlay) -->
     <div class="hero-stats py-4 bg-dark">
         <div class="container text-center">
             <h2 class="text-white mb-2" data-aos="fade-up">Statistik Olahraga Sukoharjo</h2>
-            <p class="mx-5" data-aos="fade-up" data-aos-delay="100">Data terkini mengenai atlet, wasit, pelatih,
-                event, dan prestasi
+            <p class="mx-5" data-aos="fade-up" data-aos-delay="100">Data terkini mengenai atlet, wasit, pelatih, event, dan prestasi
                 olahraga di Sukoharjo.</p>
             <div class="row justify-content-center mt-4">
                 <div class="col-6 col-md-2 text-center border-end akumulasi" data-aos="zoom-in" data-aos-delay="200">
@@ -601,6 +599,7 @@
 
     <section id="contact" class="py-5">
         <div class="container">
+            <!-- Judul -->
             <h2 class="text-center fw-bold mb-2" data-aos="fade-up">Contact</h2>
             <p class="text-center mb-5 text-black" data-aos="fade-up" data-aos-delay="100">
                 KONI Sukoharjo siap menjalin komunikasi yang baik dengan masyarakat, atlet, pelatih, dan semua pihak
@@ -610,66 +609,42 @@
                 berusaha
                 memberikan respon terbaik untuk kebutuhan Anda.
             </p>
-          <div class="row">
-            <!-- Maps Section -->
-            <div class="col-lg-6 mb-4" data-aos="fade-right" data-aos-duration="1200">
-              <div class="map-frame">
-                <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7908.018331383531!2d110.84037000000001!3d-7.682162!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a3c415b43c431%3A0xa7e9cde5bba00946!2sKONI%20Kabupaten%20Sukoharjo!5e0!3m2!1sid!2sid!4v1731592172597!5m2!1sid!2sid"
-                        width="100%" height="300" style="border:0;" allowfullscreen=""
-                        loading="lazy"></iframe>
-              </div>
+
+            <div class="row align-items-center">
+                <!-- Embed Google Map -->
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1200">
+                    <div class="map-frame">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7908.018331383531!2d110.84037000000001!3d-7.682162!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a3c415b43c431%3A0xa7e9cde5bba00946!2sKONI%20Kabupaten%20Sukoharjo!5e0!3m2!1sid!2sid!4v1731592172597!5m2!1sid!2sid"
+                            width="100%" height="300" style="border:0;" allowfullscreen=""
+                            loading="lazy"></iframe>
+                    </div>
+                </div>
+
+
+                <!-- Contact Information -->
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1200">
+                    <div class="contact-info">
+                        <p data-aos="zoom-in" data-aos-delay="200">
+                            <i class="mdi mdi-map-marker me-2"></i>
+                            Jl. Veteran, Kutorejo, Jetis, Kec. Sukoharjo, Kabupaten Sukoharjo, Jawa Tengah 57511
+                        </p>
+                        <p data-aos="zoom-in" data-aos-delay="300">
+                            <i class="mdi mdi-phone me-2"></i>
+                            (021)593023
+                        </p>
+                        <p data-aos="zoom-in" data-aos-delay="400">
+                            <i class="mdi mdi-email me-2"></i>
+                            konisukoharjo@yahoo.com
+                        </p>
+                        <a href="/messages/create" class="btn text-white mt-3" data-aos="flip-up"
+                            data-aos-delay="500">Kirim Pesan</a>
+
+                    </div>
+                </div>
             </div>
-            <!-- Contact Details Section -->
-            <div class="col-lg-6 contact-info">
-                <p data-aos="zoom-in" data-aos-delay="200">
-                    <i class="mdi mdi-map-marker me-2"></i>
-                    Jl. Veteran, Kutorejo, Jetis, Kec. Sukoharjo, Kabupaten Sukoharjo, Jawa Tengah 57511
-                </p>
-                <p data-aos="zoom-in" data-aos-delay="300">
-                    <i class="mdi mdi-phone me-2"></i>
-                    (021)593023
-                </p>
-                <p data-aos="zoom-in" data-aos-delay="400">
-                    <i class="mdi mdi-email me-2"></i>
-                    konisukoharjo@yahoo.com
-                </p>
-                <a href="/messages/create" class="btn text-white mt-3" data-aos="flip-up"
-                    data-aos-delay="500">Kirim Pesan</a>
-            </div>
-          </div>
         </div>
-      
-        <!-- Modal for Sending Message -->
-        <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="messageModalLabel">Kirim Pesan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form id="contactForm">
-                  <div class="mb-3">
-                    <label for="name" class="form-label">Nama</label>
-                    <input type="text" class="form-control" id="name" placeholder="Masukkan nama Anda">
-                  </div>
-                  <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Masukkan email Anda">
-                  </div>
-                  <div class="mb-3">
-                    <label for="message" class="form-label">Pesan</label>
-                    <textarea class="form-control" id="message" rows="3" placeholder="Tulis pesan Anda"></textarea>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Kirim</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
+    </section>
 
 
     @include('viewpublik/layouts/footer')
