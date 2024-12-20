@@ -48,6 +48,14 @@
         .hero-overlay:hover {
             transform: scale(1.05);
         }
+        @media (max-width: 768px) {
+
+            #table-view table th,
+            #table-view table td {
+                font-size: 12px;
+                padding: 5px;
+            }
+        }
     </style>
 </head>
 
@@ -79,7 +87,7 @@
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
         </div>
-        <div class="table-responsive">
+        <div id="table-view" class="table-responsive rounded">
             <table class="table table-striped" style="min-width: 845px;">
                 <thead>
                     <tr>
@@ -139,7 +147,7 @@
                                 </div>
                                 <!-- Modal for Viewing Map -->
                                 @foreach ($events as $event)
-                                    <div class="modal fade" id="viewMapModal{{ $event->id }}" tabindex="-1"
+                                    <div class="modal mt-5 fade" id="viewMapModal{{ $event->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="viewMapModalLabel{{ $event->id }}"
                                         aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">

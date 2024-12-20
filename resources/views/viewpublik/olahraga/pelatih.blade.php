@@ -14,7 +14,9 @@
     <link href="{{ asset('gambar_aset/vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.3"
+        integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous">
+    </script>
     <style>
         body {
             overflow-x: hidden;
@@ -104,9 +106,30 @@
             text-align: left;
             /* Konten dinamis rata kiri */
         }
+
         #sport-category-filter {
-        color: #6c757d; /* Ganti dengan warna yang diinginkan */
-    }
+            color: #6c757d;
+            /* Ganti dengan warna yang diinginkan */
+        }
+
+        @media (max-width: 768px) {
+
+            #table-view table th,
+            #table-view table td {
+                font-size: 12px;
+                padding: 5px;
+            }
+            #coachDetailModal img {
+                width: 100%;
+                height: auto;
+            }
+
+            #coachName {
+                font-size: 16px;
+                text-align: center;
+            }
+
+        }
     </style>
 </head>
 
@@ -133,8 +156,10 @@
                 <button id="table-view-btn" class="btn btn-secondary">Table View</button>
             </div>
 
-            
-            <form hx-get="/api/cari-pelatih" hx-target="#data-wrapper" hx-swap="innerHTML" hx-trigger="change from:select, click from:button[type='submit']" class="d-flex" id="form-sport-category">
+
+            <form hx-get="/api/cari-pelatih" hx-target="#data-wrapper" hx-swap="innerHTML"
+                hx-trigger="change from:select, click from:button[type='submit']" class="d-flex"
+                id="form-sport-category">
                 <!-- Dropdown Filter Kategori Olahraga -->
                 <select class="form-select form-select-sm me-2" name="sport_category">
                     <option value="">Semua Cabang Olahraga</option>
@@ -149,7 +174,7 @@
                 <input type="text" name="search" class="form-control me-2" placeholder="Cari pelatih atau cabor..."
                     value="{{ request('search') }}" id="sport-category-search">
                 <!-- View card/table -->
-                 <input type="hidden" name="_view" id="active-view" value="card">
+                <input type="hidden" name="_view" id="active-view" value="card">
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
         </div>
@@ -177,7 +202,7 @@
 
             <!-- Tampilan Tabel -->
             <div id="table-view" class="table-responsive rounded" style="display: none;">
-                <table class="table table-bordered table-striped" style="min-width: 845px;">
+                <table class="table table-bordered table-striped" style="min-width: 500px;">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -204,14 +229,14 @@
                                     <a href="#" class="btn btn-primary btn-sm"
                                         onclick="showCoachDetails({{ json_encode($coach) }})" data-bs-toggle="modal"
                                         data-bs-target="#coachDetailModal">Detail</a>
-    
+
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            
+
             <!-- Pagination -->
             <div class="mt-4">
                 {{ $coaches->links('layouts.pagination') }}
@@ -224,11 +249,12 @@
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <h5 class="modal-title text-white" id="coachDetailModalLabel">Detail Pelatih</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-12 col-md-4 mb-3 mb-md-0">
                                 <img id="coachPhoto" src="" alt="Foto Pelatih" class="img-fluid rounded">
                             </div>
                             <div class="col-md-8">

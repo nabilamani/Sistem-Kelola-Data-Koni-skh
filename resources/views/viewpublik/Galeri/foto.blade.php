@@ -111,21 +111,36 @@
             background-color: #ea8d03;
             color: white;
         }
-        #toggleCategories {
-        color: #ea8d03;
-        transition: color 0.3s ease;
-    }
 
-    #toggleCategories:hover {
-        color: #FF9800;
-    }
-    @media (max-width: 768px) {
+        #toggleCategories {
+            color: #ea8d03;
+            transition: color 0.3s ease;
+        }
+
+        #toggleCategories:hover {
+            color: #FF9800;
+        }
+
+        @media (max-width: 768px) {
             .hero-title {
                 font-size: 16px;
             }
 
             .hero-subtitle {
                 font-size: 12px;
+            }
+
+            .custom-category-menu {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            #categoryMenu {
+                justify-content: center;
+            }
+
+            #toggleCategories {
+                align-self: center;
             }
         }
     </style>
@@ -165,7 +180,8 @@
 
     <section class="container my-5">
         <h2 class="text-center text-uppercase mb-4 text-white">Galeri Dokumentasi</h2>
-        <div class="d-flex flex-wrap align-items-center justify-content-center mb-4 p-2 rounded bg-white custom-category-menu">
+        <div
+            class="d-flex flex-wrap align-items-center justify-content-center mb-4 p-2 rounded bg-white custom-category-menu">
             <ul id="categoryMenu" class="nav nav-pills mb-0 me-3"></ul>
             <button id="toggleCategories" class="btn btn-link text-decoration-none">Selengkapnya</button>
         </div>
@@ -297,7 +313,7 @@
         const categoryMenu = document.getElementById("categoryMenu");
         const toggleButton = document.getElementById("toggleCategories");
         let showAllCategories = false;
-    
+
         // Generate menu items dynamically
         const maxVisibleCategories = 9; // Batas kategori yang terlihat secara default
         sportCategories.forEach((category, index) => {
@@ -311,18 +327,18 @@
             </li>`;
             categoryMenu.innerHTML += listItem;
         });
-    
+
         // Add toggle functionality
         toggleButton.addEventListener("click", () => {
             showAllCategories = !showAllCategories;
             const categoryItems = categoryMenu.querySelectorAll(".nav-item");
-    
+
             categoryItems.forEach((item, index) => {
                 if (index >= maxVisibleCategories) {
                     item.classList.toggle("d-none", !showAllCategories);
                 }
             });
-    
+
             // Update button text
             toggleButton.textContent = showAllCategories ? "Sembunyikan" : "Selengkapnya";
         });

@@ -90,6 +90,7 @@
             border-right: 5px solid #E00818;
             border-radius: 15px;
         }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 16px;
@@ -97,6 +98,19 @@
 
             .hero-subtitle {
                 font-size: 12px;
+            }
+
+            .sport-logo {
+                max-width: 60px;
+                max-height: 60px;
+            }
+
+            .sport-name {
+                font-size: 12px;
+            }
+
+            .sport-category {
+                font-size: 11px;
             }
         }
     </style>
@@ -148,17 +162,16 @@
             <h2 class="text-center">Ragam Cabang Olahraga</h2>
             <p class="text-center mb-4 text-dark">Temukan berbagai cabang olahraga yang tersedia untuk mendukung
                 aktivitas dan prestasi Anda.</p>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div class="row g-4 justify-content-center">
                 @forelse($SportCategories as $SportCategory)
-                    <div class="col-md-3">
-                        <a href="{{ route('cabor.show', $SportCategory->id) }}" class="text-decoration-none">
-                            <div class="card text-center p-4 sport-card">
+                    <div class="col-6 col-sm-4 col-md-3 col-lg-3 d-flex justify-content-center">
+                        <a href="{{ route('cabor.show', $SportCategory->id) }}" class="text-decoration-none w-100">
+                            <div class="card text-center p-3 sport-card h-100">
                                 <img src="{{ asset($SportCategory->logo ?? 'img/default.png') }}"
                                     alt="{{ $SportCategory->nama_cabor }}" class="sport-logo mx-auto mb-3"
-                                    style="width: 100px; height: 100px; object-fit: contain; background-color: #ffff;">
-
-                                <h5 class="text-dark">{{ $SportCategory->nama_cabor }}</h5>
-                                <p class="text-muted">{{ $SportCategory->sport_category }}</p>
+                                    style="width: 80px; height: 80px; object-fit: contain; background-color: #ffff;">
+                                <h5 class="text-dark sport-name">{{ $SportCategory->nama_cabor }}</h5>
+                                <p class="text-muted sport-category">{{ $SportCategory->sport_category }}</p>
                             </div>
                         </a>
                     </div>

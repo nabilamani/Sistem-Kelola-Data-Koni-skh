@@ -80,6 +80,50 @@
         .referee-details {
             padding: 20px;
         }
+        .table-borderless td {
+            vertical-align: top;
+            padding: 0.3rem 0;
+            /* Mengurangi jarak atas dan bawah */
+        }
+
+        .table-borderless td:first-child {
+            width: 40px;
+            /* Kolom untuk ikon */
+            text-align: center;
+        }
+
+        .table-borderless td:nth-child(2) {
+            width: 150px;
+            /* Kolom untuk label */
+            text-align: left;
+        }
+
+        .table-borderless td:last-child {
+            text-align: left;
+            /* Konten dinamis rata kiri */
+        }
+        @media (max-width: 768px) {
+
+            #table-view table th,
+            #table-view table td {
+                font-size: 12px;
+                padding: 5px;
+            }
+            #table-view table img {
+                width: 50px;
+                height: auto;
+            }
+
+            #refereeDetailModal img {
+                width: 100%;
+                height: auto;
+            }
+
+            #refereeName {
+                font-size: 16px;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -134,7 +178,7 @@
 
         <!-- Tampilan Tabel -->
         <div id="table-view" class="table-responsive rounded" style="display: none;">
-            <table class="table table-bordered table-striped" style="min-width: 845px;">
+            <table class="table table-bordered table-striped" style="min-width: 500px;">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -173,9 +217,8 @@
             {{ $referees->links('layouts.pagination') }}
         </div>
         <!-- Modal untuk Detail Wasit -->
-        <div class="modal fade mt-5 pt-2" id="refereeDetailModal" tabindex="-1"
-            aria-labelledby="refereeDetailModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+        <div class="modal fade mt-5 pt-2" id="refereeDetailModal" tabindex="-1" aria-labelledby="refereeDetailModalLabel" aria-hidden="true">
+            <div class="modal-dialog mb-5 modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
                         <h5 class="modal-title text-white" id="refereeDetailModalLabel">Detail Wasit</h5>
@@ -183,42 +226,50 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-12 col-md-4 mb-3 mb-md-0">
                                 <img id="refereePhoto" src="" alt="Foto Wasit" class="img-fluid rounded">
                             </div>
                             <div class="col-md-8">
                                 <h5 id="refereeName" class="text-dark mb-3"></h5>
-                                <p class="mb-0">
-                                    <strong><i class="mdi mdi-soccer mr-1 text-primary"></i> Cabang Olahraga :</strong>
-                                    <span id="refereeSportCategory"></span>
-                                </p>
-                                <p class="mb-0">
-                                    <strong><i class="mdi mdi-gender-male-female mr-1 text-primary"></i> Jenis Kelamin
-                                        :</strong>
-                                    <span id="refereeGender"></span>
-                                </p>
-                                <p class="mb-0">
-                                    <strong><i class="mdi mdi-calendar mr-1 text-primary"></i> Tanggal Lahir :</strong>
-                                    <span id="refereeBirthDate"></span>
-                                    (<span id="refereeAge"></span> tahun)
-                                </p>
-                                <p class="mb-0">
-                                    <strong><i class="mdi mdi-certificate mr-1 text-primary"></i> Lisensi :</strong>
-                                    <span id="refereeLicense"></span>
-                                </p>
-                                <p class="mb-0">
-                                    <strong><i class="mdi mdi-whatsapp mr-1 text-primary"></i> Whatsapp :</strong>
-                                    <span id="refereeWA"></span>
-                                </p>
-                                <p class="mb-0">
-                                    <strong><i class="mdi mdi-instagram mr-1 text-primary"></i> Instagram :</strong>
-                                    <span id="refereeIG"></span>
-                                </p>
-                                <p class="mb-0">
-                                    <strong><i class="mdi mdi-briefcase mr-1 text-primary"></i> Pengalaman :</strong>
-                                    <span id="refereeExperience"></span>
-                                </p>
-
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="mdi mdi-soccer text-primary"></i></td>
+                                            <td><strong>Cabang Olahraga</strong></td>
+                                            <td id="refereeSportCategory">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="mdi mdi-gender-male-female text-primary"></i></td>
+                                            <td><strong>Jenis Kelamin</strong></td>
+                                            <td id="refereeGender">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="mdi mdi-calendar text-primary"></i></td>
+                                            <td><strong>Tanggal Lahir</strong></td>
+                                            <td><span id="refereeBirthDate">-</span> (<span id="refereeAge">-</span> tahun)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="mdi mdi-certificate text-primary"></i></td>
+                                            <td><strong>Lisensi</strong></td>
+                                            <td id="refereeLicense">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="mdi mdi-whatsapp text-primary"></i></td>
+                                            <td><strong>Whatsapp</strong></td>
+                                            <td id="refereeWA">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="mdi mdi-instagram text-primary"></i></td>
+                                            <td><strong>Instagram</strong></td>
+                                            <td id="refereeIG">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="mdi mdi-briefcase text-primary"></i></td>
+                                            <td><strong>Pengalaman</strong></td>
+                                            <td id="refereeExperience">-</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -227,7 +278,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
     </div>
 
 

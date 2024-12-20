@@ -104,35 +104,35 @@
             /* Konten dinamis rata kiri */
         }
 
-        @media (max-width: 576px) {
-            .col-6 {
-                flex: 0 0 50%;
-                max-width: 50%;
-            }
-            .list-view{
-                margin-bottom: 5px;
-            }
+        @media (max-width: 768px) {
 
-            .athlete-photo {
-                height: 120px;
-                /* Ukuran foto dikurangi */
-            }
-
-            .athlete-details {
-                padding: 0.5rem;
-                /* Padding lebih kecil */
-            }
-
-            .athlete-details h6 {
+            #table-view table th,
+            #table-view table td {
                 font-size: 12px;
-                /* Ukuran judul lebih kecil */
+                padding: 5px;
             }
 
-            .athlete-details p {
-                font-size: 10px;
-                /* Ukuran teks tambahan lebih kecil */
+            #table-view table img {
+                width: 50px;
+                height: auto;
+            }
+
+            #athleteDetailModal img {
+                width: 100%;
+                height: auto;
+            }
+
+            #athleteName {
+                font-size: 16px;
+                text-align: center;
+            }
+
+            .modal-body {
+                padding: 10px;
             }
         }
+
+        
     </style>
 </head>
 
@@ -225,7 +225,7 @@
 
         <!-- Tampilan Tabel -->
         <div id="table-view" class="table-responsive rounded" style="display: none;">
-            <table class="table table-bordered table-striped" style="min-width: 845px;">
+            <table class="table table-bordered table-striped" style="min-width: 500px;">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -264,8 +264,8 @@
         </div>
     </div>
     <!-- Modal untuk Detail Atlet -->
-    <div class="modal fade mt-5 pt-2" id="athleteDetailModal" tabindex="-1" aria-labelledby="athleteDetailModalLabel"
-        aria-hidden="true">
+    <div class="modal fade mt-5 pt-2" id="athleteDetailModal" tabindex="-1"
+        aria-labelledby="athleteDetailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary d-flex align-items-center">
@@ -275,26 +275,28 @@
                 <div class="modal-body position-relative">
                     <!-- Logo di kanan atas -->
                     <img id="athleteLogo" src="{{ asset('gambar_aset/images/koni.png') }}" alt="Logo"
-                        class="position-absolute"
+                        class="position-absolute d-none d-md-block"
                         style="top: 0; right: 0; width: 80px; height: 80px; margin: 10px; z-index: 10;">
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-12 col-md-4 mb-3 mb-md-0 text-center">
                             <!-- Foto Atlet -->
                             <img id="athletePhoto" src="" alt="Foto Atlet" class="img-fluid rounded">
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-12 col-md-8">
                             <!-- Detail Atlet -->
                             <h5 id="athleteName" class="text-dark mb-3"></h5>
                             <table class="table table-borderless">
                                 <tbody>
                                     <tr>
-                                        <td><i class="mdi mdi-trophy text-primary"></i></td>
+                                        <td class="text-center text-md-start"><i
+                                                class="mdi mdi-trophy text-primary"></i></td>
                                         <td><strong>Cabang Olahraga</strong></td>
                                         <td id="athleteSportCategory">-</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="mdi mdi-calendar text-primary"></i></td>
+                                        <td class="text-center text-md-start"><i
+                                                class="mdi mdi-calendar text-primary"></i></td>
                                         <td><strong>Tanggal Lahir</strong></td>
                                         <td>
                                             <span id="athleteBirthDate">-</span> (<span id="athleteAge">-</span>
@@ -302,22 +304,26 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td><i class="mdi mdi-gender-male-female text-primary"></i></td>
+                                        <td class="text-center text-md-start"><i
+                                                class="mdi mdi-gender-male-female text-primary"></i></td>
                                         <td><strong>Jenis Kelamin</strong></td>
                                         <td id="athleteGender">-</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="mdi mdi-human text-primary"></i></td>
+                                        <td class="text-center text-md-start"><i
+                                                class="mdi mdi-human text-primary"></i></td>
                                         <td><strong>Tinggi Badan</strong></td>
                                         <td id="athleteHeight">-</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="mdi mdi-weight-kilogram text-primary"></i></td>
+                                        <td class="text-center text-md-start"><i
+                                                class="mdi mdi-weight-kilogram text-primary"></i></td>
                                         <td><strong>Berat Badan</strong></td>
                                         <td id="athleteWeight">-</td>
                                     </tr>
                                     <tr>
-                                        <td><i class="mdi mdi-medal text-primary"></i></td>
+                                        <td class="text-center text-md-start"><i
+                                                class="mdi mdi-medal text-primary"></i></td>
                                         <td><strong>Prestasi</strong></td>
                                         <td>
                                             <ul id="athleteAchievements" class="list-unstyled mb-0"></ul>
@@ -334,6 +340,8 @@
             </div>
         </div>
     </div>
+
+
 
 
 

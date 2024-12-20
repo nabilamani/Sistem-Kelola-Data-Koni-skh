@@ -285,7 +285,7 @@
                 </div>
                 <div class="col-6 col-md-2 text-center" data-aos="zoom-in" data-aos-delay="800">
                     <h3 class="count mt-1" data-count="{{ $caborCount }}">0</h3>
-                    <p class="text-light">cabor</p>
+                    <p class="text-light">Cabor</p>
                 </div>
             </div>
         </div>
