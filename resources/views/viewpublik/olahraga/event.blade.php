@@ -99,7 +99,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($events as $event)
+                    @forelse ($events as $event)
                         <tr>
                             <td>{{ $event->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}</td>
@@ -181,7 +181,16 @@
     
                             </td>
                         </tr>
-                    @endforeach
+                        @empty
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <div class="d-flex justify-content-center align-items-center my-2">
+                                    <i class="mdi mdi-alert-circle-outline me-2" style="font-size: 20px;"></i>
+                                    <span class="fs-8">Tidak ada event yang tersedia saat ini.</span>
+                                </div>
+                            </td>
+                        </tr>                    
+                        @endforelse
                 </tbody>
             </table>
         </div>

@@ -119,6 +119,7 @@
                 font-size: 12px;
                 padding: 5px;
             }
+
             #coachDetailModal img {
                 width: 100%;
                 height: auto;
@@ -182,7 +183,7 @@
         <div id="data-wrapper">
             <!-- Tampilan Card -->
             <div id="card-view" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                @foreach ($coaches as $coach)
+                @forelse ($coaches as $coach)
                     <div class="col-md-3">
                         <div class="card coach-card">
                             <img src="{{ $coach->photo ? asset($coach->photo) : 'https://via.placeholder.com/300x200' }}"
@@ -197,7 +198,18 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-12">
+                        <!-- Alert untuk Pelatih -->
+                        <div class="alert alert-dark text-center p-4 mb-3">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <i class="mdi mdi mdi-clock-alert me-2 fs-4"></i>
+                                <strong>Belum ada data daftar pelatih yang tersedia saat ini.</strong>
+                            </div>
+                            <p class="mt-2">Informasi akan diperbarui secara berkala, mohon tunggu beberapa waktu.</p>
+                        </div>
+                    </div>
+                @endforelse
             </div>
 
             <!-- Tampilan Tabel -->
@@ -216,7 +228,7 @@
                         @php
                             $no = ($coaches->currentPage() - 1) * $coaches->perPage() + 1;
                         @endphp
-                        @foreach ($coaches as $index => $coach)
+                        @forelse ($coaches as $index => $coach)
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $coach->name }}</td>
@@ -232,7 +244,16 @@
 
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div class="d-flex justify-content-center align-items-center my-2">
+                                        <i class="mdi mdi-alert-circle-outline me-2" style="font-size: 20px;"></i>
+                                        <span class="fs-8">Saat ini belum ada data daftar pelatih.</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
@@ -243,8 +264,8 @@
             </div>
         </div>
         <!-- Modal untuk Detail Pelatih -->
-        <div class="modal fade mt-5 pt-2" id="coachDetailModal" tabindex="-1" aria-labelledby="coachDetailModalLabel"
-            aria-hidden="true">
+        <div class="modal fade mt-5 pt-2" id="coachDetailModal" tabindex="-1"
+            aria-labelledby="coachDetailModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">

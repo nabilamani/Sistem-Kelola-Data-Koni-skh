@@ -103,6 +103,7 @@
             text-align: left;
             /* Konten dinamis rata kiri */
         }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 16px;
@@ -168,7 +169,7 @@
 
         <!-- Tampilan Card -->
         <div id="card-view" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-            @foreach ($achievements as $achievement)
+            @forelse ($achievements as $achievement)
                 <div class="col-md-3">
                     <div class="card achievement-card">
                         <div class="achievement-details text-center p-3">
@@ -181,7 +182,17 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+                @empty
+                <div class="col-12">
+                    <div class="alert alert-dark text-center p-4">
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+                            <i class="mdi mdi-clock-alert me-2 fs-4"></i>
+                            <strong>Belum ada data daftar prestasi yang tersedia saat ini.</strong>
+                        </div>
+                        <p class="mt-2">Informasi akan diperbarui secara berkala, mohon tunggu beberapa waktu.</p>
+                    </div>
+                </div>
+            @endforelse
         </div>
 
         <!-- Tampilan Tabel -->
@@ -201,7 +212,7 @@
                     @php
                         $no = ($achievements->currentPage() - 1) * $achievements->perPage() + 1;
                     @endphp
-                    @foreach ($achievements as $achievement)
+                    @forelse ($achievements as $achievement)
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $achievement->athlete_name }}</td>
@@ -214,7 +225,16 @@
                                     data-bs-toggle="modal" data-bs-target="#achievementDetailModal">Detail</a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <div class="d-flex justify-content-center align-items-center my-2">
+                                    <i class="mdi mdi-alert-circle-outline me-2" style="font-size: 20px;"></i>
+                                    <span class="fs-8">Saat ini belum ada data prestasi yang tersedia.</span>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

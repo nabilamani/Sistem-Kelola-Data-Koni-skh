@@ -310,8 +310,8 @@
                                         <div class="card-body d-flex justify-content-between align-items-center">
                                             <!-- Bagian Kiri: Teks dan Count -->
                                             <div>
-                                                <h2 class="mb-1 count text-primary" data-count=""
-                                                    id="sportCategoryCount">0</h2>
+                                                <h2 class="count mb-1 text-primary" data-count="{{ $caborCount }}">
+                                                    0</h2>
                                                 <p class="text-secondary mb-0">Total Cabor</p>
                                             </div>
 
@@ -358,141 +358,151 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
-                                            @foreach ($beritas as $berita)
-                                                <div class="col-lg-4 col-md-6 mb-4">
-                                                    <div
-                                                        class="card border bg-white shadow-sm h-100 position-relative hover-card">
-                                                        <img src="{{ asset($berita->photo) }}"
-                                                            class="card-img-top img-fluid"
-                                                            alt="{{ $berita->judul_berita }}"
-                                                            style="object-fit: cover; height: 200px; border-radius: 8px 8px 0 0;">
-                                                        <div class="card-body d-flex flex-column">
-                                                            <h5 class="card-title">{{ $berita->judul_berita }}
-                                                            </h5>
-                                                            <p class="card-text text-muted mb-2"
-                                                                style="font-size: 12px;">
-                                                                <i class="mdi mdi-calendar me-1"></i>
-                                                                {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}
-                                                            </p>
-                                                            <p class="card-text mb-2">
-                                                                {{ Str::limit(strip_tags($berita->isi_berita), 100) }}
-                                                            </p>
-                                                            <p class="card-text mb-2">
-                                                                <i class="mdi mdi-map-marker-outline me-1"></i>
-                                                                <strong>Lokasi:</strong>
-                                                                {{ $berita->lokasi_peristiwa }}
-                                                            </p>
-                                                            <p class="card-text mb-3">
-                                                                <i class="mdi mdi-bookmark-outline me-1"></i>
-                                                                <strong>Sumber:</strong> {{ $berita->kutipan_sumber }}
-                                                            </p>
-                                                            <button type="button"
-                                                                class="btn btn-warning btn-sm mt-auto text-white"
-                                                                data-toggle="modal"
-                                                                data-target="#newsDetailModal{{ $berita->id }}">
-                                                                Selengkapnya
-                                                            </button>
+                                            @if ($beritas->isEmpty())
+                                                <div class="col-12">
+                                                    <div class="alert alert-dark text-center">
+                                                        <i class="mdi mdi-information-outline me-1"></i>
+                                                        Belum ada berita yang tersedia saat ini.
+                                                    </div>
+                                                </div>
+                                            @else
+                                                @foreach ($beritas as $berita)
+                                                    <div class="col-lg-4 col-md-6 mb-4">
+                                                        <div
+                                                            class="card border bg-white shadow-sm h-100 position-relative hover-card">
+                                                            <img src="{{ asset($berita->photo) }}"
+                                                                class="card-img-top img-fluid"
+                                                                alt="{{ $berita->judul_berita }}"
+                                                                style="object-fit: cover; height: 200px; border-radius: 8px 8px 0 0;">
+                                                            <div class="card-body d-flex flex-column">
+                                                                <h5 class="card-title">{{ $berita->judul_berita }}
+                                                                </h5>
+                                                                <p class="card-text text-muted mb-2"
+                                                                    style="font-size: 12px;">
+                                                                    <i class="mdi mdi-calendar me-1"></i>
+                                                                    {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}
+                                                                </p>
+                                                                <p class="card-text mb-2">
+                                                                    {{ Str::limit(strip_tags($berita->isi_berita), 100) }}
+                                                                </p>
+                                                                <p class="card-text mb-2">
+                                                                    <i class="mdi mdi-map-marker-outline me-1"></i>
+                                                                    <strong>Lokasi:</strong>
+                                                                    {{ $berita->lokasi_peristiwa }}
+                                                                </p>
+                                                                <p class="card-text mb-3">
+                                                                    <i class="mdi mdi-bookmark-outline me-1"></i>
+                                                                    <strong>Sumber:</strong>
+                                                                    {{ $berita->kutipan_sumber }}
+                                                                </p>
+                                                                <button type="button"
+                                                                    class="btn btn-warning btn-sm mt-auto text-white"
+                                                                    data-toggle="modal"
+                                                                    data-target="#newsDetailModal{{ $berita->id }}">
+                                                                    Selengkapnya
+                                                                </button>
+                                                            </div>
                                                         </div>
+
                                                     </div>
 
-                                                </div>
+                                                    <!-- Modal for News Details -->
+                                                    <div class="modal fade" id="newsDetailModal{{ $berita->id }}"
+                                                        tabindex="-1" role="dialog"
+                                                        aria-labelledby="newsDetailModalLabel{{ $berita->id }}"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg px-3" role="document">
+                                                            <div class="modal-content">
+                                                                <!-- Header -->
+                                                                <div class="modal-header bg-primary text-white">
+                                                                    <h5 class="modal-title"
+                                                                        id="newsDetailModalLabel{{ $berita->id }}">
+                                                                        <i class="mdi mdi-newspaper me-2"> </i>Berita
+                                                                        Selengkapnya:
+                                                                        {{ $berita->judul_berita }}
+                                                                    </h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                </div>
 
-                                                <!-- Modal for News Details -->
-                                                <div class="modal fade" id="newsDetailModal{{ $berita->id }}"
-                                                    tabindex="-1" role="dialog"
-                                                    aria-labelledby="newsDetailModalLabel{{ $berita->id }}"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg px-3" role="document">
-                                                        <div class="modal-content">
-                                                            <!-- Header -->
-                                                            <div class="modal-header bg-primary text-white">
-                                                                <h5 class="modal-title"
-                                                                    id="newsDetailModalLabel{{ $berita->id }}">
-                                                                    <i class="mdi mdi-newspaper me-2"> </i>Berita
-                                                                    Selengkapnya:
-                                                                    {{ $berita->judul_berita }}
-                                                                </h5>
-                                                                <button type="button" class="close"
-                                                                    data-dismiss="modal" aria-label="Close">
-                                                            </div>
-
-                                                            <!-- Body -->
-                                                            <div class="modal-body">
-                                                                <div class="row">
-                                                                    <!-- News Image -->
-                                                                    <div class="col-md-5">
-                                                                        @if ($berita->photo)
-                                                                            <img src="{{ asset($berita->photo) }}"
-                                                                                alt="Foto Berita"
-                                                                                class="img-fluid rounded shadow-sm mb-3"
-                                                                                style="width: 100%; object-fit: cover;">
-                                                                        @else
-                                                                            <div class="d-flex align-items-center justify-content-center bg-light border rounded shadow-sm"
-                                                                                style="height: 250px;">
-                                                                                <i
-                                                                                    class="mdi mdi-image-off-outline mdi-48px text-muted"></i>
+                                                                <!-- Body -->
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <!-- News Image -->
+                                                                        <div class="col-md-5">
+                                                                            @if ($berita->photo)
+                                                                                <img src="{{ asset($berita->photo) }}"
+                                                                                    alt="Foto Berita"
+                                                                                    class="img-fluid rounded shadow-sm mb-3"
+                                                                                    style="width: 100%; object-fit: cover;">
+                                                                            @else
+                                                                                <div class="d-flex align-items-center justify-content-center bg-light border rounded shadow-sm"
+                                                                                    style="height: 250px;">
+                                                                                    <i
+                                                                                        class="mdi mdi-image-off-outline mdi-48px text-muted"></i>
+                                                                                </div>
+                                                                            @endif
+                                                                            <div class="mb-3 p-3 rounded shadow-sm"
+                                                                                style="background-color: #f8f9fa;">
+                                                                                <p class="mb-3">
+                                                                                    <strong class="text-primary"><i
+                                                                                            class="mdi mdi-bookmark-outline me-2"></i>Judul
+                                                                                        Berita:</strong><br>
+                                                                                    <span
+                                                                                        class="text-dark">{{ $berita->judul_berita }}</span>
+                                                                                </p>
+                                                                                <p class="mb-3">
+                                                                                    <strong class="text-success"><i
+                                                                                            class="mdi mdi-calendar me-2"></i>Tanggal
+                                                                                        Waktu:</strong><br>
+                                                                                    <span
+                                                                                        class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</span>
+                                                                                </p>
+                                                                                <p class="mb-3">
+                                                                                    <strong class="text-info"><i
+                                                                                            class="mdi mdi-map-marker-outline me-2"></i>Lokasi
+                                                                                        Peristiwa:</strong><br>
+                                                                                    <span
+                                                                                        class="text-dark">{{ $berita->lokasi_peristiwa }}</span>
+                                                                                </p>
+                                                                                <p class="mb-0">
+                                                                                    <strong class="text-warning"><i
+                                                                                            class="mdi mdi-source-branch me-2"></i>Kutipan
+                                                                                        Sumber:</strong><br>
+                                                                                    <span
+                                                                                        class="text-muted">{{ $berita->kutipan_sumber }}</span>
+                                                                                </p>
                                                                             </div>
-                                                                        @endif
-                                                                        <div class="mb-3 p-3 rounded shadow-sm"
-                                                                            style="background-color: #f8f9fa;">
-                                                                            <p class="mb-3">
-                                                                                <strong class="text-primary"><i
-                                                                                        class="mdi mdi-bookmark-outline me-2"></i>Judul
-                                                                                    Berita:</strong><br>
-                                                                                <span
-                                                                                    class="text-dark">{{ $berita->judul_berita }}</span>
-                                                                            </p>
-                                                                            <p class="mb-3">
-                                                                                <strong class="text-success"><i
-                                                                                        class="mdi mdi-calendar me-2"></i>Tanggal
-                                                                                    Waktu:</strong><br>
-                                                                                <span
-                                                                                    class="text-muted">{{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d-m-Y H:i') }}</span>
-                                                                            </p>
-                                                                            <p class="mb-3">
-                                                                                <strong class="text-info"><i
-                                                                                        class="mdi mdi-map-marker-outline me-2"></i>Lokasi
-                                                                                    Peristiwa:</strong><br>
-                                                                                <span
-                                                                                    class="text-dark">{{ $berita->lokasi_peristiwa }}</span>
-                                                                            </p>
-                                                                            <p class="mb-0">
-                                                                                <strong class="text-warning"><i
-                                                                                        class="mdi mdi-source-branch me-2"></i>Kutipan
-                                                                                    Sumber:</strong><br>
-                                                                                <span
-                                                                                    class="text-muted">{{ $berita->kutipan_sumber }}</span>
-                                                                            </p>
+
                                                                         </div>
 
-                                                                    </div>
-
-                                                                    <!-- News Details -->
-                                                                    <div class="col-md-7">
+                                                                        <!-- News Details -->
+                                                                        <div class="col-md-7">
 
 
-                                                                        <div class="mb-3">
+                                                                            <div class="mb-3">
 
-                                                                            <div
-                                                                                class="bg-light p-3 rounded shadow-sm">
-                                                                                {!! $berita->isi_berita !!}
+                                                                                <div
+                                                                                    class="bg-light p-3 rounded shadow-sm">
+                                                                                    {!! $berita->isi_berita !!}
+                                                                                </div>
                                                                             </div>
+
+
                                                                         </div>
-
-
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
-                                                            <!-- Footer -->
-                                                            <div class="modal-footer bg-light">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Tutup</button>
+                                                                <!-- Footer -->
+                                                                <div class="modal-footer bg-light">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Tutup</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -520,14 +530,23 @@
                                                 </tr>
                                             </thead>
                                             <tbody style="color: rgb(114, 114, 114)">
-                                                @foreach ($achievements as $achievement)
+                                                @if ($achievements->isEmpty())
                                                     <tr>
-                                                        <td>{{ $achievement->sport_category }}</td>
-                                                        <td>{{ $achievement->event_type }}</td>
-                                                        <td>{{ $achievement->athlete_name }}</td>
-                                                        <td>{{ $achievement->description }}</td>
+                                                        <td colspan="4" class="text-center text-muted">
+                                                            <i class="mdi mdi-information-outline me-1"></i>
+                                                            Belum ada data prestasi yang tersedia.
+                                                        </td>
                                                     </tr>
-                                                @endforeach
+                                                @else
+                                                    @foreach ($achievements as $achievement)
+                                                        <tr>
+                                                            <td>{{ $achievement->sport_category }}</td>
+                                                            <td>{{ $achievement->event_type }}</td>
+                                                            <td>{{ $achievement->athlete_name }}</td>
+                                                            <td>{{ $achievement->description }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -551,14 +570,23 @@
                                                 </tr>
                                             </thead>
                                             <tbody style="color: rgb(114, 114, 114)">
-                                                @foreach ($upcomingEvents as $event)
+                                                @if ($upcomingEvents->isEmpty())
                                                     <tr>
-                                                        <td>{{ $event->name }}</td>
-                                                        <td>{{ \Carbon\Carbon::parse($event->event_date)->format('d-m-Y') }}
+                                                        <td colspan="3" class="text-center text-muted">
+                                                            <i class="mdi mdi-calendar-remove me-1"></i>
+                                                            Tidak ada event yang akan datang.
                                                         </td>
-                                                        <td>{{ $event->location }}</td>
                                                     </tr>
-                                                @endforeach
+                                                @else
+                                                    @foreach ($upcomingEvents as $event)
+                                                        <tr>
+                                                            <td>{{ $event->name }}</td>
+                                                            <td>{{ \Carbon\Carbon::parse($event->event_date)->format('d-m-Y') }}
+                                                            </td>
+                                                            <td>{{ $event->location }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>

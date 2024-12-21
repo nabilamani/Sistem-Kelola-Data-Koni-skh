@@ -200,7 +200,7 @@ class CoachController extends Controller
             $query->where('sport_category', $sportCategory);
         }
 
-        $coaches = $query->paginate(8)->withPath(url('/olahraga/pelatih'))->appends($request->except('page'));
+        $coaches = $query->paginate(8);
 
         // Ambil semua kategori olahraga untuk dropdown filter
         $sportCategories = Coach::select('sport_category')->distinct()->pluck('sport_category');

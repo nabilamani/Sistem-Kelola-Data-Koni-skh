@@ -165,7 +165,7 @@
                         @php
                             $no = ($athletes->currentPage() - 1) * $athletes->perPage() + 1;
                         @endphp
-                        @foreach ($athletes as $athlete)
+                        @forelse ($athletes as $athlete)
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $athlete->name }}</td>
@@ -179,7 +179,16 @@
                                     <a href="{{ route('', $athlete->id) }}" class="btn btn-info btn-sm">Detail</a>
                                 </td> --}}
                             </tr>
-                        @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    <div class="d-flex justify-content-center align-items-center my-2">
+                                        <i class="mdi mdi-alert-circle-outline me-2" style="font-size: 20px;"></i>
+                                        <span class="fs-8">Saat ini belum ada data daftar atlet.</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

@@ -210,7 +210,19 @@
                                     </div>
                                 </div>
                             @else
-                                <p>No main news found.</p>
+                                <div class="card shadow-sm border-0 bg-light text-center py-5 px-3">
+                                    <div class="card-body">
+                                        <i class="mdi mdi-alert-circle-outline text-warning display-1 mb-3"></i>
+                                        <h4 class="text-dark fw-bold">Tidak Ada Berita Utama</h4>
+                                        <p class="text-muted mb-4">
+                                            Berita utama saat ini belum tersedia. Kami akan segera memperbarui dengan
+                                            informasi terbaru.
+                                        </p>
+                                        <a href="/" class="btn btn-primary text-white px-4 py-2">
+                                            Kembali Ke Beranda
+                                        </a>
+                                    </div>
+                                </div>
                             @endif
 
                             <!-- Section for additional actions or info -->
@@ -225,22 +237,22 @@
                                             <i class="fab fa-facebook-f fa-lg"></i>
                                         </a>
                                         <!-- Twitter -->
-                                        <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ $beritaUtama->judul_berita }}"
+                                        <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ $beritaUtama->judul_berita ?? 'Berita Utama' }}"
                                             target="_blank" class="me-3 text-dark">
                                             <i class="fab fa-twitter fa-lg"></i>
                                         </a>
                                         <!-- WhatsApp -->
-                                        <a href="https://api.whatsapp.com/send?text={{ $beritaUtama->judul_berita }} {{ request()->fullUrl() }}"
+                                        <a href="https://api.whatsapp.com/send?text={{ $beritaUtama->judul_berita ?? 'Berita Utama' }} {{ request()->fullUrl() }}"
                                             target="_blank" class="me-3 text-dark">
                                             <i class="fab fa-whatsapp fa-lg"></i>
                                         </a>
                                         <!-- Telegram -->
-                                        <a href="https://telegram.me/share/url?url={{ urlencode(request()->fullUrl()) }}&text={{ $beritaUtama->judul_berita }}"
+                                        <a href="https://telegram.me/share/url?url={{ urlencode(request()->fullUrl()) }}&text={{ $beritaUtama->judul_berita ?? 'Berita Utama' }}"
                                             target="_blank" class="me-3 text-dark">
                                             <i class="fab fa-telegram-plane fa-lg"></i>
                                         </a>
                                         <!-- Email -->
-                                        <a href="mailto:?subject={{ $beritaUtama->judul_berita }}&body={{ request()->fullUrl() }}"
+                                        <a href="mailto:?subject={{ $beritaUtama->judul_berita ?? 'Berita Utama' }}&body={{ request()->fullUrl() }}"
                                             target="_blank" class="me-3 text-dark">
                                             <i class="fas fa-envelope fa-lg"></i>
                                         </a>
@@ -262,15 +274,15 @@
                                 <hr>
                                 <div class="mb-4">
                                     <form>
-                                        <label for="search" class="form-label">Cari</label>
-                                        <div class="input-group">
+                                        <label for="search" class="form-label">Cari Berita</label>
+                                        <div class="input-group shadow-sm">
                                             <input type="text" class="form-control" id="search"
-                                                placeholder="Cari...">
-                                            <button class="btn btn-primary">Cari</button>
+                                                placeholder="Cari berita...">
+                                            <button type="submit" class="btn btn-primary text-white">Cari</button>
                                         </div>
                                     </form>
                                 </div>
-                                @foreach ($beritaLatepost as $berita)
+                                @forelse ($beritaLatepost as $berita)
                                     <div class="d-flex align-items-start mb-3 berita-item p-1"
                                         data-id="{{ $berita->id }}" data-judul="{{ $berita->judul_berita }}"
                                         data-photo="{{ asset($berita->photo) }}"
@@ -290,7 +302,12 @@
                                         </div>
                                     </div>
                                     <hr>
-                                @endforeach
+                                @empty
+                                    <div class="text-center py-5">
+                                        <i class="mdi mdi-alert-circle-outline text-warning display-4 mb-3"></i>
+                                        <h6 class="text-muted">Belum ada berita terbaru.</h6>
+                                    </div>
+                                @endforelse
                                 <a href="/berita/daftar" class="btn btn-primary w-100">
                                     Lihat Semua Berita
                                 </a>
@@ -302,15 +319,15 @@
                                 <hr>
                                 <div class="mb-4">
                                     <form>
-                                        <div class="input-group">
+                                        <div class="input-group shadow-sm">
                                             <input type="text" class="form-control" id="search"
-                                                placeholder="Cari...">
-                                            <button class="btn btn-primary">Cari</button>
+                                                placeholder="Cari event...">
+                                            <button type="submit" class="btn btn-primary text-white">Cari</button>
                                         </div>
                                     </form>
                                 </div>
 
-                                @foreach ($upcomingEvents as $event)
+                                @forelse ($upcomingEvents as $event)
                                     <div class="d-flex align-items-start event-item p-1"
                                         data-id="{{ $event->id }}" data-name="{{ $event->name }}"
                                         data-event_date="{{ \Carbon\Carbon::parse($event->event_date)->format('d F Y') }}"
@@ -342,7 +359,13 @@
                                         </div>
                                     </div>
                                     <hr class="my-1">
-                                @endforeach
+                                @empty
+                                    <!-- Pesan Jika Tidak Ada Event -->
+                                    <div class="text-center py-5">
+                                        <i class="mdi mdi-calendar-remove text-warning display-4 mb-3"></i>
+                                        <h6 class="text-muted">Belum ada event yang tersedia.</h6>
+                                    </div>
+                                @endforelse
 
 
                                 <a href="/olahraga/event" class="btn btn-primary w-100">
@@ -442,22 +465,22 @@
                                             <i class="fab fa-facebook-f fa-lg"></i>
                                         </a>
                                         <!-- Twitter -->
-                                        <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ $beritaUtama->judul_berita }}"
+                                        <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ $beritaUtama->judul_berita ?? 'Berita Utama' }}"
                                             target="_blank" class="me-3 text-dark">
                                             <i class="fab fa-twitter fa-lg"></i>
                                         </a>
                                         <!-- WhatsApp -->
-                                        <a href="https://api.whatsapp.com/send?text={{ $beritaUtama->judul_berita }} {{ request()->fullUrl() }}"
+                                        <a href="https://api.whatsapp.com/send?text={{ $beritaUtama->judul_berita ?? 'Berita Utama' }} {{ request()->fullUrl() }}"
                                             target="_blank" class="me-3 text-dark">
                                             <i class="fab fa-whatsapp fa-lg"></i>
                                         </a>
                                         <!-- Telegram -->
-                                        <a href="https://telegram.me/share/url?url={{ urlencode(request()->fullUrl()) }}&text={{ $beritaUtama->judul_berita }}"
+                                        <a href="https://telegram.me/share/url?url={{ urlencode(request()->fullUrl()) }}&text={{ $beritaUtama->judul_berita ?? 'Berita Utama' }}"
                                             target="_blank" class="me-3 text-dark">
                                             <i class="fab fa-telegram-plane fa-lg"></i>
                                         </a>
                                         <!-- Email -->
-                                        <a href="mailto:?subject={{ $beritaUtama->judul_berita }}&body={{ request()->fullUrl() }}"
+                                        <a href="mailto:?subject={{ $beritaUtama->judul_berita ?? 'Berita Utama' }}&body={{ request()->fullUrl() }}"
                                             target="_blank" class="me-3 text-dark">
                                             <i class="fas fa-envelope fa-lg"></i>
                                         </a>

@@ -176,8 +176,12 @@
                         </a>
                     </div>
                 @empty
-                    <div class="col-12">
-                        <p class="text-center">Tidak ada data cabang olahraga yang tersedia.</p>
+                    <div class="col-12 d-flex flex-column align-items-center py-5">
+                        <i class="mdi mdi-alert-circle-outline text-warning display-3 mb-3"></i>
+                        <h5 class="text-muted text-center">Belum ada data cabang olahraga yang tersedia saat ini.</h5>
+                        <a href="/" class="btn btn-primary mt-4 px-4">
+                            Kembali ke Beranda
+                        </a>
                     </div>
                 @endforelse
             </div>

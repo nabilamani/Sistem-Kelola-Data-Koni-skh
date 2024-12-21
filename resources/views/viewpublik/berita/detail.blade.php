@@ -112,6 +112,7 @@
             font-weight: bold;
             /* Tambahkan ketebalan teks untuk penekanan */
         }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 16px;
@@ -191,8 +192,7 @@
                     <!-- News Content -->
                     <div class="card">
                         <img src="{{ asset($berita->photo ?? 'https://via.placeholder.com/800x400') }}"
-                            class="card-img-top img-fluid" alt="Gambar Berita"
-                            style=" object-fit: cover;">
+                            class="card-img-top img-fluid" alt="Gambar Berita" style=" object-fit: cover;">
                         <div class="card-body">
                             <h2 class="card-title text-primary">{{ $berita->judul_berita }}</h2>
                             <p class="card-text">
@@ -245,7 +245,7 @@
                                 </form>
                             </div>
 
-                            @foreach ($upcomingEvents as $event)
+                            @forelse ($upcomingEvents as $event)
                                 <div class="d-flex align-items-start event-item p-1" data-id="{{ $event->id }}"
                                     data-name="{{ $event->name }}"
                                     data-event_date="{{ \Carbon\Carbon::parse($event->event_date)->format('d F Y') }}"
@@ -277,7 +277,13 @@
                                     </div>
                                 </div>
                                 <hr class="my-1">
-                            @endforeach
+                            @empty
+                                <!-- Pesan Jika Tidak Ada Event -->
+                                <div class="text-center py-5">
+                                    <i class="mdi mdi-calendar-remove text-warning display-4 mb-3"></i>
+                                    <h6 class="text-muted">Belum ada event yang tersedia.</h6>
+                                </div>
+                            @endforelse
 
 
                             <a href="/olahraga/event" class="btn btn-primary w-100">

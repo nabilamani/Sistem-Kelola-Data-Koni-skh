@@ -178,8 +178,6 @@ class AthleteController extends Controller
 
         return redirect()->back()->with('message', 'Data Athlete berhasil dihapus!');
     }
-
-
     public function showAthletes(Request $request)
     {
         $search = $request->input('search');
@@ -202,5 +200,27 @@ class AthleteController extends Controller
         }
 
         return view('viewpublik.olahraga.atlet', compact('athletes','categories'));
+    }
+
+    public function cariAtlet(Request $request)
+    {
+        $search = $request->input('search');
+        $sportCategory = $request->input('sport_category');
+        $activeView = $request->input('_view');
+
+        $query = Athlete::query();
+
+        if ($search) {
+            $query->where('name', 'like', "%$search%")
+                ->orWhere('sport_category', 'like', "%$search%");
+        }
+
+        if ($sportCategory) {
+            $query->where('sport_category', $sportCategory);
+        }
+
+        $athletes = $query->paginate(8)->withPath(url('/olahraga/atlet'))->appends($request->except('page'));
+
+        return view('viewpublik.olahraga.table_atlet', compact('athletes', 'activeView'));
     }
 }

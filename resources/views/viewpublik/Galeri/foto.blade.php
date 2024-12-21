@@ -186,7 +186,7 @@
             <button id="toggleCategories" class="btn btn-link text-decoration-none">Selengkapnya</button>
         </div>
         <div class="row g-4">
-            @foreach ($galleries as $gallery)
+            @forelse ($galleries as $gallery)
                 <div class="col-lg-4 col-md-6 gallery-item" data-category="{{ $gallery->sport_category }}">
                     <div class="card shadow-sm border-0 h-80 overflow-hidden">
                         @if ($gallery->media_type === 'photo')
@@ -268,7 +268,14 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="alert alert-warning text-center p-4">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <i class="mdi mdi-emoticon-sad me-2 text-dark" style="font-size: 30px;"></i>
+                        <span class="fs-6 text-dark">Maaf, saat ini belum ada dokumentasi yang tersedia.</span>
+                    </div>
+                </div>
+            @endforelse
         </div>
 
     </section>

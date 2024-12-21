@@ -112,6 +112,7 @@
             font-weight: bold;
             /* Tambahkan ketebalan teks untuk penekanan */
         }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 16px;
@@ -241,9 +242,14 @@
                             {{ $beritas->links('layouts.pagination') }}
                         </div>
                     @else
-                        <div class="alert alert-warning text-white">
-                            Tidak ada berita yang ditemukan.
+                        <div class="alert alert-warning text-center py-4">
+                            <i class="mdi mdi-alert-circle-outline display-4 text-dark mb-2"></i>
+                            <h5 class="text-dark mb-2">Belum ada berita yang tersedia saat ini.</h5>
+                            <a href="/" class="btn btn-outline-dark mt-3 px-4">
+                                Kembali ke Beranda
+                            </a>
                         </div>
+
                     @endif
                 </div>
 
@@ -268,17 +274,17 @@
                             <hr>
                             <div class="mb-4">
                                 <form>
-                                    <div class="input-group">
+                                    <div class="input-group shadow-sm">
                                         <input type="text" class="form-control" id="search"
-                                            placeholder="Cari...">
-                                        <button class="btn btn-primary">Cari</button>
+                                            placeholder="Cari event...">
+                                        <button type="submit" class="btn btn-primary text-white">Cari</button>
                                     </div>
                                 </form>
                             </div>
 
-                            @foreach ($upcomingEvents as $event)
-                                <div class="d-flex align-items-start event-item p-1"
-                                    data-id="{{ $event->id }}" data-name="{{ $event->name }}"
+                            @forelse ($upcomingEvents as $event)
+                                <div class="d-flex align-items-start event-item p-1" data-id="{{ $event->id }}"
+                                    data-name="{{ $event->name }}"
                                     data-event_date="{{ \Carbon\Carbon::parse($event->event_date)->format('d F Y') }}"
                                     data-banner="{{ asset($event->banner) }}"
                                     data-location_map="{{ $event->location_map }}"
@@ -308,7 +314,13 @@
                                     </div>
                                 </div>
                                 <hr class="my-1">
-                            @endforeach
+                            @empty
+                                <!-- Pesan Jika Tidak Ada Event -->
+                                <div class="text-center py-5">
+                                    <i class="mdi mdi-calendar-remove text-warning display-4 mb-3"></i>
+                                    <h6 class="text-muted">Belum ada event yang tersedia.</h6>
+                                </div>
+                            @endforelse
 
 
                             <a href="/olahraga/event" class="btn btn-primary w-100">
@@ -317,19 +329,18 @@
                         </div>
                     </div>
                     <div class="modal fade" id="imageModal" data-bs-backdrop="false" tabindex="-1"
-                            aria-labelledby="imageModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-body text-center">
-                                        <img id="modalImage" src="" alt="Full Banner"
-                                            class="img-fluid rounded">
-                                    </div>
+                        aria-labelledby="imageModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    <img id="modalImage" src="" alt="Full Banner" class="img-fluid rounded">
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
 
-                
+
 
             </div>
         </div>

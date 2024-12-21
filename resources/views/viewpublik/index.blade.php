@@ -100,9 +100,11 @@
             margin-bottom: 20px;
             letter-spacing: 1px;
         }
-        .count{
+
+        .count {
             color: #f39c12;
         }
+
         /* Cards Styling */
         .card {
             transition: transform 0.3s ease;
@@ -213,6 +215,8 @@
 
 <body>
 
+
+
     @include('viewpublik/layouts/navbar')
 
     <!-- Hero Section -->
@@ -259,7 +263,8 @@
     <div class="hero-stats py-4 bg-dark">
         <div class="container text-center">
             <h2 class="text-white mb-2" data-aos="fade-up">Statistik Olahraga Sukoharjo</h2>
-            <p class="mx-5 text-light" data-aos="fade-up" data-aos-delay="100">Data terkini mengenai atlet, wasit, pelatih,
+            <p class="mx-5 text-light" data-aos="fade-up" data-aos-delay="100">Data terkini mengenai atlet, wasit,
+                pelatih,
                 event, dan prestasi
                 olahraga di Sukoharjo.</p>
             <div class="row justify-content-center mt-4">
@@ -383,45 +388,56 @@
             </p>
             <!-- Berita Cards -->
             <div class="row gy-4">
-                @foreach ($beritas as $berita)
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                        <div class="card border-0 shadow-sm position-relative hover-card h-100">
-                            <img src="{{ asset($berita->photo) }}" class="card-img-top img-fluid"
-                                alt="{{ $berita->judul_berita }}"
-                                style="object-fit: cover; height: 200px; border-radius: 8px;">
-
-                            <div class="card-body d-flex flex-column">
-                                <!-- Judul Berita -->
-                                <h5 class="card-title fw-bold mb-3">{{ $berita->judul_berita }}</h5>
-
-                                <!-- Waktu dan Lokasi -->
-                                <div class="d-flex align-items-center mb-n2">
-                                    <small class="text-muted">
-                                        {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d F Y') }}
-                                    </small>
-                                    <span class="mx-2 text-muted">|</span>
-                                    <small class="text-muted">{{ $berita->lokasi_peristiwa }}</small>
-                                </div>
-
-                                <!-- Isi Berita Singkat -->
-                                <p class="card-text mb-3">{!! Str::limit($berita->isi_berita, 500) !!}</p>
-
-                                <!-- Tombol Baca Selengkapnya -->
-                                <button type="button" class="btn btn-primary text-white btn-sm mt-auto"
-                                    data-bs-toggle="modal" data-bs-target="#newsDetailModal{{ $berita->id }}">
-                                    Baca Selengkapnya
-                                </button>
-                            </div>
+                @if ($beritas->isEmpty())
+                    <div class="col-12 text-center">
+                        <div class="alert alert-dark py-4" data-aos="zoom-in">
+                            <i class="mdi mdi-information-outline me-1"></i>
+                            Belum ada berita yang tersedia saat ini.
                         </div>
                     </div>
-                @endforeach
+                @else
+                    @foreach ($beritas as $berita)
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                            <div class="card border-0 shadow-sm position-relative hover-card h-100">
+                                <img src="{{ asset($berita->photo) }}" class="card-img-top img-fluid"
+                                    alt="{{ $berita->judul_berita }}"
+                                    style="object-fit: cover; height: 200px; border-radius: 8px;">
+
+                                <div class="card-body d-flex flex-column">
+                                    <!-- Judul Berita -->
+                                    <h5 class="card-title fw-bold mb-3">{{ $berita->judul_berita }}</h5>
+
+                                    <!-- Waktu dan Lokasi -->
+                                    <div class="d-flex align-items-center mb-n2">
+                                        <small class="text-muted">
+                                            {{ \Carbon\Carbon::parse($berita->tanggal_waktu)->format('d F Y') }}
+                                        </small>
+                                        <span class="mx-2 text-muted">|</span>
+                                        <small class="text-muted">{{ $berita->lokasi_peristiwa }}</small>
+                                    </div>
+
+                                    <!-- Isi Berita Singkat -->
+                                    <p class="card-text mb-3">{!! Str::limit($berita->isi_berita, 500) !!}</p>
+
+                                    <!-- Tombol Baca Selengkapnya -->
+                                    <button type="button" class="btn btn-primary text-white btn-sm mt-auto"
+                                        data-bs-toggle="modal" data-bs-target="#newsDetailModal{{ $berita->id }}">
+                                        Baca Selengkapnya
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
             <!-- Tombol Baca Berita Lain -->
-            <div class="text-center mt-5" data-aos="zoom-in">
-                <a href="/berita" class="btn btn-outline-light btn-lg px-5 py-2 fw-bold bg-light">
-                    Baca Berita Lain...
-                </a>
-            </div>
+            @if (!$beritas->isEmpty())
+                <div class="text-center mt-5" data-aos="zoom-in">
+                    <a href="/berita" class="btn btn-outline-light btn-lg px-5 py-2 fw-bold bg-light">
+                        Baca Berita Lain...
+                    </a>
+                </div>
+            @endif
         </div>
 
         <!-- Modal Detail Berita -->
@@ -612,36 +628,36 @@
                 berusaha
                 memberikan respon terbaik untuk kebutuhan Anda.
             </p>
-          <div class="row">
-            <!-- Maps Section -->
-            <div class="col-lg-6 mb-4" data-aos="fade-right" data-aos-duration="1200">
-              <div class="map-frame">
-                <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7908.018331383531!2d110.84037000000001!3d-7.682162!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a3c415b43c431%3A0xa7e9cde5bba00946!2sKONI%20Kabupaten%20Sukoharjo!5e0!3m2!1sid!2sid!4v1731592172597!5m2!1sid!2sid"
-                        width="100%" height="300" style="border:0;" allowfullscreen=""
-                        loading="lazy"></iframe>
-              </div>
+            <div class="row">
+                <!-- Maps Section -->
+                <div class="col-lg-6 mb-4" data-aos="fade-right" data-aos-duration="1200">
+                    <div class="map-frame">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7908.018331383531!2d110.84037000000001!3d-7.682162!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a3c415b43c431%3A0xa7e9cde5bba00946!2sKONI%20Kabupaten%20Sukoharjo!5e0!3m2!1sid!2sid!4v1731592172597!5m2!1sid!2sid"
+                            width="100%" height="300" style="border:0;" allowfullscreen=""
+                            loading="lazy"></iframe>
+                    </div>
+                </div>
+                <!-- Contact Details Section -->
+                <div class="col-lg-6 contact-info">
+                    <p data-aos="zoom-in" data-aos-delay="200">
+                        <i class="mdi mdi-map-marker me-2"></i>
+                        Jl. Veteran, Kutorejo, Jetis, Kec. Sukoharjo, Kabupaten Sukoharjo, Jawa Tengah 57511
+                    </p>
+                    <p data-aos="zoom-in" data-aos-delay="300">
+                        <i class="mdi mdi-phone me-2"></i>
+                        (021)593023
+                    </p>
+                    <p data-aos="zoom-in" data-aos-delay="400">
+                        <i class="mdi mdi-email me-2"></i>
+                        konisukoharjo@yahoo.com
+                    </p>
+                    <a href="/messages/create" class="btn text-white mt-3" data-aos="flip-up"
+                        data-aos-delay="500">Kirim Pesan</a>
+                </div>
             </div>
-            <!-- Contact Details Section -->
-            <div class="col-lg-6 contact-info">
-                <p data-aos="zoom-in" data-aos-delay="200">
-                    <i class="mdi mdi-map-marker me-2"></i>
-                    Jl. Veteran, Kutorejo, Jetis, Kec. Sukoharjo, Kabupaten Sukoharjo, Jawa Tengah 57511
-                </p>
-                <p data-aos="zoom-in" data-aos-delay="300">
-                    <i class="mdi mdi-phone me-2"></i>
-                    (021)593023
-                </p>
-                <p data-aos="zoom-in" data-aos-delay="400">
-                    <i class="mdi mdi-email me-2"></i>
-                    konisukoharjo@yahoo.com
-                </p>
-                <a href="/messages/create" class="btn text-white mt-3" data-aos="flip-up"
-                    data-aos-delay="500">Kirim Pesan</a>
-            </div>
-          </div>
         </div>
-      
+
         {{-- <!-- Modal for Sending Message -->
         <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -670,8 +686,8 @@
             </div>
           </div>
         </div> --}}
-      </section>
-      
+    </section>
+
 
 
     @include('viewpublik/layouts/footer')

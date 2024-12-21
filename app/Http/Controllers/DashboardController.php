@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Coach;
 use App\Models\Referee;
+use App\Models\SportCategory;
 use App\Models\User;
 use App\Models\Venue;
 use Carbon\Carbon;
@@ -24,6 +25,7 @@ class DashboardController extends Controller
         $refereeteCount = Referee::count();
         $venueCount = Venue::count();
         $achievementCount = Achievement::count();
+        $caborCount = SportCategory::count();
         $userCount = User::count();
         $maleCount = Athlete::where('gender', 'Laki-laki')->count();
         $femaleCount = Athlete::where('gender', 'Perempuan')->count();
@@ -40,6 +42,6 @@ class DashboardController extends Controller
 
 
         // Pass these counts and the upcoming events to the view
-        return view('dashboard', compact('eventCount', 'maleCount','femaleCount','coachCount', 'athleteCount', 'refereeteCount', 'venueCount', 'achievementCount', 'upcomingEvents', 'achievements', 'beritas','userCount'));
+        return view('dashboard', compact('eventCount', 'maleCount','femaleCount','coachCount', 'athleteCount', 'refereeteCount', 'venueCount', 'achievementCount', 'upcomingEvents', 'achievements', 'beritas','userCount','caborCount'));
     }
 }

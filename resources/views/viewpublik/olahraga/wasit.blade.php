@@ -80,6 +80,7 @@
         .referee-details {
             padding: 20px;
         }
+
         .table-borderless td {
             vertical-align: top;
             padding: 0.3rem 0;
@@ -102,6 +103,7 @@
             text-align: left;
             /* Konten dinamis rata kiri */
         }
+
         @media (max-width: 768px) {
 
             #table-view table th,
@@ -109,6 +111,7 @@
                 font-size: 12px;
                 padding: 5px;
             }
+
             #table-view table img {
                 width: 50px;
                 height: auto;
@@ -159,7 +162,7 @@
 
         <!-- Tampilan Card -->
         <div id="card-view" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-            @foreach ($referees as $referee)
+            @forelse ($referees as $referee)
                 <div class="col-md-3">
                     <div class="card referee-card">
                         <img src="{{ $referee->photo ? asset($referee->photo) : 'https://via.placeholder.com/300x200' }}"
@@ -173,7 +176,17 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-12">
+                    <div class="alert alert-dark text-center p-4">
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+                            <i class="mdi mdi-clock-alert me-2 fs-4"></i>
+                            <strong>Belum ada data daftar wasit yang tersedia saat ini.</strong>
+                        </div>
+                        <p class="mt-2">Informasi akan diperbarui secara berkala, mohon tunggu beberapa waktu.</p>
+                    </div>
+                </div>
+            @endforelse
         </div>
 
         <!-- Tampilan Tabel -->
@@ -192,7 +205,7 @@
                     @php
                         $no = ($referees->currentPage() - 1) * $referees->perPage() + 1;
                     @endphp
-                    @foreach ($referees as $referee)
+                    @forelse ($referees as $referee)
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $referee->name }}</td>
@@ -207,7 +220,16 @@
                                     data-bs-target="#refereeDetailModal">Detail</a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <div class="d-flex justify-content-center align-items-center my-2">
+                                    <i class="mdi mdi-alert-circle-outline me-2" style="font-size: 20px;"></i>
+                                    <span class="fs-8">Saat ini belum ada data daftar wasit.</span>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -217,7 +239,8 @@
             {{ $referees->links('layouts.pagination') }}
         </div>
         <!-- Modal untuk Detail Wasit -->
-        <div class="modal fade mt-5 pt-2" id="refereeDetailModal" tabindex="-1" aria-labelledby="refereeDetailModalLabel" aria-hidden="true">
+        <div class="modal fade mt-5 pt-2" id="refereeDetailModal" tabindex="-1"
+            aria-labelledby="refereeDetailModalLabel" aria-hidden="true">
             <div class="modal-dialog mb-5 modal-lg">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
@@ -246,7 +269,8 @@
                                         <tr>
                                             <td><i class="mdi mdi-calendar text-primary"></i></td>
                                             <td><strong>Tanggal Lahir</strong></td>
-                                            <td><span id="refereeBirthDate">-</span> (<span id="refereeAge">-</span> tahun)</td>
+                                            <td><span id="refereeBirthDate">-</span> (<span id="refereeAge">-</span>
+                                                tahun)</td>
                                         </tr>
                                         <tr>
                                             <td><i class="mdi mdi-certificate text-primary"></i></td>
@@ -278,7 +302,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 
 

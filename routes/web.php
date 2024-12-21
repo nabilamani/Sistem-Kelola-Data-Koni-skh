@@ -105,6 +105,7 @@ Route::get('/profil/struktur', function () {
 });
 
 Route::get('/api/cari-pelatih', [CoachController::class, 'cariPelatih'])->name('cari-pelatih');
+Route::get('/api/cari-atlet', [AthleteController::class, 'cariAtlet'])->name('cari-atlet');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -123,7 +124,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/edit-athlete/{id}', [AthleteController::class, 'update']);
     Route::delete('/delete-athlete/{id}', [AthleteController::class, 'destroy']);
     Route::get('/cetak-athlete', [AthleteController::class, 'cetakAthlete'])->name('cetak-athlete');
-    Route::get('/api/cari-atlet', [AthleteController::class, 'cariAtlet'])->name('cari-atlet');
 
     // Rute wasit
     Route::resource('referees', RefereeController::class);

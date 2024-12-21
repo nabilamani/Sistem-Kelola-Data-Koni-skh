@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('gambar_aset/assets/vendor/fonts/boxicons.css') }}" />
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/htmx.org@2.0.3"
+        integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous">
+    </script>
     <style>
         body {
             overflow-x: hidden;
@@ -131,8 +134,6 @@
                 padding: 10px;
             }
         }
-
-        
     </style>
 </head>
 
@@ -192,75 +193,101 @@
             </div>
 
             <!-- Form Pencarian -->
-            <form id="athleteSearchForm" action="{{ route('showAthletes') }}" method="GET" class="d-flex">
+            <form hx-get="/api/cari-atlet" hx-target="#data-wrapper" hx-swap="innerHTML"
+                hx-trigger="change from:select, click from:button[type='submit']" class="d-flex"
+                id="form-sport-category">
                 <input id="searchInput" type="text" name="search" class="form-control me-2"
-                    placeholder="Cari atlet atau cabor..." value="{{ request('search') }}" onkeyup="filterAthletes()">
+                    placeholder="Cari atlet atau cabor..." value="{{ request('search') }}" id="sport-category-search">
+                <!-- View card/table -->
+                <input type="hidden" name="_view" id="active-view" value="card">
                 <button type="submit" class="btn btn-primary">Cari</button>
             </form>
 
         </div>
 
         <!-- Tampilan Card -->
-        <div id="card-view" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-            @foreach ($athletes as $athlete)
-                <div class="col-6 col-sm-4 col-md-3">
-                    <div class="card athlete-card h-100">
-                        <!-- Foto Atlet (Gunakan placeholder jika tidak ada gambar) -->
-                        <img src="{{ $athlete->photo ? asset($athlete->photo) : 'https://via.placeholder.com/300x200' }}"
-                            alt="{{ $athlete->name }}" class="athlete-photo img-fluid">
-                        <div class="athlete-details text-center p-2">
-                            <h6 class="text-dark mb-1">{{ $athlete->name }}</h6>
-                            <p class="text-muted small mb-2">Cabang: {{ $athlete->sport_category }}</p>
-                            <a href="#" class="btn btn-primary btn-sm"
-                                onclick="showAthleteDetails({{ json_encode($athlete) }})" data-bs-toggle="modal"
-                                data-bs-target="#athleteDetailModal">
-                                Detail
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-
-        <!-- Tampilan Tabel -->
-        <div id="table-view" class="table-responsive rounded" style="display: none;">
-            <table class="table table-bordered table-striped" style="min-width: 500px;">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Atlet</th>
-                        <th>Cabang Olahraga</th>
-                        <th>Foto</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $no = ($athletes->currentPage() - 1) * $athletes->perPage() + 1;
-                    @endphp
-                    @foreach ($athletes as $index => $athlete)
-                        <tr>
-                            <td>{{ $no++ }}</td>
-                            <td>{{ $athlete->name }}</td>
-                            <td>{{ $athlete->sport_category }}</td>
-                            <td>
-                                <img src="{{ $athlete->photo ? asset($athlete->photo) : 'https://via.placeholder.com/100x100' }}"
-                                    alt="{{ $athlete->name }}" class="img-thumbnail" width="100">
-                            </td>
-                            <td>
+        <div id="data-wrapper">
+            <div id="card-view" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                @forelse ($athletes as $athlete)
+                    <div class="col-6 col-sm-4 col-md-3">
+                        <div class="card athlete-card h-100">
+                            <!-- Foto Atlet (Gunakan placeholder jika tidak ada gambar) -->
+                            <img src="{{ $athlete->photo ? asset($athlete->photo) : 'https://via.placeholder.com/300x200' }}"
+                                alt="{{ $athlete->name }}" class="athlete-photo img-fluid">
+                            <div class="athlete-details text-center p-2">
+                                <h6 class="text-dark mb-1">{{ $athlete->name }}</h6>
+                                <p class="text-muted small mb-2">Cabang: {{ $athlete->sport_category }}</p>
                                 <a href="#" class="btn btn-primary btn-sm"
                                     onclick="showAthleteDetails({{ json_encode($athlete) }})" data-bs-toggle="modal"
-                                    data-bs-target="#athleteDetailModal">Detail</a>
-                            </td>
+                                    data-bs-target="#athleteDetailModal">
+                                    Detail
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-12">
+                        <div class="alert alert-dark text-center p-4">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <i class="mdi mdi-account-alert me-2 fs-4"></i>
+                                <strong>Belum ada data daftar atlet yang tersedia saat ini.</strong>
+                            </div>
+                            <p class="mt-2">Informasi akan diperbarui secara berkala, mohon tunggu beberapa waktu.</p>
+                        </div>
+                    </div>
+                @endforelse
+            </div>
+
+
+
+            <!-- Tampilan Tabel -->
+            <div id="table-view" class="table-responsive rounded" style="display: none;">
+                <table class="table table-bordered table-striped" style="min-width: 500px;">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Atlet</th>
+                            <th>Cabang Olahraga</th>
+                            <th>Foto</th>
+                            <th>Aksi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        <!-- Pagination -->
-        <div class="mt-4">
-            {{ $athletes->links('layouts.pagination') }}
+                    </thead>
+                    <tbody>
+                        @php
+                            $no = ($athletes->currentPage() - 1) * $athletes->perPage() + 1;
+                        @endphp
+                        @forelse ($athletes as $index => $athlete)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $athlete->name }}</td>
+                                <td>{{ $athlete->sport_category }}</td>
+                                <td>
+                                    <img src="{{ $athlete->photo ? asset($athlete->photo) : 'https://via.placeholder.com/100x100' }}"
+                                        alt="{{ $athlete->name }}" class="img-thumbnail" width="100">
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm"
+                                        onclick="showAthleteDetails({{ json_encode($athlete) }})"
+                                        data-bs-toggle="modal" data-bs-target="#athleteDetailModal">Detail</a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center">
+                                    <div class="d-flex justify-content-center align-items-center my-2">
+                                        <i class="mdi mdi-alert-circle-outline me-2" style="font-size: 20px;"></i>
+                                        <span class="fs-8">Saat ini belum ada data daftar atlet.</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <!-- Pagination -->
+            <div class="mt-4">
+                {{ $athletes->links('layouts.pagination') }}
+            </div>
         </div>
     </div>
     <!-- Modal untuk Detail Atlet -->
@@ -361,11 +388,13 @@
             if (savedView === 'table') {
                 document.getElementById('card-view').style.display = 'none';
                 document.getElementById('table-view').style.display = 'block';
+                document.getElementById('active-view').value = 'table';
                 document.getElementById('table-view-btn').classList.add('active');
                 document.getElementById('card-view-btn').classList.remove('active');
             } else {
                 document.getElementById('card-view').style.display = 'flex';
                 document.getElementById('table-view').style.display = 'none';
+                document.getElementById('active-view').value = 'card';
                 document.getElementById('card-view-btn').classList.add('active');
                 document.getElementById('table-view-btn').classList.remove('active');
             }
@@ -375,12 +404,14 @@
         document.getElementById('card-view-btn').addEventListener('click', function() {
             document.getElementById('card-view').style.display = 'flex';
             document.getElementById('table-view').style.display = 'none';
+            document.getElementById('active-view').value = 'card';
             setView('card');
         });
 
         document.getElementById('table-view-btn').addEventListener('click', function() {
             document.getElementById('card-view').style.display = 'none';
             document.getElementById('table-view').style.display = 'block';
+            document.getElementById('active-view').value = 'table';
             setView('table');
         });
 
@@ -416,22 +447,14 @@
         AOS.init();
     </script>
     <script>
-        $(document).ready(function() {
-            $('#table-view').DataTable({
-                order: [], // Tidak ada kolom diurutkan secara default
-                columnDefs: [{
-                        orderable: false,
-                        targets: 8
-                    } // Kolom aksi tidak bisa diurutkan
-                ],
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.5/i18n/Indonesian.json' // Bahasa Indonesia
-                }
-            });
+        document.getElementById('table-wrapper').addEventListener('htmx:afterSwap', function(event) {
+            const responseUrl = event.detail.pathInfo.responsePath;
+            const nextUrl = responseUrl.replace('/api/cari-atlet', '/olahraga/atlet');
+            history.pushState(null, '', nextUrl);
         });
     </script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
-    <script>
+    {{-- <script>
         function filterAthletes() {
             const input = document.getElementById('searchInput').value.toLowerCase();
 
@@ -459,7 +482,7 @@
                 }
             });
         }
-    </script>
+    </script> --}}
 
 </body>
 
